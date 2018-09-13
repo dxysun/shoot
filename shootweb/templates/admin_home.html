@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}运动员数据分析-管理员主页{% endblock %}
+
+{% block menu %}
+
+    <ul class="nav" id="main-menu">
+        <li>
+            <a class="active-menu" href="{% url 'admin_home' %}"><i class="fa fa-dashboard"></i> 项目列表</a>
+        </li>
+        <li>
+            <a href="{% url 'admin_coach' %}"><i class="fa fa-table"></i> 教练列表</a>
+        </li>
+        <li>
+            <a href="{% url 'admin_sport' %}"><i class="fa fa-qrcode"></i> 运动员列表</a>
+        </li>
+    </ul>
+
+{% endblock %}
+
+
+{% block header %}
+
+    <h1 class="page-header">
+        射击项目列表
+    </h1>
+    <ol class="breadcrumb">
+        <li class="active">项目列表</li>
+    </ol>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Advanced Tables -->
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-4">
+                            射击项目
+                        </div>
+                        <div class="col-md-5">
+
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{% url 'admin_add_item' %}" class="btn btn-primary btn-sm">添加项目</a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>射击项目名称</th>
+                                <th>主管教练</th>
+                                <th>远动员数目</th>
+                                <th>备注</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="success">
+                                <td>男子25米气手枪</td>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                                <td>
+                                    <a href="#" class="btn btn-success btn-sm">修改</a>
+                                    <a href="#" class="btn btn-danger btn-sm">删除</a>
+                                </td>
+                            </tr>
+                            <tr class="info">
+                                <td>女子25米气手枪</td>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                                <td>
+                                    <a href="#" class="btn btn-success btn-sm">修改</a>
+                                    <a href="#" class="btn btn-danger btn-sm">删除</a>
+                                </td>
+                            </tr>
+                            <tr class="warning">
+                                <td>男子10米手枪</td>
+                                <td>Larry</td>
+                                <td>the Bird</td>
+                                <td>@twitter</td>
+                                <td>
+                                    <a href="#" class="btn btn-success btn-sm">修改</a>
+                                    <a href="#" class="btn btn-danger btn-sm">删除</a>
+                                </td>
+                            </tr>
+                            <tr class="danger">
+                                <td>女子10米手枪</td>
+                                <td>John</td>
+                                <td>Smith</td>
+                                <td>@jsmith</td>
+                                <td>
+                                    <a href="#" class="btn btn-success btn-sm">修改</a>
+                                    <a href="#" class="btn btn-danger btn-sm">删除</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--End Advanced Tables -->
+        </div>
+    </div>
+{% endblock %}
+

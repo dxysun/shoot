@@ -1,0 +1,81 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}运动员数据分析-运动员主页{% endblock %}
+
+{% block script %}
+    <script src="/static/assets/js/pages/sport_home.js"></script>
+{% endblock %}
+{% block menu %}
+
+    <ul class="nav" id="main-menu">
+        <li>
+            <a class="active-menu" href="{% url 'sport_home' %}"><i class="fa fa-dashboard"></i> 主界面</a>
+        </li>
+        <li>
+            <a href="{% url 'sport_game_analyse' %}"><i class="fa fa-desktop"></i> 比赛数据分析</a>
+        </li>
+        <li>
+            <a href="{% url 'sport_game_history' %}"><i class="fa fa-qrcode"></i> 历史比赛数据</a>
+        </li>
+    </ul>
+
+{% endblock %}
+
+
+{% block header %}
+
+    <h1 class="page-header">
+        主页面
+    </h1>
+    <ol class="breadcrumb">
+        <li class="active">数据整体分析结果</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    比赛成绩统计
+                </div>
+                <div class="panel-body">
+                    <p> 经您的历史数据分析得，您的平均成绩为<br>
+                        手部的抖动范围为，<br>
+                        腰部的抖动范围为，<br>
+                        臂部的抖动范围为，<br>
+                        平均心率为<br>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    技能图
+                </div>
+                <div class="panel-body">
+                    <div id="attention" style="width: 100%;height:500%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    成绩关系图
+                </div>
+                <div class="panel-body">
+                    <div id="relationship" style="width: 100%;height:500%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
