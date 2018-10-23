@@ -11,10 +11,10 @@
             <a href="{% url 'sport_home' %}"><i class="fa fa-dashboard"></i> 主界面</a>
         </li>
         <li>
-            <a class="active-menu" href="{% url 'sport_game_analyse' %}"><i class="fa fa-desktop"></i> 比赛数据分析</a>
+            <a class="active-menu" href="{% url 'sport_game_analyse' %}"><i class="fa fa-desktop"></i> 射击数据分析</a>
         </li>
         <li>
-            <a href="{% url 'sport_game_history' %}"><i class="fa fa-qrcode"></i> 历史比赛数据</a>
+            <a href="{% url 'sport_game_history' %}"><i class="fa fa-qrcode"></i> 历史数据</a>
         </li>
 
     </ul>
@@ -38,13 +38,11 @@
             <form role="form">
 
                 <div class="form-group">
-                    <label>选择比赛数据</label>
+                    <label>选择射击数据</label>
                     <select class="form-control">
-                        <option>比赛数据1</option>
-                        <option>比赛数据2</option>
-                        <option>比赛数据3</option>
-                        <option>比赛数据4</option>
-                        <option>比赛数据5</option>
+                        {% for report in shoot_reports %}
+                            <option>时间:{{ report.shoot_date }}&nbsp;&nbsp;&nbsp;成绩:{{ report.remark }}</option>
+                        {% endfor %}
                     </select>
                 </div>
 
@@ -136,7 +134,7 @@
     </div>
     <div class="row">
 
-     <div class="col-md-12">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     比赛稳定性图
@@ -146,7 +144,7 @@
                 </div>
             </div>
         </div>
-      {% comment %}     <div class="col-md-6">
+        {% comment %}     <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     成绩稳定性统计图

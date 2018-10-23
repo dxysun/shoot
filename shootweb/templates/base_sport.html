@@ -19,7 +19,7 @@
     <!-- jQuery Js -->
     <script src="/static/assets/js/jquery-1.10.2.js"></script>
     {% block script %}
-        
+
     {% endblock %}
 </head>
 <body>
@@ -60,9 +60,22 @@
     <!--/. NAV TOP  -->
     <nav class="navbar-default navbar-side" role="navigation">
         <div class="sidebar-collapse">
-            {% block menu %}
 
-            {% endblock %}
+
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a href="{% url 'sport_home' %}"><i class="fa fa-dashboard"></i> 主界面</a>
+                </li>
+                <li>
+                    <a class="active-menu" href="{% url 'sport_game_analyse' %}"><i class="fa fa-desktop"></i>
+                        射击数据分析</a>
+                </li>
+                <li>
+                    <a href="{% url 'sport_game_history' %}"><i class="fa fa-qrcode"></i> 历史数据</a>
+                </li>
+
+            </ul>
+
         </div>
 
     </nav>

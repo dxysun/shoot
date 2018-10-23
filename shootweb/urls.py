@@ -9,11 +9,11 @@ urlpatterns = [
     url('^main$', views.main, name="main"),
     url('^coach$', views.coach, name="coach"),
     url('^vue', views.vue, name="vue"),
-
     url('^login', views.login, name="login"),
     url('^register', views.register, name="register"),
     url('^sport/home', views.sport_home, name="sport_home"),
-    url('^sport/game_analyse', views.sport_game_analyse, name="sport_game_analyse"),
+    url('^sport/game_analyse$', views.sport_game_analyse, name="sport_game_analyse"),
+    url('^sport/game_analyse_id$', views.sport_game_analyse_id, name="sport_game_analyse_id"),
     url('^sport/game_history', views.sport_game_history, name="sport_game_history"),
     url('^coach/home', views.coach_home, name="coach_home"),
     url('^coach/sport_info$', views.coach_sport_info, name="coach_sport_info"),
