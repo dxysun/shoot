@@ -428,73 +428,54 @@
         </div>
     </div>
     <div class="row">
-    <div class="panel panel-default">
-                <div class="panel-heading">
+        <div class="panel panel-default">
+            <div class="panel-heading">
 
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            射击信息
-                        </div>
-                        <div class="col-md-5">
-
-                        </div>
-                        <div class="col-md-3">
-
-                        </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        射击信息
+                    </div>
+                    <div class="col-md-5">
 
                     </div>
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>射击时间</th>
-                                <th>射击成绩</th>
-                                <th>速射时间</th>
-                                <th>弹着点坐标</th>
-                                <th>x方向抖动</th>
-                                <th>y方向抖动</th>
-                                <th>心率</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Mark</td>
-                                <td>男</td>
-                                <td>30</td>
-                                <td>项目1</td>
-                                <td>
-                                    <a href="#" class="btn btn-success btn-sm">修改</a>
-                                    <a href="#" class="btn btn-danger btn-sm">删除</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Jacob</td>
-                                <td>男</td>
-                                <td>32</td>
-                                <td>项目2</td>
-                                <td>
-                                    <a href="#" class="btn btn-success btn-sm">修改</a>
-                                    <a href="#" class="btn btn-danger btn-sm">删除</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Larry</td>
-                                <td>女</td>
-                                <td>28</td>
-                                <td>项目3</td>
-                                <td>
-                                    <a href="#" class="btn btn-success btn-sm">修改</a>
-                                    <a href="#" class="btn btn-danger btn-sm">删除</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div class="col-md-3">
+
                     </div>
+
                 </div>
             </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>射击时间</th>
+                            <th>射击成绩</th>
+                            <th>速射时间</th>
+                            <th>弹着点坐标(mm)</th>
+                            <th>x方向抖动(mm)</th>
+                            <th>y方向抖动(mm)</th>
+                            <th>心率</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for shoot in shoot_info %}
+                            <tr>
+                                <td>{{ shoot.grade_date }}</td>
+                                <td>{{ shoot.grade }}</td>
+                                <td>{{ shoot.rapid_time }}</td>
+                                <td>{{ shoot.x_pos}},{{shoot.y_pos }}</td>
+                                <td>{{ shoot.x_shake }}</td>
+                                <td>{{ shoot.y_shake }}</td>
+                                <td>{{ shoot.heart }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-6">

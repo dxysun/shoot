@@ -4,6 +4,7 @@ import time
 import math
 from . import shootlib
 
+
 # Create your views here.
 def index(request):
     return render(request, 'main.html')
@@ -57,21 +58,45 @@ def sport_game_analyse_id(request):
     report_end_time = time.mktime(record_end)
     x_data = ""
     y_data = ""
+    grades = ""
+    hearts = ""
+    r_pos = ""
+    p_pos = ""
     shoot_info = []
+    x_data_five = []
+    y_data_five = []
     for shake_time in shake_times:
         record_start = time.strptime(shake_time.record_date, "%Y-%m-%d %H:%M:%S")
         record_start_time = time.mktime(record_start)
         if report_start_time <= record_start_time <= report_end_time:
             shake_datas = shake_data.objects.filter(record_id=shake_time.id)
+            x_datas = []
+            y_datas = []
             for shakeData in shake_datas:
                 x_data += shakeData.x_data
                 y_data += shakeData.y_data
+                x_datas += shakeData.x_data[:-1].split(",")
+                y_datas += shakeData.y_data[:-1].split(",")
+            x_data_five, y_data_five = shootlib.get_max_five(x_datas, y_datas)
+            x_data_five = list(x_data_five)
     shoot_grades = shoot_grade.objects.filter(report_id=report_id)
-    grades = ""
-    hearts = ""
-    r_pos = ""
-    p_pos = ""
+    i = 0
+    is_have_shake = True
+    if len(x_data_five) == 0:
+        is_have_shake = False
     for grade in shoot_grades:
+        data_info = {}
+        data_info['grade_date'] = grade.grade_date
+        data_info['grade'] = grade.grade
+        data_info['rapid_time'] = grade.rapid_time
+        data_info['x_pos'] = grade.x_pos
+        data_info['y_pos'] = grade.y_pos
+        if is_have_shake:
+            data_info['x_shake'] = x_data_five[i]
+            data_info['y_shake'] = y_data_five[i]
+        else:
+            data_info['x_shake'] = "0"
+            data_info['y_shake'] = "0"
         grades += grade.grade + ","
         x = float(grade.x_pos)
         y = float(grade.y_pos)
@@ -82,14 +107,13 @@ def sport_game_analyse_id(request):
         heart_times = heart_data.objects.filter(heart_date=grade.grade_date)
         if len(heart_times) == 1:
             heart_time = heart_times[0]
+            data_info['heart'] = str(heart_time.average_rate)
             hearts += str(heart_time.average_rate) + ","
         else:
+            data_info['heart'] = "0"
             hearts += "0,"
-        # heart_times = heart_data.objects.get(heart_date=grade.grade_date)
-        # if heart_times is not None:
-        #     hearts += str(heart_times.average_rate) + ","
-        # else:
-        #     heart_times += "-1,"
+        shoot_info.append(data_info)
+        i += 1
     grades = grades[:-1]
     hearts = hearts[:-1]
     r_pos = r_pos[:-1]
@@ -101,7 +125,8 @@ def sport_game_analyse_id(request):
         'x_data': x_data[:-1],
         'y_data': y_data[:-1],
         'r_pos': r_pos,
-        'p_pos': p_pos
+        'p_pos': p_pos,
+        'shoot_info': shoot_info
     })
 
 

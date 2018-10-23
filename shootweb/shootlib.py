@@ -162,9 +162,9 @@ def cart_to_polar(x, y):
         angle = 360 + angle
     r = round(r, 2)
     angle = round(angle, 2)
-    print(r)
-    print(11 - r)
-    print(angle)
+    # print(r)
+    # print(11 - r)
+    # print(angle)
     return r, angle
 
 
