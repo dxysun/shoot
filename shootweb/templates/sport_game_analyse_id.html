@@ -21,13 +21,6 @@
                 data1.push([r_pos[i], p_pos[i]]);
             }
 
-            /*    for (var i = 0; i < 60; i++) {
-                    data1.push([(10 - Math.random() * 5).toFixed(1), (Math.random() * 360).toFixed(1)]);
-                    data_grade.push((10 - Math.random() * 5).toFixed(1));
-                    data_index.push(i + 1);
-
-                }*/
-
             var options = {
                 title: {
                     text: '射击数据图示',
@@ -256,6 +249,7 @@
                     }
                 },
                 yAxis: {
+                    min: 50,
                     axisLabel: {
                         color: '#000000'
                     },
@@ -339,8 +333,8 @@
                     type: 'value',
                     max: 10,
                     name: '环数',
-                    min: 0,
-                    interval: 2,
+                    min: 5,
+                    interval: 1,
                     splitLine: {
                         show: true,
                         lineStyle: {
@@ -388,11 +382,11 @@
         <li>
             <a href="{% url 'sport_home' %}"><i class="fa fa-dashboard"></i> 主界面</a>
         </li>
+    {% comment %}    <li>
+            <a href="{% url 'sport_game_analyse' %}"><i class="fa fa-desktop"></i> 射击数据分析</a>
+        </li>{% endcomment %}
         <li>
-            <a class="active-menu" href="{% url 'sport_game_analyse' %}"><i class="fa fa-desktop"></i> 射击数据分析</a>
-        </li>
-        <li>
-            <a href="{% url 'sport_game_history' %}"><i class="fa fa-qrcode"></i> 历史数据</a>
+            <a class="active-menu" href="{% url 'sport_game_history' %}"><i class="fa fa-qrcode"></i> 射击数据</a>
         </li>
 
     </ul>
@@ -417,7 +411,7 @@
 
                 <div class="form-group">
 
-                    时间:{{ shoot_reports.shoot_date }}&nbsp;&nbsp;&nbsp;成绩:{{ shoot_reports.remark }}
+                    时间:{{ shoot_reports.shoot_date }}&nbsp;&nbsp;&nbsp;成绩:{{ shoot_reports.remark }}环
 
                 </div>
 
@@ -438,6 +432,7 @@
                     </div>
                     <div class="col-md-5">
 
+
                     </div>
                     <div class="col-md-3">
 
@@ -450,6 +445,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
+
                             <th>射击时间</th>
                             <th>射击成绩</th>
                             <th>速射时间</th>
@@ -462,10 +458,11 @@
                         <tbody>
                         {% for shoot in shoot_info %}
                             <tr>
-                                <td>{{ shoot.grade_date }}</td>
+
+                                <td>{{ shoot.grade_time }}</td>
                                 <td>{{ shoot.grade }}</td>
                                 <td>{{ shoot.rapid_time }}</td>
-                                <td>{{ shoot.x_pos}},{{shoot.y_pos }}</td>
+                                <td>{{ shoot.x_pos }},{{ shoot.y_pos }}</td>
                                 <td>{{ shoot.x_shake }}</td>
                                 <td>{{ shoot.y_shake }}</td>
                                 <td>{{ shoot.heart }}</td>

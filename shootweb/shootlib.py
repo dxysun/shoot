@@ -168,15 +168,26 @@ def cart_to_polar(x, y):
     return r, angle
 
 
+def update_report_data():
+    shoot_reports = shoot_report.objects.all()
+    for report in shoot_reports:
+        print(report.remark)
+        print(report.remark[6:8])
+        report.remark = report.remark[6:8]
+        report.save()
+
+
 if __name__ == "__main__":
     print("shoot")
     # test()
     # get_shoot_info()
-    x1, y1 = - 36.06, -8.96
-    x2, y2 = 35.52, -7.48
-    x3, y3 = 2.96, 37.16
-    x4, y4 = - 32.49, 2.67
-    x5, y5 = - 26.68, -29.15
-    xs = [x1, x2, x3, x4, x5]
-    ys = [y1, y2, y3, y4, y5]
+    # x1, y1 = - 36.06, -8.96
+    # x2, y2 = 35.52, -7.48
+    # x3, y3 = 2.96, 37.16
+    # x4, y4 = - 32.49, 2.67
+    # x5, y5 = - 26.68, -29.15
+    # xs = [x1, x2, x3, x4, x5]
+    # ys = [y1, y2, y3, y4, y5]
+
+    # update_report_data()
 

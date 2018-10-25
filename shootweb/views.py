@@ -43,8 +43,90 @@ def coach_sport_info_detail(request):
 
 
 def sport_game_analyse(request):
-    shoot_reports = shoot_report.objects.all()
-    return render(request, 'sport_game_analyse.html', {'shoot_reports': shoot_reports})
+    shoot_reports = []
+    best_grade = 0
+    bad_grade = 100
+    total_grade = 0
+    num = 0
+    average_grade = 0
+    quadrant = [0, 0, 0, 0]
+    right_up = 0
+    left_up = 0
+    left_blow = 0
+    right_blow = 0
+    grades = ""
+    r_pos = ""
+    p_pos = ""
+    hearts = ""
+    if request.method == 'POST':
+        report_id = request.POST['report_id']
+        # print(report_id)
+        ids = report_id.split(",")
+        for id in ids:
+            # print(id)
+            num += 1
+            report = shoot_report.objects.get(id=id)
+            grade = int(report.remark)
+            grades += report.remark + ","
+            total_grade += grade
+            if grade > best_grade:
+                best_grade = grade
+            if grade < bad_grade:
+                bad_grade = grade
+            shoot_reports.append(report)
+            shoot_grades = shoot_grade.objects.filter(report_id=id)
+            heart_temp = []
+            heart_total = 0
+            for grade in shoot_grades:
+                x = float(grade.x_pos)
+                y = float(grade.y_pos)
+                r, p = shootlib.cart_to_polar(x, y)
+                r = 11 - r
+                r_pos += str(r) + ","
+                p_pos += str(p) + ","
+                if x > 0 and y > 0:
+                    quadrant[0] += 1
+                    right_up += 1
+                if x < 0 and y > 0:
+                    quadrant[1] += 1
+                    left_up += 1
+                if x < 0 and y < 0:
+                    quadrant[2] += 1
+                    left_blow += 1
+                if x > 0 and y < 0:
+                    quadrant[3] += 1
+                    right_blow += 1
+                heart_times = heart_data.objects.filter(heart_date=grade.grade_date)
+                if len(heart_times) == 1:
+                    heart_time = heart_times[0]
+                    heart_temp.append(heart_time.average_rate)
+                    heart_total += heart_time.average_rate
+            if len(heart_temp) != 0:
+                heart = heart_total/len(heart_temp)
+            else:
+                heart = 0
+            hearts += str(heart) + ","
+        average_grade = total_grade / num
+    grades = grades[:-1]
+    r_pos = r_pos[:-1]
+    p_pos = p_pos[:-1]
+    hearts = hearts[:-1]
+    # shoot_reports = shoot_report.objects.all()
+    return render(request, 'sport_game_analyse.html', {
+        'shoot_reports': shoot_reports,
+        'best_grade': best_grade,
+        'bad_grade': bad_grade,
+        'average_grade': average_grade,
+        'quadrant': quadrant,
+        'right_up': right_up,
+        'left_up': left_up,
+        'left_blow': left_blow,
+        'right_blow': right_blow,
+        'grades': grades,
+        'r_pos': r_pos,
+        'p_pos': p_pos,
+        'hearts': hearts
+    })
 
 
 def sport_game_analyse_id(request):
@@ -87,6 +169,7 @@ def sport_game_analyse_id(request):
     for grade in shoot_grades:
         data_info = {}
         data_info['grade_date'] = grade.grade_date
+        data_info['grade_time'] = grade.grade_time
         data_info['grade'] = grade.grade
         data_info['rapid_time'] = grade.rapid_time
         data_info['x_pos'] = grade.x_pos
