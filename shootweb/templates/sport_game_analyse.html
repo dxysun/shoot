@@ -24,6 +24,48 @@
             for (var i = 0; i < r_pos.length; i++) {
                 data1.push([r_pos[i], p_pos[i]]);
             }
+
+
+            var pie_data = [{{ right_up }}, {{ right_blow }}, {{ left_blow }}, {{ left_up }}];
+
+            var option_pie = {
+                title: {
+                    text: '打靶位置分布统计',
+                    x: 'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                  //  orient: 'vertical',
+                 //   left: 'left',
+                    data: ['右上', '右下', '左下', '左上'],
+                    top: 40
+                },
+                series: [
+                    {
+                        name: '打靶位置次数占比',
+                        type: 'pie',
+                        radius: '55%',
+                        center: ['50%', '60%'],
+                        data: [
+                            {value: pie_data[0], name: '右上'},
+                            {value: pie_data[1], name: '右下'},
+                            {value: pie_data[2], name: '左下'},
+                            {value: pie_data[3], name: '左上'}
+                        ],
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
             var options = {
                 title: {
                     text: '射击数据图示',
@@ -218,18 +260,6 @@
                 series: serieData
             };
 
-            var pie_data = [0, 0, 0, 0];
-            for (var p1 = 0; p1 < 4; p1++) {
-
-                var d1 = 0;
-                for (var j1 = 0; j1 < 60; j1++) {
-                    var t1 = Math.random() * 10;
-                    d1 = d1 + t1;
-                }
-                pie_data[p1] = (d1 / 60).toFixed(2);
-
-            }
-
 
             var values = hearts.split(",");
             var heart_index = [];
@@ -239,7 +269,7 @@
             }
             var option_heart = {
                 title: {
-                    text: '心率变化数据'
+                    text: '5次射击平均心率变化数据'
                 },
                 tooltip: {
                     triggerOn: 'onmousemove',
@@ -266,7 +296,7 @@
                     }
                 },
                 yAxis: {
-                    min: 50,
+                    min: 40,
                     axisLabel: {
                         color: '#000000'
                     },
@@ -298,7 +328,7 @@
             var option_grade = {
                 title: {
                     left: 'center',
-                    text: '成绩趋势走向图'
+                    text: '5次射击总成绩趋势走向图'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -379,14 +409,16 @@
             var myGrade = echarts.init(document.getElementById('grade'));
             var myChart = echarts.init(document.getElementById('circle'));
             var myTotalGrade = echarts.init(document.getElementById('total_grade'));
-       //     var myLineShake = echarts.init(document.getElementById('line_shake'));
+            //     var myLineShake = echarts.init(document.getElementById('line_shake'));
             var myHeart = echarts.init(document.getElementById('heart'));
+            var myTotalShake = echarts.init(document.getElementById('total_shake'));
 
             myChart.setOption(options);
             myGrade.setOption(option_grade);
             myTotalGrade.setOption(total_grade);
-     //       myLineShake.setOption(option_line_shake);
+            //       myLineShake.setOption(option_line_shake);
             myHeart.setOption(option_heart);
+            myTotalShake.setOption(option_pie);
         });
 
 
@@ -398,7 +430,7 @@
         <li>
             <a href="{% url 'sport_home' %}"><i class="fa fa-dashboard"></i> 主界面</a>
         </li>
-   {% comment %}     <li>
+        {% comment %}     <li>
             <a class="active-menu" href="{% url 'sport_game_analyse' %}"><i class="fa fa-desktop"></i> 射击数据分析</a>
         </li>{% endcomment %}
         <li>
@@ -450,11 +482,7 @@
                         最好成绩:{{ best_grade }}<br>
                         最坏成绩:{{ bad_grade }}<br>
                         平均成绩:{{ average_grade }}<br>
-                        打靶位置分布：<br>
-                        右上：{{ right_up }}次 &nbsp;<br>
-                        左上：{{ left_up }}次 &nbsp;<br>
-                        左下：{{ left_blow }}次 &nbsp;<br>
-                        右下：{{ right_blow }}次 &nbsp;<br>
+
                     </p>
                 </div>
                 <div class="panel-footer">
@@ -477,6 +505,8 @@
                 </div>
 
             </div>
+
+
         </div>
     </div>
     <div class="row">
@@ -493,13 +523,27 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    成绩趋势走向图
+                    打靶位置统计图
                 </div>
                 <div class="panel-body">
-                    <div id="grade" style="width: 100%;height:500%;"></div>
+                    <div id="total_shake" style="width: 100%;height:500%;"></div>
                 </div>
             </div>
+
         </div>
+    </div>
+    <div class="row">
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                成绩趋势走向图
+            </div>
+            <div class="panel-body">
+                <div id="grade" style="width: 100%;height:500%;"></div>
+            </div>
+        </div>
+
     </div>
     <div class="row">
         <div class="col-md-6">
@@ -523,7 +567,7 @@
             </div>
         </div>
     </div>
-   {% comment %} <div class="row">
+    {% comment %} <div class="row">
 
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -536,5 +580,56 @@
             </div>
         </div>
     </div>{% endcomment %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Advanced Tables -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-4">
+                            查看所选射击数据具体信息
+                        </div>
+                        <div class="col-md-5">
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                    <br>
+
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+
+                                <th>时间</th>
+                                <th>地点</th>
+                                <th>开始时间</th>
+                                <th>结束时间</th>
+                                <th>备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for report in shoot_reports %}
+                                <tr class="gradeA">
+                                    <td>
+                                        <a href="{% url 'sport_game_analyse_id' %}?id={{ report.id }}">{{ report.shoot_date }}</a>
+                                    </td>
+                                    <td>北京射击馆</td>
+                                    <td>{{ report.start_time }}</td>
+                                    <td>{{ report.end_time }}</td>
+                                    <td>5次射击一共{{ report.remark }}环</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--End Advanced Tables -->
+        </div>
+    </div>
 {% endblock %}
 

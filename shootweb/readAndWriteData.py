@@ -411,6 +411,26 @@ def write_up_data_to_mysql(file_path):
     print(count)
 
 
+def filter_first_data(file_path, save_path):
+    files = os.listdir(file_path)
+    for heart_file in files:
+        heart_file_path = file_path + "/" + heart_file
+        print(heart_file[0:8])
+        start = int(heart_file[6:8])
+        with open(heart_file_path, 'r') as file:
+            # context = file.read()
+            context = ""
+            data = file.readlines()  # 读取全部内容 ，并以列表方式返回
+            last = data[-1:][0]
+            end = int(last[-6:-4])
+            print(last[-6:-4])
+            if end - start > 4:
+                for line in data:
+                    context += line
+                with open(save_path + heart_file, 'w') as f:
+                    f.write(context)
+
+
 if __name__ == "__main__":
     # sius时间落后现实时间大约1分27秒
     print("shoot")
@@ -434,7 +454,10 @@ if __name__ == "__main__":
     #                   'D:/workSpace/PythonWorkspace/shoot/shootweb/data/second/after_process/camera/y/',
     #                   'D:/workSpace/PythonWorkspace/shoot/shootweb/data/second/after_process/camera/merge/')
 
-    write_beside_data_mysql('D:/workSpace/PythonWorkspace/shoot/shootweb/data/second/after_process/camera/merge/')
+    filter_first_data('D:/workSpace/PythonWorkspace/shoot/shootweb/data/first/second_process/camera/x',
+                      'D:/workSpace/PythonWorkspace/shoot/shootweb/data/first/third_process/camera/x/')
+
+    # write_beside_data_mysql('D:/workSpace/PythonWorkspace/shoot/shootweb/data/second/after_process/camera/merge/')
     # write_up_data_to_mysql('D:/workSpace/PythonWorkspace/shoot/shootweb/data/after_process/camera/up')
     # datatime = "10-21-22"
     # t1 = string_to_time(datatime)

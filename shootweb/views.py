@@ -96,7 +96,7 @@ def sport_game_analyse(request):
                 if x > 0 and y < 0:
                     quadrant[3] += 1
                     right_blow += 1
-                heart_times = heart_data.objects.filter(heart_date=grade.grade_date)
+                heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
                 if len(heart_times) == 1:
                     heart_time = heart_times[0]
                     heart_temp.append(heart_time.average_rate)
@@ -133,9 +133,9 @@ def sport_game_analyse_id(request):
     report_id = request.GET['id']
     report = shoot_report.objects.get(id=report_id)
     shake_times = record_shake_time.objects.all()
-    record_start = time.strptime(report.shoot_date, "%Y-%m-%d %H:%M:%S")
+    record_start = time.strptime(report.shoot_date + " " + report.shoot_time, "%Y-%m-%d %H:%M:%S")
     report_start_time = time.mktime(record_start)
-    end_time = report.shoot_date[:-5] + report.end_time[:5]
+    end_time = report.shoot_date + " " + report.shoot_time[:3] + report.end_time[:5]
     record_end = time.strptime(end_time, "%Y-%m-%d %H:%M:%S")
     report_end_time = time.mktime(record_end)
     x_data = ""
@@ -148,7 +148,7 @@ def sport_game_analyse_id(request):
     x_data_five = []
     y_data_five = []
     for shake_time in shake_times:
-        record_start = time.strptime(shake_time.record_date, "%Y-%m-%d %H:%M:%S")
+        record_start = time.strptime(shake_time.record_date + " " + shake_time.record_time, "%Y-%m-%d %H:%M:%S")
         record_start_time = time.mktime(record_start)
         if report_start_time <= record_start_time <= report_end_time:
             shake_datas = shake_data.objects.filter(record_id=shake_time.id)
@@ -187,7 +187,7 @@ def sport_game_analyse_id(request):
         r = 11 - r
         r_pos += str(r) + ","
         p_pos += str(p) + ","
-        heart_times = heart_data.objects.filter(heart_date=grade.grade_date)
+        heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
         if len(heart_times) == 1:
             heart_time = heart_times[0]
             data_info['heart'] = str(heart_time.average_rate)
@@ -214,7 +214,9 @@ def sport_game_analyse_id(request):
 
 
 def sport_game_history(request):
-    shoot_reports = shoot_report.objects.all()
+    report = shoot_report.objects.last()
+    date = report.shoot_date
+    shoot_reports = shoot_report.objects.filter(shoot_date=report.shoot_date)
     # for report in shoot_reports:
     #     shoot_grades = shoot_grade.objects.filter(report_id=report.id)
     #     res = 0
@@ -222,7 +224,10 @@ def sport_game_history(request):
     #         res += int(grade.grade)
     #     report.remark = "5次射击一共" + str(res) + "环"
     #     report.save()
-    return render(request, 'sport_game_history.html', {'shoot_reports': shoot_reports})
+    return render(request, 'sport_game_history.html', {
+        'shoot_reports': shoot_reports,
+        'date': date
+    })
 
 
 def admin_home(request):

@@ -95,6 +95,7 @@ class StageInfo(models.Model):
 # 记录每次抖动开始和结束的时间
 class record_shake_time(models.Model):
     record_date = models.CharField(max_length=200)
+    record_time = models.CharField(max_length=200,default="")
     start_time = models.CharField(max_length=200)
     end_time = models.CharField(max_length=200)
     remark = models.TextField(null=True)
@@ -104,7 +105,7 @@ class shake_data(models.Model):
     report_id = models.IntegerField(default=0)
     record_id = models.IntegerField(default=0)
     shake_date = models.CharField(max_length=200)
-    shake_time = models.CharField(max_length=200)
+    shake_time = models.CharField(max_length=200,default="")
     x_data = models.TextField(null=True)
     y_data = models.TextField(null=True)
     remark = models.TextField(null=True)
@@ -113,6 +114,7 @@ class shake_data(models.Model):
 # 记录每次心率开始和结束的时间
 class record_heart_time(models.Model):
     record_date = models.CharField(max_length=200)
+    record_time = models.CharField(max_length=200,default="")
     start_time = models.CharField(max_length=200,default='')
     end_time = models.CharField(max_length=200,default='')
     remark = models.TextField(null=True)
@@ -133,6 +135,7 @@ class shoot_grade(models.Model):
     report_id = models.IntegerField()
     grade_date = models.CharField(max_length=200)
     grade_time = models.CharField(max_length=200)
+    grade_detail_time = models.CharField(max_length=200,default="")
     grade = models.CharField(max_length=200)
     rapid_time = models.CharField(max_length=200)
     x_pos = models.CharField(max_length=200)
@@ -142,6 +145,7 @@ class shoot_grade(models.Model):
 # 每五次射击的开始时间和结束时间
 class shoot_report(models.Model):
     shoot_date = models.CharField(max_length=200)
+    shoot_time = models.CharField(max_length=200,default="")
     start_time = models.CharField(max_length=200)
     end_time = models.CharField(max_length=200)
     remark = models.TextField(null=True)

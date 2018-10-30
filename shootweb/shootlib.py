@@ -73,12 +73,6 @@ def test():
 def get_shoot_info():
     reports = shoot_report.objects.all()
     shake_times = record_shake_time.objects.all()
-    # heart_times = record_heart_time.objects.all()
-    # for shake_time in shake_times:
-    #     print(shake_time.record_date)
-    #     timeArray = time.strptime(shake_time.record_date, "%Y-%m-%d %H:%M:%S")
-    #     timestamp = time.mktime(timeArray)
-    #     print(timestamp)
     context = ""
     for report in reports:
         record_start = time.strptime(report.shoot_date, "%Y-%m-%d %H:%M:%S")
@@ -122,9 +116,6 @@ def get_shoot_info():
                 print(str(hearts))
                 print(str(x_data_five))
                 print(str(y_data_five))
-                # heart_times = heart_data.objects.filter(heart_date=report.shoot_date)
-                # for heart_time in heart_times:
-                #     print(heart_time.heart_rate)
                 print()
     with open("D:/workSpace/PythonWorkspace/shoot/shootweb/data/data.txt", 'w') as f:
         f.write(context)
@@ -168,13 +159,60 @@ def cart_to_polar(x, y):
     return r, angle
 
 
-def update_report_data():
+def update_shoot_report():
     shoot_reports = shoot_report.objects.all()
     for report in shoot_reports:
-        print(report.remark)
-        print(report.remark[6:8])
-        report.remark = report.remark[6:8]
+        print(report.shoot_date)
+        print(report.shoot_date[:-9])
+        # report.shoot_time = report.shoot_date[-8:]
+        report.shoot_date = "2018-07-14"
         report.save()
+
+
+def update_shoot_grade():
+    shoot_grades = shoot_grade.objects.all()
+    for grade in shoot_grades:
+        print(grade.grade_date)
+        grade.grade_detail_time = grade.grade_time
+        grade.grade_time = grade.grade_date[-8:]
+        grade.grade_date = grade.grade_date[:-9]
+        grade.save()
+
+
+def update_shake_time():
+    record_shake_times = record_shake_time.objects.all()
+    for shake_time in record_shake_times:
+        print(shake_time.record_date)
+        shake_time.record_time = shake_time.record_date[-8:]
+        shake_time.record_date = shake_time.record_date[:-9]
+        shake_time.save()
+
+
+def update_shake_data():
+    shake_datas = shake_data.objects.all()
+    for data in shake_datas:
+        print(data.shake_date)
+        data.shake_time = data.shake_date[-8:]
+        data.shake_date = data.shake_date[:-9]
+        data.save()
+
+
+def update_heart_time():
+    record_heart_times = record_heart_time.objects.all()
+    for heart_time in record_heart_times:
+        print(heart_time.record_date)
+        heart_time.record_time = heart_time.record_date[-8:]
+        heart_time.record_date = heart_time.record_date[:-9]
+        heart_time.save()
+
+
+def update_heart_data():
+    heart_datas = heart_data.objects.all()
+    for data in heart_datas:
+        print(data.heart_date)
+        data.heart_time = data.heart_date[-8:]
+        data.heart_date = data.heart_date[:-9]
+        data.save()
 
 
 if __name__ == "__main__":
@@ -189,5 +227,12 @@ if __name__ == "__main__":
     # xs = [x1, x2, x3, x4, x5]
     # ys = [y1, y2, y3, y4, y5]
 
-    # update_report_data()
+    # update_shoot_report()
+    # update_shoot_grade()
+
+    # update_shake_time()
+    # update_shake_data()
+
+    # update_heart_time()
+    # update_heart_data()
 
