@@ -382,7 +382,7 @@
         <li>
             <a href="{% url 'sport_home' %}"><i class="fa fa-dashboard"></i> 主界面</a>
         </li>
-    {% comment %}    <li>
+        {% comment %}    <li>
             <a href="{% url 'sport_game_analyse' %}"><i class="fa fa-desktop"></i> 射击数据分析</a>
         </li>{% endcomment %}
         <li>
@@ -411,7 +411,7 @@
 
                 <div class="form-group">
 
-                    时间:{{ shoot_reports.shoot_date }}&nbsp;&nbsp;&nbsp;成绩:{{ shoot_reports.remark }}环
+                    开始时间:{{ shoot_reports.shoot_date }}&nbsp;{{ shoot_reports.shoot_time }}&nbsp;&nbsp;成绩:{{ shoot_reports.remark }}环
 
                 </div>
 
@@ -459,13 +459,13 @@
                         {% for shoot in shoot_info %}
                             <tr>
 
-                                <td>{{ shoot.grade_time }}</td>
+                                <td>{{ shoot.grade_detail_time }}</td>
                                 <td>{{ shoot.grade }}</td>
                                 <td>{{ shoot.rapid_time }}</td>
                                 <td>{{ shoot.x_pos }},{{ shoot.y_pos }}</td>
                                 <td>{{ shoot.x_shake }}</td>
                                 <td>{{ shoot.y_shake }}</td>
-                                <td>{{ shoot.heart }}</td>
+                                <td>{{ shoot.heart_rate }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

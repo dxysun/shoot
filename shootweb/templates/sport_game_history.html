@@ -94,68 +94,7 @@
     <div class="row">
         <div class="col-md-12">
             <!-- Advanced Tables -->
-            {% comment %}<div class="panel panel-default">
-                <div class="panel-heading">
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            射击数据
-                        </div>
-                        <div class="col-md-5">
-                        </div>
-                        <div class="col-md-3">
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="#" id="shoot_select" class="btn btn-success">全选</a>
-                            <a href="#" id="shoot_analyse" class="btn btn-info">数据分析与统计</a>
-                            <form id="shoot_info" action="{% url 'sport_game_analyse' %}" method="post">
-                                <input id="report_id" name="report_id" value="" type="text" hidden="hidden">
-                            </form>
-                        </div>
-                        <div class="col-md-5">
-                        </div>
-                        <div class="col-md-3">
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                            <thead>
-                            <tr>
-                                <th>选择</th>
-                                <th>时间</th>
-                                <th>地点</th>
-                                <th>开始时间</th>
-                                <th>结束时间</th>
-                                <th>备注</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for report in shoot_reports %}
-                                <tr class="gradeA">
-                                    <td>
-                                        <input name="shoot_report" type="checkbox" value="{{ report.id }}">
-                                    </td>
-                                    <td>
-                                        <a href="{% url 'sport_game_analyse_id' %}?id={{ report.id }}">{{ report.shoot_date }}</a>
-                                    </td>
-                                    <td>北京射击馆</td>
-                                    <td>{{ report.start_time }}</td>
-                                    <td>{{ report.end_time }}</td>
-                                    <td>5次射击一共{{ report.remark }}环</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-
-            </div>{% endcomment %}
 
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -192,6 +131,7 @@
                             </div>
                         </div>
                         <div class="col-md-1">
+                            <a href="#" class="btn btn-primary">筛选</a>
                         </div>
                     </div>
                 </div>

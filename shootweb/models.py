@@ -140,6 +140,9 @@ class shoot_grade(models.Model):
     rapid_time = models.CharField(max_length=200)
     x_pos = models.CharField(max_length=200)
     y_pos = models.CharField(max_length=200)
+    x_shake = models.FloatField(null=True)
+    y_shake = models.FloatField(null=True)
+    heart_rate = models.IntegerField(null=True)
     remark = models.TextField(null=True)
 
 # 每五次射击的开始时间和结束时间
@@ -148,6 +151,8 @@ class shoot_report(models.Model):
     shoot_time = models.CharField(max_length=200,default="")
     start_time = models.CharField(max_length=200)
     end_time = models.CharField(max_length=200)
+    x_shake_data = models.TextField(null=True)
+    y_shake_data = models.TextField(null=True)
     remark = models.TextField(null=True)
 
 
