@@ -297,6 +297,10 @@ def update_all_info():
 
 if __name__ == "__main__":
     print("shoot")
+    r, a = cart_to_polar(248.83, -212.41)
+    print(r)
+    print(11 - r)
+    print(a)
     # test()
     # get_shoot_info()
     # x1, y1 = - 36.06, -8.96
@@ -317,4 +321,3 @@ if __name__ == "__main__":
     # update_heart_data()
 
     # update_all_info()
-

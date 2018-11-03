@@ -3,10 +3,19 @@ __author__ = 'dxy'
 import time
 import random
 import datetime
+import threading
+import math
 
 
-def generate_shoot_data():
-    k = 5
+def GeneratePointInCycle(r1, r2):
+    theta = random.random() * 2 * math.pi
+    r = random.uniform(r1, r2)
+    y = math.sin(theta) * r
+    x = math.cos(theta) * r
+    return x, y
+
+
+def generate_shoot_data(k=5):
     num = 0
     b = 0
     t = datetime.datetime.now()
@@ -40,23 +49,29 @@ def generate_shoot_data():
             else:
                 y = -1
             if grade == 10:
-                x = round(random.uniform(0, 50) * x, 2)
-                y = round(random.uniform(0, 50) * y, 2)
+                x, y = GeneratePointInCycle(0, 50)
+                x = round(x, 2)
+                y = round(y, 2)
             if grade == 9:
-                x = round(random.uniform(50, 90) * x, 2)
-                y = round(random.uniform(50, 90) * y, 2)
+                x, y = GeneratePointInCycle(50, 90)
+                x = round(x, 2)
+                y = round(y, 2)
             if grade == 8:
-                x = round(random.uniform(90, 130) * x, 2)
-                y = round(random.uniform(90, 130) * y, 2)
+                x, y = GeneratePointInCycle(90, 130)
+                x = round(x, 2)
+                y = round(y, 2)
             if grade == 7:
-                x = round(random.uniform(130, 170) * x, 2)
-                y = round(random.uniform(130, 170) * y, 2)
+                x, y = GeneratePointInCycle(130, 170)
+                x = round(x, 2)
+                y = round(y, 2)
             if grade == 6:
-                x = round(random.uniform(170, 210) * x, 2)
-                y = round(random.uniform(170, 210) * y, 2)
+                x, y = GeneratePointInCycle(170, 210)
+                x = round(x, 2)
+                y = round(y, 2)
             if grade == 5:
-                x = round(random.uniform(210, 250) * x, 2)
-                y = round(random.uniform(210, 250) * y, 2)
+                x, y = GeneratePointInCycle(210, 20)
+                x = round(x, 2)
+                y = round(y, 2)
             shoot_report_ctx += " " + str(x) + "/ " + " " + str(y)
             grades.append(shoot_report_ctx)
             grades.append("            (" + str(sec) + ")")
@@ -71,8 +86,8 @@ def generate_shoot_data():
         with open('D:/code/shoot/simulation_data/grade/' + file_name, 'a+', encoding='ISO-8859-15') as f:
             f.write("%Shot Report\n")
         for j in range(4, -1, -1):
-            print(grades[2 * j])
-            print(grades[2 * j + 1])
+            # print(grades[2 * j])
+            # print(grades[2 * j + 1])
             con = grades[2 * j] + '\n'
             con += grades[2 * j + 1] + '\n'
             with open('D:/code/shoot/simulation_data/grade/' + file_name, 'a+', encoding='ISO-8859-15') as f:
@@ -86,12 +101,11 @@ def generate_shoot_data():
         k -= 1
 
 
-def generate_heart_data():
-    t = 5
+def generate_heart_data(t=5):
     while t > 0:
         file_name = "Heart" + str(time.strftime('%Y-%m-%d %H-%M-%S %A', time.localtime(time.time()))) + ".txt"
         print(file_name)
-        t1 = 4 * 5
+        t1 = 8 * 5
         context = ""
         while t1 > 0:
             time.sleep(0.2)
@@ -106,22 +120,21 @@ def generate_heart_data():
         t -= 1
 
 
-def generate_shake_data():
-    t = 2
+def generate_shake_data(t=5):
     while t > 0:
         file_name_x = "BesideX" + str(time.strftime('%Y-%m-%d %H-%M-%S %A', time.localtime(time.time()))) + ".txt"
         file_name_y = "BesideY" + str(time.strftime('%Y-%m-%d %H-%M-%S %A', time.localtime(time.time()))) + ".txt"
         print(file_name_x)
-        t1 = 4 * 5
+        t1 = 8 * 20
         context_x = ""
         context_y = ""
         while t1 > 0:
-            time.sleep(0.2)
+            time.sleep(0.05)
             shake_x = str(time.strftime('%H-%M-%S', time.localtime(time.time()))) + "：" + str(
                 round(random.uniform(-10, 10), 3))
             shake_y = str(time.strftime('%H-%M-%S', time.localtime(time.time()))) + "：" + str(
                 round(random.uniform(-10, 10), 3))
-            print(shake_x)
+            # print(shake_x)
             context_x += shake_x + "\n"
             context_y += shake_y + "\n"
             t1 -= 1
@@ -134,6 +147,10 @@ def generate_shake_data():
 
 
 if __name__ == '__main__':
+    print("thread start")
+    # x, y = GeneratePointInCycle(50, 90)
+    # print(x)
+    # print(y)
     # generate_heart_data()
     # generate_shake_data()
     # print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'))
@@ -141,4 +158,10 @@ if __name__ == '__main__':
     # t = datetime.datetime.now() + t1
     # print(t.strftime('%Y-%m-%d %H:%M:%S.%f'))
     generate_shoot_data()
-    pass
+    # t1 = threading.Thread(target=generate_heart_data, args=(2,))
+    # t2 = threading.Thread(target=generate_shake_data, args=(2,))
+    # t3 = threading.Thread(target=generate_shoot_data, args=(2,))
+    # t1.start()
+    # t2.start()
+    # t3.start()
+    print("thread end")
