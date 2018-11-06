@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-theme.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/echarts.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#convert').click(function () {
+                var text = $('#origin').val();
+                text = text.replace(/\n/g," ");
+                $("#after").val(text);
+
+            })
+
+
+        });
+
+    </script>
+</head>
+<body>
+<br>
+<div class="row">
+    <div class="col-md-5">
+        <textarea id="origin" class="form-control" rows="20"></textarea>
+
+
+    </div>
+    <div class="col-md-1">
+        <button id="convert" type="button" class="btn btn-success">转换</button>
+
+    </div>
+    <div class="col-md-6">
+       <textarea id="after" class="form-control" rows="20"></textarea>
+
+    </div>
+</div>
+<div class="col-md-6">
+
+
+</div>
+
+</body>
+</html>

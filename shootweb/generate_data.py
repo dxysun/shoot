@@ -131,17 +131,17 @@ def generate_shake_data(t=5):
         while t1 > 0:
             time.sleep(0.05)
             shake_x = str(time.strftime('%H-%M-%S', time.localtime(time.time()))) + "：" + str(
-                round(random.uniform(-10, 10), 3))
+                round(random.uniform(-1000, 2000), 3))
             shake_y = str(time.strftime('%H-%M-%S', time.localtime(time.time()))) + "：" + str(
-                round(random.uniform(-10, 10), 3))
+                round(random.uniform(-1000, 2000), 3))
             # print(shake_x)
             context_x += shake_x + "\n"
             context_y += shake_y + "\n"
             t1 -= 1
         time.sleep(5)
-        with open("D:/code/shoot/simulation_data/x/" + file_name_x, 'w') as f:
+        with open("D:/code/shoot/simulation_data/shake/x/" + file_name_x, 'w') as f:
             f.write(context_x)
-        with open("D:/code/shoot/simulation_data/y/" + file_name_y, 'w') as f:
+        with open("D:/code/shoot/simulation_data/shake/y/" + file_name_y, 'w') as f:
             f.write(context_y)
         t -= 1
 
@@ -151,17 +151,20 @@ if __name__ == '__main__':
     # x, y = GeneratePointInCycle(50, 90)
     # print(x)
     # print(y)
+
     # generate_heart_data()
     # generate_shake_data()
+    # generate_shoot_data()
+
     # print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'))
     # t1 = datetime.timedelta(seconds=random.uniform(2, 2.5))
     # t = datetime.datetime.now() + t1
     # print(t.strftime('%Y-%m-%d %H:%M:%S.%f'))
-    generate_shoot_data()
-    # t1 = threading.Thread(target=generate_heart_data, args=(2,))
-    # t2 = threading.Thread(target=generate_shake_data, args=(2,))
+
+    t1 = threading.Thread(target=generate_heart_data, args=(5,))
+    t2 = threading.Thread(target=generate_shake_data, args=(5,))
     # t3 = threading.Thread(target=generate_shoot_data, args=(2,))
-    # t1.start()
-    # t2.start()
+    t1.start()
+    t2.start()
     # t3.start()
     print("thread end")

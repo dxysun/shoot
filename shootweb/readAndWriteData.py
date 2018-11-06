@@ -383,32 +383,32 @@ def write_beside_data_mysql(file_path):
     print(count)
 
 
-def write_up_data_to_mysql(file_path):
-    files = os.listdir(file_path)
-    count = 0
-    for heart_file in files:
-        heart_file_path = file_path + "/" + heart_file
-        print(heart_file[0:8])
-        athlete_id = 1
-        game_id = 1
-        with open(heart_file_path, 'r') as file:
-            data = file.readlines()  # 读取全部内容 ，并以列表方式返回
-            for line in data:
-                record_date = "2018-07-06 " + heart_file[0:3].replace("-", ":")
-                line = line.strip()
-                data = line.split(" ")
-                if len(data) > 1:
-                    up_data = float(data[0])
-                    record_time = data[1]
-                    temp = str(record_time)
-                    record_date += temp[0:5]
-                    print(record_date)
-                    shake_up_data = ShakeUpData(athleteId=athlete_id, gameId=game_id, up_data=up_data,
-                                                date=record_date, record_time=str(record_time))
-                    shake_up_data.save()
-                print(line)
-                count += 1
-    print(count)
+# def write_up_data_to_mysql(file_path):
+#     files = os.listdir(file_path)
+#     count = 0
+#     for heart_file in files:
+#         heart_file_path = file_path + "/" + heart_file
+#         print(heart_file[0:8])
+#         athlete_id = 1
+#         game_id = 1
+#         with open(heart_file_path, 'r') as file:
+#             data = file.readlines()  # 读取全部内容 ，并以列表方式返回
+#             for line in data:
+#                 record_date = "2018-07-06 " + heart_file[0:3].replace("-", ":")
+#                 line = line.strip()
+#                 data = line.split(" ")
+#                 if len(data) > 1:
+#                     up_data = float(data[0])
+#                     record_time = data[1]
+#                     temp = str(record_time)
+#                     record_date += temp[0:5]
+#                     print(record_date)
+#                     shake_up_data = ShakeUpData(athleteId=athlete_id, gameId=game_id, up_data=up_data,
+#                                                 date=record_date, record_time=str(record_time))
+#                     shake_up_data.save()
+#                 print(line)
+#                 count += 1
+#     print(count)
 
 
 def filter_first_data(file_path, save_path):

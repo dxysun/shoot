@@ -163,9 +163,10 @@ def update_shoot_report():
     shoot_reports = shoot_report.objects.all()
     for report in shoot_reports:
         print(report.shoot_date)
-        print(report.shoot_date[:-9])
+        # print(report.shoot_date[:-9])
         # report.shoot_time = report.shoot_date[-8:]
-        report.shoot_date = "2018-07-14"
+        # report.shoot_date = "2018-07-14"
+        report.is_process = 1
         report.save()
 
 
@@ -181,10 +182,33 @@ def update_shoot_grade():
 
 def update_shake_time():
     record_shake_times = record_shake_time.objects.all()
+
     for shake_time in record_shake_times:
         print(shake_time.record_date)
-        shake_time.record_time = shake_time.record_date[-8:]
-        shake_time.record_date = shake_time.record_date[:-9]
+        x_data = ""
+        y_data = ""
+        shake_datas = shake_data.objects.filter(record_id=shake_time.id)
+        x_data_detail = ""
+        y_data_detail = ""
+        for shakeData in shake_datas:
+            x_data += shakeData.x_data
+            y_data += shakeData.y_data
+            t = shakeData.shake_time.replace(":", "-")
+            x_data_detail += t + ":"
+            x_data_detail += shakeData.x_data + "\n"
+            y_data_detail += t + ":"
+            y_data_detail += shakeData.y_data + "\n"
+        shake_time.shake_x_data = x_data[:-1]
+        shake_time.shake_y_data = y_data[:-1]
+        shake_time.shake_x_detail_data = x_data_detail
+        shake_time.shake_y_detail_data = y_data_detail
+        # print(x_data[:-1])
+        # print(y_data[:-1])
+        # print(x_data_detail)
+        # print(y_data_detail)
+        shake_time.is_process = 1
+        # shake_time.record_time = shake_time.record_date[-8:]
+        # shake_time.record_date = shake_time.record_date[:-9]
         shake_time.save()
 
 
@@ -201,8 +225,9 @@ def update_heart_time():
     record_heart_times = record_heart_time.objects.all()
     for heart_time in record_heart_times:
         print(heart_time.record_date)
-        heart_time.record_time = heart_time.record_date[-8:]
-        heart_time.record_date = heart_time.record_date[:-9]
+        # heart_time.record_time = heart_time.record_date[-8:]
+        # heart_time.record_date = heart_time.record_date[:-9]
+        heart_time.is_process = 1
         heart_time.save()
 
 
@@ -216,9 +241,9 @@ def update_heart_data():
 
 
 def update_all_info():
-    shoot_reports = shoot_report.objects.all()
+    shoot_reports = shoot_report.objects.filter(is_process=0)
     for report in shoot_reports:
-        shake_times = record_shake_time.objects.all()
+        shake_times = record_shake_time.objects.all(is_process=0)
         record_start = time.strptime(report.shoot_date + " " + report.shoot_time, "%Y-%m-%d %H:%M:%S")
         report_start_time = time.mktime(record_start)
         end_time = report.shoot_date + " " + report.shoot_time[:3] + report.end_time[:5]
@@ -230,48 +255,40 @@ def update_all_info():
         hearts = ""
         r_pos = ""
         p_pos = ""
-        shoot_info = []
         x_data_five = []
         y_data_five = []
         for shake_time in shake_times:
             record_start = time.strptime(shake_time.record_date + " " + shake_time.record_time, "%Y-%m-%d %H:%M:%S")
             record_start_time = time.mktime(record_start)
             if report_start_time <= record_start_time <= report_end_time:
-                shake_datas = shake_data.objects.filter(record_id=shake_time.id)
-                x_datas = []
-                y_datas = []
-                for shakeData in shake_datas:
-                    x_data += shakeData.x_data
-                    y_data += shakeData.y_data
-                    x_datas += shakeData.x_data[:-1].split(",")
-                    y_datas += shakeData.y_data[:-1].split(",")
+                # shake_datas = shake_data.objects.filter(record_id=shake_time.id)
+                x_data += shake_time.shake_x_data
+                y_data += shake_time.shake_y_data
+                x_datas = shake_time.shake_x_data.split(",")
+                y_datas = shake_time.shake_y_data.split(",")
+                # for shakeData in shake_datas:
+                #     x_data += shakeData.x_data
+                #     y_data += shakeData.y_data
+                #     x_datas += shakeData.x_data[:-1].split(",")
+                #     y_datas += shakeData.y_data[:-1].split(",")
                 x_data_five, y_data_five = get_max_five(x_datas, y_datas)
                 x_data_five = list(x_data_five)
-        report.x_shake_data = x_data[:-1]
-        report.y_shake_data = y_data[:-1]
+                shake_time.is_process = 1
+                shake_time.save()
+        report.x_shake_data = x_data
+        report.y_shake_data = y_data
         shoot_grades = shoot_grade.objects.filter(report_id=report.id)
         i = 0
         is_have_shake = True
         if len(x_data_five) == 0:
             is_have_shake = False
         for grade in shoot_grades:
-            data_info = {}
-            data_info['grade_date'] = grade.grade_date
-            data_info['grade_time'] = grade.grade_time
-            data_info['grade'] = grade.grade
-            data_info['rapid_time'] = grade.rapid_time
-            data_info['x_pos'] = grade.x_pos
-            data_info['y_pos'] = grade.y_pos
             if is_have_shake:
                 grade.x_shake = float(x_data_five[i])
                 grade.y_shake = float(y_data_five[i])
-                data_info['x_shake'] = x_data_five[i]
-                data_info['y_shake'] = y_data_five[i]
             else:
                 grade.x_shake = 0
                 grade.y_shake = 0
-                data_info['x_shake'] = "0"
-                data_info['y_shake'] = "0"
             grades += grade.grade + ","
             x = float(grade.x_pos)
             y = float(grade.y_pos)
@@ -282,25 +299,19 @@ def update_all_info():
             heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
             if len(heart_times) == 1:
                 heart_time = heart_times[0]
-                data_info['heart'] = str(heart_time.average_rate)
                 grade.heart_rate = heart_time.average_rate
                 hearts += str(heart_time.average_rate) + ","
             else:
-                data_info['heart'] = "0"
                 grade.heart_rate = 0
                 hearts += "0,"
-            shoot_info.append(data_info)
             grade.save()
             i += 1
+        report.is_process = 1
         report.save()
 
 
 if __name__ == "__main__":
     print("shoot")
-    r, a = cart_to_polar(248.83, -212.41)
-    print(r)
-    print(11 - r)
-    print(a)
     # test()
     # get_shoot_info()
     # x1, y1 = - 36.06, -8.96
