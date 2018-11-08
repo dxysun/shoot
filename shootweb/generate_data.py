@@ -103,46 +103,38 @@ def generate_shoot_data(k=5):
 
 def generate_heart_data(t=5):
     while t > 0:
-        file_name = "Heart" + str(time.strftime('%Y-%m-%d %H-%M-%S %A', time.localtime(time.time()))) + ".txt"
+        file_name = "A-" + str(time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time()))) + "heart.txt"
         print(file_name)
         t1 = 8 * 5
-        context = ""
         while t1 > 0:
             time.sleep(0.2)
-            heart_time = str(time.strftime('%H-%M-%S', time.localtime(time.time()))) + "：" + str(
-                random.randint(40, 120))
-            # print(heart_time)
-            context += heart_time + "\n"
+            heart_time = str(datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d-%H:%M:%S:%f'))[
+                         :-3] + "\t\t" + str(random.randint(40, 120)) + "\n"
             t1 -= 1
+            with open("D:/code/shoot/simulation_data/Heart/" + file_name, 'a+') as f:
+                f.write(heart_time)
+        with open("D:/code/shoot/simulation_data/Heart/" + file_name, 'a+') as f:
+            f.write("END")
         time.sleep(5)
-        with open("D:/code/shoot/simulation_data/heart/" + file_name, 'w') as f:
-            f.write(context)
         t -= 1
 
 
 def generate_shake_data(t=5):
     while t > 0:
-        file_name_x = "BesideX" + str(time.strftime('%Y-%m-%d %H-%M-%S %A', time.localtime(time.time()))) + ".txt"
-        file_name_y = "BesideY" + str(time.strftime('%Y-%m-%d %H-%M-%S %A', time.localtime(time.time()))) + ".txt"
-        print(file_name_x)
+        file_name = "A-" + str(time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time()))) + "hand.txt"
+        print(file_name)
         t1 = 8 * 20
-        context_x = ""
-        context_y = ""
         while t1 > 0:
             time.sleep(0.05)
-            shake_x = str(time.strftime('%H-%M-%S', time.localtime(time.time()))) + "：" + str(
-                round(random.uniform(-1000, 2000), 3))
-            shake_y = str(time.strftime('%H-%M-%S', time.localtime(time.time()))) + "：" + str(
-                round(random.uniform(-1000, 2000), 3))
-            # print(shake_x)
-            context_x += shake_x + "\n"
-            context_y += shake_y + "\n"
+            shake = str(datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d-%H:%M:%S:%f'))[
+                    :-3] + "\t\t" + str(round(random.uniform(-100, 100), 2)) + "\t" + str(
+                round(random.uniform(-100, 100), 2)) + "\n"
             t1 -= 1
+            with open("D:/code/shoot/simulation_data/Hand/" + file_name, 'a+') as f:
+                f.write(shake)
+        with open("D:/code/shoot/simulation_data/Hand/" + file_name, 'a+') as f:
+            f.write("END")
         time.sleep(5)
-        with open("D:/code/shoot/simulation_data/shake/x/" + file_name_x, 'w') as f:
-            f.write(context_x)
-        with open("D:/code/shoot/simulation_data/shake/y/" + file_name_y, 'w') as f:
-            f.write(context_y)
         t -= 1
 
 
@@ -151,6 +143,7 @@ if __name__ == '__main__':
     # x, y = GeneratePointInCycle(50, 90)
     # print(x)
     # print(y)
+    # print(str(datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d-%H-%M-%S.%f'))[:-3])
 
     # generate_heart_data()
     # generate_shake_data()

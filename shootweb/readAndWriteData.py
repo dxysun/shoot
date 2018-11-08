@@ -204,6 +204,41 @@ def read_heart_from_file_second(file_path, save_dir):
                 f.write(str(context))
 
 
+def get_normal_str(s):
+    s = s.strip()
+    if int(s) < 10:
+        s = "0" + s
+    return s
+
+
+def read_heart_from_file_third(file_path):
+    files = os.listdir(file_path)
+    for heart_file in files:
+        heart_file_path = file_path + "/" + heart_file
+        print(heart_file)
+        print(heart_file[2:12])
+        print(heart_file[13:21])
+        with open(heart_file_path, 'r', encoding='gbk') as file:
+            data = file.readlines()  # 读取全部内容 ，并以列表方式返回
+            for line in data:
+                line = line.strip()
+                print(line)
+                if "END" in line:
+                    break
+                d1 = line.split("-")
+                # print(d1)
+                date = get_normal_str(d1[0]) + "-" + get_normal_str(d1[1]) + "-" + get_normal_str(d1[2])
+                print(date)
+                d2 = d1[3]
+                d3 = d2.split(":")
+                # print(d3)
+                h_time = get_normal_str(d3[0]) + "-" + get_normal_str(d3[1]) + "-" + get_normal_str(d3[2])
+                print(h_time)
+                d4 = d3[3]
+                d5 = d4.split("\t")
+                print(d5[-1])
+
+
 def read_camera_from_file(file_path, file_type, save_dir):
     del_file(save_dir)
     files = os.listdir(file_path)
@@ -273,6 +308,46 @@ def read_camera_from_file_second(file_path, file_type, save_dir):
                 context += "\n"
             with open(save_dir + record_time + '.txt', 'w') as f:
                 f.write(str(context))
+
+
+def find_n_sub_str(src, sub, pos, start):
+    index = src.find(sub, start)
+    if index != -1 and pos > 0:
+        return find_n_sub_str(src, sub, pos - 1, index + 1)
+    return index
+
+
+def read_camera_from_file_third(file_path):
+    files = os.listdir(file_path)
+    for camera_file in files:
+        camera_file_path = file_path + "/" + camera_file
+        print(camera_file)
+        print(camera_file[2:12])
+        print(camera_file[13:21])
+        with open(camera_file_path, 'r', encoding='gbk') as file:
+            # print(file.read())
+            data = file.readlines()  # 读取全部内容 ，并以列表方式返回
+            for line in data:
+                line = line.strip()
+                print(line)
+                if "END" in line:
+                    break
+                i = find_n_sub_str(line, "-", 2, 0)
+                line1 = line[:i]
+                line2 = line[i + 1:]
+                d1 = line1.split("-")
+                # print(d1)
+                date = get_normal_str(d1[0]) + "-" + get_normal_str(d1[1]) + "-" + get_normal_str(d1[2])
+                print(date)
+                d2 = line2
+                d3 = d2.split(":")
+                # print(d3)
+                h_time = get_normal_str(d3[0]) + "-" + get_normal_str(d3[1]) + "-" + get_normal_str(d3[2])
+                print(h_time)
+                d4 = d3[3]
+                d5 = d4.split("\t")
+                print(d5[-2])
+                print(d5[-1])
 
 
 def merge_x_y_to_file(x_files_path, y_files_path, merge_file_path):
@@ -450,12 +525,18 @@ if __name__ == "__main__":
     # read_camera_from_file_second('D:/workSpace/PythonWorkspace/shoot/shootweb/data/second/origin/camera/y', 'y',
     #                              'D:/workSpace/PythonWorkspace/shoot/shootweb/data/second/after_process/camera/y/')
 
+    read_heart_from_file_third("D:/code/shoot/simulation_data/newdata/Heart")
+    read_camera_from_file_third("D:/code/shoot/simulation_data/newdata/Hand")
+
+    # a = "2018-11- 6-10:42:26:231		0.00	1.00";
+    # print(find_n_sub_str(a, "-", 2, 0))
+
     # merge_x_y_to_file('D:/workSpace/PythonWorkspace/shoot/shootweb/data/second/after_process/camera/x/',
     #                   'D:/workSpace/PythonWorkspace/shoot/shootweb/data/second/after_process/camera/y/',
     #                   'D:/workSpace/PythonWorkspace/shoot/shootweb/data/second/after_process/camera/merge/')
 
-    filter_first_data('D:/workSpace/PythonWorkspace/shoot/shootweb/data/first/second_process/camera/x',
-                      'D:/workSpace/PythonWorkspace/shoot/shootweb/data/first/third_process/camera/x/')
+    # filter_first_data('D:/workSpace/PythonWorkspace/shoot/shootweb/data/first/second_process/camera/x',
+    #                   'D:/workSpace/PythonWorkspace/shoot/shootweb/data/first/third_process/camera/x/')
 
     # write_beside_data_mysql('D:/workSpace/PythonWorkspace/shoot/shootweb/data/second/after_process/camera/merge/')
     # write_up_data_to_mysql('D:/workSpace/PythonWorkspace/shoot/shootweb/data/after_process/camera/up')
@@ -471,11 +552,3 @@ if __name__ == "__main__":
     # print(a)
     # for s in a:
     #     print(s)
-
-
-
-
-
-
-
-
