@@ -4,6 +4,7 @@ from django.http.response import JsonResponse
 import time
 import math
 from . import shootlib
+from django.shortcuts import redirect
 
 
 # Create your views here.
@@ -239,27 +240,193 @@ def sport_game_history(request):
 
 
 def admin_home(request):
-    return render(request, 'admin_home.html')
+    if request.method == 'POST':
+        item_name = request.POST['item_name']
+        item_intro = request.POST['item_intro']
+        item_rule = request.POST['item_rule']
+        print(item_name)
+        shoot_item = shoot_items(item_name=item_name,item_info=item_intro,item_rule=item_rule)
+        shoot_item.save()
+    items = shoot_items.objects.all()
+    all_item = []
+    for item in items:
+        info = {}
+        info["id"] = item.id
+        info["item_name"] = item.item_name
+        coachs = user_info.objects.filter(item_id=item.id).filter(role="coach")
+        athletes = user_info.objects.filter(item_id=item.id).filter(role="athlete")
+        coach_str = ""
+        for coach in coachs:
+            coach_str += coach.user_name +","
+        info["coach"] = coach_str[:-1]
+        info["athlete_num"] = len(athletes)
+        all_item.append(info)
+    return render(request, 'admin_home.html',{
+        "shoot_items": all_item
+    })
 
 
 def admin_coach(request):
-    return render(request, 'admin_coach.html')
+    if request.method == 'POST':
+        coach_name = request.POST['coach_name']
+        gender = request.POST['gender']
+        age = request.POST['age']
+        coach_info = request.POST['coach_info']
+        item_id = request.POST['item_id']
+        password = request.POST['password']
+        print(coach_name)
+        coach = user_info(user_name=coach_name,gender=gender,age=age,intro=coach_info,item_id=item_id,password=password,role="coach")
+        coach.save()
+    coachs = user_info.objects.filter(role="coach")
+    all_cocahs=[]
+    for coach in coachs:
+        c = {}
+        items = shoot_items.objects.filter(id=coach.item_id)
+        c["coach"] = coach
+        if len(items) > 0:
+            item = items[0]
+            c["item_name"] = item.item_name
+        else:
+            c["item_name"] = ""
+        all_cocahs.append(c)
+    return render(request, 'admin_coach.html',{
+        "coachs": all_cocahs
+    })
 
 
 def admin_sport(request):
-    return render(request, 'admin_sport.html')
+    if request.method == 'POST':
+        athlete_name = request.POST['athlete_name']
+        gender = request.POST['gender']
+        age = request.POST['age']
+        athlete_info = request.POST['athlete_info']
+        item_id = request.POST['item_id']
+        password = request.POST['password']
+        print(athlete_name)
+        athlete = user_info(user_name=athlete_name, gender=gender, age=age, intro=athlete_info, item_id=item_id,
+                          password=password, role="athlete")
+        athlete.save()
+    user_infos = user_info.objects.filter(role="athlete")
+    all_athletes = []
+    for athlete in user_infos:
+        c = {}
+        items = shoot_items.objects.filter(id=athlete.item_id)
+        c["athlete"] = athlete
+        if len(items) > 0:
+            item = items[0]
+            c["item_name"] = item.item_name
+        else:
+            c["item_name"] = ""
+        all_athletes.append(c)
+    return render(request, 'admin_sport.html', {
+        'athletes': all_athletes
+    })
 
 
 def admin_add_item(request):
     return render(request, 'admin_add_item.html')
 
 
+def admin_delete_item(request):
+    if request.method == 'GET':
+        id = request.GET['id']
+        users = user_info.objects.filter(item_id=int(id))
+        if len(users) > 0:
+            for user in users:
+                user.item_id = None
+                user.save()
+        shoot_items.objects.get(id=id).delete()
+    return redirect("admin_home")
+
+
+def admin_modify_item(request):
+    if request.method == 'GET':
+        id = request.GET['id']
+        shoot_item = shoot_items.objects.get(id=int(id))
+        return render(request, 'admin_modify_item.html', {
+            'shoot_item': shoot_item
+        })
+    if request.method == 'POST':
+        id = request.POST['id']
+        shoot_item = shoot_items.objects.get(id=int(id))
+        shoot_item.item_name = request.POST['item_name']
+        shoot_item.item_info = request.POST['item_info']
+        shoot_item.item_rule = request.POST['item_rule']
+        shoot_item.save()
+        return redirect("admin_home")
+
+
+
 def admin_add_coach(request):
-    return render(request, 'admin_add_coach.html')
+    items = shoot_items.objects.all()
+    return render(request, 'admin_add_coach.html',{
+        "items": items
+    })
+
+
+def admin_delete_coach(request):
+    if request.method == 'GET':
+        id = request.GET['id']
+        user_info.objects.get(id=id).delete()
+    return redirect("admin_coach")
+
+
+def admin_modify_coach(request):
+    if request.method == 'GET':
+        id = request.GET['id']
+        coach = user_info.objects.get(id=int(id))
+        items = shoot_items.objects.all()
+        return render(request, 'admin_modify_coach.html', {
+            'coach': coach,
+            'items': items
+        })
+    if request.method == 'POST':
+        id = request.POST['id']
+        coach = user_info.objects.get(id=int(id))
+        coach.user_name = request.POST['coach_name']
+        coach.intro = request.POST['coach_info']
+        coach.gender = request.POST['gender']
+        coach.age = request.POST['age']
+        coach.item_id = request.POST['item_id']
+        coach.password = request.POST['password']
+        coach.save()
+        return redirect("admin_coach")
 
 
 def admin_add_sport(request):
-    return render(request, 'admin_add_sport.html')
+    items = shoot_items.objects.all()
+    return render(request, 'admin_add_sport.html',{
+        "items": items
+    })
+
+
+def admin_delete_sport(request):
+    if request.method == 'GET':
+        id = request.GET['id']
+        user_info.objects.get(id=id).delete()
+    return redirect("admin_sport")
+
+
+def admin_modify_sport(request):
+    if request.method == 'GET':
+        id = request.GET['id']
+        athlete = user_info.objects.get(id=int(id))
+        items = shoot_items.objects.all()
+        return render(request, 'admin_modify_sport.html', {
+            'athlete': athlete,
+            'items': items
+        })
+    if request.method == 'POST':
+        id = request.POST['id']
+        athlete = user_info.objects.get(id=int(id))
+        athlete.user_name = request.POST['user_name']
+        athlete.intro = request.POST['athlete_info']
+        athlete.gender = request.POST['gender']
+        athlete.age = request.POST['age']
+        athlete.item_id = request.POST['item_id']
+        athlete.password = request.POST['password']
+        athlete.save()
+        return redirect("admin_sport")
 
 
 def test(request):

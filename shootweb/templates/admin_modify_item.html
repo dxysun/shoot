@@ -26,7 +26,7 @@
         射击项目列表
     </h1>
     <ol class="breadcrumb">
-        <li class="active">添加项目</li>
+        <li class="active">修改射击项目信息</li>
     </ol>
 
 {% endblock %}
@@ -41,7 +41,7 @@
                         <div class="col-lg-3">
                         </div>
                         <div class="col-lg-6">
-                            添加射击项目信息
+                            修改射击项目信息
                         </div>
                         <div class="col-lg-3">
                         </div>
@@ -53,20 +53,21 @@
                         <div class="col-lg-3">
                         </div>
                         <div class="col-lg-6">
-                            <form role="form" action="{% url 'admin_home' %}" method="post">
+                            <form role="form" action="{% url 'admin_modify_item' %}" method="post">
+                                <input name="id" type="hidden" value="{{ shoot_item.id }}">
                                 <div class="form-group">
                                     <label>项目名称</label>
-                                    <input name="item_name" class="form-control">
+                                    <input name="item_name" class="form-control" value="{{ shoot_item.item_name }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>项目简介</label>
-                                    <textarea name="item_intro" class="form-control" rows="3"></textarea>
+                                    <textarea name="item_info" class="form-control" rows="3">{{ shoot_item.item_info }}</textarea>
                                 </div>
 
                                 <div class="form-group">
                                     <label>项目规则</label>
-                                    <textarea name="item_rule" class="form-control" rows="3"></textarea>
+                                    <textarea name="item_rule" class="form-control" rows="3">{{ shoot_item.item_rule }}</textarea>
                                 </div>
 
                                 <button type="submit" class="btn btn-success">提交</button>

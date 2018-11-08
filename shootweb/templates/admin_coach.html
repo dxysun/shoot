@@ -2,6 +2,18 @@
 
 {% block title %}运动员数据分析-管理员主页{% endblock %}
 
+{% block script %}
+    <script>
+        function is_delete(id) {
+            if (window.confirm('你确定要删除吗？')) {
+                window.location.href = "{% url 'admin_delete_coach' %}?id=" + id;
+            }
+        }
+
+
+    </script>
+{% endblock %}
+
 {% block menu %}
 
     <ul class="nav" id="main-menu">
@@ -66,36 +78,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Mark</td>
-                                <td>男</td>
-                                <td>30</td>
-                                <td>项目1</td>
-                                <td>
-                                    <a href="#" class="btn btn-success btn-sm">修改</a>
-                                    <a href="#" class="btn btn-danger btn-sm">删除</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Jacob</td>
-                                <td>男</td>
-                                <td>32</td>
-                                <td>项目2</td>
-                                <td>
-                                    <a href="#" class="btn btn-success btn-sm">修改</a>
-                                    <a href="#" class="btn btn-danger btn-sm">删除</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Larry</td>
-                                <td>女</td>
-                                <td>28</td>
-                                <td>项目3</td>
-                                <td>
-                                    <a href="#" class="btn btn-success btn-sm">修改</a>
-                                    <a href="#" class="btn btn-danger btn-sm">删除</a>
-                                </td>
-                            </tr>
+                            {% for coach_item in coachs %}
+                                <tr>
+                                    <td>{{ coach_item.coach.user_name }}</td>
+                                    <td>{{ coach_item.coach.gender }}</td>
+                                    <td>{{ coach_item.coach.age }}</td>
+                                    <td>{{ coach_item.item_name }}</td>
+                                    <td>
+                                        <a href="{% url 'admin_modify_coach' %}?id={{ coach_item.coach.id }}" class="btn btn-success btn-sm">修改</a>
+                                        <a onclick="is_delete({{ coach_item.coach.id }})" class="btn btn-danger btn-sm">删除</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+
                             </tbody>
                         </table>
                     </div>
