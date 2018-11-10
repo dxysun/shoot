@@ -12,8 +12,65 @@ def index(request):
     return render(request, 'main.html')
 
 
+def login_admin(request):
+    if request.method == 'GET':
+        return render(request, 'login_admin.html')
+    result = {}
+    if request.method == "POST":  # 请求方法为POST时，进行处理
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = user_info.objects.filter(user_name=username)
+        if len(user) == 0:
+            result["status"] = "failed"
+        elif user[0].password == password:
+            request.session["username"] = username
+            request.session["user_id"] = user[0].id
+            request.session["user"] = "admin"
+            request.session["role"] = "admin"
+            result["status"] = "success"
+        else:
+            result["status"] = "failed"
+        return JsonResponse(result)
+
+
+def get_user_info(request):
+    if request.method == 'POST':
+        users = user_info.objects.filter(role="athlete")
+        result={}
+        result['data'] = []
+        for user  in users:
+            u = {}
+            u['id'] = user.id
+            u['user_name'] = user.user_name
+            result['data'].append(u)
+        if len(users) > 0:
+            result["status"] = "success"
+        else:
+            result["status"] = "failed"
+        return JsonResponse(result)
+
+
 def login(request):
-    return render(request, 'login.html')
+    if request.method == 'GET':
+        users = user_info.objects.filter(role="athlete")
+        return render(request, 'login.html', {
+            "users": users
+        })
+    if request.method == 'POST':
+        user_id = request.POST['user_id']
+        user = user_info.objects.get(id=int(user_id))
+        print(user_id)
+        request.session['user'] = user.user_name
+        request.session['user_id'] = user.id
+        request.session['role'] = user.role
+        return redirect("sport_home")
+
+
+def logout(request):
+    del request.session["user"]
+    del request.session["role"]
+    del request.session["user_id"]
+    return redirect("login")
 
 
 def register(request):
@@ -169,7 +226,7 @@ def sport_game_analyse(request):
                     heart_temp.append(grade.heart_rate)
                     heart_total += grade.heart_rate
             if len(heart_temp) != 0:
-                heart = heart_total/len(heart_temp)
+                heart = heart_total / len(heart_temp)
             else:
                 heart = 0
             hearts += str(heart) + ","
@@ -245,7 +302,7 @@ def admin_home(request):
         item_intro = request.POST['item_intro']
         item_rule = request.POST['item_rule']
         print(item_name)
-        shoot_item = shoot_items(item_name=item_name,item_info=item_intro,item_rule=item_rule)
+        shoot_item = shoot_items(item_name=item_name, item_info=item_intro, item_rule=item_rule)
         shoot_item.save()
     items = shoot_items.objects.all()
     all_item = []
@@ -257,11 +314,11 @@ def admin_home(request):
         athletes = user_info.objects.filter(item_id=item.id).filter(role="athlete")
         coach_str = ""
         for coach in coachs:
-            coach_str += coach.user_name +","
+            coach_str += coach.user_name + ","
         info["coach"] = coach_str[:-1]
         info["athlete_num"] = len(athletes)
         all_item.append(info)
-    return render(request, 'admin_home.html',{
+    return render(request, 'admin_home.html', {
         "shoot_items": all_item
     })
 
@@ -275,10 +332,11 @@ def admin_coach(request):
         item_id = request.POST['item_id']
         password = request.POST['password']
         print(coach_name)
-        coach = user_info(user_name=coach_name,gender=gender,age=age,intro=coach_info,item_id=item_id,password=password,role="coach")
+        coach = user_info(user_name=coach_name, gender=gender, age=age, intro=coach_info, item_id=item_id,
+                          password=password, role="coach")
         coach.save()
     coachs = user_info.objects.filter(role="coach")
-    all_cocahs=[]
+    all_cocahs = []
     for coach in coachs:
         c = {}
         items = shoot_items.objects.filter(id=coach.item_id)
@@ -289,7 +347,7 @@ def admin_coach(request):
         else:
             c["item_name"] = ""
         all_cocahs.append(c)
-    return render(request, 'admin_coach.html',{
+    return render(request, 'admin_coach.html', {
         "coachs": all_cocahs
     })
 
@@ -304,7 +362,7 @@ def admin_sport(request):
         password = request.POST['password']
         print(athlete_name)
         athlete = user_info(user_name=athlete_name, gender=gender, age=age, intro=athlete_info, item_id=item_id,
-                          password=password, role="athlete")
+                            password=password, role="athlete")
         athlete.save()
     user_infos = user_info.objects.filter(role="athlete")
     all_athletes = []
@@ -356,10 +414,9 @@ def admin_modify_item(request):
         return redirect("admin_home")
 
 
-
 def admin_add_coach(request):
     items = shoot_items.objects.all()
-    return render(request, 'admin_add_coach.html',{
+    return render(request, 'admin_add_coach.html', {
         "items": items
     })
 
@@ -395,7 +452,7 @@ def admin_modify_coach(request):
 
 def admin_add_sport(request):
     items = shoot_items.objects.all()
-    return render(request, 'admin_add_sport.html',{
+    return render(request, 'admin_add_sport.html', {
         "items": items
     })
 
