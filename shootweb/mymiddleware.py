@@ -12,8 +12,24 @@ class SimpleMiddleware(MiddlewareMixin):
         # else:
         #     return redirect("login")
         if request.path != '/shoot/login' and request.path != '/shoot/login_admin':
-            if request.session.get('user', None):
-                pass
+            user = request.session.get('user', None)
+            if user:
+                role = request.session.get('role')
+                # print(request.path)
+                # print(role)
+                if role == 'admin':
+                    print('in admin')
+                    if 'admin' in request.path:
+                        pass
+                    else:
+                        return redirect("login")
+                elif role == 'athlete':
+                    if 'sport' in request.path:
+                        pass
+                    else:
+                        return redirect("login")
+                else:
+                    pass
             else:
                 return redirect("login")
 

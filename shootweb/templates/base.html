@@ -47,11 +47,6 @@
                 console.log("user: " + user);
                 $("#user_id").val(user);
                 $("#switch_user_submit").submit();
-               {% comment %} var form = new FormData();
-                form.action = "{% url 'login' %}";
-                form.method = "post";
-                form.append('user_id', user);
-                form.submit;{% endcomment %}
 
             })
         })
@@ -90,9 +85,7 @@
                            data-target="#myModal"><i
                                 class="fa fa-user fa-fw"></i> 切换用户</a>
                         <!-- Button trigger modal -->
-                        {% comment %}    <button type="button" class="fa fa-user fa-fw" data-toggle="modal" data-target="#myModal">
-                            Launch demo modal
-                        </button>{% endcomment %}
+
                     </li>
                     <li><a href="{% url 'login_admin' %}"><i class="fa fa-gear fa-fw"></i> 管理员</a>
                     </li>

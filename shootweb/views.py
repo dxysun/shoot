@@ -102,6 +102,7 @@ def coach_sport_info_detail(request):
 
 
 def update_data(request):
+    user_name = request.session.get('user',"")
     shoot_reports = shoot_report.objects.filter(is_process=0)
     for report in shoot_reports:
         shake_times = record_shake_time.objects.all(is_process=0)
@@ -129,6 +130,7 @@ def update_data(request):
                 x_data_five, y_data_five = get_max_five(x_datas, y_datas)
                 x_data_five = list(x_data_five)
                 shake_time.is_process = 1
+                shake_time.user_name = user_name
                 shake_time.save()
         report.x_shake_data = x_data
         report.y_shake_data = y_data
@@ -159,9 +161,11 @@ def update_data(request):
             else:
                 grade.heart_rate = 0
                 hearts += "0,"
+            grade.user_name = user_name
             grade.save()
             i += 1
         report.is_process = 1
+        report.user_name = user_name
         report.save()
     dct = {}
     dct['status'] = 'success'
@@ -169,6 +173,7 @@ def update_data(request):
 
 
 def sport_game_analyse(request):
+    user_name = request.session.get('user', "")
     shoot_reports = []
     best_grade = 0
     bad_grade = 100
@@ -287,9 +292,10 @@ def sport_game_analyse_id(request):
 
 
 def sport_game_history(request):
+    user_name = request.session.get('user',"")
     report = shoot_report.objects.last()
     date = report.shoot_date
-    shoot_reports = shoot_report.objects.filter(shoot_date=report.shoot_date)
+    shoot_reports = shoot_report.objects.filter(shoot_date=report.shoot_date).filter(user_name=user_name)
     return render(request, 'sport_game_history.html', {
         'shoot_reports': shoot_reports,
         'date': date
@@ -379,6 +385,10 @@ def admin_sport(request):
     return render(request, 'admin_sport.html', {
         'athletes': all_athletes
     })
+
+
+def admin_analyse(request):
+    return render(request, 'admin_analyse.html')
 
 
 def admin_add_item(request):

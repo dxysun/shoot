@@ -34,5 +34,6 @@ urlpatterns = [
     url('^admin/sport$', views.admin_sport, name="admin_sport"),
     url('^admin/sport/add', views.admin_add_sport, name="admin_add_sport"),
     url('^admin/sport/delete', views.admin_delete_sport, name="admin_delete_sport"),
-    url('^admin/sport/modify', views.admin_modify_sport, name="admin_modify_sport")
+    url('^admin/sport/modify', views.admin_modify_sport, name="admin_modify_sport"),
+    url('^admin/analyse$', views.admin_analyse, name="admin_analyse"),
 ]

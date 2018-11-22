@@ -5,7 +5,7 @@ from django.conf import settings
 
 def globar_var(request):
     if request.session.get('user', None):
-        print(request.session.get('user'))
+        # print(request.session.get('user'))
         return {
             'user': request.session.get('user'),
             'role': request.session.get('role'),

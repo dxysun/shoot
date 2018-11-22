@@ -24,6 +24,9 @@
         <li>
             <a href="{% url 'admin_sport' %}"><i class="fa fa-qrcode"></i> 运动员列表</a>
         </li>
+        <li>
+            <a href="{% url 'admin_analyse' %}"><i class="fa fa-bar-chart-o"></i> 射击数据分析</a>
+        </li>
     </ul>
 
 {% endblock %}
@@ -80,7 +83,8 @@
                                     <td>{{ item.coach }}</td>
                                     <td>{{ item.athlete_num }}</td>
                                     <td>
-                                        <a href="{% url 'admin_modify_item' %}?id={{ item.id }}" class="btn btn-success btn-sm">修改</a>
+                                        <a href="{% url 'admin_modify_item' %}?id={{ item.id }}"
+                                           class="btn btn-success btn-sm">修改</a>
                                         <a onclick="is_delete({{ item.id }})" class="btn btn-danger btn-sm">删除</a>
                                     </td>
                                 </tr>

@@ -166,7 +166,7 @@ def update_shoot_report():
         # print(report.shoot_date[:-9])
         # report.shoot_time = report.shoot_date[-8:]
         # report.shoot_date = "2018-07-14"
-        report.is_process = 1
+        report.user_name = "A"
         report.save()
 
 
@@ -174,41 +174,36 @@ def update_shoot_grade():
     shoot_grades = shoot_grade.objects.all()
     for grade in shoot_grades:
         print(grade.grade_date)
-        grade.grade_detail_time = grade.grade_time
-        grade.grade_time = grade.grade_date[-8:]
-        grade.grade_date = grade.grade_date[:-9]
+        # grade.grade_detail_time = grade.grade_time
+        # grade.grade_time = grade.grade_date[-8:]
+        # grade.grade_date = grade.grade_date[:-9]
+        grade.user_name = "A"
         grade.save()
 
 
 def update_shake_time():
     record_shake_times = record_shake_time.objects.all()
-
     for shake_time in record_shake_times:
         print(shake_time.record_date)
-        x_data = ""
-        y_data = ""
-        shake_datas = shake_data.objects.filter(record_id=shake_time.id)
-        x_data_detail = ""
-        y_data_detail = ""
-        for shakeData in shake_datas:
-            x_data += shakeData.x_data
-            y_data += shakeData.y_data
-            t = shakeData.shake_time.replace(":", "-")
-            x_data_detail += t + ":"
-            x_data_detail += shakeData.x_data + "\n"
-            y_data_detail += t + ":"
-            y_data_detail += shakeData.y_data + "\n"
-        shake_time.shake_x_data = x_data[:-1]
-        shake_time.shake_y_data = y_data[:-1]
-        shake_time.shake_x_detail_data = x_data_detail
-        shake_time.shake_y_detail_data = y_data_detail
-        # print(x_data[:-1])
-        # print(y_data[:-1])
-        # print(x_data_detail)
-        # print(y_data_detail)
-        shake_time.is_process = 1
-        # shake_time.record_time = shake_time.record_date[-8:]
-        # shake_time.record_date = shake_time.record_date[:-9]
+        # x_data = ""
+        # y_data = ""
+        # shake_datas = shake_data.objects.filter(record_id=shake_time.id)
+        # x_data_detail = ""
+        # y_data_detail = ""
+        # for shakeData in shake_datas:
+        #     x_data += shakeData.x_data
+        #     y_data += shakeData.y_data
+        #     t = shakeData.shake_time.replace(":", "-")
+        #     x_data_detail += t + ":"
+        #     x_data_detail += shakeData.x_data + "\n"
+        #     y_data_detail += t + ":"
+        #     y_data_detail += shakeData.y_data + "\n"
+        # shake_time.shake_x_data = x_data[:-1]
+        # shake_time.shake_y_data = y_data[:-1]
+        # shake_time.shake_x_detail_data = x_data_detail
+        # shake_time.shake_y_detail_data = y_data_detail
+        # shake_time.is_process = 1
+        shake_time.user_name = "A"
         shake_time.save()
 
 
@@ -227,7 +222,8 @@ def update_heart_time():
         print(heart_time.record_date)
         # heart_time.record_time = heart_time.record_date[-8:]
         # heart_time.record_date = heart_time.record_date[:-9]
-        heart_time.is_process = 1
+        # heart_time.is_process = 1
+        heart_time.user_name = "A"
         heart_time.save()
 
 
@@ -235,8 +231,9 @@ def update_heart_data():
     heart_datas = heart_data.objects.all()
     for data in heart_datas:
         print(data.heart_date)
-        data.heart_time = data.heart_date[-8:]
-        data.heart_date = data.heart_date[:-9]
+        # data.heart_time = data.heart_date[-8:]
+        # data.heart_date = data.heart_date[:-9]
+        data.user_name = "A"
         data.save()
 
 
