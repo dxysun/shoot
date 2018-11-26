@@ -6,8 +6,8 @@ import os
 import datetime
 import django
 
-sys.path.append('../shoot')
-os.chdir('../shoot')
+sys.path.append('D:/workSpace/PythonWorkspace/shoot/shoot')
+os.chdir('D:/workSpace/PythonWorkspace/shoot/shoot')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shoot.settings")
 django.setup()
 from shootweb.models import *
@@ -24,7 +24,7 @@ def follow(the_file):
 
 
 class GradeEventHandler(FileSystemEventHandler):
-    def __init__(self):
+    def __init__(self, username):
         FileSystemEventHandler.__init__(self)
         self.grade_file = None
         self.num = 0
@@ -32,6 +32,7 @@ class GradeEventHandler(FileSystemEventHandler):
         self.shoot_data = None
         self.start_time = ''
         self.end_time = ''
+        self.username = username
 
     def on_moved(self, event):
         if event.is_directory:
@@ -44,6 +45,9 @@ class GradeEventHandler(FileSystemEventHandler):
             print("directory created:{0}".format(event.src_path))
         else:
             print("file created:{0}".format(event.src_path))
+
+    def set_username(self, username):
+        self.username = username
 
     def on_deleted(self, event):
         if event.is_directory:
@@ -77,7 +81,7 @@ class GradeEventHandler(FileSystemEventHandler):
                     d = datetime.datetime.now().strftime("%Y-%m-%d")
                     if line == "Shot Report":
                         self.report_data = shoot_report(shoot_date=d, start_time=self.start_time,
-                                                        end_time=self.end_time)
+                                                        end_time=self.end_time, user_name=self.username)
                         self.report_data.save()
                         self.num = 0
                     else:
@@ -111,9 +115,11 @@ class GradeEventHandler(FileSystemEventHandler):
                                 y_pos = lines[2]
                                 t = datetime.datetime.now().strftime("%H:")
                                 t += shoot_time[0:5]
+                                print(self.username)
                                 self.shoot_data = shoot_grade(report_id=self.report_data.id, grade_date=d,
                                                               grade_time=t, grade_detail_time=shoot_time,
-                                                              grade=grade, rapid_time="", x_pos=x_pos, y_pos=y_pos)
+                                                              grade=grade, rapid_time="", x_pos=x_pos, y_pos=y_pos,
+                                                              user_name=self.username)
                                 self.shoot_data.save()
                             else:
                                 if self.shoot_data is not None:
@@ -123,14 +129,24 @@ class GradeEventHandler(FileSystemEventHandler):
                                     self.shoot_data = None
 
 
+def start_watch(username):
+    observer1 = Observer()
+    event_handler = GradeEventHandler(username)
+    observer1.schedule(event_handler, "D:/code/shoot/simulation_data/grade", True)
+    observer1.start()
+    return observer1
+
+
 if __name__ == "__main__":
-    observer = Observer()
-    event_handler = GradeEventHandler()
-    observer.schedule(event_handler, "D:/code/shoot/simulation_data/grade", True)
-    observer.start()
-    # try:
-    #     while True:
-    #         time.sleep(1)
-    # except KeyboardInterrupt:
-    #     observer.stop()
-    observer.join()
+    print()
+    observer = start_watch("A")
+    time.sleep(30)
+    print("set username B")
+    observer.username = "B"
+    print(observer.username)
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        observer.stop()
+    # observer.join()

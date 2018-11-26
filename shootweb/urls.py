@@ -4,17 +4,12 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url('^$', views.index, name="index"),
-    url('^test$', views.test, name="test"),
-    url('^main$', views.main, name="main"),
-    url('^coach$', views.coach, name="coach"),
-    url('^vue', views.vue, name="vue"),
     url('^login$', views.login, name="login"),
     url('^login_admin$', views.login_admin, name="login_admin"),
     url('^logout', views.logout, name="logout"),
-    url('^get_user_info$', views.get_user_info, name="get_user_info"),
+    url('^api/get_user_info$', views.get_user_info, name="get_user_info"),
     url('^register', views.register, name="register"),
-    url('^update_data', views.update_data, name="update_data"),
+    url('^api/update_data', views.update_data, name="update_data"),
     url('^sport/home', views.sport_home, name="sport_home"),
     url('^sport/game_analyse$', views.sport_game_analyse, name="sport_game_analyse"),
     url('^sport/game_analyse_id$', views.sport_game_analyse_id, name="sport_game_analyse_id"),

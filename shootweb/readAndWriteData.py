@@ -4,8 +4,8 @@ import os
 import datetime
 import django
 
-sys.path.append('../shoot')
-os.chdir('../shoot')
+sys.path.append('D:/workSpace/PythonWorkspace/shoot/shoot')
+os.chdir('D:/workSpace/PythonWorkspace/shoot/shoot')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shoot.settings")
 django.setup()
 from shootweb.models import *

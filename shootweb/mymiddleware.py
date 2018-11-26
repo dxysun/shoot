@@ -17,7 +17,9 @@ class SimpleMiddleware(MiddlewareMixin):
                 role = request.session.get('role')
                 # print(request.path)
                 # print(role)
-                if role == 'admin':
+                if 'api' in request.path:
+                    pass
+                elif role == 'admin':
                     print('in admin')
                     if 'admin' in request.path:
                         pass

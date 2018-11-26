@@ -154,10 +154,10 @@ if __name__ == '__main__':
     # t = datetime.datetime.now() + t1
     # print(t.strftime('%Y-%m-%d %H:%M:%S.%f'))
 
-    t1 = threading.Thread(target=generate_heart_data, args=(5,))
-    t2 = threading.Thread(target=generate_shake_data, args=(5,))
-    # t3 = threading.Thread(target=generate_shoot_data, args=(2,))
-    t1.start()
-    t2.start()
-    # t3.start()
+    # t1 = threading.Thread(target=generate_heart_data, args=(5,))
+    # t2 = threading.Thread(target=generate_shake_data, args=(5,))
+    t3 = threading.Thread(target=generate_shoot_data, args=(5,))
+    # t1.start()
+    # t2.start()
+    t3.start()
     print("thread end")

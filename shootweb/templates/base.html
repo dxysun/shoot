@@ -25,8 +25,9 @@
             console.log("data click");
             $.post("{% url 'get_user_info' %}",
                 function (data, status) {
+                     console.log("status " + status);
 
-                    if (data.status == "success") {
+                    if (data.status == "success" && status == "success") {
                         console.log("data: " + data.data);
                         console.log("数据: \n" + data.status + "\n状态: " + status);
                         for (var i = 0; i < data.data.length; i++) {
@@ -36,6 +37,9 @@
                                 "                            </label>\n" +
                                 "                        </div>")
                         }
+                    }
+                    else {
+                        alert('数据获取出错')
                     }
 
                 });

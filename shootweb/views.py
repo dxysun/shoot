@@ -4,9 +4,11 @@ from django.http.response import JsonResponse
 import time
 import math
 from . import shootlib
+from . import watch_grade_file
 from django.shortcuts import redirect
 
 
+observer = None
 # Create your views here.
 def index(request):
     return render(request, 'main.html')
@@ -59,10 +61,18 @@ def login(request):
     if request.method == 'POST':
         user_id = request.POST['user_id']
         user = user_info.objects.get(id=int(user_id))
-        print(user_id)
+
         request.session['user'] = user.user_name
         request.session['user_id'] = user.id
         request.session['role'] = user.role
+        print("observer get")
+        global observer
+        if observer is not None:
+            print("observer not none")
+            observer.stop()
+            del observer
+        observer = watch_grade_file.start_watch(user.user_name)
+        # request.session['observer'] = observer
         return redirect("sport_home")
 
 
@@ -497,7 +507,7 @@ def admin_modify_sport(request):
 
 
 def test(request):
-    return render(request, 'convert.html')
+    return render(request, 'test.html')
 
 
 def coach(request):
