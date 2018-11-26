@@ -33,6 +33,7 @@ class GradeEventHandler(FileSystemEventHandler):
         self.start_time = ''
         self.end_time = ''
         self.username = username
+        self.total_grade = 0
 
     def on_moved(self, event):
         if event.is_directory:
@@ -80,15 +81,18 @@ class GradeEventHandler(FileSystemEventHandler):
                     print(line)
                     d = datetime.datetime.now().strftime("%Y-%m-%d")
                     if line == "Shot Report":
+                        print(self.username)
                         self.report_data = shoot_report(shoot_date=d, start_time=self.start_time,
                                                         end_time=self.end_time, user_name=self.username)
                         self.report_data.save()
                         self.num = 0
+                        self.total_grade = 0
                     else:
                         if self.num >= 10:
                             if self.num == 10:
                                 self.report_data.start_time = self.start_time
                                 self.report_data.end_time = self.end_time
+                                self.report_data.remark = str(self.total_grade)
                                 t = datetime.datetime.now().strftime("%H:")
                                 t += self.start_time[0:5]
                                 self.report_data.shoot_time = t
@@ -115,7 +119,7 @@ class GradeEventHandler(FileSystemEventHandler):
                                 y_pos = lines[2]
                                 t = datetime.datetime.now().strftime("%H:")
                                 t += shoot_time[0:5]
-                                print(self.username)
+                                self.total_grade += int(grade)
                                 self.shoot_data = shoot_grade(report_id=self.report_data.id, grade_date=d,
                                                               grade_time=t, grade_detail_time=shoot_time,
                                                               grade=grade, rapid_time="", x_pos=x_pos, y_pos=y_pos,

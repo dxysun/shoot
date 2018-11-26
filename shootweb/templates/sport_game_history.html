@@ -27,7 +27,7 @@
             //日期范围
             laydate.render({
                 elem: '#date_select'
-                , range: true, value: "{{ date }} - {{ date }}"
+                , range: true, value: "{{ date1 }} - {{ date2 }}"
             });
             $('#shoot_analyse').click(function () {
                 var number = "";
@@ -57,6 +57,17 @@
                     $("[name = shoot_report]:checkbox").prop("checked", false);
                     $('#shoot_select').text("全选")
                 }
+            })
+
+            $('#select_date').click(function () {
+                var date_info = $('#date_select').val();
+                var date_range = date_info.split(" - ");
+                console.log(date_range[0]);
+                console.log(date_range[1]);
+                $('#date1').val(date_range[0]);
+                $('#date2').val(date_range[1]);
+                $('#date_info').submit();
+
             })
 
 
@@ -125,13 +136,17 @@
                                     <input class="form-control" id="date_select" type="text" placeholder="yyyy-MM-dd">
                                 </div>
                             </form>{% endcomment %}
+                            <form id="date_info" action="{% url 'sport_game_history' %}" method="post">
+                                <input id="date1" name="date1" value="" type="text" hidden="hidden">
+                                <input id="date2" name="date2" value="" type="text" hidden="hidden">
+                            </form>
                             <div class="form-group input-group">
                                 <span class="input-group-addon">日期选择：</span>
                                 <input class="form-control" id="date_select" type="text" placeholder="yyyy-MM-dd">
                             </div>
                         </div>
                         <div class="col-md-1">
-                            <a href="#" class="btn btn-primary">筛选</a>
+                            <button id="select_date" class="btn btn-primary">筛选</button>
                         </div>
                     </div>
                 </div>

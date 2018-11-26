@@ -25,11 +25,11 @@
             console.log("data click");
             $.post("{% url 'get_user_info' %}",
                 function (data, status) {
-                     console.log("status " + status);
+                   //  console.log("status " + status);
 
                     if (data.status == "success" && status == "success") {
-                        console.log("data: " + data.data);
-                        console.log("数据: \n" + data.status + "\n状态: " + status);
+
+                        $("#user_div").empty();
                         for (var i = 0; i < data.data.length; i++) {
                             $("#user_div").append("<div class=\"radio\">\n" +
                                 "                            <label>\n" +

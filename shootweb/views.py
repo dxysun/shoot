@@ -7,8 +7,10 @@ from . import shootlib
 from . import watch_grade_file
 from django.shortcuts import redirect
 
-
 observer = None
+
+
+# Create your views here.
 # Create your views here.
 def index(request):
     return render(request, 'main.html')
@@ -38,9 +40,9 @@ def login_admin(request):
 def get_user_info(request):
     if request.method == 'POST':
         users = user_info.objects.filter(role="athlete")
-        result={}
+        result = {}
         result['data'] = []
-        for user  in users:
+        for user in users:
             u = {}
             u['id'] = user.id
             u['user_name'] = user.user_name
@@ -112,7 +114,7 @@ def coach_sport_info_detail(request):
 
 
 def update_data(request):
-    user_name = request.session.get('user',"")
+    user_name = request.session.get('user', "")
     shoot_reports = shoot_report.objects.filter(is_process=0)
     for report in shoot_reports:
         shake_times = record_shake_time.objects.all(is_process=0)
@@ -137,7 +139,7 @@ def update_data(request):
                 y_data += shake_time.shake_y_data
                 x_datas = shake_time.shake_x_data.split(",")
                 y_datas = shake_time.shake_y_data.split(",")
-                x_data_five, y_data_five = get_max_five(x_datas, y_datas)
+                x_data_five, y_data_five = shootlib.get_max_five(x_datas, y_datas)
                 x_data_five = list(x_data_five)
                 shake_time.is_process = 1
                 shake_time.user_name = user_name
@@ -159,7 +161,7 @@ def update_data(request):
             grades += grade.grade + ","
             x = float(grade.x_pos)
             y = float(grade.y_pos)
-            r, p = cart_to_polar(x, y)
+            r, p = shootlib.cart_to_polar(x, y)
             r = 11 - r
             r_pos += str(r) + ","
             p_pos += str(p) + ","
@@ -237,7 +239,7 @@ def sport_game_analyse(request):
                 if x > 0 and y < 0:
                     quadrant[3] += 1
                     right_blow += 1
-                if grade.heart_rate != 0:
+                if grade.heart_rate is not None and grade.heart_rate != 0:
                     heart_temp.append(grade.heart_rate)
                     heart_total += grade.heart_rate
             if len(heart_temp) != 0:
@@ -302,14 +304,29 @@ def sport_game_analyse_id(request):
 
 
 def sport_game_history(request):
-    user_name = request.session.get('user',"")
-    report = shoot_report.objects.last()
-    date = report.shoot_date
-    shoot_reports = shoot_report.objects.filter(shoot_date=report.shoot_date).filter(user_name=user_name)
-    return render(request, 'sport_game_history.html', {
-        'shoot_reports': shoot_reports,
-        'date': date
-    })
+    user_name = request.session.get('user', "")
+    if request.method == 'GET':
+        report = shoot_report.objects.last()
+        shoot_reports = None
+        date = None
+        if report is not None:
+            date = report.shoot_date
+            shoot_reports = shoot_report.objects.filter(shoot_date=report.shoot_date).filter(user_name=user_name)
+        return render(request, 'sport_game_history.html', {
+            'shoot_reports': shoot_reports,
+            'date1': date,
+            'date2': date
+        })
+    else:
+        date1 = request.POST['date1']
+        date2 = request.POST['date2']
+        shoot_reports = shoot_report.objects.filter(user_name=user_name).filter(shoot_date__gte=date1).filter(
+            shoot_date__lte=date2)
+        return render(request, 'sport_game_history.html', {
+            'shoot_reports': shoot_reports,
+            'date1': date1,
+            'date2': date2
+        })
 
 
 def admin_home(request):
