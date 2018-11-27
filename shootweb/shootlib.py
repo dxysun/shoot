@@ -14,6 +14,16 @@ django.setup()
 from shootweb.models import *
 
 
+# 把datetime转成字符串
+def time_to_string(dt):
+    return dt.strftime("%H:%M:%S")
+
+
+# 把字符串转成datetime
+def string_to_time(string):
+    return datetime.datetime.strptime(string, "%H:%M:%S")
+
+
 def get_max_five(x_data, y_data):
     xdata = {}
     ydata = {}
@@ -184,7 +194,23 @@ def update_shoot_grade():
 def update_shake_time():
     record_shake_times = record_shake_time.objects.all()
     for shake_time in record_shake_times:
-        print(shake_time.record_date)
+        if shake_time.record_time < '15:24:00':
+            print(shake_time.record_time)
+            record_time = string_to_time(shake_time.start_time)
+            shake_time.start_time = time_to_string(record_time - datetime.timedelta(minutes=3, seconds=21))
+            record_time = string_to_time(shake_time.end_time)
+            shake_time.end_time = time_to_string(record_time - datetime.timedelta(minutes=3, seconds=21))
+            shake_time.record_time = shake_time.start_time
+            shake_time.save()
+
+        # start_time = string_to_time(shake_time.start_time)
+        # end_time = string_to_time(shake_time.end_time)
+        # if end_time - start_time < datetime.timedelta(seconds=4):
+        #     print(shake_time.start_time)
+        #     print(shake_time.end_time)
+        #     print()
+        #     shake_time.delete()
+
         # x_data = ""
         # y_data = ""
         # shake_datas = shake_data.objects.filter(record_id=shake_time.id)
@@ -203,8 +229,8 @@ def update_shake_time():
         # shake_time.shake_x_detail_data = x_data_detail
         # shake_time.shake_y_detail_data = y_data_detail
         # shake_time.is_process = 1
-        shake_time.user_name = "A"
-        shake_time.save()
+        # shake_time.user_name = "A"
+        # shake_time.save()
 
 
 def update_shake_data():
@@ -230,11 +256,15 @@ def update_heart_time():
 def update_heart_data():
     heart_datas = heart_data.objects.all()
     for data in heart_datas:
-        print(data.heart_date)
+        if data.heart_time < '15:24:00':
+            print(data.heart_time)
+            record_time = string_to_time(data.heart_time)
+            data.heart_time = time_to_string(record_time - datetime.timedelta(minutes=3, seconds=21))
+            data.save()
         # data.heart_time = data.heart_date[-8:]
         # data.heart_date = data.heart_date[:-9]
-        data.user_name = "A"
-        data.save()
+        # data.user_name = "A"
+        # data.save()
 
 
 def update_all_info():
@@ -307,6 +337,40 @@ def update_all_info():
         report.save()
 
 
+def update_grade_heart_info():
+    grades = shoot_grade.objects.filter()
+    for grade in grades:
+        if grade.heart_rate == 0:
+            print(grade.grade_time)
+            heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
+            if len(heart_times) >= 1:
+                print(grade.grade_time)
+                heart_time = heart_times[0]
+                grade.heart_rate = heart_time.average_rate
+            else:
+                print('no data')
+                grade.heart_rate = 0
+            grade.save()
+
+
+def update_report_shake_info():
+    shoot_reports = shoot_report.objects.filter(is_process=0)
+    for report in shoot_reports:
+        report_time = time_to_string(string_to_time(report.shoot_time) + datetime.timedelta(seconds=4))
+        shake_times = record_shake_time.objects.filter(start_time__lte=report_time).filter(end_time__gte=report_time)
+        if len(shake_times) == 1:
+            print('find ' + report.shoot_time)
+            shake = shake_times[0]
+            report.x_shake_data = shake.shake_x_data
+            report.y_shake_data = shake.shake_y_data
+            report.is_process = 1
+            shake.is_process = 1
+            shake.save()
+            report.save()
+        else:
+            print('not find ' + report.shoot_time)
+
+
 if __name__ == "__main__":
     print("shoot")
     # test()
@@ -329,3 +393,5 @@ if __name__ == "__main__":
     # update_heart_data()
 
     # update_all_info()
+    # update_grade_heart_info()
+    update_report_shake_info()

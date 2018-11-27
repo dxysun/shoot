@@ -239,6 +239,59 @@ def read_heart_from_file_third(file_path):
                 print(d5[-1])
 
 
+def write_heart_to_sql_third(file_path):
+    files = os.listdir(file_path)
+    for heart_file in files:
+        heart_file_path = file_path + "/" + heart_file
+        print(heart_file)
+        # print(heart_file[2:12])
+        # print(heart_file[13:21])
+        record_heart = record_heart_time(record_date=heart_file[2:12], record_time=heart_file[13:21],
+                                         start_time=heart_file[13:21], end_time="", user_name="A")
+        record_heart.save()
+        with open(heart_file_path, 'r', encoding='gbk') as file:
+            heart_datas = {}
+            data = file.readlines()  # 读取全部内容 ，并以列表方式返回
+            for line in data:
+                line = line.strip()
+                # print(line)
+                if "END" in line:
+                    break
+                d1 = line.split("-")
+                # print(d1)
+                date = get_normal_str(d1[0]) + "-" + get_normal_str(d1[1]) + "-" + get_normal_str(d1[2])
+                print(date)
+                d2 = d1[3]
+                d3 = d2.split(":")
+                # print(d3)
+                h_time = get_normal_str(d3[0]) + ":" + get_normal_str(d3[1]) + ":" + get_normal_str(d3[2])
+                print(h_time)
+                d4 = d3[3]
+                d5 = d4.split("\t")
+                print(d5[-1])
+                if heart_datas.get(h_time) is None:
+                    heart_datas[h_time] = []
+                heart_datas[h_time].append(d5[-1])
+        end_time = ""
+        for key, value in heart_datas.items():
+            total = 0
+            rates = ""
+            for rate in value:
+                rates += rate + " "
+                total += int(rate)
+            heart_time = key
+            # record_time = string_to_time(key)
+            # heart_time = time_to_string(record_time - datetime.timedelta(minutes=1, seconds=27))
+            data = heart_data(record_id=record_heart.id, heart_time=heart_time,
+                              heart_date=record_heart.record_date,
+                              heart_rate=rates, average_rate=int(total / len(value)),
+                              user_name=record_heart.user_name)
+            data.save()
+            end_time = heart_time
+        record_heart.end_time = end_time
+        record_heart.save()
+
+
 def read_camera_from_file(file_path, file_type, save_dir):
     del_file(save_dir)
     files = os.listdir(file_path)
@@ -350,6 +403,71 @@ def read_camera_from_file_third(file_path):
                 print(d5[-1])
 
 
+def write_camera_to_sql_third(file_path):
+    files = os.listdir(file_path)
+    for camera_file in files:
+        camera_file_path = file_path + "/" + camera_file
+        print(camera_file)
+        # print(camera_file[2:12])
+        # print(camera_file[13:21].replace("-",":"))
+        record_shake = record_shake_time(record_date=camera_file[2:12],
+                                         record_time=camera_file[13:21].replace("-", ":"),
+                                         start_time=camera_file[13:21].replace("-", ":"), end_time="", user_name="A")
+        record_shake.save()
+        end_time = ""
+        x_data = ""
+        x_detail_data = {}
+        y_data = ""
+        y_detail_data = {}
+        with open(camera_file_path, 'r', encoding='gbk') as file:
+            # print(file.read())
+            data = file.readlines()  # 读取全部内容 ，并以列表方式返回
+            for line in data:
+                line = line.strip()
+                print(line)
+                if "END" in line:
+                    break
+                i = find_n_sub_str(line, "-", 2, 0)
+                line1 = line[:i]
+                line2 = line[i + 1:]
+                d1 = line1.split("-")
+                # print(d1)
+                date = get_normal_str(d1[0]) + "-" + get_normal_str(d1[1]) + "-" + get_normal_str(d1[2])
+                print(date)
+                d2 = line2
+                d3 = d2.split(":")
+                # print(d3)
+                h_time = get_normal_str(d3[0]) + ":" + get_normal_str(d3[1]) + ":" + get_normal_str(d3[2])
+                print(h_time)
+                d4 = d3[3]
+                d5 = d4.split("\t")
+                print(d5[-2])
+                print(d5[-1])
+                end_time = h_time
+                d4 = d3[3]
+                d5 = d4.split("\t")
+                x_data += d5[-2] + ","
+                if x_detail_data.get(h_time) is None:
+                    x_detail_data[h_time] = ""
+                x_detail_data[h_time] += d5[-2] + ","
+                y_data += d5[-1] + ","
+                if y_detail_data.get(h_time) is None:
+                    y_detail_data[h_time] = ""
+                y_detail_data[h_time] += d5[-1] + ","
+        x = ""
+        y = ""
+        for key, value in x_detail_data.items():
+            x += key + ":" + value + "\n"
+        for key, value in y_detail_data.items():
+            y += key + ":" + value + "\n"
+        record_shake.shake_x_data = x_data[:-1]
+        record_shake.shake_y_data = y_data[:-1]
+        record_shake.shake_x_detail_data = x
+        record_shake.shake_y_detail_data = y
+        record_shake.end_time = end_time
+        record_shake.save()
+
+
 def merge_x_y_to_file(x_files_path, y_files_path, merge_file_path):
     x_files = os.listdir(x_files_path)
     y_files = os.listdir(y_files_path)
@@ -406,10 +524,6 @@ def write_heart_data_to_mysql(file_path):
                         i += 1
                         average_rate += int(rate)
                     average_rate = int(average_rate / i)
-                    # print(record_date)
-                    # print(heart_time)
-                    # print(heart_rate)
-                    # print(average_rate)
                     heart_rate_data = heart_data(record_id=record_heart.id, heart_time=heart_time,
                                                  heart_date=record_date,
                                                  heart_rate=heart_rate, average_rate=average_rate)
@@ -525,9 +639,11 @@ if __name__ == "__main__":
     # read_camera_from_file_second('D:/workSpace/PythonWorkspace/shoot/shootweb/data/second/origin/camera/y', 'y',
     #                              'D:/workSpace/PythonWorkspace/shoot/shootweb/data/second/after_process/camera/y/')
 
-    read_heart_from_file_third("D:/code/shoot/simulation_data/newdata/Heart")
-    read_camera_from_file_third("D:/code/shoot/simulation_data/newdata/Hand")
+    # read_heart_from_file_third("D:\code\shoot\数据\心率")
+    # read_camera_from_file_third("D:/code/shoot/simulation_data/newdata/Hand")
 
+    # write_heart_to_sql_third("D:\code\shoot\数据\心率")
+    # write_camera_to_sql_third("D:\code\shoot\数据\手")
     # a = "2018-11- 6-10:42:26:231		0.00	1.00";
     # print(find_n_sub_str(a, "-", 2, 0))
 
