@@ -10,8 +10,9 @@ import configparser
 import inspect
 import ctypes
 
-cur_path = os.getcwd()
-pre_path = os.path.abspath('..')
+dirname, filename = os.path.split(os.path.abspath(__file__))
+pre_path = os.path.abspath(os.path.dirname(dirname))
+
 sys.path.append(pre_path + '/shoot')
 os.chdir(pre_path + '/shoot')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shoot.settings")
@@ -19,7 +20,7 @@ django.setup()
 from shootweb.models import *
 
 conf = configparser.ConfigParser()
-conf.read(cur_path + '/config.ini')  # 读config.ini文件
+conf.read(dirname + '/config.ini')  # 读config.ini文件
 
 
 def follow(the_file):
@@ -233,7 +234,7 @@ class GradeEventTimerHandler(FileSystemEventHandler):
             else:
                 line = self.grade_file.readline()
                 conf.set('file_setting', 'line_num', str(num))
-                conf.write(open(cur_path + '/config.ini', "w"))
+                conf.write(open(dirname + '/config.ini', "w"))
                 if not line:
                     time.sleep(4)
                     continue
@@ -315,7 +316,7 @@ def start_watch(username):
 
 if __name__ == "__main__":
     print()
-    observer = start_watch("A")
+    # observer = start_watch("A")
     # time.sleep(30)
     # print("set username B")
     # observer.username = "B"
@@ -325,8 +326,8 @@ if __name__ == "__main__":
     #         time.sleep(1)
     # except KeyboardInterrupt:
     #     observer.stop()
-    observer.join()
-    # print(conf.get('file_setting', 'grade_file'))
+    # observer.join()
+    print(conf.get('file_setting', 'grade_file'))
     # conf.set('file_setting', 'grade_file', 'filekkkkkk')
     # conf.write(open(cur_path + '/config.ini', "w"))
     # print(conf.get('file_setting', 'grade_file'))

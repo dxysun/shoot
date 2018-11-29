@@ -7,8 +7,8 @@ import time
 import numpy as np
 import math
 
-cur_path = os.getcwd()
-pre_path = os.path.abspath('..')
+dirname, filename = os.path.split(os.path.abspath(__file__))
+pre_path = os.path.abspath(os.path.dirname(dirname))
 sys.path.append(pre_path + '/shoot')
 os.chdir(pre_path + '/shoot')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shoot.settings")
@@ -186,11 +186,13 @@ def update_shoot_grade():
     shoot_grades = shoot_grade.objects.all()
     for grade in shoot_grades:
         print(grade.grade_date)
+        if grade.grade_date == '2018-11-29':
+            grade.delete()
         # grade.grade_detail_time = grade.grade_time
         # grade.grade_time = grade.grade_date[-8:]
         # grade.grade_date = grade.grade_date[:-9]
-        grade.user_name = "A"
-        grade.save()
+        # grade.user_name = "A"
+        # grade.save()
 
 
 def update_shake_time():
@@ -421,7 +423,7 @@ if __name__ == "__main__":
     # update_shake_time()
     # update_shake_data()
 
-    update_heart_time()
+    # update_heart_time()
     # update_heart_data()
 
     # update_all_info()

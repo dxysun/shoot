@@ -4,8 +4,8 @@ import os
 import datetime
 import django
 
-cur_path = os.getcwd()
-pre_path = os.path.abspath('..')
+dirname, filename = os.path.split(os.path.abspath(__file__))
+pre_path = os.path.abspath(os.path.dirname(dirname))
 sys.path.append(pre_path + '/shoot')
 os.chdir(pre_path + '/shoot')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shoot.settings")
