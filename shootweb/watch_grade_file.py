@@ -6,12 +6,20 @@ import os
 import datetime
 import django
 import threading
+import configparser
+import inspect
+import ctypes
 
-sys.path.append('D:/workSpace/PythonWorkspace/shoot/shoot')
-os.chdir('D:/workSpace/PythonWorkspace/shoot/shoot')
+cur_path = os.getcwd()
+pre_path = os.path.abspath('..')
+sys.path.append(pre_path + '/shoot')
+os.chdir(pre_path + '/shoot')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shoot.settings")
 django.setup()
 from shootweb.models import *
+
+conf = configparser.ConfigParser()
+conf.read(cur_path + '/config.ini')  # 读config.ini文件
 
 
 def follow(the_file):
@@ -22,6 +30,25 @@ def follow(the_file):
             time.sleep(0.1)
             continue
         yield line
+
+
+def _async_raise(tid, exctype):
+    """raises the exception, performs cleanup if needed"""
+    tid = ctypes.c_long(tid)
+    if not inspect.isclass(exctype):
+        exctype = type(exctype)
+    res = ctypes.pythonapi.PyThreadState_SetAsyncExc(tid, ctypes.py_object(exctype))
+    if res == 0:
+        raise ValueError("invalid thread id")
+    elif res != 1:
+        # """if it returns a number greater than one, you're in trouble,
+        # and you should call it again with exc=NULL to revert the effect"""
+        ctypes.pythonapi.PyThreadState_SetAsyncExc(tid, None)
+        raise SystemError("PyThreadState_SetAsyncExc failed")
+
+
+def stop_thread(thread):
+    _async_raise(thread.ident, SystemExit)
 
 
 class GradeEventHandler(FileSystemEventHandler):
@@ -71,6 +98,8 @@ class GradeEventHandler(FileSystemEventHandler):
                         break
                     if line.find("Shot Report") != -1:
                         line = "Shot Report"
+                    elif 'Miss' in line:
+                        continue
                     elif line.find("P") != -1:
                         i = line.find("P")
                         if line[i - 2] == "0":
@@ -144,7 +173,14 @@ class GradeEventTimerHandler(FileSystemEventHandler):
         self.end_time = ''
         self.username = username
         self.total_grade = 0
-        self.thread = None
+        file_path = conf.get('file_setting', 'grade_file')
+        line_num = conf.get('file_setting', 'line_num')
+        if 'dat' in file_path:
+            self.grade_file = open(file_path, "r", encoding='ISO-8859-15')
+            self.thread = threading.Thread(target=self.listen, args=(file_path, int(line_num)))
+            self.thread.start()
+        else:
+            self.thread = None
 
     def on_moved(self, event):
         if event.is_directory:
@@ -157,9 +193,13 @@ class GradeEventTimerHandler(FileSystemEventHandler):
             print("directory created:{0}".format(event.src_path))
         else:
             print("file created:{0}".format(event.src_path))
+            if self.thread is not None:
+                stop_thread(self.thread)
+                self.grade_file.close()
+                self.thread = None
             self.grade_file = open(event.src_path, "r", encoding='ISO-8859-15')
-            t = threading.Thread(target=self.listen, args=(event.src_path,))
-            t.start()
+            self.thread = threading.Thread(target=self.listen, args=(event.src_path,))
+            self.thread.start()
 
     def set_username(self, username):
         self.username = username
@@ -176,17 +216,32 @@ class GradeEventTimerHandler(FileSystemEventHandler):
         else:
             print("file modified:{0}".format(event.src_path))
 
-    def listen(self, path):
+    def listen(self, path, line_num=-1):
+        print("line_num:" + str(line_num))
+        if (self.grade_file is not None) and (line_num != -1):
+            for i in range(0, line_num):
+                self.grade_file.readline()
+        if self.grade_file is None:
+            print("self.grade_file none")
+        conf.set('file_setting', 'grade_file', path)
+        if line_num == -1:
+            line_num = line_num + 1
+        num = line_num
         while True:
             if self.grade_file is None:
                 self.grade_file = open(path, "r", encoding='ISO-8859-15')
             else:
                 line = self.grade_file.readline()
+                conf.set('file_setting', 'line_num', str(num))
+                conf.write(open(cur_path + '/config.ini', "w"))
                 if not line:
-                    time.sleep(8)
+                    time.sleep(4)
                     continue
+                num += 1
                 if line.find("Shot Report") != -1:
                     line = "Shot Report"
+                elif 'Miss' in line:
+                    continue
                 elif line.find("P") != -1:
                     i = line.find("P")
                     if line[i - 2] == "0":
@@ -252,7 +307,8 @@ class GradeEventTimerHandler(FileSystemEventHandler):
 def start_watch(username):
     observer1 = Observer()
     event_handler = GradeEventTimerHandler(username)
-    observer1.schedule(event_handler, "D:/code/shoot/grade", True)
+    # observer1.schedule(event_handler, "D:/code/shoot/grade", True)
+    observer1.schedule(event_handler, "D:\code\shoot\simulation_data\grade", True)
     observer1.start()
     return observer1
 
@@ -260,13 +316,17 @@ def start_watch(username):
 if __name__ == "__main__":
     print()
     observer = start_watch("A")
-    time.sleep(30)
-    print("set username B")
-    observer.username = "B"
-    print(observer.username)
-    try:
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        observer.stop()
-    # observer.join()
+    # time.sleep(30)
+    # print("set username B")
+    # observer.username = "B"
+    # print(observer.username)
+    # try:
+    #     while True:
+    #         time.sleep(1)
+    # except KeyboardInterrupt:
+    #     observer.stop()
+    observer.join()
+    # print(conf.get('file_setting', 'grade_file'))
+    # conf.set('file_setting', 'grade_file', 'filekkkkkk')
+    # conf.write(open(cur_path + '/config.ini', "w"))
+    # print(conf.get('file_setting', 'grade_file'))

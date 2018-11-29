@@ -34,5 +34,3 @@ class SimpleMiddleware(MiddlewareMixin):
                     pass
             else:
                 return redirect("login")
-
-

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from shootweb.models import *
 from django.http.response import JsonResponse
 import time
+import datetime
 import math
 from . import shootlib
 from . import watch_grade_file
@@ -113,79 +114,9 @@ def coach_sport_info_detail(request):
     return render(request, 'coach_sport_info_detail.html')
 
 
-def update_data(request):
-    user_name = request.session.get('user', "")
-    shoot_reports = shoot_report.objects.filter(is_process=0)
-    for report in shoot_reports:
-        shake_times = record_shake_time.objects.all(is_process=0)
-        record_start = time.strptime(report.shoot_date + " " + report.shoot_time, "%Y-%m-%d %H:%M:%S")
-        report_start_time = time.mktime(record_start)
-        end_time = report.shoot_date + " " + report.shoot_time[:3] + report.end_time[:5]
-        record_end = time.strptime(end_time, "%Y-%m-%d %H:%M:%S")
-        report_end_time = time.mktime(record_end)
-        x_data = ""
-        y_data = ""
-        grades = ""
-        hearts = ""
-        r_pos = ""
-        p_pos = ""
-        x_data_five = []
-        y_data_five = []
-        for shake_time in shake_times:
-            record_start = time.strptime(shake_time.record_date + " " + shake_time.record_time, "%Y-%m-%d %H:%M:%S")
-            record_start_time = time.mktime(record_start)
-            if report_start_time <= record_start_time <= report_end_time:
-                x_data += shake_time.shake_x_data
-                y_data += shake_time.shake_y_data
-                x_datas = shake_time.shake_x_data.split(",")
-                y_datas = shake_time.shake_y_data.split(",")
-                x_data_five, y_data_five = shootlib.get_max_five(x_datas, y_datas)
-                x_data_five = list(x_data_five)
-                shake_time.is_process = 1
-                shake_time.user_name = user_name
-                shake_time.save()
-        report.x_shake_data = x_data
-        report.y_shake_data = y_data
-        shoot_grades = shoot_grade.objects.filter(report_id=report.id)
-        i = 0
-        is_have_shake = True
-        if len(x_data_five) == 0:
-            is_have_shake = False
-        for grade in shoot_grades:
-            if is_have_shake:
-                grade.x_shake = float(x_data_five[i])
-                grade.y_shake = float(y_data_five[i])
-            else:
-                grade.x_shake = 0
-                grade.y_shake = 0
-            grades += grade.grade + ","
-            x = float(grade.x_pos)
-            y = float(grade.y_pos)
-            r, p = shootlib.cart_to_polar(x, y)
-            r = 11 - r
-            r_pos += str(r) + ","
-            p_pos += str(p) + ","
-            heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
-            if len(heart_times) == 1:
-                heart_time = heart_times[0]
-                grade.heart_rate = heart_time.average_rate
-                hearts += str(heart_time.average_rate) + ","
-            else:
-                grade.heart_rate = 0
-                hearts += "0,"
-            grade.user_name = user_name
-            grade.save()
-            i += 1
-        report.is_process = 1
-        report.user_name = user_name
-        report.save()
-    dct = {}
-    dct['status'] = 'success'
-    return JsonResponse(dct)
-
-
 def sport_game_analyse(request):
     user_name = request.session.get('user', "")
+
     shoot_reports = []
     best_grade = 0
     bad_grade = 100
@@ -305,6 +236,7 @@ def sport_game_analyse_id(request):
 
 def sport_game_history(request):
     user_name = request.session.get('user', "")
+    shootlib.update_data(user_name)
     if request.method == 'GET':
         report = shoot_report.objects.last()
         shoot_reports = None

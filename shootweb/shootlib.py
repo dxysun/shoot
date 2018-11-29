@@ -7,8 +7,10 @@ import time
 import numpy as np
 import math
 
-sys.path.append('D:/workSpace/PythonWorkspace/shoot/shoot')
-os.chdir('D:/workSpace/PythonWorkspace/shoot/shoot')
+cur_path = os.getcwd()
+pre_path = os.path.abspath('..')
+sys.path.append(pre_path + '/shoot')
+os.chdir(pre_path + '/shoot')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shoot.settings")
 django.setup()
 from shootweb.models import *
@@ -194,22 +196,22 @@ def update_shoot_grade():
 def update_shake_time():
     record_shake_times = record_shake_time.objects.all()
     for shake_time in record_shake_times:
-        if shake_time.record_time < '15:24:00':
-            print(shake_time.record_time)
-            record_time = string_to_time(shake_time.start_time)
-            shake_time.start_time = time_to_string(record_time - datetime.timedelta(minutes=3, seconds=21))
-            record_time = string_to_time(shake_time.end_time)
-            shake_time.end_time = time_to_string(record_time - datetime.timedelta(minutes=3, seconds=21))
-            shake_time.record_time = shake_time.start_time
-            shake_time.save()
+        # if shake_time.record_time < '15:24:00':
+        #     print(shake_time.record_time)
+        #     record_time = string_to_time(shake_time.start_time)
+        #     shake_time.start_time = time_to_string(record_time - datetime.timedelta(minutes=3, seconds=21))
+        #     record_time = string_to_time(shake_time.end_time)
+        #     shake_time.end_time = time_to_string(record_time - datetime.timedelta(minutes=3, seconds=21))
+        #     shake_time.record_time = shake_time.start_time
+        #     shake_time.save()
 
-        # start_time = string_to_time(shake_time.start_time)
-        # end_time = string_to_time(shake_time.end_time)
-        # if end_time - start_time < datetime.timedelta(seconds=4):
-        #     print(shake_time.start_time)
-        #     print(shake_time.end_time)
-        #     print()
-        #     shake_time.delete()
+        start_time = string_to_time(shake_time.start_time)
+        end_time = string_to_time(shake_time.end_time)
+        if end_time - start_time < datetime.timedelta(seconds=4):
+            print(shake_time.start_time)
+            print(shake_time.end_time)
+            print()
+            shake_time.delete()
 
         # x_data = ""
         # y_data = ""
@@ -249,8 +251,8 @@ def update_heart_time():
         # heart_time.record_time = heart_time.record_date[-8:]
         # heart_time.record_date = heart_time.record_date[:-9]
         # heart_time.is_process = 1
-        heart_time.user_name = "A"
-        heart_time.save()
+        # heart_time.user_name = "A"
+        # heart_time.save()
 
 
 def update_heart_data():
@@ -338,7 +340,7 @@ def update_all_info():
 
 
 def update_grade_heart_info():
-    grades = shoot_grade.objects.filter()
+    grades = shoot_grade.objects.all()
     for grade in grades:
         if grade.heart_rate == 0:
             print(grade.grade_time)
@@ -371,6 +373,36 @@ def update_report_shake_info():
             print('not find ' + report.shoot_time)
 
 
+def update_data(user_name):
+    shoot_reports = shoot_report.objects.filter(is_process=0).filter(user_name=user_name)
+    if len(shoot_reports) > 0:
+        for report in shoot_reports:
+            report_time = time_to_string(string_to_time(report.shoot_time) + datetime.timedelta(seconds=3))
+            shake_times = record_shake_time.objects.filter(start_time__lte=report_time).filter(
+                end_time__gte=report_time)
+            if len(shake_times) == 1:
+                print('find ' + report.shoot_time)
+                shake = shake_times[0]
+                report.x_shake_data = shake.shake_x_data
+                report.y_shake_data = shake.shake_y_data
+                report.is_process = 1
+                shake.is_process = 1
+                shake.save()
+                report.save()
+            else:
+                print('not find ' + report.shoot_time)
+            grades = shoot_grade.objects.filter(report_id=report.id)
+            for grade in grades:
+                heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
+                if len(heart_times) >= 1:
+                    heart_time = heart_times[0]
+                    grade.heart_rate = heart_time.average_rate
+                else:
+                    print('no data')
+                    grade.heart_rate = 0
+                grade.save()
+
+
 if __name__ == "__main__":
     print("shoot")
     # test()
@@ -389,9 +421,9 @@ if __name__ == "__main__":
     # update_shake_time()
     # update_shake_data()
 
-    # update_heart_time()
+    update_heart_time()
     # update_heart_data()
 
     # update_all_info()
     # update_grade_heart_info()
-    update_report_shake_info()
+    # update_report_shake_info()

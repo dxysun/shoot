@@ -19,7 +19,7 @@ def generate_shoot_data(k=5):
     num = 0
     b = 0
     t = datetime.datetime.now()
-    file_name = 'FILE_shoot_' + str(time.strftime('%Y_%m%d', time.localtime(time.time()))) + ".dat"
+    file_name = 'FILE_shoot2_' + str(time.strftime('%Y_%m%d', time.localtime(time.time()))) + ".dat"
     print(file_name)
     while k > 0:
         grades = []
