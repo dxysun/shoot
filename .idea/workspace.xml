@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7d03cb4f-baf8-47fc-b3ac-218109122674" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/readAndWriteData.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/readAndWriteData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/shootlib.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/shootlib.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/watch_grade_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/watch_grade_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shootweb/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shootweb/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -59,101 +58,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="shootlib.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/shootweb/shootlib.py">
+      <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shootweb/templates/test.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="421" lean-forward="true" selection-start-line="421" selection-end-line="421" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.ini" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/config.ini">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="readAndWriteData.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/readAndWriteData.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-532">
-              <caret line="8" column="36" lean-forward="true" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mymiddleware.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/mymiddleware.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="contexts.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/contexts.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="10" column="47" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3363">
-              <caret line="178" column="11" selection-start-line="178" selection-start-column="11" selection-end-line="178" selection-end-column="11" />
+            <state relative-caret-position="288">
+              <caret line="240" column="14" lean-forward="true" selection-start-line="35" selection-start-column="10" selection-end-line="240" selection-end-column="14" />
               <folding>
-                <element signature="e#0#28#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/views.py">
+      <file leaf-file-name="sport_game_analyse_id.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="76" column="39" lean-forward="true" selection-start-line="76" selection-start-column="39" selection-end-line="76" selection-end-column="39" />
+            <state relative-caret-position="1457">
+              <caret line="563" column="21" lean-forward="true" selection-start-line="563" selection-start-column="21" selection-end-line="563" selection-end-column="21" />
               <folding>
-                <element signature="e#0#35#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="watch_grade_file.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/watch_grade_file.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="generate_data.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/generate_data.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="21" column="52" lean-forward="true" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="10" column="54" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -172,8 +96,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>36</find>
-      <find>assets</find>
       <find>sort_both.png</find>
       <find>myChart</find>
       <find>DateTimeField</find>
@@ -202,6 +124,8 @@
       <find>shoot_analyse</find>
       <find>shootlib</find>
       <find>update_heart_time</find>
+      <find>gridIndex</find>
+      <find>getDayTime</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -214,7 +138,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/shootweb/static/assets/js/pages/coach_home.js" />
         <option value="$PROJECT_DIR$/shootweb/templates/sport_info.html" />
         <option value="$PROJECT_DIR$/shootweb/templates/coach_sport_info_detil.html" />
         <option value="$PROJECT_DIR$/shootweb/static/assets/js/pages/coach_sport_info_detail.js" />
@@ -231,7 +154,6 @@
         <option value="$PROJECT_DIR$/shootweb/templates/base_sport.html" />
         <option value="$PROJECT_DIR$/shootweb/static/assets/js/pages/sport_game_analyse_id.js" />
         <option value="$PROJECT_DIR$/shootweb/templates/index.html" />
-        <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" />
         <option value="$PROJECT_DIR$/shootweb/static/assets/css/style.css" />
         <option value="$PROJECT_DIR$/shootweb/mysql_option.py" />
         <option value="$PROJECT_DIR$/shootweb/watch_file.py" />
@@ -257,7 +179,6 @@
         <option value="$PROJECT_DIR$/shootweb/templates/base.html" />
         <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse.html" />
         <option value="$PROJECT_DIR$/shootweb/templates/sport_game_history.html" />
-        <option value="$PROJECT_DIR$/shootweb/urls.py" />
         <option value="$PROJECT_DIR$/shootweb/views.py" />
         <option value="$PROJECT_DIR$/shootweb/mymiddleware.py" />
         <option value="$PROJECT_DIR$/shootweb/generate_data.py" />
@@ -265,6 +186,9 @@
         <option value="$PROJECT_DIR$/shootweb/readAndWriteData.py" />
         <option value="$PROJECT_DIR$/shootweb/config.ini" />
         <option value="$PROJECT_DIR$/shootweb/shootlib.py" />
+        <option value="$PROJECT_DIR$/shootweb/urls.py" />
+        <option value="$PROJECT_DIR$/shootweb/templates/test.html" />
+        <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" />
       </list>
     </option>
   </component>
@@ -291,6 +215,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -307,7 +232,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -346,7 +270,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.shootlib">
+  <component name="RunManager" selected="Django server.shoot">
     <configuration name="generate_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="shoot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -621,21 +545,27 @@
       <option name="project" value="LOCAL" />
       <updated>1543491697607</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="修改绝对路径的问题">
+      <created>1543495266404</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1543495266404</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50334674" side_tool="true" weight="0.3257468" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="8" weight="0.32716927" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4966533" visible="true" weight="0.33238232" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4966533" visible="true" weight="0.19258203" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49799198" weight="0.31669044" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49635038" visible="true" weight="0.30764076" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49635038" visible="true" weight="0.3116622" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="5" weight="0.3297587" />
       <window_info anchor="right" id="SciView" order="4" weight="0.3297587" />
@@ -674,7 +604,8 @@
     <MESSAGE value="添加日期筛选的功能" />
     <MESSAGE value="处理今天在射击馆获取的数据" />
     <MESSAGE value="解决重启服务器不能继续读文件最新内容的问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="解决重启服务器不能继续读文件最新内容的问题" />
+    <MESSAGE value="修改绝对路径的问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改绝对路径的问题" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -852,13 +783,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/templates/convert.html" />
-    <entry file="file://$PROJECT_DIR$/shootweb/templates/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="45" column="26" lean-forward="true" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shoot/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
@@ -894,9 +818,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -917,13 +838,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="10" column="54" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3363">
@@ -937,24 +851,18 @@
     <entry file="file://$PROJECT_DIR$/shootweb/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/mysql_option.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-665">
-          <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/mysql_option.py" />
     <entry file="file://$PROJECT_DIR$/shootweb/mymiddleware.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/contexts.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
-          <caret line="10" column="47" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="47" />
+          <caret line="10" column="47" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -968,7 +876,7 @@
     <entry file="file://$PROJECT_DIR$/shootweb/generate_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="21" column="52" lean-forward="true" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
+          <caret line="21" column="52" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -979,27 +887,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="76" column="39" lean-forward="true" selection-start-line="76" selection-start-column="39" selection-end-line="76" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/readAndWriteData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-532">
-          <caret line="8" column="36" lean-forward="true" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+        <state relative-caret-position="95">
+          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/watch_grade_file.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+        <state relative-caret-position="380">
+          <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -1009,14 +907,51 @@
     <entry file="file://$PROJECT_DIR$/shootweb/config.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/shootlib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="421" lean-forward="true" selection-start-line="421" selection-end-line="421" />
+        <state relative-caret-position="404">
+          <caret line="424" selection-start-line="424" selection-end-line="424" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="459" lean-forward="true" selection-start-line="459" selection-end-line="459" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/templates/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="240" column="14" lean-forward="true" selection-start-line="35" selection-start-column="10" selection-end-line="240" selection-end-column="14" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1457">
+          <caret line="563" column="21" lean-forward="true" selection-start-line="563" selection-start-column="21" selection-end-line="563" selection-end-column="21" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

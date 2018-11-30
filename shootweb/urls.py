@@ -8,6 +8,7 @@ urlpatterns = [
     url('^login_admin$', views.login_admin, name="login_admin"),
     url('^logout', views.logout, name="logout"),
     url('^api/get_user_info$', views.get_user_info, name="get_user_info"),
+    url('^api/test', views.test, name="test"),
     url('^register', views.register, name="register"),
     url('^sport/home', views.sport_home, name="sport_home"),
     url('^sport/game_analyse$', views.sport_game_analyse, name="sport_game_analyse"),

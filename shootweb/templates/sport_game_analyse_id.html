@@ -358,6 +358,213 @@
                     data: data_grade
                 }]
             };
+
+              var getDayTime = function () {
+                var temp = [];
+                for (var i = 0; i < 500; i++) {
+                    var hour = i;
+                    temp.push(hour);
+                }
+                return temp;
+            };
+
+            var getRandomData = function (val) {
+                var temp = [];
+                for (var i = 0; i < 500; i++) {
+                    var item = Math.random() * 100 - Math.random() * 50;
+                    temp.push(item.toFixed(0));
+                }
+
+                return temp;
+            };
+            var myoption = {
+                color: [
+                    '#66CCFF',
+                    '#CC6666',
+                    '#66CCCC',
+                    '#FF9999',
+                    '#26A69A',
+                    '#6200EA'
+                ],
+                title: {
+                    text: '枪的抖动图',
+                    top: 5
+                },
+                grid: [{
+                    top: '9%',
+                    bottom: 0,
+                    left: '5%',
+                    right: '5%',
+                    height: '35%'
+                },
+                    {
+                        top: '50%',
+                        bottom: 0,
+                        left: '5%',
+                        right: '5%',
+                        height: '35%'
+                    }
+                ],
+
+                axisPointer: {
+                    link: {
+                        xAxisIndex: 'all'
+                    }
+                },
+                legend: {
+                    data: ['x方向', 'y方向'],
+                    top: 5
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: function (params) {
+                        if (params instanceof Array) {
+                            var idxMap = [{
+                                text: '占比',
+                                data: []
+                            }];
+                            var time = params[0].axisValue;
+                            for (var i = 0; i < params.length; i++) {
+                                var seriesIdx = params[i].seriesId.split(
+                                    params[i].seriesId[0]
+                                );
+                                idxMap[seriesIdx[2]].data.push({
+                                    marker: params[i].marker,
+                                    seriesName: params[i].seriesName,
+                                    data: params[i].data
+                                });
+                            }
+
+                            return (
+                                '<div>' +
+                                '<time>' +
+                                time +
+                                '</time>' +
+                                '<br />' +
+                                idxMap.map(function (item) {
+                                    return (
+                                        '<span>' +
+                                        item.text +
+                                        '</span>' +
+                                        item.data
+                                            .map(function (i_item) {
+                                                return (
+                                                    '<p style="margin: 0;padding: 0;">' +
+                                                    i_item.marker +
+                                                    i_item.seriesName +
+                                                    ': ' +
+                                                    i_item.data +
+                                                    '</p>'
+                                                );
+                                            })
+                                            .join('')
+                                    );
+                                })
+                                    .join('')
+                                +
+                                '</div>'
+                            );
+                        }
+                    }
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        gridIndex: 0,
+                        position: 'bottom',
+                        axisLabel: {
+                            show: true
+                        },
+                        data: xAxisData,
+                        //show: false,
+                        boundaryGap: true
+                    },
+                    {
+                        type: 'category',
+                        gridIndex: 1,
+                        position: 'bottom',
+                        axisLabel: {
+                            show: true
+                        },
+                        data: xAxisData,
+                        //show: false,
+                        boundaryGap: true
+                    }
+                ],
+                yAxis: [
+
+                    {
+                        name: 'x方向',
+                        type: 'value',
+                        nameTextStyle: {
+                            fontSize: 14
+                        },
+                        gridIndex: 0,
+                        inverse: false,
+                        splitLine: {
+                            lineStyle: {
+                                type: 'dashed'
+                            }
+                        },
+                        nameLocation: 'center',
+                        nameGap: 30,
+                        nameRotate: -90
+                    },
+
+                    {
+                        name: 'y方向',
+                        type: 'value',
+                        nameTextStyle: {
+                            fontSize: 14
+                        },
+                        gridIndex: 1,
+                        splitLine: {
+                            lineStyle: {
+                                type: 'dashed'
+                            }
+                        },
+                        position: 'left',
+                        nameLocation: 'center',
+                        nameGap: 30,
+                        nameRotate: -90
+                    }
+                ],
+                dataZoom: [{
+                    type: 'slider',
+                    show: true,
+                    xAxisIndex: [0, 1],
+                    start: 0,
+                    end: 100
+                },
+                    {
+                        type: 'inside',
+                        xAxisIndex: [0, 1]
+                    }
+                ],
+                series: [
+
+                    {
+                        name: 'x方向',
+                        type: 'line',
+                        xAxisIndex: 0,
+                        data: xData,
+                        yAxisIndex: 0,
+                        symbol: 'none',
+                        smooth: true
+                    },
+                    {
+                        name: 'y方向',
+                        type: 'line',
+                        xAxisIndex: 1,
+                        yAxisIndex: 1,
+                        data: yData,
+                        symbol: 'none',
+                        smooth: true,
+                        barWidth: 2
+                    }
+                ]
+            };
+
             var myGrade = echarts.init(document.getElementById('grade'));
             var myChart = echarts.init(document.getElementById('circle'));
             var myTotalGrade = echarts.init(document.getElementById('total_grade'));
@@ -368,7 +575,7 @@
             myChart.setOption(options);
             myGrade.setOption(option_grade);
             myTotalGrade.setOption(total_grade);
-            myLineShake.setOption(option_line_shake);
+            myLineShake.setOption(myoption);
             myHeart.setOption(option_heart);
 
         });
@@ -475,6 +682,29 @@
         </div>
     </div>
     <div class="row">
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    比赛稳定性图
+                </div>
+                <div class="panel-body">
+                    <div id="line_shake" style="width: 100%;height:500%;"></div>
+                </div>
+            </div>
+        </div>
+        {% comment %}     <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    成绩稳定性统计图
+                </div>
+                <div class="panel-body">
+                    <div id="total_shake" style="width: 100%;height:500%;"></div>
+                </div>
+            </div>
+        </div>{% endcomment %}
+    </div>
+    <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -518,28 +748,6 @@
             </div>
         </div>
     </div>
-    <div class="row">
 
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    比赛稳定性图
-                </div>
-                <div class="panel-body">
-                    <div id="line_shake" style="width: 100%;height:500%;"></div>
-                </div>
-            </div>
-        </div>
-        {% comment %}     <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    成绩稳定性统计图
-                </div>
-                <div class="panel-body">
-                    <div id="total_shake" style="width: 100%;height:500%;"></div>
-                </div>
-            </div>
-        </div>{% endcomment %}
-    </div>
 {% endblock %}
 
