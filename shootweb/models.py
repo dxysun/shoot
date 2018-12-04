@@ -107,8 +107,23 @@ class shoot_items(models.Model):
     remark = models.TextField(null=True)
 
 
-# 记录每次抖动开始和结束的时间
+# 记录侧面每次抖动开始和结束的时间，抖动详细信息
 class record_shake_time(models.Model):
+    record_date = models.CharField(max_length=200)
+    record_time = models.CharField(max_length=200, default="")
+    start_time = models.CharField(max_length=200)
+    end_time = models.CharField(max_length=200)
+    shake_x_data = models.TextField(null=True)
+    shake_x_detail_data = models.TextField(null=True)
+    shake_y_data = models.TextField(null=True)
+    shake_y_detail_data = models.TextField(null=True)
+    is_process = models.IntegerField(default=0)
+    user_name = models.CharField(max_length=100, default="")
+    remark = models.TextField(null=True)
+
+
+# 记录水平每次抖动开始和结束的时间，抖动详细信息
+class record_up_shake_time(models.Model):
     record_date = models.CharField(max_length=200)
     record_time = models.CharField(max_length=200, default="")
     start_time = models.CharField(max_length=200)
@@ -182,6 +197,8 @@ class shoot_report(models.Model):
     end_time = models.CharField(max_length=200)
     x_shake_data = models.TextField(null=True)
     y_shake_data = models.TextField(null=True)
+    x_up_shake_data = models.TextField(null=True)
+    y_up_shake_data = models.TextField(null=True)
     is_process = models.IntegerField(default=0)
     user_name = models.CharField(max_length=100, default="")
     remark = models.TextField(null=True)

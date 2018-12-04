@@ -222,12 +222,84 @@ def sport_game_analyse_id(request):
     hearts = hearts[:-1]
     r_pos = r_pos[:-1]
     p_pos = p_pos[:-1]
+
+    x_shake_data = report.x_shake_data
+    y_shake_data = report.y_shake_data
+    x_data = x_shake_data.split(",")
+    y_data = y_shake_data.split(",")
+    x_sum = 0
+    x_data_str = ""
+    x_data_ori = ""
+    x_plus_num = 0
+    num = 0
+    for i in range(0, len(x_data) - 10):
+        x_data_ori += x_data[i] + ","
+        data = float(x_data[i])
+        if data > 0:
+            x_plus_num += data
+            num += 1
+        x_sum += data
+        x_data_str += str(x_sum) + ","
+    x_average = x_plus_num / num
+    # print("average:" + str(x_average))
+    y_sum = 0
+    y_data_str = ""
+    y_data_ori = ""
+    y_plus_num = 0
+    num = 0
+    for i in range(0, len(y_data) - 10):
+        y_data_ori += y_data[i] + ","
+        data = float(y_data[i])
+        if data > 0:
+            y_plus_num += data
+            num += 1
+        y_sum += data
+        y_data_str += str(y_sum) + ","
+    y_average = y_plus_num / num
+
+    x_data_process = ""
+    y_data_process = ""
+    i = 0
+    x_sum = 0
+    y_sum = 0
+    re_start = True
+    t = 0
+    for i in range(0, len(y_data) - 10):
+        x = float(x_data[i])
+        y = float(y_data[i])
+        if i > 10 and (x > x_average or y > y_average):
+            print(str(i) + ":" + str(x) + " " + str(y))
+            if re_start:
+                t += 1
+                re_start = False
+            if t == 5:
+                break
+            x_sum += 10
+            x_data_process += str(x_sum) + ","
+            y_data_process += "0,"
+        else:
+            if not re_start and (x == 0 or y == 0):
+                x_sum += 10
+                y_sum = 0
+                re_start = True
+            if re_start:
+                x_sum += x
+                y_sum += y
+                x_data_process += str(x_sum) + ","
+                y_data_process += str(y_sum) + ","
+
     return render(request, 'sport_game_analyse_id.html', {
         'shoot_reports': report,
         'grades': grades,
         'hearts': hearts,
-        'x_data': report.x_shake_data,
-        'y_data': report.y_shake_data,
+        'x_data': x_data_str[:-1],
+        'x_average': x_average,
+        'y_data': y_data_str[:-1],
+        'y_average': y_average,
+        'x_data_ori': x_data_ori[:-1],
+        'y_data_ori': y_data_ori[:-1],
+        'x_data_process': x_data_process[:-1],
+        'y_data_process': y_data_process[:-1],
         'r_pos': r_pos,
         'p_pos': p_pos,
         'shoot_info': shoot_grades
@@ -449,7 +521,9 @@ def admin_modify_sport(request):
         athlete.intro = request.POST['athlete_info']
         athlete.gender = request.POST['gender']
         athlete.age = request.POST['age']
-        athlete.item_id = request.POST['item_id']
+        athlete.item_id = None
+        if request.POST['item_id'] is not None:
+            athlete.item_id = request.POST['item_id']
         athlete.password = request.POST['password']
         athlete.save()
         return redirect("admin_sport")

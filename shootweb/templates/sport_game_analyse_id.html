@@ -359,7 +359,7 @@
                 }]
             };
 
-              var getDayTime = function () {
+            var getDayTime = function () {
                 var temp = [];
                 for (var i = 0; i < 500; i++) {
                     var hour = i;
@@ -387,7 +387,7 @@
                     '#6200EA'
                 ],
                 title: {
-                    text: '枪的抖动图',
+                    text: '枪的抖动图（经过累加处理的数据）',
                     top: 5
                 },
                 grid: [{
@@ -565,18 +565,286 @@
                 ]
             };
 
+            var x_data_ori = "{{ x_data_ori }}";
+            var y_data_ori = "{{ y_data_ori }}";
+            var xDataOri = x_data_ori.split(",");
+            var yDataOri = y_data_ori.split(",");
+            var myoption1 = {
+                color: [
+                    '#66CCFF',
+                    '#CC6666',
+                    '#66CCCC',
+                    '#FF9999',
+                    '#26A69A',
+                    '#6200EA'
+                ],
+                title: {
+                    text: '枪的抖动图（原始数据)',
+                    top: 5
+                },
+                grid: [{
+                    top: '9%',
+                    bottom: 0,
+                    left: '5%',
+                    right: '5%',
+                    height: '35%'
+                },
+                    {
+                        top: '50%',
+                        bottom: 0,
+                        left: '5%',
+                        right: '5%',
+                        height: '35%'
+                    }
+                ],
+
+                axisPointer: {
+                    link: {
+                        xAxisIndex: 'all'
+                    }
+                },
+                legend: {
+                    data: ['x方向', 'y方向'],
+                    top: 5
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: function (params) {
+                        if (params instanceof Array) {
+                            var idxMap = [{
+                                text: '占比',
+                                data: []
+                            }];
+                            var time = params[0].axisValue;
+                            for (var i = 0; i < params.length; i++) {
+                                var seriesIdx = params[i].seriesId.split(
+                                    params[i].seriesId[0]
+                                );
+                                idxMap[seriesIdx[2]].data.push({
+                                    marker: params[i].marker,
+                                    seriesName: params[i].seriesName,
+                                    data: params[i].data
+                                });
+                            }
+
+                            return (
+                                '<div>' +
+                                '<time>' +
+                                time +
+                                '</time>' +
+                                '<br />' +
+                                idxMap.map(function (item) {
+                                    return (
+                                        '<span>' +
+                                        item.text +
+                                        '</span>' +
+                                        item.data
+                                            .map(function (i_item) {
+                                                return (
+                                                    '<p style="margin: 0;padding: 0;">' +
+                                                    i_item.marker +
+                                                    i_item.seriesName +
+                                                    ': ' +
+                                                    i_item.data +
+                                                    '</p>'
+                                                );
+                                            })
+                                            .join('')
+                                    );
+                                })
+                                    .join('')
+                                +
+                                '</div>'
+                            );
+                        }
+                    }
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        gridIndex: 0,
+                        position: 'bottom',
+                        axisLabel: {
+                            show: true
+                        },
+                        data: xAxisData,
+                        //show: false,
+                        boundaryGap: true
+                    },
+                    {
+                        type: 'category',
+                        gridIndex: 1,
+                        position: 'bottom',
+                        axisLabel: {
+                            show: true
+                        },
+                        data: xAxisData,
+                        //show: false,
+                        boundaryGap: true
+                    }
+                ],
+                yAxis: [
+
+                    {
+                        name: 'x方向',
+                        type: 'value',
+                        nameTextStyle: {
+                            fontSize: 14
+                        },
+                        gridIndex: 0,
+                        inverse: false,
+                        splitLine: {
+                            lineStyle: {
+                                type: 'dashed'
+                            }
+                        },
+                        nameLocation: 'center',
+                        nameGap: 30,
+                        nameRotate: -90
+                    },
+
+                    {
+                        name: 'y方向',
+                        type: 'value',
+                        nameTextStyle: {
+                            fontSize: 14
+                        },
+                        gridIndex: 1,
+                        splitLine: {
+                            lineStyle: {
+                                type: 'dashed'
+                            }
+                        },
+                        position: 'left',
+                        nameLocation: 'center',
+                        nameGap: 30,
+                        nameRotate: -90
+                    }
+                ],
+                dataZoom: [{
+                    type: 'slider',
+                    show: true,
+                    xAxisIndex: [0, 1],
+                    start: 0,
+                    end: 100
+                },
+                    {
+                        type: 'inside',
+                        xAxisIndex: [0, 1]
+                    }
+                ],
+                series: [
+
+                    {
+                        name: 'x方向',
+                        type: 'line',
+                        xAxisIndex: 0,
+                        data: xDataOri,
+                        yAxisIndex: 0,
+                        symbol: 'none',
+                        smooth: true,
+                        markLine: {
+                            data: [
+                               {
+                                    name: 'Y 轴值为 10 的水平线',
+                                    yAxis: {{ x_average }}
+                                }
+                            ]
+                        }
+
+                    },
+                    {
+                        name: 'y方向',
+                        type: 'line',
+                        xAxisIndex: 1,
+                        yAxisIndex: 1,
+                        data: yDataOri,
+                        symbol: 'none',
+                        smooth: true,
+                        barWidth: 2,
+                        markLine: {
+                            data: [
+                               {
+                                    name: 'Y 轴值为 10 的水平线',
+                                    yAxis: {{ y_average }}
+                                }
+                            ]
+                        }
+                    }
+                ]
+            };
+
+            var x_data_process = "{{ x_data_process }}";
+            var y_data_process = "{{ y_data_process }}";
+            var xDataPro = x_data_process.split(",");
+            var yDataPro = y_data_process.split(",");
+            var data_four = [];
+            var l = xData.length;
+            for (var t = 0; t < l; t++) {
+                data_four.push([xData[t], yData[t]])
+            }
+
+           {% comment %} var l = xDataPro.length;
+            for (var t = 0; t < l; t++) {
+                data_four.push([xDataPro[t], yDataPro[t]])
+            }{% endcomment %}
+            var option_four = {
+                xAxis: {
+                    type: 'value'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                dataZoom: {
+                    show: true,
+                    realtime: true,
+                    start: 0,
+                    end: 100
+                },
+                series: [{
+                    data: data_four,
+                    type: 'line',
+                    smooth: true,
+                 {% comment %}   markPoint: {
+                        data: [{
+
+                            value: '第一发',
+                            xAxis: 20,
+                            yAxis: 20
+                        }, {
+                            value: '第二发',
+                            xAxis: 60,
+                            yAxis: 50
+                        }, {
+                            value: '第三发',
+                            xAxis: 70,
+                            yAxis: 40
+                        }]
+                    }{% endcomment %}
+                }]
+            };
+
+
             var myGrade = echarts.init(document.getElementById('grade'));
             var myChart = echarts.init(document.getElementById('circle'));
             var myTotalGrade = echarts.init(document.getElementById('total_grade'));
             var myLineShake = echarts.init(document.getElementById('line_shake'));
+            var myLineShakeOri = echarts.init(document.getElementById('line_shake_ori'));
             var myHeart = echarts.init(document.getElementById('heart'));
+            var line_shake_four = echarts.init(document.getElementById('line_shake_four'));
 
 
             myChart.setOption(options);
             myGrade.setOption(option_grade);
             myTotalGrade.setOption(total_grade);
             myLineShake.setOption(myoption);
+            myLineShakeOri.setOption(myoption1);
             myHeart.setOption(option_heart);
+            line_shake_four.setOption(option_four);
+
 
         });
 
@@ -681,6 +949,20 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    比赛稳定性图
+                </div>
+                <div class="panel-body">
+                    <div id="line_shake_ori" style="width: 100%;height:500%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
 
         <div class="col-md-12">
@@ -693,17 +975,22 @@
                 </div>
             </div>
         </div>
-        {% comment %}     <div class="col-md-6">
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    成绩稳定性统计图
+                    比赛稳定性坐标图
                 </div>
                 <div class="panel-body">
-                    <div id="total_shake" style="width: 100%;height:500%;"></div>
+                    <div id="line_shake_four" style="width: 100%;height:500%;"></div>
                 </div>
             </div>
-        </div>{% endcomment %}
+        </div>
     </div>
+
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">

@@ -4,7 +4,6 @@ import os
 import datetime
 import django
 import time
-import numpy as np
 import math
 
 dirname, filename = os.path.split(os.path.abspath(__file__))
@@ -260,11 +259,8 @@ def update_heart_time():
 def update_heart_data():
     heart_datas = heart_data.objects.all()
     for data in heart_datas:
-        if data.heart_time < '15:24:00':
+        if data.average_rate == 0:
             print(data.heart_time)
-            record_time = string_to_time(data.heart_time)
-            data.heart_time = time_to_string(record_time - datetime.timedelta(minutes=3, seconds=21))
-            data.save()
         # data.heart_time = data.heart_date[-8:]
         # data.heart_date = data.heart_date[:-9]
         # data.user_name = "A"
@@ -346,15 +342,15 @@ def update_grade_heart_info():
     for grade in grades:
         if grade.heart_rate == 0:
             print(grade.grade_time)
-            heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
-            if len(heart_times) >= 1:
-                print(grade.grade_time)
-                heart_time = heart_times[0]
-                grade.heart_rate = heart_time.average_rate
-            else:
-                print('no data')
-                grade.heart_rate = 0
-            grade.save()
+            # heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
+            # if len(heart_times) >= 1:
+            #     print(grade.grade_time)
+            #     heart_time = heart_times[0]
+            #     grade.heart_rate = heart_time.average_rate
+            # else:
+            #     print('no data')
+            #     grade.heart_rate = 0
+            # grade.save()
 
 
 def update_report_shake_info():
