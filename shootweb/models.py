@@ -92,9 +92,9 @@ import django.utils.timezone as timezone
 class user_info(models.Model):
     user_name = models.CharField(max_length=100, default="")
     password = models.CharField(max_length=100, default="")
-    gender = models.CharField(max_length=10, null=True)   # 男/女
+    gender = models.CharField(max_length=10, null=True)  # 男/女
     age = models.IntegerField(null=True)
-    role = models.CharField(max_length=100)   # admin, athlete, coach
+    role = models.CharField(max_length=100)  # admin, athlete, coach
     intro = models.TextField(null=True)
     item_id = models.IntegerField(null=True)
     remark = models.TextField(null=True)
@@ -132,6 +132,24 @@ class record_up_shake_time(models.Model):
     shake_x_detail_data = models.TextField(null=True)
     shake_y_data = models.TextField(null=True)
     shake_y_detail_data = models.TextField(null=True)
+    is_process = models.IntegerField(default=0)
+    user_name = models.CharField(max_length=100, default="")
+    remark = models.TextField(null=True)
+
+
+class shake_all_info(models.Model):
+    record_date = models.CharField(max_length=200, default="")
+    record_time = models.CharField(max_length=200, default="")
+    start_time = models.CharField(max_length=200, default="")
+    end_time = models.CharField(max_length=200, default="")
+    beside_x_data = models.TextField(null=True)
+    beside_x_pos = models.TextField(null=True)
+    beside_y_data = models.TextField(null=True)
+    beside_y_pos = models.TextField(null=True)
+    up_x_data = models.TextField(null=True)
+    up_x_pos = models.TextField(null=True)
+    up_y_data = models.TextField(null=True)
+    up_y_pos = models.TextField(null=True)
     is_process = models.IntegerField(default=0)
     user_name = models.CharField(max_length=100, default="")
     remark = models.TextField(null=True)
@@ -197,8 +215,12 @@ class shoot_report(models.Model):
     end_time = models.CharField(max_length=200)
     x_shake_data = models.TextField(null=True)
     y_shake_data = models.TextField(null=True)
+    x_shake_pos = models.TextField(null=True)
+    y_shake_pos = models.TextField(null=True)
     x_up_shake_data = models.TextField(null=True)
     y_up_shake_data = models.TextField(null=True)
+    x_up_shake_pos = models.TextField(null=True)
+    y_up_shake_pos = models.TextField(null=True)
     is_process = models.IntegerField(default=0)
     user_name = models.CharField(max_length=100, default="")
     remark = models.TextField(null=True)

@@ -249,7 +249,7 @@ def write_heart_to_sql_third(file_path):
         # print(heart_file[2:12])
         # print(heart_file[13:21])
         record_heart = record_heart_time(record_date=heart_file[2:12], record_time=heart_file[13:21],
-                                         start_time=heart_file[13:21], end_time="", user_name="A")
+                                         start_time=heart_file[13:21], end_time="", user_name="B")
         record_heart.save()
         with open(heart_file_path, 'r', encoding='gbk') as file:
             heart_datas = {}
@@ -405,7 +405,7 @@ def read_camera_from_file_third(file_path):
                 print(d5[-1])
 
 
-def write_camera_to_sql_third(file_path):
+def write_beside_camera_to_sql_third(file_path):
     files = os.listdir(file_path)
     for camera_file in files:
         camera_file_path = file_path + "/" + camera_file
@@ -414,12 +414,14 @@ def write_camera_to_sql_third(file_path):
         # print(camera_file[13:21].replace("-",":"))
         record_shake = record_shake_time(record_date=camera_file[2:12],
                                          record_time=camera_file[13:21].replace("-", ":"),
-                                         start_time=camera_file[13:21].replace("-", ":"), end_time="", user_name="A")
+                                         start_time=camera_file[13:21].replace("-", ":"), end_time="", user_name="B")
         record_shake.save()
         end_time = ""
         x_data = ""
+        x_data_detail = ""
         x_detail_data = {}
         y_data = ""
+        y_data_detail = ""
         y_detail_data = {}
         with open(camera_file_path, 'r', encoding='gbk') as file:
             # print(file.read())
@@ -449,23 +451,96 @@ def write_camera_to_sql_third(file_path):
                 d4 = d3[3]
                 d5 = d4.split("\t")
                 x_data += d5[-2] + ","
-                if x_detail_data.get(h_time) is None:
-                    x_detail_data[h_time] = ""
-                x_detail_data[h_time] += d5[-2] + ","
+                x_data_detail += d5[-4] + ","
                 y_data += d5[-1] + ","
-                if y_detail_data.get(h_time) is None:
-                    y_detail_data[h_time] = ""
-                y_detail_data[h_time] += d5[-1] + ","
-        x = ""
-        y = ""
-        for key, value in x_detail_data.items():
-            x += key + ":" + value + "\n"
-        for key, value in y_detail_data.items():
-            y += key + ":" + value + "\n"
+                y_data_detail += d5[-3] + ","
+                # if x_detail_data.get(h_time) is None:
+                #     x_detail_data[h_time] = ""
+                # x_detail_data[h_time] += d5[-2] + ","
+                # y_data += d5[-1] + ","
+                # if y_detail_data.get(h_time) is None:
+                #     y_detail_data[h_time] = ""
+                # y_detail_data[h_time] += d5[-1] + ","
+        # x = ""
+        # y = ""
+        # for key, value in x_detail_data.items():
+        #     x += key + ":" + value + "\n"
+        # for key, value in y_detail_data.items():
+        #     y += key + ":" + value + "\n"
         record_shake.shake_x_data = x_data[:-1]
         record_shake.shake_y_data = y_data[:-1]
-        record_shake.shake_x_detail_data = x
-        record_shake.shake_y_detail_data = y
+        record_shake.shake_x_detail_data = x_data_detail[:-1]
+        record_shake.shake_y_detail_data = y_data_detail[:-1]
+        record_shake.end_time = end_time
+        record_shake.save()
+
+
+def write_up_camera_to_sql_third(file_path):
+    files = os.listdir(file_path)
+    for camera_file in files:
+        camera_file_path = file_path + "/" + camera_file
+        print(camera_file)
+        # print(camera_file[2:12])
+        # print(camera_file[13:21].replace("-",":"))
+        record_shake = record_up_shake_time(record_date=camera_file[2:12],
+                                            record_time=camera_file[13:21].replace("-", ":"),
+                                            start_time=camera_file[13:21].replace("-", ":"), end_time="", user_name="B")
+        record_shake.save()
+        end_time = ""
+        x_data = ""
+        x_data_detail = ""
+        x_detail_data = {}
+        y_data = ""
+        y_data_detail = ""
+        y_detail_data = {}
+        with open(camera_file_path, 'r', encoding='gbk') as file:
+            # print(file.read())
+            data = file.readlines()  # 读取全部内容 ，并以列表方式返回
+            for line in data:
+                line = line.strip()
+                print(line)
+                if "END" in line:
+                    break
+                i = find_n_sub_str(line, "-", 2, 0)
+                line1 = line[:i]
+                line2 = line[i + 1:]
+                d1 = line1.split("-")
+                # print(d1)
+                date = get_normal_str(d1[0]) + "-" + get_normal_str(d1[1]) + "-" + get_normal_str(d1[2])
+                print(date)
+                d2 = line2
+                d3 = d2.split(":")
+                # print(d3)
+                h_time = get_normal_str(d3[0]) + ":" + get_normal_str(d3[1]) + ":" + get_normal_str(d3[2])
+                print(h_time)
+                d4 = d3[3]
+                d5 = d4.split("\t")
+                print(d5[-2])
+                print(d5[-1])
+                end_time = h_time
+                d4 = d3[3]
+                d5 = d4.split("\t")
+                x_data += d5[-2] + ","
+                x_data_detail += d5[-4] + ","
+                y_data += d5[-1] + ","
+                y_data_detail += d5[-3] + ","
+                # if x_detail_data.get(h_time) is None:
+                #     x_detail_data[h_time] = ""
+                # x_detail_data[h_time] += d5[-2] + ","
+                # y_data += d5[-1] + ","
+                # if y_detail_data.get(h_time) is None:
+                #     y_detail_data[h_time] = ""
+                # y_detail_data[h_time] += d5[-1] + ","
+        # x = ""
+        # y = ""
+        # for key, value in x_detail_data.items():
+        #     x += key + ":" + value + "\n"
+        # for key, value in y_detail_data.items():
+        #     y += key + ":" + value + "\n"
+        record_shake.shake_x_data = x_data[:-1]
+        record_shake.shake_y_data = y_data[:-1]
+        record_shake.shake_x_detail_data = x_data_detail[:-1]
+        record_shake.shake_y_detail_data = y_data_detail[:-1]
         record_shake.end_time = end_time
         record_shake.save()
 
@@ -622,9 +697,42 @@ def filter_first_data(file_path, save_path):
                     f.write(context)
 
 
+def process_data(x_path, y_path):
+    x = ""
+    y = ""
+    x_len = 0
+    y_len = 0
+    x_sum = 0
+    y_sum = 0
+    with open(x_path, 'r') as file_x:
+        data = file_x.readlines()
+        for line in data:
+            x_len += 1
+            line = line.strip()
+            x_sum += int(line)
+            x += str(x_sum) + ","
+            if x_len > 200:
+                break
+
+    with open(y_path, 'r') as file_y:
+        data = file_y.readlines()
+        print(len(data))
+        for line in data:
+            y_len += 1
+            line = line.strip()
+            y_sum += int(line)
+            y += str(y_sum) + ","
+            if y_len > 200:
+                break
+    print(x[:-1])
+    print(y[:-1])
+
+
 if __name__ == "__main__":
     # sius时间落后现实时间大约1分27秒
     print("shoot")
+    process_data("D:/myFiles/dataset/shoot/UPHand-x.txt","D:\myFiles\dataset\shoot\Hand-y.txt")
+
     # read_context_from_file('D:\workSpace\PythonWorkspace\shoot\shootweb\data\second\origin\FILE_shoot_2_2018_0714.dat',
     #                        'D:/workSpace/PythonWorkspace/shoot/shootweb/data/second/after_process/shoot_2_2018_0714_after_process.dat')
     # write_shoot_grade_to_mysql(
@@ -644,8 +752,10 @@ if __name__ == "__main__":
     # read_heart_from_file_third("D:\code\shoot\数据\心率")
     # read_camera_from_file_third("D:/code/shoot/simulation_data/newdata/Hand")
 
-    # write_heart_to_sql_third("D:\code\shoot\数据\心率")
-    # write_camera_to_sql_third("D:\code\shoot\数据\手")
+    # write_heart_to_sql_third("D:\myFiles\dataset\shoot\数据1206\数据上午\heart")
+    write_beside_camera_to_sql_third("D:\myFiles\dataset\shoot\数据1206\数据下午\Hand")
+    # write_up_camera_to_sql_third("D:/myFiles/dataset/shoot/数据1206/数据下午/UpHand")
+
     # a = "2018-11- 6-10:42:26:231		0.00	1.00";
     # print(find_n_sub_str(a, "-", 2, 0))
 

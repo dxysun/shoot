@@ -207,10 +207,13 @@ def sport_game_analyse_id(request):
     hearts = ""
     r_pos = ""
     p_pos = ""
-    shoot_grades = shoot_grade.objects.filter(report_id=report_id)
-    is_have_shake = True
+    x_pos = ""
+    y_pos = ""
+    shoot_grades = shoot_grade.objects.filter(report_id=report_id).order_by('grade_detail_time')
     for grade in shoot_grades:
         grades += grade.grade + ","
+        x_pos += grade.x_pos + ","
+        y_pos += grade.y_pos + ","
         x = float(grade.x_pos)
         y = float(grade.y_pos)
         r, p = shootlib.cart_to_polar(x, y)
@@ -223,86 +226,124 @@ def sport_game_analyse_id(request):
     r_pos = r_pos[:-1]
     p_pos = p_pos[:-1]
 
-    x_shake_data = report.x_shake_data
-    y_shake_data = report.y_shake_data
-    x_data = x_shake_data.split(",")
-    y_data = y_shake_data.split(",")
-    x_sum = 0
-    x_data_str = ""
+    x_data_plus = ""
     x_data_ori = ""
-    x_plus_num = 0
-    num = 0
-    for i in range(0, len(x_data) - 10):
-        x_data_ori += x_data[i] + ","
-        data = float(x_data[i])
-        if data > 0:
-            x_plus_num += data
-            num += 1
-        x_sum += data
-        x_data_str += str(x_sum) + ","
-    x_average = x_plus_num / num
-    # print("average:" + str(x_average))
-    y_sum = 0
-    y_data_str = ""
+    y_data_plus = ""
     y_data_ori = ""
-    y_plus_num = 0
-    num = 0
-    for i in range(0, len(y_data) - 10):
-        y_data_ori += y_data[i] + ","
-        data = float(y_data[i])
-        if data > 0:
-            y_plus_num += data
-            num += 1
-        y_sum += data
-        y_data_str += str(y_sum) + ","
-    y_average = y_plus_num / num
+
+    x_up_data_plus = ""
+    x_up_data_ori = ""
+    y_up_data_plus = ""
+    y_up_data_ori = ""
 
     x_data_process = ""
     y_data_process = ""
-    i = 0
-    x_sum = 0
-    y_sum = 0
-    re_start = True
-    t = 0
-    for i in range(0, len(y_data) - 10):
-        x = float(x_data[i])
-        y = float(y_data[i])
-        if i > 10 and (x > x_average or y > y_average):
-            print(str(i) + ":" + str(x) + " " + str(y))
-            if re_start:
-                t += 1
-                re_start = False
-            if t == 5:
-                break
-            x_sum += 10
-            x_data_process += str(x_sum) + ","
-            y_data_process += "0,"
-        else:
-            if not re_start and (x == 0 or y == 0):
-                x_sum += 10
-                y_sum = 0
-                re_start = True
-            if re_start:
-                x_sum += x
-                y_sum += y
-                x_data_process += str(x_sum) + ","
-                y_data_process += str(y_sum) + ","
+    y_average = 0
+    x_average = 0
+    x_shake_data = report.x_shake_data
+    y_shake_data = report.y_shake_data
+    x_up_shake_data = report.x_up_shake_data
+    y_up_shake_data = report.y_up_shake_data
+    if x_shake_data is not None and y_shake_data is not None:
+        x_data = x_shake_data.split(",")
+        y_data = y_shake_data.split(",")
+        x_sum = 0
+        x_plus_num = 0
+        num = 0
+        for i in range(0, len(x_data) - 10):
+            x_data_ori += x_data[i] + ","
+            data = float(x_data[i])
+            if data > 0:
+                x_plus_num += data
+                num += 1
+            x_sum += data
+            x_data_plus += str(x_sum) + ","
+        x_average = x_plus_num / num
+        # print("average:" + str(x_average))
+        y_sum = 0
+        num = 0
+        y_plus_num = 0
+        for i in range(0, len(y_data) - 10):
+            y_data_ori += y_data[i] + ","
+            data = float(y_data[i])
+            if data > 0:
+                y_plus_num += data
+                num += 1
+            y_sum += data
+            y_data_plus += str(y_sum) + ","
+        y_average = y_plus_num / num
+
+        x_up_data = x_up_shake_data.split(",")
+        y_up_data = y_up_shake_data.split(",")
+        x_up_sum = 0
+        for i in range(0, len(x_up_data)):
+            x_up_data_ori += x_up_data[i] + ","
+            data = float(x_up_data[i])
+            x_up_sum += data
+            x_up_data_plus += str(x_up_sum) + ","
+
+        y_up_sum = 0
+        for i in range(0, len(y_up_data)):
+            y_up_data_ori += y_up_data[i] + ","
+            data = float(y_up_data[i])
+            y_up_sum += data
+            y_up_data_plus += str(y_up_sum) + ","
+
+        # i = 0
+        # x_sum = 0
+        # y_sum = 0
+        # re_start = True
+        # t = 0
+        # start = 0
+        # for i in range(0, len(y_data) - 10):
+        #     x = float(x_data[i])
+        #     y = float(y_data[i])
+        #     if i > 10 and (x > x_average or y > y_average):
+        #         # print(str(i) + ":" + str(x) + " " + str(y))
+        #         if re_start:
+        #             t += 1
+        #             re_start = False
+        #             for j in range(i - 1, start, -1):
+        #                 x_sum += (float(x_data[j]))
+        #                 y_sum += float(y_data[j])
+        #                 x_data_process += str(x_sum) + ","
+        #                 y_data_process += str(y_sum) + ","
+        #         if t == 5:
+        #             break
+        #     else:
+        #         if not re_start and (x == 0 or y == 0):
+        #             start = i
+        #             x_data_process += "#"
+        #             y_data_process += "#"
+        #             x_sum = 0
+        #             y_sum = 0
+        #             re_start = True
 
     return render(request, 'sport_game_analyse_id.html', {
         'shoot_reports': report,
         'grades': grades,
         'hearts': hearts,
-        'x_data': x_data_str[:-1],
+        'r_pos': r_pos,
+        'p_pos': p_pos,
+        'x_pos': x_pos[:-1],
+        'y_pos': y_pos[:-1],
+        'shoot_info': shoot_grades,
+        'x_data': x_data_plus[:-1],
         'x_average': x_average,
-        'y_data': y_data_str[:-1],
+        'y_data': y_data_plus[:-1],
         'y_average': y_average,
         'x_data_ori': x_data_ori[:-1],
         'y_data_ori': y_data_ori[:-1],
+        'x_data_real': report.x_shake_data_real,
+        'y_data_real': report.y_shake_data_real,
         'x_data_process': x_data_process[:-1],
         'y_data_process': y_data_process[:-1],
-        'r_pos': r_pos,
-        'p_pos': p_pos,
-        'shoot_info': shoot_grades
+        'x_up_data': x_up_data_plus[:-1],
+        'y_up_data': y_up_data_plus[:-1],
+        'x_up_data_ori': x_up_data_ori[:-1],
+        'y_up_data_ori': y_up_data_ori[:-1],
+        'x_up_data_real': report.x_up_shake_data_real,
+        'y_up_data_real': report.y_up_shake_data_real,
     })
 
 

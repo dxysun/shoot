@@ -170,6 +170,21 @@ def cart_to_polar(x, y):
     return r, angle
 
 
+def polar_to_cart(x, y, r):
+    x_data = []
+    y_data = []
+    x_start = x + r * math.cos(0 * math.pi / 180)
+    y_start = y + r * math.sin(0 * math.pi / 180)
+    for angle in range(0, 360):
+        x1 = x + r * math.cos(angle * math.pi / 180)
+        y1 = y + r * math.sin(angle * math.pi / 180)
+        x_data.append(round(x1, 2))
+        y_data.append(round(y1, 2))
+    x_data.append(x_start)
+    y_data.append(y_start)
+    return x_data, y_data
+
+
 def update_shoot_report():
     shoot_reports = shoot_report.objects.all()
     for report in shoot_reports:
@@ -338,31 +353,52 @@ def update_all_info():
 
 
 def update_grade_heart_info():
-    grades = shoot_grade.objects.all()
+    grades = shoot_grade.objects.filter(user_name="B")
     for grade in grades:
-        if grade.heart_rate == 0:
-            print(grade.grade_time)
-            # heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
-            # if len(heart_times) >= 1:
-            #     print(grade.grade_time)
-            #     heart_time = heart_times[0]
-            #     grade.heart_rate = heart_time.average_rate
-            # else:
-            #     print('no data')
-            #     grade.heart_rate = 0
-            # grade.save()
+        if grade.heart_rate == 0 or grade.heart_rate is None:
+            heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
+            if len(heart_times) >= 1:
+                print(grade.grade_time)
+                heart_time = heart_times[0]
+                grade.heart_rate = heart_time.average_rate
+            else:
+                print(grade.grade_time + ':no data')
+                grade.heart_rate = None
+            grade.save()
+
+        # if grade.heart_rate == 0:
+        #     print(grade.grade_time)
+        # heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
+        # if len(heart_times) >= 1:
+        #     print(grade.grade_time)
+        #     heart_time = heart_times[0]
+        #     grade.heart_rate = heart_time.average_rate
+        # else:
+        #     print('no data')
+        #     grade.heart_rate = 0
+        # grade.save()
 
 
 def update_report_shake_info():
-    shoot_reports = shoot_report.objects.filter(is_process=0)
+    shoot_reports = shoot_report.objects.filter(is_process=0).filter(user_name="B")
+    # shoot_reports = shoot_report.objects.filter(user_name="B")
     for report in shoot_reports:
-        report_time = time_to_string(string_to_time(report.shoot_time) + datetime.timedelta(seconds=4))
+        report_time = time_to_string(string_to_time(report.shoot_time) + datetime.timedelta(seconds=2))
         shake_times = record_shake_time.objects.filter(start_time__lte=report_time).filter(end_time__gte=report_time)
-        if len(shake_times) == 1:
+        up_shake_times = record_up_shake_time.objects.filter(start_time__lte=report_time).filter(
+            end_time__gte=report_time)
+        if len(shake_times) == 1 and len(up_shake_times) == 1:
             print('find ' + report.shoot_time)
             shake = shake_times[0]
             report.x_shake_data = shake.shake_x_data
             report.y_shake_data = shake.shake_y_data
+            report.x_shake_data_real = shake.shake_x_detail_data
+            report.y_shake_data_real = shake.shake_y_detail_data
+            up_shake = up_shake_times[0]
+            report.x_up_shake_data = up_shake.shake_x_data
+            report.y_up_shake_data = up_shake.shake_y_data
+            report.x_up_shake_data_real = up_shake.shake_x_detail_data
+            report.y_up_shake_data_real = up_shake.shake_y_detail_data
             report.is_process = 1
             shake.is_process = 1
             shake.save()
@@ -375,20 +411,37 @@ def update_data(user_name):
     shoot_reports = shoot_report.objects.filter(is_process=0).filter(user_name=user_name)
     if len(shoot_reports) > 0:
         for report in shoot_reports:
-            report_time = time_to_string(string_to_time(report.shoot_time) + datetime.timedelta(seconds=3))
+            report_time = time_to_string(string_to_time(report.shoot_time) + datetime.timedelta(seconds=2))
             shake_times = record_shake_time.objects.filter(start_time__lte=report_time).filter(
                 end_time__gte=report_time)
             if len(shake_times) == 1:
-                print('find ' + report.shoot_time)
+                print('find beside:' + report.shoot_time)
                 shake = shake_times[0]
                 report.x_shake_data = shake.shake_x_data
                 report.y_shake_data = shake.shake_y_data
+                report.x_up_shake_data_real = shake.shake_x_detail_data
+                report.y_up_shake_data_real = shake.shake_y_detail_data
                 report.is_process = 1
                 shake.is_process = 1
                 shake.save()
                 report.save()
             else:
-                print('not find ' + report.shoot_time)
+                print('not find beside ' + report.shoot_time)
+            up_shake_times = record_up_shake_time.objects.filter(start_time__lte=report_time).filter(
+                end_time__gte=report_time)
+            if len(up_shake_times) == 1:
+                print('find up:' + report.shoot_time)
+                shake = up_shake_times[0]
+                report.x_up_shake_data = shake.shake_x_data
+                report.y_up_shake_data = shake.shake_y_data
+                report.x_up_shake_data_real = shake.shake_x_detail_data
+                report.y_up_shake_data_real = shake.shake_y_detail_data
+                report.is_process = 1
+                shake.is_process = 1
+                shake.save()
+                report.save()
+            else:
+                print('not find beside ' + report.shoot_time)
             grades = shoot_grade.objects.filter(report_id=report.id)
             for grade in grades:
                 heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
@@ -405,13 +458,18 @@ if __name__ == "__main__":
     print("shoot")
     # test()
     # get_shoot_info()
-    # x1, y1 = - 36.06, -8.96
+    # x1, y1 = 31.33, 12.82
     # x2, y2 = 35.52, -7.48
     # x3, y3 = 2.96, 37.16
     # x4, y4 = - 32.49, 2.67
     # x5, y5 = - 26.68, -29.15
     # xs = [x1, x2, x3, x4, x5]
     # ys = [y1, y2, y3, y4, y5]
+    # print(cart_to_polar(x1, y1))
+
+    # xd, yd = polar_to_cart(0, 0, 50)
+    # for x, y in zip(xd, yd):
+    #     print(str(x) + " " + str(y))
 
     # update_shoot_report()
     # update_shoot_grade()

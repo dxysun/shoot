@@ -176,7 +176,7 @@ class GradeEventTimerHandler(FileSystemEventHandler):
         self.total_grade = 0
         file_path = conf.get('file_setting', 'grade_file')
         line_num = conf.get('file_setting', 'line_num')
-        if 'dat' in file_path:
+        if os.path.exists(file_path):
             self.grade_file = open(file_path, "r", encoding='ISO-8859-15')
             self.thread = threading.Thread(target=self.listen, args=(file_path, int(line_num)))
             self.thread.start()
@@ -308,8 +308,8 @@ class GradeEventTimerHandler(FileSystemEventHandler):
 def start_watch(username):
     observer1 = Observer()
     event_handler = GradeEventTimerHandler(username)
-    # observer1.schedule(event_handler, "D:/code/shoot/grade", True)
-    observer1.schedule(event_handler, "D:\code\shoot\simulation_data\grade", True)
+    observer1.schedule(event_handler, "D:/code/shoot/grade", True)
+    # observer1.schedule(event_handler, "D:\code\shoot\simulation_data\grade", True)
     observer1.start()
     return observer1
 
