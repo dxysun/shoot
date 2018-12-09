@@ -52,6 +52,14 @@ def stop_thread(thread):
     _async_raise(thread.ident, SystemExit)
 
 
+def time_to_string_mill(dt):
+    return dt.strftime("%H:%M:%S.%f")
+
+
+def string_to_time_mill(string):
+    return datetime.datetime.strptime(string, "%H:%M:%S.%f")
+
+
 class GradeEventHandler(FileSystemEventHandler):
     def __init__(self, username):
         FileSystemEventHandler.__init__(self)
@@ -172,6 +180,7 @@ class GradeEventTimerHandler(FileSystemEventHandler):
         self.shoot_data = None
         self.start_time = ''
         self.end_time = ''
+        self.rapid_time = ''
         self.username = username
         self.total_grade = 0
         file_path = conf.get('file_setting', 'grade_file')
@@ -287,20 +296,26 @@ class GradeEventTimerHandler(FileSystemEventHandler):
                         else:
                             if self.shoot_data is not None:
                                 rapid_time = line[1:-1]
-                                self.shoot_data.rapid_time = rapid_time
+                                self.rapid_time = rapid_time[:-1]
+                                self.shoot_data.rapid_time = self.rapid_time
                                 self.shoot_data.save()
                                 self.shoot_data = None
                         if self.num >= 10:
                             if self.num == 10:
-                                self.report_data.start_time = self.start_time
-                                self.report_data.end_time = self.end_time
                                 self.report_data.remark = str(self.total_grade)
                                 t = datetime.datetime.now().strftime("%H:")
-                                t += self.start_time[0:5]
-                                self.report_data.shoot_time = t
-                                self.end_time = ""
-                                self.start_time = ""
+                                self.start_time = t + self.start_time
+                                self.end_time = t + self.end_time
+                                self.report_data.shoot_time = self.start_time
+                                report_time = time_to_string_mill(
+                                    string_to_time_mill(self.start_time) - datetime.timedelta(
+                                        seconds=float(self.rapid_time)))
+                                self.report_data.start_time = report_time[:-4]
+                                self.report_data.end_time = self.end_time
                                 self.report_data.save()
+                                self.end_time = ""
+                                self.rapid_time = ""
+                                self.start_time = ""
                                 self.report_data = None
                             self.num += 1
 
@@ -327,7 +342,7 @@ if __name__ == "__main__":
     # except KeyboardInterrupt:
     #     observer.stop()
     # observer.join()
-    print(conf.get('file_setting', 'grade_file'))
+    # print(conf.get('file_setting', 'grade_file'))
     # conf.set('file_setting', 'grade_file', 'filekkkkkk')
     # conf.write(open(cur_path + '/config.ini', "w"))
     # print(conf.get('file_setting', 'grade_file'))

@@ -74,16 +74,32 @@
             }
             var x_center = 0;
             var y_center = 0;
-            var r = 50;
-            var circle_data = [];
-            var x_start = x_center + r * Math.cos(0);
-            var y_start = y_center + r * Math.sin(0);
-            for (var angle = 0; angle < 360; angle+= 10) {
-                var x1 = x_center + r * Math.cos(angle * Math.PI / 180);
-                var y1 = y_center + r * Math.sin(angle * Math.PI / 180);
-                circle_data.push([x1,y1]);
+            var r_10 = 50;
+            var r_9 = 90;
+            var r_8 = 130;
+            var circle_data_10 = [];
+            var circle_data_9 = [];
+            var circle_data_8 = [];
+            var x_10_start = x_center + r_10 * Math.cos(0);
+            var y_10_start = y_center + r_10 * Math.sin(0);
+            var x_9_start = x_center + r_9 * Math.cos(0);
+            var y_9_start = y_center + r_9 * Math.sin(0);
+            var x_8_start = x_center + r_8 * Math.cos(0);
+            var y_8_start = y_center + r_8 * Math.sin(0);
+            for (var angle = 0; angle < 360; angle += 10) {
+                var x1 = x_center + r_10 * Math.cos(angle * Math.PI / 180);
+                var y1 = y_center + r_10 * Math.sin(angle * Math.PI / 180);
+                var x2 = x_center + r_9 * Math.cos(angle * Math.PI / 180);
+                var y2 = y_center + r_9 * Math.sin(angle * Math.PI / 180);
+                var x3 = x_center + r_8 * Math.cos(angle * Math.PI / 180);
+                var y3 = y_center + r_8 * Math.sin(angle * Math.PI / 180);
+                circle_data_10.push([x1, y1]);
+                circle_data_9.push([x2, y2]);
+                circle_data_8.push([x3, y3]);
             }
-            circle_data.push([x_start,y_start]);
+            circle_data_10.push([x_10_start, y_10_start]);
+            circle_data_9.push([x_9_start, y_9_start]);
+            circle_data_8.push([x_8_start, y_8_start]);
             var option_grade_pos = {
                 xAxis: {
                     type: 'value',
@@ -108,13 +124,27 @@
                     data: grade_data,
                     type: 'line',
                     smooth: true
-                },{
-                    data: circle_data,
+                }, {
+                    data: circle_data_10,
                     type: 'line',
                     smooth: true,
-                   tooltip:{
-                         show: false
-                     }
+                    tooltip: {
+                        show: false
+                    }
+                }, {
+                    data: circle_data_9,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
+                }, {
+                    data: circle_data_8,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
                 }]
             };
 
@@ -303,8 +333,10 @@
             var yData = y_data.split(",");
             var len = xData.length;
             var xAxisData = [];
+            var x_y_plus = [];
             for (i = 0; i < len; i++) {
                 xAxisData.push(i + 1);
+                x_y_plus.push([xData[i],yData[i]])
             }
             var option_beside_shake_line = {
                 color: [
@@ -500,6 +532,9 @@
             var y_data_ori = "{{ y_data_ori }}";
             var xDataOri = x_data_ori.split(",");
             var yDataOri = y_data_ori.split(",");
+            for(i = 0;i < yDataOri.length;i ++){
+                yDataOri[i] *= -1;
+            }
             var option_beside_shake_ori = {
                 color: [
                     '#66CCFF',
@@ -693,28 +728,50 @@
                         symbol: 'none',
                         smooth: true,
                         barWidth: 2,
-                        {% comment %} markLine: {
+                         markLine: {
                              data: [
                                  {
                                      name: 'Y 轴值为 10 的水平线',
                                      yAxis: {{ y_average }}
                                  }
                              ]
-                         }{% endcomment %}
+                         }
                     }
                 ]
             };
+            var option_beside_shake_x_y_plus = {
+                xAxis: {
+                    type: 'value'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                dataZoom: {
+                    show: true,
+                    realtime: true,
+                    start: 0,
+                    end: 100
+                },
+                series: [{
+                    data: x_y_plus,
+                    type: 'line',
+                    smooth: true
+                }]
+            };
 
 
-            var x_data_real = "{{ x_data_real }}";
-            var y_data_real = "{{ y_data_real }}";
+            var x_data_real = "{{ x_data_pos }}";
+            var y_data_real = "{{ y_data_pos }}";
             var xDataReal = x_data_real.split(",");
             var yDataReal = y_data_real.split(",");
             var beside_data_real = [];
             for (i = 0; i < xDataReal.length; i++) {
-                beside_data_real.push([xDataReal[i], yDataReal[i]])
+                beside_data_real.push([xDataReal[i], yDataReal[i] * -1])
             }
-            var option_beside_shake_real = {
+            var option_beside_shake_pos = {
                 xAxis: {
                     type: 'value'
                 },
@@ -1144,16 +1201,44 @@
                 ]
             };
 
+            var up_data_x_y_plus = [];
+            for(i = 0;i < up_len;i ++){
+                up_data_x_y_plus.push([xUpData[i],yUpData[i]]);
+            }
+            var option_up_shake_x_y_plus = {
+                xAxis: {
+                    type: 'value'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                dataZoom: {
+                    show: true,
+                    realtime: true,
+                    start: 0,
+                    end: 100
+                },
+                series: [{
+                    data: up_data_x_y_plus,
 
-            var x_up_data_real = "{{ x_up_data_real }}";
-            var y_up_data_real = "{{ y_up_data_real }}";
+                    type: 'line',
+                    smooth: true
+                }]
+            };
+
+
+            var x_up_data_real = "{{ x_up_data_pos }}";
+            var y_up_data_real = "{{ y_up_data_pos }}";
             var xUpDataReal = x_up_data_real.split(",");
             var yUpDataReal = y_up_data_real.split(",");
             var up_data_real = [];
             for (i = 0; i < xUpDataReal.length; i++) {
-                up_data_real.push([xUpDataReal[i], yUpDataReal[i]])
+                up_data_real.push([xUpDataReal[i], yUpDataReal[i] * -1])
             }
-            var option_up_shake_real = {
+            var option_up_shake_pos = {
                 xAxis: {
                     type: 'value'
                 },
@@ -1177,164 +1262,192 @@
                 }]
             };
 
-
-            var x_data_process = "{{ x_data_process }}";
-            var y_data_process = "{{ y_data_process }}";
-            var xDataAll = x_data_process.split("#");
-            var yDataAll = y_data_process.split("#");
-            var len1 = xDataAll.length;
-            var allInfo = [];
-            for (var k = 0; k < len1; k++) {
-                var xDataPro = xDataAll[k].split(",");
-                var yDataPro = yDataAll[k].split(",");
-                var data_four = [];
-                var l = xDataPro.length;
-                for (var t = 0; t < l; t++) {
-                    data_four.push([xDataPro[t], yDataPro[t]])
-                }
-                allInfo.push(data_four)
+            var merge_data = [];
+            for(i = 0;i < yData.length;i ++){
+                merge_data.push([xUpData[i],yData[i]]);
             }
-            var option_line_shake_five = {
-
+            var option_shake_merge_info = {
+                xAxis: {
+                    type: 'value'
+                },
                 tooltip: {
                     trigger: 'axis'
                 },
-                grid: [{
-                    show: false,
-                    left: '0%',
-                    top: '5%',
-                    containLabel: true,
-                    width: '20%',
-                    height: '80%'
-                }, {
-                    show: false,
-                    left: '20%',
-                    top: '5%',
-                    containLabel: true,
-                    width: '20%',
-                    height: '80%'
-                }, {
-                    show: false,
-                    left: '40%',
-                    top: '5%',
-                    containLabel: true,
-                    width: '20%',
-                    height: '80%'
-                }, {
-                    show: false,
-                    left: '60%',
-                    top: '5%',
-                    containLabel: true,
-                    width: '20%',
-                    height: '80%'
-                }, {
-                    show: false,
-                    left: '80%',
-                    top: '5%',
-                    containLabel: true,
-                    width: '18%',
-                    height: '80%'
-                }],
-                xAxis: [{
-                    gridIndex: 0,
+                yAxis: {
                     type: 'value'
-                }, {
-                    gridIndex: 1,
-                    type: 'value'
-                }, {
-                    gridIndex: 2,
-                    type: 'value'
-                }, {
-                    gridIndex: 3,
-                    type: 'value'
-                }, {
-                    gridIndex: 4,
-                    type: 'value'
-                }],
-                yAxis: [{
-                    gridIndex: 0,
-                    type: 'value'
-                }, {
-                    gridIndex: 1,
-                    type: 'value'
-                }, {
-                    gridIndex: 2,
-                    type: 'value'
-                }, {
-                    gridIndex: 3,
-                    type: 'value'
-                }, {
-                    gridIndex: 4,
-                    type: 'value'
-                }],
-                dataZoom: [{
+                },
+                dataZoom: {
                     show: true,
                     realtime: true,
-                    xAxisIndex: 0,
-                    yAxisIndex: 0,
                     start: 0,
                     end: 100
-                }, {
-                    show: true,
-                    realtime: true,
-                    xAxisIndex: 1,
-                    yAxisIndex: 1,
-                    start: 0,
-                    end: 100
-                }, {
-                    show: true,
-                    realtime: true,
-                    xAxisIndex: 2,
-                    yAxisIndex: 2,
-                    start: 0,
-                    end: 100
-                }, {
-                    show: true,
-                    realtime: true,
-                    xAxisIndex: 3,
-                    yAxisIndex: 3,
-                    start: 0,
-                    end: 100
-                }, {
-                    show: true,
-                    realtime: true,
-                    xAxisIndex: 4,
-                    yAxisIndex: 4,
-                    start: 0,
-                    end: 100
-                }],
+                },
                 series: [{
-                    data: allInfo[0],
-                    xAxisIndex: 0,
-                    yAxisIndex: 0,
-                    type: 'line',
-                    smooth: true
-                }, {
-                    data: allInfo[1],
-                    xAxisIndex: 1,
-                    yAxisIndex: 1,
-                    type: 'line',
-                    smooth: true
-                }, {
-                    data: allInfo[2],
-                    xAxisIndex: 2,
-                    yAxisIndex: 2,
-                    type: 'line',
-                    smooth: true
-                }, {
-                    data: allInfo[3],
-                    xAxisIndex: 3,
-                    yAxisIndex: 3,
-                    type: 'line',
-                    smooth: true
-                }, {
-                    data: allInfo[4],
-                    xAxisIndex: 4,
-                    yAxisIndex: 4,
+                    data: merge_data,
+
                     type: 'line',
                     smooth: true
                 }]
             };
+
+
+            {% comment %}        var x_data_process = "{{ x_data_process }}";
+                    var y_data_process = "{{ y_data_process }}";
+                    var xDataAll = x_data_process.split("#");
+                    var yDataAll = y_data_process.split("#");
+                    var len1 = xDataAll.length;
+                    var allInfo = [];
+                    for (var k = 0; k < len1; k++) {
+                        var xDataPro = xDataAll[k].split(",");
+                        var yDataPro = yDataAll[k].split(",");
+                        var data_four = [];
+                        var l = xDataPro.length;
+                        for (var t = 0; t < l; t++) {
+                            data_four.push([xDataPro[t], yDataPro[t]])
+                        }
+                        allInfo.push(data_four)
+                    }
+                    var option_line_shake_five = {
+
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        grid: [{
+                            show: false,
+                            left: '0%',
+                            top: '5%',
+                            containLabel: true,
+                            width: '20%',
+                            height: '80%'
+                        }, {
+                            show: false,
+                            left: '20%',
+                            top: '5%',
+                            containLabel: true,
+                            width: '20%',
+                            height: '80%'
+                        }, {
+                            show: false,
+                            left: '40%',
+                            top: '5%',
+                            containLabel: true,
+                            width: '20%',
+                            height: '80%'
+                        }, {
+                            show: false,
+                            left: '60%',
+                            top: '5%',
+                            containLabel: true,
+                            width: '20%',
+                            height: '80%'
+                        }, {
+                            show: false,
+                            left: '80%',
+                            top: '5%',
+                            containLabel: true,
+                            width: '18%',
+                            height: '80%'
+                        }],
+                        xAxis: [{
+                            gridIndex: 0,
+                            type: 'value'
+                        }, {
+                            gridIndex: 1,
+                            type: 'value'
+                        }, {
+                            gridIndex: 2,
+                            type: 'value'
+                        }, {
+                            gridIndex: 3,
+                            type: 'value'
+                        }, {
+                            gridIndex: 4,
+                            type: 'value'
+                        }],
+                        yAxis: [{
+                            gridIndex: 0,
+                            type: 'value'
+                        }, {
+                            gridIndex: 1,
+                            type: 'value'
+                        }, {
+                            gridIndex: 2,
+                            type: 'value'
+                        }, {
+                            gridIndex: 3,
+                            type: 'value'
+                        }, {
+                            gridIndex: 4,
+                            type: 'value'
+                        }],
+                        dataZoom: [{
+                            show: true,
+                            realtime: true,
+                            xAxisIndex: 0,
+                            yAxisIndex: 0,
+                            start: 0,
+                            end: 100
+                        }, {
+                            show: true,
+                            realtime: true,
+                            xAxisIndex: 1,
+                            yAxisIndex: 1,
+                            start: 0,
+                            end: 100
+                        }, {
+                            show: true,
+                            realtime: true,
+                            xAxisIndex: 2,
+                            yAxisIndex: 2,
+                            start: 0,
+                            end: 100
+                        }, {
+                            show: true,
+                            realtime: true,
+                            xAxisIndex: 3,
+                            yAxisIndex: 3,
+                            start: 0,
+                            end: 100
+                        }, {
+                            show: true,
+                            realtime: true,
+                            xAxisIndex: 4,
+                            yAxisIndex: 4,
+                            start: 0,
+                            end: 100
+                        }],
+                        series: [{
+                            data: allInfo[0],
+                            xAxisIndex: 0,
+                            yAxisIndex: 0,
+                            type: 'line',
+                            smooth: true
+                        }, {
+                            data: allInfo[1],
+                            xAxisIndex: 1,
+                            yAxisIndex: 1,
+                            type: 'line',
+                            smooth: true
+                        }, {
+                            data: allInfo[2],
+                            xAxisIndex: 2,
+                            yAxisIndex: 2,
+                            type: 'line',
+                            smooth: true
+                        }, {
+                            data: allInfo[3],
+                            xAxisIndex: 3,
+                            yAxisIndex: 3,
+                            type: 'line',
+                            smooth: true
+                        }, {
+                            data: allInfo[4],
+                            xAxisIndex: 4,
+                            yAxisIndex: 4,
+                            type: 'line',
+                            smooth: true
+                        }]
+                    };{% endcomment %}
 
 
             var grade_line = echarts.init(document.getElementById('grade_line'));
@@ -1345,12 +1458,15 @@
 
             var line_shake_ori = echarts.init(document.getElementById('line_shake_ori'));
             var line_shake = echarts.init(document.getElementById('line_shake'));
-            var line_shake_real = echarts.init(document.getElementById('line_shake_real'));
+            var line_shake_x_y_plus = echarts.init(document.getElementById('line_shake_x_y_plus'));
+            var line_shake_pos = echarts.init(document.getElementById('line_shake_pos'));
 
             var line_up_shake_ori = echarts.init(document.getElementById('line_up_shake_ori'));
             var line_up_shake = echarts.init(document.getElementById('line_up_shake'));
-            var line_up_shake_real = echarts.init(document.getElementById('line_up_shake_real'));
+            var line_up_shake_x_y_plus = echarts.init(document.getElementById('line_up_shake_x_y_plus'));
+            var line_up_shake_pos = echarts.init(document.getElementById('line_up_shake_pos'));
 
+            var line_shake_merge_info = echarts.init(document.getElementById('line_shake_merge_info'));
             //    var line_shake_five = echarts.init(document.getElementById('line_shake_five'));
 
 
@@ -1362,12 +1478,16 @@
 
             line_shake_ori.setOption(option_beside_shake_ori);
             line_shake.setOption(option_beside_shake_line);
-            line_shake_real.setOption(option_beside_shake_real);
+            line_shake_x_y_plus.setOption(option_beside_shake_x_y_plus);
+            line_shake_pos.setOption(option_beside_shake_pos);
 
             line_up_shake_ori.setOption(option_up_shake_ori);
             line_up_shake.setOption(option_up_shake_line);
-            line_up_shake_real.setOption(option_up_shake_real);
+            line_up_shake_x_y_plus.setOption(option_up_shake_x_y_plus);
+            line_up_shake_pos.setOption(option_up_shake_pos);
 
+
+            line_shake_merge_info.setOption(option_shake_merge_info);
             //     line_shake_five.setOption(option_line_shake_five);
 
 
@@ -1426,13 +1546,9 @@
                         射击信息
                     </div>
                     <div class="col-md-5">
-
-
                     </div>
                     <div class="col-md-3">
-
                     </div>
-
                 </div>
             </div>
             <div class="panel-body">
@@ -1440,7 +1556,6 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-
                             <th>射击时间</th>
                             <th>射击成绩</th>
                             <th>速射时间</th>
@@ -1475,7 +1590,21 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    比赛稳定性图(侧面原始数据)
+                    比赛稳定性图(枪的正面移动图)
+                </div>
+                <div class="panel-body">
+                    <div id="line_shake_merge_info" style="width: 100%;height:500%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    比赛稳定性图(侧面摄像头原始数据)
                 </div>
                 <div class="panel-body">
                     <div id="line_shake_ori" style="width: 100%;height:500%;"></div>
@@ -1488,7 +1617,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    比赛稳定性图(侧面累加数据)
+                    比赛稳定性图(侧面摄像头累加数据)
                 </div>
                 <div class="panel-body">
                     <div id="line_shake" style="width: 100%;height:500%;"></div>
@@ -1498,14 +1627,26 @@
     </div>
 
     <div class="row">
-
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    比赛稳定性图(侧面坐标数据)
+                    比赛稳定性图(侧面摄像头x和y累加数据)
                 </div>
                 <div class="panel-body">
-                    <div id="line_shake_real" style="width: 100%;height:500%;"></div>
+                    <div id="line_shake_x_y_plus" style="width: 100%;height:500%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    比赛稳定性图(侧面摄像头坐标数据)
+                </div>
+                <div class="panel-body">
+                    <div id="line_shake_pos" style="width: 100%;height:500%;"></div>
                 </div>
             </div>
         </div>
@@ -1516,7 +1657,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    比赛稳定性图(上面原始数据)
+                    比赛稳定性图(上面摄像头原始数据)
                 </div>
                 <div class="panel-body">
                     <div id="line_up_shake_ori" style="width: 100%;height:500%;"></div>
@@ -1530,7 +1671,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    比赛稳定性图(上面累加数据)
+                    比赛稳定性图(上面摄像头累加数据)
                 </div>
                 <div class="panel-body">
                     <div id="line_up_shake" style="width: 100%;height:500%;"></div>
@@ -1544,10 +1685,24 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    比赛稳定性图(上面坐标数据)
+                    比赛稳定性图(上面摄像头xy坐标累加数据)
                 </div>
                 <div class="panel-body">
-                    <div id="line_up_shake_real" style="width: 100%;height:500%;"></div>
+                    <div id="line_up_shake_x_y_plus" style="width: 100%;height:500%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    比赛稳定性图(上面摄像头坐标数据)
+                </div>
+                <div class="panel-body">
+                    <div id="line_up_shake_pos" style="width: 100%;height:500%;"></div>
                 </div>
             </div>
         </div>

@@ -20,9 +20,18 @@ def time_to_string(dt):
     return dt.strftime("%H:%M:%S")
 
 
+def time_to_string_mill(dt):
+    return dt.strftime("%H:%M:%S.%f")
+
+
 # 把字符串转成datetime
 def string_to_time(string):
     return datetime.datetime.strptime(string, "%H:%M:%S")
+
+
+# 把字符串转成datetime
+def string_to_time_mill(string):
+    return datetime.datetime.strptime(string, "%H:%M:%S.%f")
 
 
 def get_max_five(x_data, y_data):
@@ -188,12 +197,29 @@ def polar_to_cart(x, y, r):
 def update_shoot_report():
     shoot_reports = shoot_report.objects.all()
     for report in shoot_reports:
-        print(report.shoot_date)
+        print(report.start_time)
+        # report.start_time = report.shoot_time[:3] + report.start_time
+        # report.end_time = report.shoot_time[:3] + report.end_time
         # print(report.shoot_date[:-9])
         # report.shoot_time = report.shoot_date[-8:]
         # report.shoot_date = "2018-07-14"
-        report.user_name = "A"
-        report.save()
+        # report.user_name = "A"
+        # report.save()
+
+        grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
+        rapid_time = grades[0].rapid_time
+        print(rapid_time)
+        report_time = time_to_string_mill(
+            string_to_time_mill(report.start_time) - datetime.timedelta(seconds=float(rapid_time)))
+        print(report_time[:-4])
+        report.shoot_time = report.start_time
+        report.start_time = report_time[:-4]
+        # report.save()
+
+        # for grade in grades:
+        #     print(grade.rapid_time)
+        #     grade.rapid_time = grade.rapid_time[:-1]
+        #     grade.save()
 
 
 def update_shoot_grade():
@@ -380,10 +406,11 @@ def update_grade_heart_info():
 
 
 def update_report_shake_info():
-    shoot_reports = shoot_report.objects.filter(is_process=0).filter(user_name="B")
-    # shoot_reports = shoot_report.objects.filter(user_name="B")
+    # shoot_reports = shoot_report.objects.filter(is_process=0).filter(user_name="B")
+    shoot_reports = shoot_report.objects.filter(user_name="B")
+    print(len(shoot_reports))
     for report in shoot_reports:
-        report_time = time_to_string(string_to_time(report.shoot_time) + datetime.timedelta(seconds=2))
+        report_time = time_to_string(string_to_time(report.shoot_time[:-3]) + datetime.timedelta(seconds=2))
         shake_times = record_shake_time.objects.filter(start_time__lte=report_time).filter(end_time__gte=report_time)
         up_shake_times = record_up_shake_time.objects.filter(start_time__lte=report_time).filter(
             end_time__gte=report_time)
@@ -392,22 +419,24 @@ def update_report_shake_info():
             shake = shake_times[0]
             report.x_shake_data = shake.shake_x_data
             report.y_shake_data = shake.shake_y_data
-            report.x_shake_data_real = shake.shake_x_detail_data
-            report.y_shake_data_real = shake.shake_y_detail_data
+            report.x_shake_pos = shake.shake_x_detail_data
+            report.y_shake_pos = shake.shake_y_detail_data
             up_shake = up_shake_times[0]
             report.x_up_shake_data = up_shake.shake_x_data
             report.y_up_shake_data = up_shake.shake_y_data
-            report.x_up_shake_data_real = up_shake.shake_x_detail_data
-            report.y_up_shake_data_real = up_shake.shake_y_detail_data
-            report.is_process = 1
-            shake.is_process = 1
-            shake.save()
+            report.x_up_shake_pos = up_shake.shake_x_detail_data
+            report.y_up_shake_pos = up_shake.shake_y_detail_data
+            # report.is_process = 1
+            # shake.is_process = report.id
+            # up_shake.is_process = report.id
+            # shake.save()
+            # up_shake.save()
             report.save()
         else:
             print('not find ' + report.shoot_time)
 
 
-def update_data(user_name):
+def update_data_bak(user_name):
     shoot_reports = shoot_report.objects.filter(is_process=0).filter(user_name=user_name)
     if len(shoot_reports) > 0:
         for report in shoot_reports:
@@ -454,6 +483,197 @@ def update_data(user_name):
                 grade.save()
 
 
+def update_data(user_name):
+    shake_datas = shake_all_info.objects.filter(user_name=user_name)
+    for data in shake_datas:
+        record_time = data.record_time
+        report_times = shoot_report.objects.filter(shoot_date=data.record_date).filter(
+            start_time__lte=record_time).filter(end_time__gte=record_time)
+        if len(report_times) > 0:
+            if string_to_time(data.end_time) - string_to_time(data.start_time) <= datetime.timedelta(seconds=2):
+                print("delete " + data.record_time)
+                data.delete()
+        else:
+            print(data.record_time + "  not find data")
+            data.delete()
+
+    shoot_reports = shoot_report.objects.filter(is_process=0).filter(user_name=user_name)
+    if len(shoot_reports) > 0:
+        for report in shoot_reports:
+            report_time = time_to_string(string_to_time(report.shoot_time) + datetime.timedelta(seconds=2))
+            shake_times = shake_all_info.objects.filter(start_time__lte=report_time).filter(
+                end_time__gte=report_time)
+            if len(shake_times) == 1:
+                print('find beside:' + report.shoot_time)
+                shake = shake_times[0]
+                report.x_shake_data = shake.beside_x_data
+                report.y_shake_data = shake.beside_y_data
+                report.x_shake_pos = shake.beside_x_pos
+                report.y_shake_pos = shake.beside_y_pos
+                report.x_up_shake_data = shake.up_x_data
+                report.y_up_shake_data = shake.up_y_data
+                report.x_up_shake_pos = shake.up_x_pos
+                report.y_up_shake_pos = shake.up_y_pos
+                report.is_process = 1
+                shake.is_process = 1
+                shake.save()
+                report.save()
+            else:
+                print('not find beside ' + report.shoot_time)
+            grades = shoot_grade.objects.filter(report_id=report.id)
+            for grade in grades:
+                heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
+                if len(heart_times) >= 1:
+                    heart_time = heart_times[0]
+                    grade.heart_rate = heart_time.average_rate
+                else:
+                    print('no data')
+                    grade.heart_rate = 0
+                grade.save()
+
+
+def process_shake_data():
+    shake_datas = record_shake_time.objects.filter(user_name="B")
+    for data in shake_datas:
+        # record_time = time_to_string(string_to_time(data.record_time) + datetime.timedelta(seconds=1))
+        record_time = data.record_time
+        report_times = shoot_report.objects.filter(user_name="B").filter(start_time__lte=record_time).filter(
+            end_time__gte=record_time)
+        if len(report_times) > 0:
+            print(data.record_time)
+            print(len(report_times))
+            print(report_times[0].shoot_time)
+            print()
+            if string_to_time(data.end_time) - string_to_time(data.start_time) <= datetime.timedelta(seconds=2):
+                print("delete " + data.record_time)
+                data.delete()
+        else:
+            print(data.record_time + "  not find data")
+            data.delete()
+
+    print("up_data")
+    shake_up_datas = record_up_shake_time.objects.filter(user_name="B")
+    for data in shake_up_datas:
+        # record_time = time_to_string(string_to_time(data.record_time) + datetime.timedelta(seconds=1))
+        record_time = data.record_time
+        report_times = shoot_report.objects.filter(user_name="B").filter(start_time__lte=record_time).filter(
+            end_time__gte=record_time)
+        if len(report_times) > 0:
+            print(data.record_time)
+            print(len(report_times))
+            print(report_times[0].shoot_time)
+            print()
+            if string_to_time(data.end_time) - string_to_time(data.start_time) <= datetime.timedelta(seconds=2):
+                print("delete " + data.record_time)
+                data.delete()
+        else:
+            print(data.record_time + "  not find data")
+            data.delete()
+
+
+def process_shake_time_data():
+    shake_datas = record_shake_time.objects.filter(user_name="B")
+    for data in shake_datas:
+        up_data = record_up_shake_time.objects.filter(is_process=data.is_process)
+        up_data = up_data[0]
+        beside_shake = data.remark.strip("\n").split("\n")
+        up_shake = up_data.remark.strip("\n").split("\n")
+        beside_first = beside_shake[0].split(":")
+        up_first = up_shake[0].split(":")
+
+        if string_to_time(data.start_time) >= string_to_time(up_data.start_time):
+            if string_to_time(data.start_time) == string_to_time(up_data.start_time):
+                if int(up_first[3]) >= int(beside_first[3]):
+                    line = 0
+                    for shake in beside_shake:
+                        shake_info = shake.split(":")
+                        if shake_info[0] == up_first[0] and shake_info[1] == up_first[1] and shake_info[2] == up_first[
+                            2]:
+                            if abs(int(shake_info[3]) - int(up_first[3])) <= 10:
+                                break
+                        line += 1
+                    beside_shake = beside_shake[line:]
+                else:
+                    line = 0
+                    for shake in up_shake:
+                        shake_info = shake.split(":")
+                        if shake_info[0] == beside_first[0] and shake_info[1] == beside_first[1] and shake_info[2] == \
+                                beside_first[2]:
+                            if abs(int(shake_info[3]) - int(beside_first[3])) <= 10:
+                                break
+                        line += 1
+                    up_shake = up_shake[line:]
+            else:
+                line = 0
+                for shake in up_shake:
+                    shake_info = shake.split(":")
+                    if shake_info[0] == beside_first[0] and shake_info[1] == beside_first[1] and shake_info[2] == \
+                            beside_first[2]:
+                        if abs(int(shake_info[3]) - int(beside_first[3])) <= 10:
+                            break
+                    line += 1
+                up_shake = up_shake[line:]
+        else:
+            line = 0
+            for shake in beside_shake:
+                shake_info = shake.split(":")
+                if shake_info[0] == up_first[0] and shake_info[1] == up_first[1] and shake_info[2] == up_first[2]:
+                    if abs(int(shake_info[3]) - int(up_first[3])) <= 10:
+                        break
+                line += 1
+            beside_shake = beside_shake[line:]
+        if len(up_shake) > len(beside_shake):
+            up_shake = up_shake[:len(beside_shake)]
+        if len(up_shake) < len(beside_shake):
+            beside_shake = beside_shake[:len(up_shake)]
+        # print(len(up_shake))
+        # print(len(beside_shake))
+        print(up_shake[0])
+        print(beside_shake[0])
+        # print(up_shake[-1])
+        # print(beside_shake[-1])
+        print()
+        beside_remark = ""
+        up_remark = ""
+        shake_x_data = ""
+        shake_x_detail_data = ""
+        shake_y_data = ""
+        shake_y_detail_data = ""
+        up_shake_x_data = ""
+        up_shake_x_detail_data = ""
+        up_shake_y_data = ""
+        up_shake_y_detail_data = ""
+        for beside, up in zip(beside_shake, up_shake):
+            beside_remark += beside + "\n"
+            up_remark += up + "\n"
+            beside = beside.split(":")
+            beside = beside[-1]
+            beside = beside.split("#")
+            shake_x_detail_data += beside[0] + ","
+            shake_y_detail_data += beside[1] + ","
+            shake_x_data += beside[2] + ","
+            shake_y_data += beside[3] + ","
+            up = up.split(":")
+            up = up[-1]
+            up = up.split("#")
+            up_shake_x_detail_data += up[0] + ","
+            up_shake_y_detail_data += up[1] + ","
+            up_shake_x_data += up[2] + ","
+            up_shake_y_data += up[3] + ","
+        data.remark = beside_remark
+        data.shake_x_detail_data = shake_x_detail_data[:-1]
+        data.shake_y_detail_data = shake_y_detail_data[:-1]
+        data.shake_x_data = shake_x_data[:-1]
+        data.shake_y_data = shake_y_data[:-1]
+        data.save()
+        up_data.remark = up_remark
+        up_data.shake_x_detail_data = up_shake_x_detail_data[:-1]
+        up_data.shake_y_detail_data = up_shake_y_detail_data[:-1]
+        up_data.shake_x_data = up_shake_x_data[:-1]
+        up_data.shake_y_data = up_shake_y_data[:-1]
+        up_data.save()
+
+
 if __name__ == "__main__":
     print("shoot")
     # test()
@@ -483,3 +703,6 @@ if __name__ == "__main__":
     # update_all_info()
     # update_grade_heart_info()
     # update_report_shake_info()
+
+    # process_shake_data()
+    # process_shake_time_data()
