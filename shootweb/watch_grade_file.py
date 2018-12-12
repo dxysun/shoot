@@ -171,7 +171,7 @@ class GradeEventHandler(FileSystemEventHandler):
                                 self.num += 1
 
 
-class GradeEventTimerHandler(FileSystemEventHandler):
+class GradeEventOldTimerHandler(FileSystemEventHandler):
     def __init__(self, username):
         FileSystemEventHandler.__init__(self)
         self.grade_file = None
@@ -186,10 +186,12 @@ class GradeEventTimerHandler(FileSystemEventHandler):
         file_path = conf.get('file_setting', 'grade_file')
         line_num = conf.get('file_setting', 'line_num')
         if os.path.exists(file_path):
+            print("file exist")
             self.grade_file = open(file_path, "r", encoding='ISO-8859-15')
             self.thread = threading.Thread(target=self.listen, args=(file_path, int(line_num)))
             self.thread.start()
         else:
+            print("file not exist")
             self.thread = None
 
     def on_moved(self, event):
@@ -248,6 +250,7 @@ class GradeEventTimerHandler(FileSystemEventHandler):
                     time.sleep(4)
                     continue
                 num += 1
+                d = datetime.datetime.now().strftime("%Y-%m-%d")
                 if line.find("Shot Report") != -1:
                     line = "Shot Report"
                 elif 'Miss' in line:
@@ -318,6 +321,162 @@ class GradeEventTimerHandler(FileSystemEventHandler):
                                 self.start_time = ""
                                 self.report_data = None
                             self.num += 1
+
+
+class GradeEventTimerHandler(FileSystemEventHandler):
+    def __init__(self, username):
+        FileSystemEventHandler.__init__(self)
+        self.grade_file = None
+        self.num = 0
+        self.report_data = None
+        self.shoot_data = None
+        self.start_time = ''
+        self.end_time = ''
+        self.rapid_time = ''
+        self.username = username
+        self.is_report = False
+        self.total_grade = 0
+        file_path = conf.get('file_setting', 'grade_file')
+        line_num = conf.get('file_setting', 'line_num')
+        if os.path.exists(file_path):
+            print("file exist")
+            self.grade_file = open(file_path, "r", encoding='ISO-8859-15')
+            self.thread = threading.Thread(target=self.listen, args=(file_path, int(line_num)))
+            self.thread.start()
+        else:
+            print("file not exist")
+            self.thread = None
+
+    def on_moved(self, event):
+        if event.is_directory:
+            print("directory moved from {0} to {1}".format(event.src_path, event.dest_path))
+        else:
+            print("file moved from {0} to {1}".format(event.src_path, event.dest_path))
+
+    def on_created(self, event):
+        if event.is_directory:
+            print("directory created:{0}".format(event.src_path))
+        else:
+            print("file created:{0}".format(event.src_path))
+            if self.thread is not None:
+                stop_thread(self.thread)
+                self.grade_file.close()
+                self.thread = None
+            self.grade_file = open(event.src_path, "r", encoding='ISO-8859-15')
+            self.thread = threading.Thread(target=self.listen, args=(event.src_path,))
+            self.thread.start()
+
+    def set_username(self, username):
+        self.username = username
+
+    def on_deleted(self, event):
+        if event.is_directory:
+            print("directory deleted:{0}".format(event.src_path))
+        else:
+            print("file deleted:{0}".format(event.src_path))
+
+    def on_modified(self, event):
+        if event.is_directory:
+            print("directory modified:{0}".format(event.src_path))
+        else:
+            print("file modified:{0}".format(event.src_path))
+
+    def listen(self, path, line_num=-1):
+        print("line_num:" + str(line_num))
+        if (self.grade_file is not None) and (line_num != -1):
+            for i in range(0, line_num):
+                self.grade_file.readline()
+        if self.grade_file is None:
+            print("self.grade_file none")
+        conf.set('file_setting', 'grade_file', path)
+        if line_num == -1:
+            line_num = line_num + 1
+        l_num = line_num
+        while True:
+            if self.grade_file is None:
+                self.grade_file = open(path, "r", encoding='ISO-8859-15')
+            else:
+                line = self.grade_file.readline()
+                conf.set('file_setting', 'line_num', str(l_num))
+                conf.write(open(dirname + '/config.ini', "w"))
+                if not line:
+                    time.sleep(4)
+                    continue
+                l_num += 1
+                line = line.strip()
+                print(line)
+                d = datetime.datetime.now().strftime("%Y-%m-%d")
+                if self.is_report:
+                    if self.report_data is not None and self.num < 10:
+                        self.num += 1
+                        if 'Miss' in line:
+                            self.num += 1
+                            continue
+                        if '%' in line:
+                            data = line.split("/")
+                            y_pos = data[1].strip()
+                            data = data[0].split()
+                            # print(data)
+                            x_pos = data[-1]
+                            shoot_time = data[-2]
+                            grade = None
+                            if data[-3].isdigit():
+                                grade = data[-3]
+                            else:
+                                if data[-3] == "P":
+                                    grade = data[-4]
+                                elif "*P" in data[-3]:
+                                    grade = data[-3][:-2]
+                                elif "*" in data[-3]:
+                                    grade = data[-3][:-1]
+                            t = datetime.datetime.now().strftime("%H:")
+                            t += shoot_time[0:5]
+                            if self.num == 1:
+                                self.end_time = shoot_time
+                            if self.num == 9:
+                                self.start_time = shoot_time
+                            self.total_grade += int(grade)
+                            self.shoot_data = shoot_grade(report_id=self.report_data.id, grade_date=d,
+                                                          grade_time=t, grade_detail_time=t + shoot_time,
+                                                          grade=grade, rapid_time="", x_pos=x_pos, y_pos=y_pos,
+                                                          user_name=self.username)
+                            self.shoot_data.save()
+                        else:
+                            if self.shoot_data is not None:
+                                rapid_time = line[1:-1]
+                                s = rapid_time.find("s")
+                                self.rapid_time = rapid_time[:s]
+                                self.shoot_data.rapid_time = self.rapid_time
+                                self.shoot_data.save()
+                                self.shoot_data = None
+                        if self.num >= 10:
+                            if self.num == 10:
+                                self.report_data.remark = str(self.total_grade)
+                                t = datetime.datetime.now().strftime("%H:")
+                                self.start_time = t + self.start_time
+                                self.end_time = t + self.end_time
+                                self.report_data.shoot_time = self.start_time
+                                report_time = time_to_string_mill(
+                                    string_to_time_mill(self.start_time) - datetime.timedelta(
+                                        seconds=float(self.rapid_time)))
+                                self.report_data.start_time = report_time[:-4]
+                                self.report_data.end_time = self.end_time
+                                self.report_data.save()
+                                self.is_report = False
+                                self.end_time = ""
+                                self.rapid_time = ""
+                                self.start_time = ""
+                                self.report_data = None
+                            self.num += 1
+                else:
+                    if line.find("Shot Report") != -1:
+                        self.is_report = True
+                        print(self.username)
+                        self.report_data = shoot_report(shoot_date=d, start_time=self.start_time,
+                                                        end_time=self.end_time, user_name=self.username)
+                        self.report_data.save()
+                        self.num = 0
+                        self.total_grade = 0
 
 
 def start_watch(username):

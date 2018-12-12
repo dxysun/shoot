@@ -626,7 +626,7 @@
                 }]
             };
 
-           // var up_data_real = [[4, 0], [0, 4], [-4, 0], [0, -4], [4, 0]];
+            // var up_data_real = [[4, 0], [0, 4], [-4, 0], [0, -4], [4, 0]];
             var up_data_real = [];
             x_data =
                 "-3,-5,-6,-8,-9,-12,-13,-14,-21,-25,-27,-31,-33,-36,-38,-39,-41,-42,-43,-44,-46,-45,-45,-45,-45,-44,-43,-44,-43,-42,-41,-43,-45,-47,-48,-47,-48,-48,-48,-47,-52,-61,-64,-67,-70,-85,-100,-117,-127,-137,-154,-161,-168,-183,-188,-196,-200,-205,-208,-211,-212,-213,-214,-214,-214,-213,-212,-211,-210,-209,-208,-207,-207,-206,-206,-208,-210,-219,-228,-238,-241,-244,-249,-254,-259,-270,-274,-278,-292,-300,-306,-313,-318,-325,-329,-333,-341,-344,-346,-348,-352,-356,-357,-357,-357,-358,-359,-361,-362,-363,-365,-367,-374,-381,-386,-391,-396,-401,-409,-414,-418,-424,-430,-439,-444,-453,-457,-464,-469,-474,-480,-484,-488,-491,-494,-496,-498,-500,-501,-502,-503,-505,-506,-508,-509,-510,-515,-518,-528,-536,-541,-544,-550,-555,-561,-570,-576,-584,-590,-600,-606,-612,-619,-623,-629,-633,-638,-640,-644,-645,-647,-650,-652,-654,-655,-657,-659,-662,-670,-671,-680,-686,-690,-691,-693,-694,-697,-698,-700,-702,-704,-707,-708,-710,-712,-713,-712,-713,-712,-712,-711";
@@ -634,33 +634,33 @@
                 "-6,-13,-20,-25,-31,-35,-40,-44,-47,-50,-52,-54,-55,-56,-58,-59,-61,-63,-66,-68,-71,-73,-74,-76,-77,-78,-79,-79,-79,-79,-78,-78,-77,-75,-75,-74,-73,-74,-95,-98,-100,-105,-104,-101,-94,-87,-84,-79,-76,-73,-70,-69,-67,-67,-68,-69,-72,-74,-76,-78,-80,-81,-83,-83,-83,-83,-83,-83,-82,-82,-83,-83,-84,-84,-86,-101,-110,-110,-116,-116,-113,-109,-105,-102,-99,-96,-93,-92,-91,-89,-86,-84,-83,-82,-82,-81,-81,-83,-83,-84,-85,-86,-87,-87,-87,-87,-85,-86,-85,-85,-101,-106,-104,-108,-108,-103,-99,-94,-91,-88,-87,-85,-84,-83,-84,-83,-84,-83,-84,-84,-84,-85,-86,-86,-88,-88,-87,-86,-87,-86,-86,-86,-85,-85,-86,-86,-105,-104,-105,-107,-102,-98,-94,-88,-85,-82,-80,-80,-79,-80,-79,-79,-79,-81,-81,-82,-83,-84,-84,-84,-85,-85,-85,-85,-85,-87,-87,-86,-85,-103,-121,-139,-157,-156,-154,-152,-149,-147,-145,-144,-145,-144,-144,-143,-142,-138,-134,-126,-119,-109,-99";
             x_data = x_data.split(",");
             y_data = y_data.split(",");
-            for(i = 0;i < x_data.length;i ++){
-                up_data_real.push([x_data[i],y_data[i]]);
+            for (i = 0; i < x_data.length; i++) {
+                up_data_real.push([x_data[i], y_data[i]]);
             }
 
             var option_up_shake_real = {
-              {% comment %}  polar: {
-                    radius: 130,
-                    center: ['40%', '40%']
-                },
-                angleAxis: {
-                    type: 'value',
-                    startAngle: 0,
-                    minInterval: 30,
-                    maxInterval: 30,
-                    interval: 30,
-                    splitNumber: 12,
-                    max: 360,
-                    inverse: true
+                {% comment %}  polar: {
+                      radius: 130,
+                      center: ['40%', '40%']
+                  },
+                  angleAxis: {
+                      type: 'value',
+                      startAngle: 0,
+                      minInterval: 30,
+                      maxInterval: 30,
+                      interval: 30,
+                      splitNumber: 12,
+                      max: 360,
+                      inverse: true
 
-                },
-                radiusAxis: {
-                    //     axisAngle: 90,
-                    min: 8,
-                    max: 11,
-                    interval: 1,
-                    inverse: true
-                },{% endcomment %}
+                  },
+                  radiusAxis: {
+                      //     axisAngle: 90,
+                      min: 8,
+                      max: 11,
+                      interval: 1,
+                      inverse: true
+                  },{% endcomment %}
                 xAxis: {
                     type: 'value'
 
@@ -678,15 +678,15 @@
                     start: 0,
                     end: 100
                 },
-                 series: [{
-                     data: up_data_real,
-                     silent: true,
-                     type: 'line',
-                     smooth: true,
-                     tooltip:{
-                         show: false
-                     }
-                 }]
+                series: [{
+                    data: up_data_real,
+                    silent: true,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
+                }]
             };
 
             var option_test = {
@@ -853,8 +853,149 @@
                 }
             };
 
+            var x_pos =
+                "35.57,33.63,31.71,29.77,27.8,25.8,23.78,21.75,19.72,17.7,15.7,13.73,11.78,9.84,7.89,5.89,3.8,1.63,-0.59,-2.76,-4.76,-6.43,-7.66,-8.42,-8.75,-8.75,-8.58,-8.37,-8.21,-8.13,-8.13,-8.16,-8.19,-8.21,-8.21,-8.21,-8.24,-8.31,-8.41,-8.49,-8.49,-8.32,-7.93,-7.3,-6.45,-5.45,-4.39,-3.33,-2.3,-1.3,-0.3,0.76,1.9,3.1,4.27,5.27,5.94,6.17,5.93,5.25,4.25,3.1,1.93,0.81,-0.23,-1.23,-2.27,-3.38,-4.55,-5.7,-6.7,-7.39,-7.65,-7.44,-6.79,-5.79,-4.6,-3.34,-2.12,-1.0,0.0,0.88,1.68,2.46,3.3,4.3,5.57,7.1,8.76,10.29,11.29"
+            ;
+            var y_pos =
+                "-108.99,-106.54,-103.56,-100.08,-96.23,-92.23,-88.37,-84.88,-81.88,-79.41,-77.41,-75.74,-74.29,-72.99,-71.83,-70.83,-70.05,-69.53,-69.26,-69.17,-69.17,-69.12,-68.92,-68.48,-67.76,-66.76,-65.5,-64.0,-62.3,-60.43,-58.43,-56.34,-54.19,-52.04,-49.94,-47.94,-46.1,-44.46,-43.04,-41.84,-40.84,-39.99,-39.24,-38.5,-37.69,-36.69,-35.39,-33.76,-31.84,-29.77,-27.77,-26.11,-24.97,-24.37,-24.2,-24.2,-24.02,-23.42,-22.27,-20.61,-18.61,-16.54,-14.63,-13.01,-11.72,-10.72,-9.89,-9.12,-8.33,-7.45,-6.45,-5.32,-4.09,-2.82,-1.62,-0.62,0.03,0.28,0.2,0.0,0.0,0.64,2.38,5.71,11.12,19.12,30.14,44.13,60.48,78.03,95.03"
+            ;
+            x_pos = x_pos.split(",");
+            y_pos = y_pos.split(",");
+
+            var grade_data = [];
+            var pos_data = [];
+            var value = ["一", "二", "三", "四", "五"];
+            for (i = 0; i < x_pos.length; i++) {
+                x = parseFloat(x_pos[i]) + 6.26;
+                y = parseFloat(y_pos[i])/4 + 2.56;
+                grade_data.push([x, y]);
+                var d1 = {};
+                d1.value = value[i];
+                d1.xAxis = x_pos[i];
+                d1.yAxis = y_pos[i];
+                pos_data.push(d1);
+            }
+            var x_center = 0;
+            var y_center = 0;
+            var r_10 = 10;
+            var r_9 = 18;
+            var r_8 = 26;
+            var circle_data_10 = [];
+            var circle_data_9 = [];
+            var circle_data_8 = [];
+            var x_10_start = x_center + r_10 * Math.cos(0);
+            var y_10_start = y_center + r_10 * Math.sin(0);
+            var x_9_start = x_center + r_9 * Math.cos(0);
+            var y_9_start = y_center + r_9 * Math.sin(0);
+            var x_8_start = x_center + r_8 * Math.cos(0);
+            var y_8_start = y_center + r_8 * Math.sin(0);
+            for (var angle = 0; angle < 360; angle += 10) {
+                var x1 = x_center + r_10 * Math.cos(angle * Math.PI / 180);
+                var y1 = y_center + r_10 * Math.sin(angle * Math.PI / 180);
+                var x2 = x_center + r_9 * Math.cos(angle * Math.PI / 180);
+                var y2 = y_center + r_9 * Math.sin(angle * Math.PI / 180);
+                var x3 = x_center + r_8 * Math.cos(angle * Math.PI / 180);
+                var y3 = y_center + r_8 * Math.sin(angle * Math.PI / 180);
+                circle_data_10.push([x1, y1]);
+                circle_data_9.push([x2, y2]);
+                circle_data_8.push([x3, y3]);
+            }
+            circle_data_10.push([x_10_start, y_10_start]);
+            circle_data_9.push([x_9_start, y_9_start]);
+            circle_data_8.push([x_8_start, y_8_start]);
+            var option_grade_pos = {
+                xAxis: {
+                    type: 'value',
+                    {#min: -130,#}
+                    {#max: 130#}
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                yAxis: {
+                    type: 'value',
+                    {#min: -130,#}
+                    {#max: 130#}
+                },
+                dataZoom: {
+                    show: true,
+                    realtime: true,
+                    start: 0,
+                    end: 100
+                },
+                series: [{
+                    data: grade_data,
+                    type: 'line',
+                    smooth: true,
+                    markPoint: {
+                        itemStyle: {
+                            color: 'rgba(0,0,255,0.3)'
+                        },
+                        data: [{
+                             value: '射击点',
+                             xAxis: 6.26,
+                             yAxis: 2.56
+                         }]
+                    }
+
+                }, {
+                    data: circle_data_10,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    },
+                    markPoint: {
+                        itemStyle: {
+                            color: 'rgba(255,0,0,0.3)'
+                        },
+                        data: [{
+                             value: '10环',
+                             xAxis: 10,
+                             yAxis: 0
+                         }]
+                    }
+                }, {
+                    data: circle_data_9,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    },
+                    markPoint: {
+                        itemStyle: {
+                            color: 'rgba(255,0,0,0.3)'
+                        },
+                        data: [{
+
+                             value: '9环',
+                             xAxis: 18,
+                             yAxis: 0
+                         }]
+                    }
+                }, {
+                    data: circle_data_8,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    },
+                    markPoint: {
+                        itemStyle: {
+                            color: 'rgba(255,0,0,0.3)'
+                        },
+                        data: [{
+
+                             value: '8环',
+                             xAxis: 26,
+                             yAxis: 0
+                         }]
+                    }
+                }]
+            };
+
             // 使用刚指定的配置项和数据显示图表。
-            myChart.setOption(option_up_shake_real);
+            myChart.setOption(option_grade_pos);
 
 
         });
@@ -863,9 +1004,12 @@
 </head>
 <body>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
+         <div id="main" style="width: 100%;height:600px;"></div>
+    </div>
+    <div class="col-md-6">
 
-        <div id="main" style="width: 100%;height:600px;"></div>
+
     </div>
 </div>
 

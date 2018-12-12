@@ -1,9 +1,6 @@
 from django.shortcuts import render
 from shootweb.models import *
 from django.http.response import JsonResponse
-import time
-import datetime
-import math
 from . import shootlib
 from . import watch_grade_file
 from django.shortcuts import redirect
@@ -177,7 +174,7 @@ def sport_game_analyse(request):
             else:
                 heart = 0
             hearts += str(heart) + ","
-        average_grade = total_grade / num
+        average_grade = round(total_grade / num, 2)
     grades = grades[:-1]
     r_pos = r_pos[:-1]
     p_pos = p_pos[:-1]
@@ -209,7 +206,9 @@ def sport_game_analyse_id(request):
     x_pos = ""
     y_pos = ""
     shoot_grades = shoot_grade.objects.filter(report_id=report_id).order_by('grade_detail_time')
+    rapid_data = []
     for grade in shoot_grades:
+        rapid_data.append(grade.rapid_time)
         grades += grade.grade + ","
         x_pos += grade.x_pos + ","
         y_pos += grade.y_pos + ","
@@ -235,57 +234,62 @@ def sport_game_analyse_id(request):
     y_up_data_plus = ""
     y_up_data_ori = ""
 
-    y_average = 0
-    x_average = 0
+    y_shoot_pos = ""
+    x_shoot_pos = ""
+
+    x_pos_str = ""
+    y_pos_str = ""
+
     x_shake_data = report.x_shake_data
     y_shake_data = report.y_shake_data
     x_up_shake_data = report.x_up_shake_data
     y_up_shake_data = report.y_up_shake_data
     if x_shake_data is not None and y_shake_data is not None:
+        is_insert = False
         x_data = x_shake_data.split(",")
         y_data = y_shake_data.split(",")
-        x_sum = 0
-        x_plus_num = 0
-        num = 0
-        for i in range(0, len(x_data)):
-            x_data_ori += x_data[i] + ","
-            data = float(x_data[i])
-            if data > 0:
-                x_plus_num += data
-                num += 1
-            x_sum += data
-            x_data_plus += str(x_sum) + ","
-        x_average = x_plus_num / num
-        # print("average:" + str(x_average))
-        y_sum = 0
-        num = 0
-        y_plus_num = 0
-        for i in range(0, len(y_data)):
-            y_data_ori += y_data[i] + ","
-            data = float(y_data[i]) * -1
-            if data > 0:
-                y_plus_num += data
-                num += 1
-            y_sum += data
-            y_data_plus += str(y_sum) + ","
-        y_average = y_plus_num / num
-        print(y_average)
-
         x_up_data = x_up_shake_data.split(",")
         y_up_data = y_up_shake_data.split(",")
-        x_up_sum = 0
-        for i in range(0, len(x_up_data)):
-            x_up_data_ori += x_up_data[i] + ","
-            data = float(x_up_data[i])
-            x_up_sum += data
-            x_up_data_plus += str(x_up_sum) + ","
 
-        y_up_sum = 0
-        for i in range(0, len(y_up_data)):
-            y_up_data_ori += y_up_data[i] + ","
-            data = float(y_up_data[i]) * -1
-            y_up_sum += data
-            y_up_data_plus += str(y_up_sum) + ","
+        x_data = shootlib.get_int_data(x_data)
+        y_data = shootlib.get_int_data(y_data, is_negative=True)
+        x_up_data = shootlib.get_int_data(x_up_data)
+        y_up_data = shootlib.get_int_data(y_up_data, is_negative=True)
+        # print(y_data)
+
+        y_data, num = shootlib.cut_shake_data(y_data)
+        x_data = x_data[num:]
+        x_up_data = x_up_data[num:]
+        y_up_data = y_up_data[num:]
+        nums = shootlib.get_shoot_point(y_data, is_insert=is_insert)
+        if is_insert:
+            x_data, y_data = shootlib.insert(x_data, y_data)
+            x_up_data, y_up_data = shootlib.insert(x_up_data, y_up_data)
+
+        x_data_ori, x_data_plus = shootlib.shake_data_process(x_data)
+        y_data_ori, y_data_plus, y_shoot_pos, y_pos_array = shootlib.shake_data_process(y_data, nums,
+                                                                                        is_insert=is_insert)
+
+        x_up_data_ori, x_up_data_plus, x_shoot_pos, x_pos_array = shootlib.shake_data_process(x_up_data, nums,
+                                                                                              is_insert=is_insert)
+        y_up_data_ori, y_up_data_plus = shootlib.shake_data_process(y_up_data)
+        # print(len(x_pos_array))
+        # print(x_pos_array[0])
+        for x_pos_a in x_pos_array:
+            # print(len(x_pos_a))
+            for x_d in x_pos_a:
+                # d1 = x_d
+                d1 = round(x_d - x_pos_a[len(x_pos_a) - 1], 2)
+                x_pos_str += str(d1) + ","
+            x_pos_str = x_pos_str[:-1] + "#"
+        for y_pos_a in y_pos_array:
+            # print(len(y_pos_a))
+            for y_d in y_pos_a:
+                # d1 = y_d
+                d1 = round(y_d - y_pos_a[len(y_pos_a) - 1], 2)
+                y_pos_str += str(d1) + ","
+            y_pos_str = y_pos_str[:-1] + "#"
+        # print(x_pos_str)
     return render(request, 'sport_game_analyse_id.html', {
         'shoot_reports': report,
         'grades': grades,
@@ -296,9 +300,7 @@ def sport_game_analyse_id(request):
         'y_pos': y_pos[:-1],
         'shoot_info': shoot_grades,
         'x_data': x_data_plus[:-1],
-        'x_average': x_average,
         'y_data': y_data_plus[:-1],
-        'y_average': y_average,
         'x_data_ori': x_data_ori[:-1],
         'y_data_ori': y_data_ori[:-1],
         'x_data_pos': report.x_shake_pos,
@@ -309,6 +311,10 @@ def sport_game_analyse_id(request):
         'y_up_data_ori': y_up_data_ori[:-1],
         'x_up_data_pos': report.x_up_shake_pos,
         'y_up_data_pos': report.y_up_shake_pos,
+        'x_shoot_pos': x_shoot_pos,
+        'y_shoot_pos': y_shoot_pos,
+        'x_pos_str': x_pos_str,
+        'y_pos_str': y_pos_str,
     })
 
 
@@ -321,7 +327,8 @@ def sport_game_history(request):
         date = None
         if report is not None:
             date = report.shoot_date
-            shoot_reports = shoot_report.objects.filter(shoot_date=report.shoot_date).filter(user_name=user_name)
+            shoot_reports = shoot_report.objects.filter(shoot_date=report.shoot_date).filter(
+                user_name=user_name).order_by('shoot_time')
         return render(request, 'sport_game_history.html', {
             'shoot_reports': shoot_reports,
             'date1': date,
