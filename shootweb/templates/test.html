@@ -689,169 +689,6 @@
                 }]
             };
 
-            var option_test = {
-                series: [
-                    {
-                        name: '测试曲线一',
-                        data: [[
-                            970.2634887695312,
-                            916.5289306640625
-                        ],
-                            [
-                                955.5230102539062,
-                                1085.013427734375
-                            ],
-                            [
-                                911.7494506835938,
-                                1248.3785400390625
-                            ],
-                            [
-                                840.2728271484375,
-                                1401.66064453125
-                            ],
-                            [
-                                743.2649536132812,
-                                1540.2022705078125
-                            ],
-                            [
-                                623.6734008789062,
-                                1659.7939453125
-                            ],
-                            [
-                                485.1317138671875,
-                                1756.8017578125
-                            ],
-                            [
-                                331.84967041015625,
-                                1828.2783203125
-                            ],
-                            [
-                                168.48452758789062,
-                                1872.052001953125
-                            ],
-                            [
-                                -4.2411564209032804e-05,
-                                1886.79248046875
-                            ],
-                            [
-                                -168.4844970703125,
-                                1872.052001953125
-                            ],
-                            [
-                                -331.8496398925781,
-                                1828.2783203125
-                            ],
-                            [
-                                -485.1318054199219,
-                                1756.8017578125
-                            ],
-                            [
-                                -623.6734008789062,
-                                1659.7939453125
-                            ],
-                            [
-                                -743.2649536132812,
-                                1540.202392578125
-                            ],
-                            [
-                                -840.2728271484375,
-                                1401.6607666015625
-                            ],
-                            [
-                                -911.7494506835938,
-                                1248.378662109375
-                            ],
-                            [
-                                -955.5230102539062,
-                                1085.0135498046875
-                            ],
-                            [
-                                -970.2634887695312,
-                                916.5288696289062
-                            ],
-                            [
-                                -955.5230102539062,
-                                748.04443359375
-                            ],
-                            [
-                                -911.7494506835938,
-                                584.6792602539062
-                            ],
-                            [
-                                -840.2728271484375,
-                                431.397216796875
-                            ],
-                            [
-                                -743.2650146484375,
-                                292.8555908203125
-                            ],
-                            [
-                                -623.6732788085938,
-                                173.26385498046875
-                            ],
-                            [
-                                -485.13165283203125,
-                                76.25604248046875
-                            ],
-                            [
-                                -331.8495788574219,
-                                4.7794189453125
-                            ],
-                            [
-                                -168.4844512939453,
-                                -38.994140625
-                            ],
-                            [
-                                1.1570276001293678e-05,
-                                -53.73455810546875
-                            ],
-                            [
-                                168.4844512939453,
-                                -38.99407958984375
-                            ],
-                            [
-                                331.849609375,
-                                4.77947998046875
-                            ],
-                            [
-                                485.13165283203125,
-                                76.25604248046875
-                            ],
-                            [
-                                623.6732788085938,
-                                173.263916015625
-                            ],
-                            [
-                                743.2648315429688,
-                                292.85546875
-                            ],
-                            [
-                                840.2727661132812,
-                                431.3970031738281
-                            ],
-                            [
-                                911.7493896484375,
-                                584.6790771484375
-                            ],
-                            [
-                                955.5230712890625,
-                                748.044677734375
-                            ],
-                            [
-                                970.2634887695312,
-                                916.5291137695312
-                            ]],
-                        // sampling: 'average', //以优化模式显示
-                        type: 'line'
-                    }
-                ],
-                xAxis: {
-                    type: 'value'
-                },
-                yAxis: {
-                    type: 'value'
-                }
-            };
 
             var x_pos =
                 "35.57,33.63,31.71,29.77,27.8,25.8,23.78,21.75,19.72,17.7,15.7,13.73,11.78,9.84,7.89,5.89,3.8,1.63,-0.59,-2.76,-4.76,-6.43,-7.66,-8.42,-8.75,-8.75,-8.58,-8.37,-8.21,-8.13,-8.13,-8.16,-8.19,-8.21,-8.21,-8.21,-8.24,-8.31,-8.41,-8.49,-8.49,-8.32,-7.93,-7.3,-6.45,-5.45,-4.39,-3.33,-2.3,-1.3,-0.3,0.76,1.9,3.1,4.27,5.27,5.94,6.17,5.93,5.25,4.25,3.1,1.93,0.81,-0.23,-1.23,-2.27,-3.38,-4.55,-5.7,-6.7,-7.39,-7.65,-7.44,-6.79,-5.79,-4.6,-3.34,-2.12,-1.0,0.0,0.88,1.68,2.46,3.3,4.3,5.57,7.1,8.76,10.29,11.29"
@@ -867,7 +704,7 @@
             var value = ["一", "二", "三", "四", "五"];
             for (i = 0; i < x_pos.length; i++) {
                 x = parseFloat(x_pos[i]) + 6.26;
-                y = parseFloat(y_pos[i])/4 + 2.56;
+                y = parseFloat(y_pos[i]) / 4 + 2.56;
                 grade_data.push([x, y]);
                 var d1 = {};
                 d1.value = value[i];
@@ -932,10 +769,10 @@
                             color: 'rgba(0,0,255,0.3)'
                         },
                         data: [{
-                             value: '射击点',
-                             xAxis: 6.26,
-                             yAxis: 2.56
-                         }]
+                            value: '射击点',
+                            xAxis: 6.26,
+                            yAxis: 2.56
+                        }]
                     }
 
                 }, {
@@ -950,10 +787,10 @@
                             color: 'rgba(255,0,0,0.3)'
                         },
                         data: [{
-                             value: '10环',
-                             xAxis: 10,
-                             yAxis: 0
-                         }]
+                            value: '10环',
+                            xAxis: 10,
+                            yAxis: 0
+                        }]
                     }
                 }, {
                     data: circle_data_9,
@@ -968,10 +805,10 @@
                         },
                         data: [{
 
-                             value: '9环',
-                             xAxis: 18,
-                             yAxis: 0
-                         }]
+                            value: '9环',
+                            xAxis: 18,
+                            yAxis: 0
+                        }]
                     }
                 }, {
                     data: circle_data_8,
@@ -986,16 +823,53 @@
                         },
                         data: [{
 
-                             value: '8环',
-                             xAxis: 26,
-                             yAxis: 0
-                         }]
+                            value: '8环',
+                            xAxis: 26,
+                            yAxis: 0
+                        }]
                     }
                 }]
             };
+            var shoot_series = [];
+            var x_centers = [0, 300, 600, 900, 1200, 1500];
+            var y_centers = [0, 0, 0, 0, 0, 0];
+            var rs = [50, 90, 130];
+            for (i = 0; i < 5; i++) {
 
+                for (var j = 0; j < 3; j++) {
+                    var circle_data = [];
+                    x_center = x_centers[i];
+                    y_center = y_centers[i];
+                    var x_start = x_center + rs[j] * Math.cos(0);
+                    var y_start = y_center + rs[j] * Math.sin(0);
+
+                    for (angle = 0; angle < 360; angle += 10) {
+                        x1 = x_center + rs[j] * Math.cos(angle * Math.PI / 180);
+                        y1 = y_center + rs[j] * Math.sin(angle * Math.PI / 180);
+                        circle_data.push([x1, y1]);
+                    }
+                    circle_data.push([x_start, y_start]);
+                    var temp = {
+
+                        data: circle_data,
+                        type: 'line',
+                        smooth: true
+                    };
+                    shoot_series.push(temp);
+                }
+            }
+
+            var option_test = {
+                series: shoot_series,
+                xAxis: {
+                    type: 'value'
+                },
+                yAxis: {
+                    type: 'value'
+                }
+            };
             // 使用刚指定的配置项和数据显示图表。
-            myChart.setOption(option_grade_pos);
+            myChart.setOption(option_test);
 
 
         });
@@ -1004,12 +878,158 @@
 </head>
 <body>
 <div class="row">
-    <div class="col-md-6">
-         <div id="main" style="width: 100%;height:600px;"></div>
+    <div class="col-md-12">
+        <div id="main" style="width: 100%;height:300%;"></div>
     </div>
-    <div class="col-md-6">
+    {% comment %}  <div class="col-md-6">
 
 
+    </div>{% endcomment %}
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Collapsible Accordion Panel Group
+            </div>
+            <div class="panel-body">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                   class="collapsed">Collapsible Group Item #1</a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse" style="height: 0px;">
+                            <div class="panel-body">
+
+                                <div class="table-responsive">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Username</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Larry</td>
+                                                    <td>the Bird</td>
+                                                    <td>@twitter</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Collapsible Group
+                                    Item #2</a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse in" style="height: auto;">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Username</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Larry</td>
+                                                    <td>the Bird</td>
+                                                    <td>@twitter</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+                                   class="collapsed">Collapsible Group Item #3</a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Username</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Larry</td>
+                                                    <td>the Bird</td>
+                                                    <td>@twitter</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

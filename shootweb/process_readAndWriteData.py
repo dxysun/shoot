@@ -535,13 +535,15 @@ def write_up_camera_to_sql_third(file_path):
         record_shake.save()
 
 
-def write_all_shake_to_sql(file_path, user_name):
+def write_all_shake_to_sql(file_path):
     files = os.listdir(file_path)
     for camera_file in files:
         camera_file_path = file_path + "/" + camera_file
         print(camera_file)
         # print(camera_file[2:12])
         # print(camera_file[13:21].replace("-",":"))
+        i = camera_file.find("-")
+        user_name = camera_file[:i]
         shake_date = camera_file[2:12]
         shake_time = camera_file[13:21].replace("-", ":")
         record_all_shake = shake_all_info(record_date=shake_date, record_time=shake_time,
@@ -596,8 +598,8 @@ def write_all_shake_to_sql(file_path, user_name):
                 if heart_rate.get(h_time) is None:
                     heart_rate[h_time] = []
                 heart_rate[h_time].append(d5[9])
-                all_info += h_time + ":" + d5[0] + "#" + d5[1] + "#" + d5[2] + d5[3] + "#" + d5[4] + d5[
-                    5] + "#" + d5[6] + d5[7] + "#" + d5[8] + "#" + d5[9] + "\n"
+                all_info += h_time + ":" + d5[0] + "#" + d5[1] + "#" + d5[2] + "#" + d5[3] + "#" + d5[4] + "#" + d5[
+                    5] + "#" + d5[6] + "#" + d5[7] + "#" + d5[8] + "#" + d5[9] + "\n"
         record_all_shake.beside_x_data = x_beside_data[:-1]
         record_all_shake.beside_y_data = y_beside_data[:-1]
         record_all_shake.beside_x_pos = x_beside_pos[:-1]
@@ -607,6 +609,7 @@ def write_all_shake_to_sql(file_path, user_name):
         record_all_shake.up_x_pos = x_up_pos[:-1]
         record_all_shake.up_y_pos = y_up_pos[:-1]
         record_all_shake.end_time = end_time
+        record_all_shake.remark = all_info
         record_all_shake.save()
         end_time = ""
         for key, value in heart_rate.items():
@@ -788,7 +791,7 @@ if __name__ == "__main__":
 
     # read_context_from_file('D:\workSpace\PythonWorkspace\shoot\shootweb\data\second\origin\FILE_shoot_2_2018_0714.dat',
     #                        'D:/workSpace/PythonWorkspace/shoot/shootweb/data/second/after_process/shoot_2_2018_0714_after_process.dat')
-    write_shoot_grade_to_mysql('D:/code/shoot/grade/FILE_shoot_2018_1212_1.dat',"C")
+    # write_shoot_grade_to_mysql('D:/code/shoot/grade/FILE_shoot_2018_1212_1.dat',"C")
 
     # read_heart_from_file('D:/workSpace/PythonWorkspace/shoot/shootweb/data/first/origin/heart',
     #                      'D:/workSpace/PythonWorkspace/shoot/shootweb/data/first/second_process/heart/')
@@ -807,7 +810,7 @@ if __name__ == "__main__":
     # write_heart_to_sql_third("D:\myFiles\dataset\shoot\数据1206\数据上午\heart")
     # write_beside_camera_to_sql_third("D:\myFiles\dataset\shoot\数据1206\数据\Hand")
     # write_up_camera_to_sql_third("D:/myFiles/dataset/shoot/数据1206/数据/UpHand")
-    # write_all_shake_to_sql("D:/myFiles/dataset/shoot/数据1212", "C")
+    write_all_shake_to_sql("D:/myFiles/dataset/shoot/数据1213")
 
     # a = "2018-11- 6-10:42:26:231		0.00	1.00";
     # print(find_n_sub_str(a, "-", 2, 0))

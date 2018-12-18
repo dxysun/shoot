@@ -158,17 +158,19 @@ def update_data_bak(user_name):
 
 
 def update_data(user_name):
-    shake_datas = shake_all_info.objects.filter(user_name=user_name)
+    shake_datas = shake_all_info.objects.filter(is_process=0).filter(user_name=user_name)
     for data in shake_datas:
         record_time = data.record_time
         report_times = shoot_report.objects.filter(shoot_date=data.record_date).filter(
             start_time__lte=record_time).filter(end_time__gte=record_time)
         if len(report_times) > 0:
+            # print(len(report_times))
+            print(data.record_time + " shake  find report data " + report_times[0].start_time)
             if string_to_time(data.end_time) - string_to_time(data.start_time) <= datetime.timedelta(seconds=2):
                 print("delete " + data.record_time)
                 data.delete()
         else:
-            print(data.record_time + "  not find data")
+            print(data.record_time + " shake  not find report data")
             data.delete()
 
     shoot_reports = shoot_report.objects.filter(is_process=0).filter(user_name=user_name)
@@ -178,7 +180,7 @@ def update_data(user_name):
             shake_times = shake_all_info.objects.filter(start_time__lte=report_time).filter(
                 end_time__gte=report_time)
             if len(shake_times) == 1:
-                print('find beside:' + report.shoot_time)
+                print('find shake:' + report.shoot_time)
                 shake = shake_times[0]
                 report.x_shake_data = shake.beside_x_data
                 report.y_shake_data = shake.beside_y_data
@@ -193,15 +195,16 @@ def update_data(user_name):
                 shake.save()
                 report.save()
             else:
-                print('not find beside ' + report.shoot_time)
+                print('not find shake ' + report.shoot_time)
             grades = shoot_grade.objects.filter(report_id=report.id)
             for grade in grades:
                 heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
                 if len(heart_times) >= 1:
+                    print('find heart data')
                     heart_time = heart_times[0]
                     grade.heart_rate = heart_time.average_rate
                 else:
-                    print('no data')
+                    print('no heart data')
                     grade.heart_rate = 0
                 grade.save()
 
@@ -231,34 +234,33 @@ def get_int_data(list_data, is_negative=False):
     return temp_data
 
 
-def shake_data_process(data_shake, nums=None, is_insert=False):
+def shake_data_process(data_shake, nums=None, is_insert=False, is_negative=False):
     plus_num = 0
-    data_ori = ""
-    data_plus = ""
     data_plus_array = []
+    for i in range(0, len(data_shake)):
+        data = float(data_shake[i])
+        if is_negative:
+            data *= -1
+        plus_num += data
+        plus_num = round(plus_num, 2)
+        data_plus_array.append(plus_num)
+    return data_plus_array
+
+
+def shake_get_plus_shoot_point(data_plus_array, nums, is_insert=False):
     pos_array = []
-    pos = ""
+    pos = []
     j = 0
     n = 20
     if is_insert:
         n = 80
-    for i in range(0, len(data_shake)):
-        data_ori += str(data_shake[i]) + ","
-        data = float(data_shake[i])
-        plus_num += data
-        plus_num = round(plus_num, 2)
-        data_plus_array.append(plus_num)
-        data_plus += str(plus_num) + ","
-    if nums is None:
-        return data_ori, data_plus
-    else:
-        for i in range(0, len(data_plus_array)):
-            plus_num = data_plus_array[i]
-            if j < len(nums) and i == nums[j]:
-                pos_array.append(data_plus_array[i - n:i])
-                pos += str(plus_num) + ","
-                j += 1
-        return data_ori, data_plus, pos[:-1], pos_array
+    for i in range(0, len(data_plus_array)):
+        plus_num = data_plus_array[i]
+        if j < len(nums) and i == nums[j]:
+            pos_array.append(data_plus_array[i - n:i])
+            pos.append(plus_num)
+            j += 1
+    return pos, pos_array
 
 
 def cut_shake_data(y_shake_data):
@@ -288,39 +290,19 @@ def process_grade_rapid_time(rapid_data):
     return data
 
 
-# def get_shoot_point(beside_y_data, up_x_data, rapid_data):
-#     shoot_info = {}
-#     r = 0
-#     frames = 35
-#     shoot_name = ['one', 'two', 'three', 'four', 'five']
-#
-#     for i in range(0, len(beside_y_data)):
-#         x = up_x_data[i]
-#         y = beside_y_data[i]
-#         if y > 10:
-#             if r == 0:
-#                 shoot_info[shoot_name[r]] = []
-#                 shoot_info[shoot_name[r]].append(up_x_data[:i])
-#                 shoot_info[shoot_name[r]].append(beside_y_data[:i])
-#             else:
-#                 t = frames * rapid_data[r] - 5
-#                 shoot_info[shoot_name[r]] = []
-#                 shoot_info[shoot_name[r]].append(up_x_data[i - t:i])
-#                 shoot_info[shoot_name[r]].append(beside_y_data[i - t:i])
-#             r += 1
-def get_shoot_point(beside_y_data, is_insert=False):
+def get_shoot_point(beside_y_data, is_insert=False, limit=10):
     nums = []
     is_smooth = False
     count_smooth = 0
     for i in range(0, len(beside_y_data)):
         y = beside_y_data[i]
-        if y > 10:
+        if y > limit:
             count_smooth = 0
         else:
             count_smooth += 1
-            if count_smooth > 10:
+            if count_smooth >= 8:
                 is_smooth = True
-        if is_smooth and y >= 10:
+        if is_smooth and y >= limit:
             if beside_y_data[i - 1] > 5:
                 if is_insert:
                     nums.append((i - 2) * 5)
@@ -333,6 +315,8 @@ def get_shoot_point(beside_y_data, is_insert=False):
                     nums.append(i - 1)
             count_smooth = 0
             is_smooth = False
+        if len(nums) == 5:
+            break
     return nums
 
 
@@ -358,21 +342,108 @@ def get_shoot_info(y_sum_data):
         start += 1
 
 
+def process_shake_pos_info(beside_x_pos, beside_y_pos, up_x_pos, up_y_pos):
+    beside_x_pos = beside_x_pos.split(",")
+    beside_y_pos = beside_y_pos.split(",")
+    up_x_pos = up_x_pos.split(",")
+    up_y_pos = up_y_pos.split(",")
+    beside_x_data = "0,"
+    beside_y_data = "0,"
+    up_x_data = "0,"
+    up_y_data = "0,"
+    for i in range(1, len(beside_x_pos)):
+        d_x = int(beside_x_pos[i]) - int(beside_x_pos[i - 1])
+        d_y = int(beside_y_pos[i]) - int(beside_y_pos[i - 1])
+        beside_x_data += str(d_x) + ","
+        beside_y_data += str(d_y) + ","
+    beside_x_data = beside_x_data[:-1]
+    beside_y_data = beside_y_data[:-1]
+
+    for i in range(1, len(up_x_pos)):
+        d_x = int(up_x_pos[i]) - int(up_x_pos[i - 1])
+        d_y = int(up_y_pos[i]) - int(up_y_pos[i - 1])
+        up_x_data += str(d_x) + ","
+        up_y_data += str(d_y) + ","
+    up_x_data = up_x_data[:-1]
+    up_y_data = up_y_data[:-1]
+    return beside_x_data, beside_y_data, up_x_data, up_y_data
+
+
+def array_to_str(data):
+    data_str = ""
+    for i in range(0, len(data)):
+        data_str += str(data[i]) + ","
+    return data_str[:-1]
+
+
+def get_up_shoot_limit(x_up_shoot_pos, x_pos, grades):
+    up_x_10_pos = []
+    if len(x_up_shoot_pos) == 5:
+        if x_pos[0] > 0:
+            left = 50 - x_pos[0]
+        else:
+            left = 50 + x_pos[0]
+        if x_pos[4] > 0:
+            right = 50 + x_pos[4]
+        else:
+            right = 50 - x_pos[4]
+        pos_cha = 3100 - (left + right)
+        up_x_cha = (x_up_shoot_pos[4] - x_up_shoot_pos[0]) * -1
+        up_shake_rate = pos_cha / up_x_cha
+        # print(up_shake_rate)
+        for i in range(0, 5):
+            if grades[i] == 10:
+                if x_pos[i] > 0:
+                    cha10_r = 50 - abs(x_pos[i])
+                    cha10_r = cha10_r / up_shake_rate
+                    cha10_r = x_up_shoot_pos[i] + cha10_r
+                    cha10_l = 50 + abs(x_pos[i])
+                    cha10_l = cha10_l / up_shake_rate
+                    cha10_l = x_up_shoot_pos[i] - cha10_l
+                else:
+                    cha10_r = 50 + abs(x_pos[i])
+                    cha10_r = cha10_r / up_shake_rate
+                    cha10_r = x_up_shoot_pos[i] + cha10_r
+                    cha10_l = 50 - abs(x_pos[i])
+                    cha10_l = cha10_l / up_shake_rate
+                    cha10_l = x_up_shoot_pos[i] - cha10_l
+                up_x_10_pos.append(round(cha10_r, 2))
+                up_x_10_pos.append(round(cha10_l, 2))
+            if grades[i] == 9 or grades[i] == 8:
+                if x_pos[i] > 0:
+                    cha10_r = abs(x_pos[i]) - 50
+                    cha10_r = cha10_r / up_shake_rate
+                    cha10_r = x_up_shoot_pos[i] - cha10_r
+                    cha10_l = abs(x_pos[i]) + 50
+                    cha10_l = cha10_l / up_shake_rate
+                    cha10_l = x_up_shoot_pos[i] - cha10_l
+                else:
+                    cha10_r = abs(x_pos[i]) + 50
+                    cha10_r = cha10_r / up_shake_rate
+                    cha10_r = x_up_shoot_pos[i] + cha10_r
+                    cha10_l = abs(x_pos[i]) - 50
+                    cha10_l = cha10_l / up_shake_rate
+                    cha10_l = x_up_shoot_pos[i] + cha10_l
+                up_x_10_pos.append(round(cha10_r, 2))
+                up_x_10_pos.append(round(cha10_l, 2))
+    return up_x_10_pos
+
+
+def split_report(reports):
+    all_report = []
+    temp_report = []
+    temp_report.append(reports[0])
+    for i in range(1, len(reports)):
+        r1_time = string_to_time_mill(reports[i - 1].start_time)
+        r2_time = string_to_time_mill(reports[i].start_time)
+        if r2_time - r1_time > datetime.timedelta(minutes=5):
+            all_report.append(temp_report)
+            temp_report = []
+        else:
+            temp_report.append(reports[i])
+    return all_report
+
+
 if __name__ == "__main__":
     print("shoot")
-    # print(3 ** 2)
-    y_data = [-17.0, 21.0, 52.0, 75.0, 95.0, 110.0, 125.0, 136.0, 144.0, 152.0, 160.0, 168.0, 172.0, 175.0, 179.0,
-              182.0, 187.0, 189.0, 193.0, 197.0, 201.0, 205.0, 207.0, 209.0, 213.0, 215.0, 216.0, 216.0, 217.0, 219.0,
-              221.0, 222.0, 223.0, 225.0, 225.0, 227.0, 228.0, 229.0, 230.0, 230.0, 238.0, 255.0, 254.0, 259.0, 264.0,
-              260.0, 254.0, 248.0, 246.0, 243.0, 241.0, 240.0, 239.0, 237.0, 235.0, 232.0, 230.0, 228.0, 227.0, 227.0,
-              228.0, 228.0, 228.0, 228.0, 228.0, 229.0, 229.0, 229.0, 229.0, 229.0, 229.0, 229.0, 230.0, 231.0, 234.0,
-              234.0, 236.0, 261.0, 263.0, 265.0, 268.0, 271.0, 260.0, 253.0, 248.0, 244.0, 242.0, 242.0, 242.0, 243.0,
-              245.0, 245.0, 245.0, 247.0, 248.0, 248.0, 247.0, 247.0, 246.0, 246.0, 246.0, 245.0, 244.0, 244.0, 244.0,
-              243.0, 242.0, 243.0, 243.0, 244.0, 244.0, 247.0, 266.0, 265.0, 269.0, 268.0, 265.0, 260.0, 256.0, 253.0,
-              252.0, 250.0, 249.0, 248.0, 248.0, 248.0, 247.0, 245.0, 244.0, 242.0, 242.0, 241.0, 241.0, 240.0, 240.0,
-              241.0, 240.0, 241.0, 242.0, 243.0, 243.0, 243.0, 244.0, 245.0, 246.0, 268.0, 269.0, 275.0, 277.0, 275.0,
-              269.0, 264.0, 258.0, 254.0, 253.0, 251.0, 249.0, 248.0, 247.0, 246.0, 242.0, 241.0, 240.0, 240.0, 240.0,
-              240.0, 240.0, 240.0, 240.0, 241.0, 242.0, 241.0, 241.0, 241.0, 242.0, 242.0, 242.0, 243.0, 244.0, 245.0,
-              267.0, 267.0, 272.0, 275.0, 276.0, 275.0, 275.0, 275.0, 272.0, 269.0, 266.0, 266.0, 266.0, 265.0, 264.0,
-              262.0, 260.0, 258.0, 248.0, 240.0, 226.0, 212.0, 198.0, 184.0, 170.0, 156.0, 142.0, 128.0, 114.0, 100.0]
-    get_shoot_info(y_data)
+    update_data("A")

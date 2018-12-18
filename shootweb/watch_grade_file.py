@@ -429,17 +429,18 @@ class GradeEventTimerHandler(FileSystemEventHandler):
                                     grade = data[-3][:-2]
                                 elif "*" in data[-3]:
                                     grade = data[-3][:-1]
-                            t = datetime.datetime.now().strftime("%H:")
-                            t += shoot_time[0:5]
+                            t1 = datetime.datetime.now().strftime("%H:")
+                            t = t1 + shoot_time[0:5]
                             if self.num == 1:
                                 self.end_time = shoot_time
                             if self.num == 9:
                                 self.start_time = shoot_time
                             self.total_grade += int(grade)
                             self.shoot_data = shoot_grade(report_id=self.report_data.id, grade_date=d,
-                                                          grade_time=t, grade_detail_time=t + shoot_time,
+                                                          grade_time=t, grade_detail_time=t1 + shoot_time,
                                                           grade=grade, rapid_time="", x_pos=x_pos, y_pos=y_pos,
                                                           user_name=self.username)
+                            print("save shoot_data")
                             self.shoot_data.save()
                         else:
                             if self.shoot_data is not None:
@@ -449,25 +450,26 @@ class GradeEventTimerHandler(FileSystemEventHandler):
                                 self.shoot_data.rapid_time = self.rapid_time
                                 self.shoot_data.save()
                                 self.shoot_data = None
-                        if self.num >= 10:
-                            if self.num == 10:
-                                self.report_data.remark = str(self.total_grade)
-                                t = datetime.datetime.now().strftime("%H:")
-                                self.start_time = t + self.start_time
-                                self.end_time = t + self.end_time
-                                self.report_data.shoot_time = self.start_time
-                                report_time = time_to_string_mill(
-                                    string_to_time_mill(self.start_time) - datetime.timedelta(
-                                        seconds=float(self.rapid_time)))
-                                self.report_data.start_time = report_time[:-4]
-                                self.report_data.end_time = self.end_time
-                                self.report_data.save()
-                                self.is_report = False
-                                self.end_time = ""
-                                self.rapid_time = ""
-                                self.start_time = ""
-                                self.report_data = None
-                            self.num += 1
+                    if self.num >= 10:
+                        if self.num == 10:
+                            self.report_data.total_grade = self.total_grade
+                            t = datetime.datetime.now().strftime("%H:")
+                            self.start_time = t + self.start_time
+                            self.end_time = t + self.end_time
+                            self.report_data.shoot_time = self.start_time
+                            report_time = time_to_string_mill(
+                                string_to_time_mill(self.start_time) - datetime.timedelta(
+                                    seconds=float(self.rapid_time)))
+                            self.report_data.start_time = report_time[:-4]
+                            self.report_data.end_time = self.end_time
+                            print("save report_data")
+                            self.report_data.save()
+                            self.is_report = False
+                            self.end_time = ""
+                            self.rapid_time = ""
+                            self.start_time = ""
+                            self.report_data = None
+                        self.num += 1
                 else:
                     if line.find("Shot Report") != -1:
                         self.is_report = True
@@ -475,6 +477,7 @@ class GradeEventTimerHandler(FileSystemEventHandler):
                         self.report_data = shoot_report(shoot_date=d, start_time=self.start_time,
                                                         end_time=self.end_time, user_name=self.username)
                         self.report_data.save()
+                        print("save first report_data")
                         self.num = 0
                         self.total_grade = 0
 
