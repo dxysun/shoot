@@ -810,7 +810,7 @@ if __name__ == "__main__":
     # write_heart_to_sql_third("D:\myFiles\dataset\shoot\数据1206\数据上午\heart")
     # write_beside_camera_to_sql_third("D:\myFiles\dataset\shoot\数据1206\数据\Hand")
     # write_up_camera_to_sql_third("D:/myFiles/dataset/shoot/数据1206/数据/UpHand")
-    write_all_shake_to_sql("D:/myFiles/dataset/shoot/数据1213")
+    write_all_shake_to_sql("D:/myFiles/dataset/shoot/temp")
 
     # a = "2018-11- 6-10:42:26:231		0.00	1.00";
     # print(find_n_sub_str(a, "-", 2, 0))

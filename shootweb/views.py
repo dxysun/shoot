@@ -136,8 +136,8 @@ def sport_game_analyse(request):
             # print(id)
             num += 1
             report = shoot_report.objects.get(id=id)
-            grade = int(report.remark)
-            grades += report.remark + ","
+            grade = float(report.total_grade)
+            grades += str(report.total_grade) + ","
             total_grade += grade
             if grade > best_grade:
                 best_grade = grade
@@ -209,7 +209,7 @@ def sport_game_analyse_id(request):
     rapid_data = []
     for grade in shoot_grades:
         rapid_data.append(grade.rapid_time)
-        grades.append(int(grade.grade))
+        grades.append(float(grade.grade))
         x_pos.append(float(grade.x_pos))
         y_pos.append(float(grade.y_pos))
         x = float(grade.x_pos)
@@ -247,13 +247,15 @@ def sport_game_analyse_id(request):
     y_data_pos = report.y_shake_pos
     x_up_data_pos = report.x_up_shake_pos
     y_up_data_pos = report.y_up_shake_pos
-    x_shake_data, y_shake_data, x_up_shake_data, y_up_shake_data = shootlib.process_shake_pos_info(report.x_shake_pos,
-                                                                                                   report.y_shake_pos,
-                                                                                                   report.x_up_shake_pos,
-                                                                                                   report.y_up_shake_pos)
+
     up_x_10_pos = []
     nums = []
-    if x_shake_data is not None and y_shake_data is not None:
+    if report.x_shake_pos is not None and report.x_up_shake_pos is not None:
+        x_shake_data, y_shake_data, x_up_shake_data, y_up_shake_data = shootlib.process_shake_pos_info(
+            report.x_shake_pos,
+            report.y_shake_pos,
+            report.x_up_shake_pos,
+            report.y_up_shake_pos)
         is_insert = False
         x_data = x_shake_data.split(",")
         y_data = y_shake_data.split(",")
@@ -287,7 +289,7 @@ def sport_game_analyse_id(request):
 
         nums = shootlib.get_shoot_point(y_data, is_insert=is_insert)
         up_nums = shootlib.get_shoot_point(y_up_data, is_insert=is_insert, limit=5)
-        # print(nums)
+        print(nums)
         # print(up_nums)
 
         if is_insert:
@@ -391,7 +393,9 @@ def sport_game_history(request):
             date = report.shoot_date
             shoot_reports = shoot_report.objects.filter(shoot_date=report.shoot_date).filter(
                 user_name=user_name).order_by('shoot_time')
+            # print(len(shoot_reports))
             all_report = shootlib.split_report(shoot_reports)
+            # print(all_report)
         return render(request, 'sport_game_history.html', {
             'shoot_reports': shoot_reports,
             'all_report': all_report,

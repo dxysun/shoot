@@ -201,19 +201,11 @@ def update_shoot_report():
     shoot_reports = shoot_report.objects.all()
     for report in shoot_reports:
         print(report.start_time)
-        print(report.end_time)
-        print(report.start_time[:3])
-        if report.start_time[:2] != report.end_time[:2]:
-            print("not same " + str(report.id))
-        # report.start_time = report.shoot_time[:3] + report.start_time
-        # report.end_time = report.shoot_time[:3] + report.end_time
-        # print(report.shoot_date[:-9])
-        # report.shoot_time = report.shoot_date[-8:]
-        # report.shoot_date = "2018-07-14"
-        # report.user_name = "A"
-        # report.save()
+        if report.is_process == 0:
+            report.is_process = 2
+            report.save()
 
-        grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
+        # grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
         # rapid_time = grades[0].rapid_time
         # print(rapid_time)
         # report_time = time_to_string_mill(
@@ -223,9 +215,9 @@ def update_shoot_report():
         # report.start_time = report_time[:-4]
         # report.save()
 
-        for grade in grades:
-            # print(grade.grade_time)
-            print(grade.grade_detail_time)
+        # for grade in grades:
+        #     print(grade.grade_time)
+        #     print(grade.grade_detail_time)
             # grade.grade_time = grade.grade_detail_time[:-3]
             # print(grade.grade_detail_time[:-3])
             # grade.delete()
@@ -390,9 +382,19 @@ def update_all_info():
 
 
 def update_grade_heart_info():
-    # grades = shoot_grade.objects.filter(user_name="C")
-    grades = shoot_grade.objects.all()
+    grades = shoot_grade.objects.filter(user_name="A").filter(grade_date="2018-12-20")
+    # grades = shoot_grade.objects.all()
     for grade in grades:
+        grade_time = time_to_string(string_to_time(grade.grade_time) + datetime.timedelta(seconds=7))
+        heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade_time)
+        if len(heart_times) >= 1:
+            print(grade.grade_time)
+            heart_time = heart_times[0]
+            grade.heart_rate = heart_time.average_rate
+        else:
+            print(grade.grade_time + ':no data')
+            grade.heart_rate = None
+        grade.save()
         # if grade.heart_rate == 0 or grade.heart_rate is None:
         #     heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
         #     if len(heart_times) >= 1:
@@ -404,13 +406,13 @@ def update_grade_heart_info():
         #         grade.heart_rate = None
         #     grade.save()
 
-        if len(grade.grade_detail_time) > 13:
-            print(grade.grade_detail_time)
-            print(grade.grade_detail_time[:8])
-            print(grade.grade_detail_time[-3:])
-            grade.grade_detail_time = grade.grade_detail_time[:8] + grade.grade_detail_time[-3:]
-            grade.save()
-            print()
+        # if len(grade.grade_detail_time) > 13:
+        #     print(grade.grade_detail_time)
+        #     print(grade.grade_detail_time[:8])
+        #     print(grade.grade_detail_time[-3:])
+        #     grade.grade_detail_time = grade.grade_detail_time[:8] + grade.grade_detail_time[-3:]
+        #     grade.save()
+        #     print()
 
         # if grade.heart_rate == 0:
         #     print(grade.grade_time)

@@ -1551,20 +1551,22 @@
                 data: scatter_data
 
             };
-            var markline_series = {
-                type: 'line',
-                markLine: {
-                    data: [[{
-                        {#name: '两个坐标之间的标线',#}
-                        coord: [parseFloat(x_pos[0]) + x_centers[4], parseFloat(y_pos[0])]
-                    },
-                        {
-                            coord: [parseFloat(x_pos[4]), parseFloat(y_pos[4])]
-                        }]]
-                }
-            };
             shoot_series.push(scatter_series);
-            shoot_series.push(markline_series);
+
+            {% comment %} var markline_series = {
+                 type: 'line',
+                 markLine: {
+                     data: [[{
+                         {#name: '两个坐标之间的标线',#}
+                         coord: [parseFloat(x_pos[0]) + x_centers[4], parseFloat(y_pos[0])]
+                     },
+                         {
+                             coord: [parseFloat(x_pos[4]), parseFloat(y_pos[4])]
+                         }]]
+                 }
+             };
+             shoot_series.push(markline_series);{% endcomment %}
+
             var option_pos_five = {
                 grid: [{
                     top: '15%',
@@ -1589,11 +1591,11 @@
                 }
             };
             var beside_y_nums = "{{ beside_y_nums }}";
-         {% comment %}   beside_y_nums = beside_y_nums.split(",");
-            test_data = [];
-            for (i = 0; i < y_shoot_pos.length; i++) {
-                test_data.push([beside_y_nums[i], y_shoot_pos[i]])
-            }{% endcomment %}
+            {% comment %}   beside_y_nums = beside_y_nums.split(",");
+               test_data = [];
+               for (i = 0; i < y_shoot_pos.length; i++) {
+                   test_data.push([beside_y_nums[i], y_shoot_pos[i]])
+               }{% endcomment %}
             var option_test_five = {
 
                 tooltip: {
@@ -1774,7 +1776,7 @@
             var line_shake_ori = echarts.init(document.getElementById('line_shake_ori'));
             var line_shake = echarts.init(document.getElementById('line_shake'));
             {#var line_shake_x_y_plus = echarts.init(document.getElementById('line_shake_x_y_plus'));#}
-            {#var line_shake_pos = echarts.init(document.getElementById('line_shake_pos'));#}
+            var line_shake_pos = echarts.init(document.getElementById('line_shake_pos'));
 
             var line_up_shake_ori = echarts.init(document.getElementById('line_up_shake_ori'));
             {#var line_up_shake = echarts.init(document.getElementById('line_up_shake'));#}
@@ -1785,12 +1787,12 @@
             {#var line_test_five = echarts.init(document.getElementById('line_test_five'));#}
             var line_pos_five = echarts.init(document.getElementById('line_pos_five'));
 
-            {% comment %}  var line_shake_one = echarts.init(document.getElementById('line_shake_one'));
-              var line_shake_two = echarts.init(document.getElementById('line_shake_two'));
-              var line_shake_three = echarts.init(document.getElementById('line_shake_three'));
-              var line_shake_four = echarts.init(document.getElementById('line_shake_four'));
-              var line_shake_five = echarts.init(document.getElementById('line_shake_five'));
-  {% endcomment %}
+            var line_shake_one = echarts.init(document.getElementById('line_shake_one'));
+            var line_shake_two = echarts.init(document.getElementById('line_shake_two'));
+            var line_shake_three = echarts.init(document.getElementById('line_shake_three'));
+            var line_shake_four = echarts.init(document.getElementById('line_shake_four'));
+            var line_shake_five = echarts.init(document.getElementById('line_shake_five'));
+
 
             grade_circle.setOption(option_grade_circle);
             grade_position.setOption(option_grade_pos);
@@ -1801,7 +1803,7 @@
             line_shake_ori.setOption(option_beside_shake_ori);
             line_shake.setOption(option_beside_shake_line);
             {#line_shake_x_y_plus.setOption(option_beside_shake_x_y_plus);#}
-            {#line_shake_pos.setOption(option_beside_shake_pos);#}
+            line_shake_pos.setOption(option_beside_shake_pos);
 
             line_up_shake_ori.setOption(option_up_shake_ori);
             {#line_up_shake.setOption(option_up_shake_line);#}
@@ -1813,11 +1815,11 @@
             {#line_test_five.setOption(option_test_five);#}
             line_pos_five.setOption(option_pos_five);
 
-            {% comment %}  line_shake_one.setOption(option_line_shake_one);
-              line_shake_two.setOption(option_line_shake_two);
-              line_shake_three.setOption(option_line_shake_three);
-              line_shake_four.setOption(option_line_shake_four);
-              line_shake_five.setOption(option_line_shake_five);{% endcomment %}
+            line_shake_one.setOption(option_line_shake_one);
+            line_shake_two.setOption(option_line_shake_two);
+            line_shake_three.setOption(option_line_shake_three);
+            line_shake_four.setOption(option_line_shake_four);
+            line_shake_five.setOption(option_line_shake_five);
 
 
         });
@@ -1886,8 +1888,8 @@
                             <th>射击成绩</th>
                             <th>速射时间</th>
                             <th>弹着点坐标(mm)</th>
-                            <th>x方向抖动(mm)</th>
-                            <th>y方向抖动(mm)</th>
+                            {% comment %}    <th>x方向抖动(mm)</th>
+                            <th>y方向抖动(mm)</th>{% endcomment %}
                             <th>心率</th>
                         </tr>
                         </thead>
@@ -1899,8 +1901,8 @@
                                 <td>{{ shoot.grade }}</td>
                                 <td>{{ shoot.rapid_time }}</td>
                                 <td>{{ shoot.x_pos }},{{ shoot.y_pos }}</td>
-                                <td>{{ shoot.x_shake }}</td>
-                                <td>{{ shoot.y_shake }}</td>
+                                {% comment %}    <td>{{ shoot.x_shake }}</td>
+                                <td>{{ shoot.y_shake }}</td>{% endcomment %}
                                 <td>{{ shoot.heart_rate }}</td>
                             </tr>
                         {% endfor %}
@@ -1925,7 +1927,7 @@
         </div>
     </div>
 
-      <div class="row">
+    <div class="row">
 
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -1939,8 +1941,7 @@
         </div>
     </div>
 
-   {% comment %} <div class="row">
-
+    {% comment %}   <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -1952,8 +1953,8 @@
             </div>
         </div>
     </div>{% endcomment %}
-    <div class="row">
 
+    <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -1966,7 +1967,7 @@
         </div>
     </div>
 
-    {% comment %} <div class="row">
+    <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -1992,7 +1993,7 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                     第三枪
+                    第三枪
                 </div>
                 <div class="panel-body">
                     <div id="line_shake_three" style="width: 100%;height:500%;"></div>
@@ -2002,7 +2003,7 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                     第四枪
+                    第四枪
                 </div>
                 <div class="panel-body">
                     <div id="line_shake_four" style="width: 100%;height:500%;"></div>
@@ -2014,7 +2015,7 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                     第五枪
+                    第五枪
                 </div>
                 <div class="panel-body">
                     <div id="line_shake_five" style="width: 100%;height:500%;"></div>
@@ -2022,7 +2023,7 @@
             </div>
         </div>
 
-    </div>{% endcomment %}
+    </div>
     <div class="row">
 
         <div class="col-md-12">
@@ -2050,7 +2051,7 @@
         </div>
     </div>
 
-  {% comment %}  <div class="row">
+    {% comment %}  <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -2063,7 +2064,7 @@
         </div>
     </div>{% endcomment %}
 
-    {% comment %}  <div class="row">
+    <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -2074,7 +2075,7 @@
                 </div>
             </div>
         </div>
-    </div>{% endcomment %}
+    </div>
 
     <div class="row">
 
@@ -2090,7 +2091,7 @@
         </div>
     </div>
 
-   {% comment %} <div class="row">
+    {% comment %} <div class="row">
 
         <div class="col-md-12">
             <div class="panel panel-default">

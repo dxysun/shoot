@@ -435,7 +435,7 @@ class GradeEventTimerHandler(FileSystemEventHandler):
                                 self.end_time = shoot_time
                             if self.num == 9:
                                 self.start_time = shoot_time
-                            self.total_grade += int(grade)
+                            self.total_grade += float(grade)
                             self.shoot_data = shoot_grade(report_id=self.report_data.id, grade_date=d,
                                                           grade_time=t, grade_detail_time=t1 + shoot_time,
                                                           grade=grade, rapid_time="", x_pos=x_pos, y_pos=y_pos,

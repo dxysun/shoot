@@ -161,6 +161,7 @@ def update_data(user_name):
     shake_datas = shake_all_info.objects.filter(is_process=0).filter(user_name=user_name)
     for data in shake_datas:
         record_time = data.record_time
+        # record_time = time_to_string_mill(string_to_time(record_time) - datetime.timedelta(seconds=7))
         report_times = shoot_report.objects.filter(shoot_date=data.record_date).filter(
             start_time__lte=record_time).filter(end_time__gte=record_time)
         if len(report_times) > 0:
@@ -171,14 +172,17 @@ def update_data(user_name):
                 data.delete()
         else:
             print(data.record_time + " shake  not find report data")
+            data.is_process = 1
             data.delete()
 
     shoot_reports = shoot_report.objects.filter(is_process=0).filter(user_name=user_name)
     if len(shoot_reports) > 0:
         for report in shoot_reports:
+            # report_time = time_to_string_mill(string_to_time_mill(report.shoot_time) + datetime.timedelta(seconds=10))
+            # print(report_time)
             report_time = time_to_string_mill(string_to_time_mill(report.shoot_time) + datetime.timedelta(seconds=2))
-            shake_times = shake_all_info.objects.filter(start_time__lte=report_time).filter(
-                end_time__gte=report_time)
+            shake_times = shake_all_info.objects.filter(record_date=report.shoot_date).filter(
+                start_time__lte=report_time).filter(end_time__gte=report_time)
             if len(shake_times) == 1:
                 print('find shake:' + report.shoot_time)
                 shake = shake_times[0]
@@ -234,7 +238,7 @@ def get_int_data(list_data, is_negative=False):
     return temp_data
 
 
-def shake_data_process(data_shake, nums=None, is_insert=False, is_negative=False):
+def shake_data_process(data_shake, is_negative=False):
     plus_num = 0
     data_plus_array = []
     for i in range(0, len(data_shake)):
@@ -257,7 +261,10 @@ def shake_get_plus_shoot_point(data_plus_array, nums, is_insert=False):
     for i in range(0, len(data_plus_array)):
         plus_num = data_plus_array[i]
         if j < len(nums) and i == nums[j]:
-            pos_array.append(data_plus_array[i - n:i])
+            if i - n > 0:
+                pos_array.append(data_plus_array[i - n:i])
+            else:
+                pos_array.append(data_plus_array[0:i])
             pos.append(plus_num)
             j += 1
     return pos, pos_array
@@ -268,16 +275,16 @@ def cut_shake_data(y_shake_data):
     rank = -1
     for data in y_shake_data:
         rank += 1
-        if count_smooth < 10 < int(data):
+        if count_smooth < 5 and 10 < int(data):
             count_smooth = 0
             continue
         if abs(data) < 10:
             # print(data)
             count_smooth += 1
-        if count_smooth == 10:
+        if count_smooth == 5:
             break
     # print(rank)
-    return y_shake_data[rank - 9:], rank - 9
+    return y_shake_data[rank - 4:], rank - 4
 
 
 def process_grade_rapid_time(rapid_data):
@@ -296,13 +303,7 @@ def get_shoot_point(beside_y_data, is_insert=False, limit=10):
     count_smooth = 0
     for i in range(0, len(beside_y_data)):
         y = beside_y_data[i]
-        if y > limit:
-            count_smooth = 0
-        else:
-            count_smooth += 1
-            if count_smooth >= 8:
-                is_smooth = True
-        if is_smooth and y >= limit:
+        if is_smooth and y > limit:
             if beside_y_data[i - 1] > 5:
                 if is_insert:
                     nums.append((i - 2) * 5)
@@ -315,8 +316,15 @@ def get_shoot_point(beside_y_data, is_insert=False, limit=10):
                     nums.append(i - 1)
             count_smooth = 0
             is_smooth = False
+            continue
         if len(nums) == 5:
             break
+        if y > limit:
+            count_smooth = 0
+        else:
+            count_smooth += 1
+            if count_smooth >= 5:
+                is_smooth = True
     return nums
 
 
@@ -430,20 +438,26 @@ def get_up_shoot_limit(x_up_shoot_pos, x_pos, grades):
 
 
 def split_report(reports):
-    all_report = []
     temp_report = []
+    all_report = []
     temp_report.append(reports[0])
     for i in range(1, len(reports)):
-        r1_time = string_to_time_mill(reports[i - 1].start_time)
-        r2_time = string_to_time_mill(reports[i].start_time)
-        if r2_time - r1_time > datetime.timedelta(minutes=5):
-            all_report.append(temp_report)
-            temp_report = []
-        else:
+        # print(reports[i].start_time)
+        if len(reports[i - 1].start_time) > 3:
+            r1_time = string_to_time_mill(reports[i - 1].start_time)
+            r2_time = string_to_time_mill(reports[i].start_time)
+            # print(r1_time)
+            # print(r2_time)
+            if r2_time - r1_time > datetime.timedelta(minutes=5):
+                all_report.append(temp_report)
+                temp_report = []
             temp_report.append(reports[i])
+
+    if len(temp_report) > 0:
+        all_report.append(temp_report)
     return all_report
 
 
 if __name__ == "__main__":
     print("shoot")
-    update_data("A")
+    # update_data("A")
