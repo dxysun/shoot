@@ -4,6 +4,7 @@ from django.http.response import JsonResponse
 from . import shootlib
 from . import watch_grade_file
 from django.shortcuts import redirect
+import json
 
 observer = None
 
@@ -219,36 +220,17 @@ def sport_game_analyse_id(request):
         r_pos.append(r)
         p_pos.append(p)
         hearts.append(grade.heart_rate)
+    grade_stability = shootlib.get_grade_stability(x_pos, y_pos)
+    grade_info = dict(r_pos=r_pos, p_pos=p_pos, x_pos=x_pos, y_pos=y_pos, grades=grades, hearts=hearts,
+                      grade_stability=grade_stability)
 
-    x_data_plus = ""
-    x_data_ori = ""
-    y_data_plus = ""
-    y_data_ori = ""
-
-    x_up_data_plus = ""
-    x_up_data_ori = ""
-    y_up_data_plus = ""
-    y_up_data_ori = ""
-
-    y_shoot_pos = ""
-    x_shoot_pos = ""
-    x_up_shoot_pos = ""
-    y_up_shoot_pos = ""
-
-    x_pos_str = ""
-    y_pos_str = ""
-
-    # x_shake_data = report.x_shake_data
-    # y_shake_data = report.y_shake_data
-    # x_up_shake_data = report.x_up_shake_data
-    # y_up_shake_data = report.y_up_shake_data
-
+    shake_info = {}
+    five_pos_info = {}
     x_data_pos = report.x_shake_pos
     y_data_pos = report.y_shake_pos
     x_up_data_pos = report.x_up_shake_pos
     y_up_data_pos = report.y_up_shake_pos
 
-    up_x_10_pos = []
     nums = []
     if report.x_shake_pos is not None and report.x_up_shake_pos is not None:
         x_shake_data, y_shake_data, x_up_shake_data, y_up_shake_data = shootlib.process_shake_pos_info(
@@ -289,7 +271,7 @@ def sport_game_analyse_id(request):
 
         nums = shootlib.get_shoot_point(y_data, is_insert=is_insert)
         up_nums = shootlib.get_shoot_point(y_up_data, is_insert=is_insert, limit=5)
-        print(nums)
+        # print(nums)
         # print(up_nums)
 
         if is_insert:
@@ -307,85 +289,60 @@ def sport_game_analyse_id(request):
         x_up_shoot_pos, _ = shootlib.shake_get_plus_shoot_point(x_up_data_plus, up_nums, is_insert=is_insert)
         y_up_shoot_pos, _ = shootlib.shake_get_plus_shoot_point(y_up_data_plus, up_nums, is_insert=is_insert)
 
-        up_x_10_pos = shootlib.get_up_shoot_limit(x_up_shoot_pos, x_pos, grades)
+        up_x_10_pos, up_shake_rate = shootlib.get_up_shoot_limit(x_up_shoot_pos, x_pos, grades)
         # print(x_up_shoot_pos)
         # print(up_x_10_pos)
-        for x_pos_a in x_pos_array:
-            for x_d in x_pos_a:
-                d1 = round(x_d - x_pos_a[len(x_pos_a) - 1], 2)
-                x_pos_str += str(d1) + ","
-            x_pos_str = x_pos_str[:-1] + "#"
-        for y_pos_a in y_pos_array:
-            for y_d in y_pos_a:
-                d1 = round(y_d - y_pos_a[len(y_pos_a) - 1], 2)
-                y_pos_str += str(d1) + ","
-            y_pos_str = y_pos_str[:-1] + "#"
 
-        x_data_plus = shootlib.array_to_str(x_data_plus)
-        x_data_ori = shootlib.array_to_str(x_data)
-        y_data_plus = shootlib.array_to_str(y_data_plus)
-        y_data_ori = shootlib.array_to_str(y_data)
+        x_pos_str, x_shoot_point = shootlib.process_pos_array(x_pos_array, x_pos, up_shake_rate)
+        y_pos_str, y_shoot_point, y_pos_average_str = shootlib.process_pos_array(y_pos_array, y_pos, up_shake_rate,
+                                                                                 is_average=True)
 
-        x_up_data_plus = shootlib.array_to_str(x_up_data_plus)
-        x_up_data_ori = shootlib.array_to_str(x_up_data)
-        y_up_data_plus = shootlib.array_to_str(y_up_data_plus)
-        y_up_data_ori = shootlib.array_to_str(y_up_data)
+        five_pos_info['x_pos_str'] = x_pos_str
+        five_pos_info['y_pos_str'] = y_pos_str
+        five_pos_info['y_pos_average_str'] = y_pos_average_str
+        five_pos_info['up_shake_rate'] = up_shake_rate
 
-        x_data_pos = shootlib.array_to_str(x_data_pos)
-        y_data_pos = shootlib.array_to_str(y_data_pos)
-        x_up_data_pos = shootlib.array_to_str(x_up_data_pos)
-        y_up_data_pos = shootlib.array_to_str(y_up_data_pos)
+        five_pos_info['x_shoot_point'] = x_shoot_point
+        five_pos_info['y_shoot_point'] = y_shoot_point
 
-        y_shoot_pos = shootlib.array_to_str(y_shoot_pos)
-        x_shoot_pos = shootlib.array_to_str(x_shoot_pos)
-        x_up_shoot_pos = shootlib.array_to_str(x_up_shoot_pos)
-        y_up_shoot_pos = shootlib.array_to_str(y_up_shoot_pos)
-        up_x_10_pos = shootlib.array_to_str(up_x_10_pos)
+        shake_info['x_data_plus'] = x_data_plus
+        shake_info['y_data_plus'] = y_data_plus
+        shake_info['x_data_ori'] = x_data
+        shake_info['y_data_ori'] = y_data
 
-    x_pos = shootlib.array_to_str(x_pos)
-    y_pos = shootlib.array_to_str(y_pos)
-    grades = shootlib.array_to_str(grades)
-    hearts = shootlib.array_to_str(hearts)
-    r_pos = shootlib.array_to_str(r_pos)
-    p_pos = shootlib.array_to_str(p_pos)
+        shake_info['x_up_data_plus'] = x_up_data_plus
+        shake_info['x_up_data_ori'] = x_up_data
+        shake_info['y_up_data_plus'] = y_up_data_plus
+        shake_info['y_up_data_ori'] = y_up_data
+
+        shake_info['x_data_pos'] = x_data_pos
+        shake_info['y_data_pos'] = y_data_pos
+        shake_info['x_up_data_pos'] = x_up_data_pos
+        shake_info['y_up_data_pos'] = y_up_data_pos
+
+        shake_info['y_shoot_pos'] = y_shoot_pos
+        shake_info['x_shoot_pos'] = x_shoot_pos
+        shake_info['x_up_shoot_pos'] = x_up_shoot_pos
+        shake_info['y_up_shoot_pos'] = y_up_shoot_pos
+        shake_info['up_x_10_pos'] = up_x_10_pos
+
     nums = shootlib.array_to_str(nums)
     return render(request, 'sport_game_analyse_id.html', {
         'shoot_reports': report,
-        'grades': grades,
-        'hearts': hearts,
-        'r_pos': r_pos,
-        'p_pos': p_pos,
-        'x_pos': x_pos,
-        'y_pos': y_pos,
+        'grade_info': json.dumps(grade_info),
+        'shake_info': json.dumps(shake_info),
+        'five_pos_info': json.dumps(five_pos_info),
         'shoot_info': shoot_grades,
-        'x_data': x_data_plus,
-        'y_data': y_data_plus,
-        'x_data_ori': x_data_ori,
-        'y_data_ori': y_data_ori,
-        'x_data_pos': x_data_pos,
-        'y_data_pos': y_data_pos,
-        'x_up_data': x_up_data_plus,
-        'y_up_data': y_up_data_plus,
-        'x_up_data_ori': x_up_data_ori,
-        'y_up_data_ori': y_up_data_ori,
-        'x_up_data_pos': x_up_data_pos,
-        'y_up_data_pos': y_up_data_pos,
-        'x_pos_str': x_pos_str,
-        'y_pos_str': y_pos_str,
-        'x_shoot_pos': x_shoot_pos,
-        'y_shoot_pos': y_shoot_pos,
-        'x_up_shoot_pos': x_up_shoot_pos,
-        'y_up_shoot_pos': y_up_shoot_pos,
-        'up_x_10_pos': up_x_10_pos,
-        'beside_y_nums': nums
+        'beside_y_nums': nums,
     })
 
 
 def sport_game_history(request):
     user_name = request.session.get('user', "")
     shootlib.update_data(user_name)
+    shoot_dates = shootlib.get_shoot_date(user_name)
     if request.method == 'GET':
-        report = shoot_report.objects.last()
+        report = shoot_report.objects.filter(user_name=user_name).last()
         shoot_reports = None
         date = None
         all_report = None
@@ -395,22 +352,25 @@ def sport_game_history(request):
                 user_name=user_name).order_by('shoot_time')
             # print(len(shoot_reports))
             all_report = shootlib.split_report(shoot_reports)
-            # print(all_report)
         return render(request, 'sport_game_history.html', {
             'shoot_reports': shoot_reports,
             'all_report': all_report,
+            'shoot_dates': shoot_dates,
             'date1': date,
             'date2': date
         })
     else:
         date1 = request.POST['date1']
         date2 = request.POST['date2']
-        shoot_reports = shoot_report.objects.filter(user_name=user_name).filter(shoot_date__gte=date1).filter(
-            shoot_date__lte=date2)
+        print(date1)
+        # shoot_reports = shoot_report.objects.filter(user_name=user_name).filter(shoot_date__gte=date1).filter(
+        #     shoot_date__lte=date2).order_by('shoot_time').order_by('shoot_date')
+        shoot_reports = shoot_report.objects.filter(user_name=user_name).filter(shoot_date=date1).order_by('shoot_time')
         all_report = shootlib.split_report(shoot_reports)
         return render(request, 'sport_game_history.html', {
             'shoot_reports': shoot_reports,
             'all_report': all_report,
+            'shoot_dates': shoot_dates,
             'date1': date1,
             'date2': date2
         })

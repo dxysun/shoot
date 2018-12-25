@@ -110,53 +110,6 @@ def polar_to_cart(x, y, r):
     return x_data, y_data
 
 
-def update_data_bak(user_name):
-    shoot_reports = shoot_report.objects.filter(is_process=0).filter(user_name=user_name)
-    if len(shoot_reports) > 0:
-        for report in shoot_reports:
-            report_time = time_to_string(string_to_time(report.shoot_time) + datetime.timedelta(seconds=2))
-            shake_times = record_shake_time.objects.filter(start_time__lte=report_time).filter(
-                end_time__gte=report_time)
-            if len(shake_times) == 1:
-                print('find beside:' + report.shoot_time)
-                shake = shake_times[0]
-                report.x_shake_data = shake.shake_x_data
-                report.y_shake_data = shake.shake_y_data
-                report.x_up_shake_data_real = shake.shake_x_detail_data
-                report.y_up_shake_data_real = shake.shake_y_detail_data
-                report.is_process = 1
-                shake.is_process = 1
-                shake.save()
-                report.save()
-            else:
-                print('not find beside ' + report.shoot_time)
-            up_shake_times = record_up_shake_time.objects.filter(start_time__lte=report_time).filter(
-                end_time__gte=report_time)
-            if len(up_shake_times) == 1:
-                print('find up:' + report.shoot_time)
-                shake = up_shake_times[0]
-                report.x_up_shake_data = shake.shake_x_data
-                report.y_up_shake_data = shake.shake_y_data
-                report.x_up_shake_data_real = shake.shake_x_detail_data
-                report.y_up_shake_data_real = shake.shake_y_detail_data
-                report.is_process = 1
-                shake.is_process = 1
-                shake.save()
-                report.save()
-            else:
-                print('not find beside ' + report.shoot_time)
-            grades = shoot_grade.objects.filter(report_id=report.id)
-            for grade in grades:
-                heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
-                if len(heart_times) >= 1:
-                    heart_time = heart_times[0]
-                    grade.heart_rate = heart_time.average_rate
-                else:
-                    print('no data')
-                    grade.heart_rate = 0
-                grade.save()
-
-
 def update_data(user_name):
     shake_datas = shake_all_info.objects.filter(is_process=0).filter(user_name=user_name)
     for data in shake_datas:
@@ -255,9 +208,9 @@ def shake_get_plus_shoot_point(data_plus_array, nums, is_insert=False):
     pos_array = []
     pos = []
     j = 0
-    n = 20
+    n = 10
     if is_insert:
-        n = 80
+        n *= 5
     for i in range(0, len(data_plus_array)):
         plus_num = data_plus_array[i]
         if j < len(nums) and i == nums[j]:
@@ -386,6 +339,7 @@ def array_to_str(data):
 
 def get_up_shoot_limit(x_up_shoot_pos, x_pos, grades):
     up_x_10_pos = []
+    up_shake_rate = None
     if len(x_up_shoot_pos) == 5:
         if x_pos[0] > 0:
             left = 50 - x_pos[0]
@@ -398,7 +352,7 @@ def get_up_shoot_limit(x_up_shoot_pos, x_pos, grades):
         pos_cha = 3100 - (left + right)
         up_x_cha = (x_up_shoot_pos[4] - x_up_shoot_pos[0]) * -1
         up_shake_rate = pos_cha / up_x_cha
-        # print(up_shake_rate)
+        print(up_shake_rate)
         for i in range(0, 5):
             if grades[i] == 10:
                 if x_pos[i] > 0:
@@ -434,7 +388,7 @@ def get_up_shoot_limit(x_up_shoot_pos, x_pos, grades):
                     cha10_l = x_up_shoot_pos[i] + cha10_l
                 up_x_10_pos.append(round(cha10_r, 2))
                 up_x_10_pos.append(round(cha10_l, 2))
-    return up_x_10_pos
+    return up_x_10_pos, up_shake_rate
 
 
 def split_report(reports):
@@ -456,6 +410,50 @@ def split_report(reports):
     if len(temp_report) > 0:
         all_report.append(temp_report)
     return all_report
+
+
+def get_grade_stability(x_pos, y_pos):
+    res = 0
+    for x, y in zip(x_pos, y_pos):
+        res += math.sqrt(x * x + y * y)
+    return round(res / 5, 2)
+
+
+def process_pos_array(pos_array, shoot_pos, up_shake_rate, is_average=False):
+    y_pos_average_str = []
+    y_pos_str = []
+    last_num = None
+    temp_sum = 0
+    i = 5 - len(pos_array)
+    shoot_point = []
+    j = 1
+    for pos_a in pos_array:
+        temp = []
+        for y_d in pos_a:
+            if is_average:
+                if last_num is not None:
+                    cha = y_d - last_num
+                    temp_sum += cha
+                last_num = y_d
+            d1 = round(y_d - pos_a[len(pos_a) - j], 2) + int(shoot_pos[i] / up_shake_rate)
+            temp.append(d1)
+        shoot_point.append(temp[len(pos_a) - j])
+        i += 1
+        if is_average:
+            y_pos_average_str.append(round(temp_sum / (len(pos_a) - 1), 2))
+        y_pos_str.append(temp)
+    if is_average:
+        return y_pos_str, shoot_point, y_pos_average_str
+    else:
+        return y_pos_str, shoot_point
+
+
+def get_shoot_date(user_name):
+    shoot_reports = shoot_report.objects.filter(user_name=user_name).values('shoot_date').distinct()
+    shoot_dates = []
+    for r in shoot_reports:
+        shoot_dates.append(r['shoot_date'])
+    return shoot_dates
 
 
 if __name__ == "__main__":

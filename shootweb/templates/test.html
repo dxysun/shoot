@@ -869,7 +869,7 @@
                 }
             };
             // 使用刚指定的配置项和数据显示图表。
-            myChart.setOption(option_test);
+            myChart.setOption(option_grade_pos);
 
 
         });
@@ -878,15 +878,15 @@
 </head>
 <body>
 <div class="row">
-    <div class="col-md-12">
+{% comment %}    <div class="col-md-12">
         <div id="main" style="width: 100%;height:300%;"></div>
-    </div>
-    {% comment %}  <div class="col-md-6">
-
-
     </div>{% endcomment %}
+    <div class="col-md-6">
+
+        <div id="main" style="width: 100%;height:600%;"></div>
+    </div>
 </div>
-<div class="row">
+{% comment %}<div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -1031,7 +1031,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>{% endcomment %}
 
 </body>
 </html>

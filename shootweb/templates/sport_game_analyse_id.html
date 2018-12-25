@@ -3,18 +3,13 @@
 {% block title %}运动员数据分析-运动员主页{% endblock %}
 
 {% block script %}
-    {#    <script src="/static/assets/js/pages/sport_game_analyse_id.js"></script>#}
     <script>
         $(function () {
-
-            var r_pos = "{{ r_pos }}";
-            var p_pos = "{{ p_pos }}";
-            r_pos = r_pos.split(",");
-            p_pos = p_pos.split(",");
+            var grade_info = {{ grade_info|safe }};
             var i = 0;
             var data_circle = [];
-            for (i = 0; i < r_pos.length; i++) {
-                data_circle.push([r_pos[i], p_pos[i]]);
+            for (i = 0; i < grade_info.r_pos.length; i++) {
+                data_circle.push([grade_info.r_pos[i], grade_info.p_pos[i]]);
             }
             var option_grade_circle = {
                 title: {
@@ -64,19 +59,15 @@
             };
 
 
-            var x_pos = "{{ x_pos }}";
-            var y_pos = "{{ y_pos }}";
-            x_pos = x_pos.split(",");
-            y_pos = y_pos.split(",");
             var grade_data = [];
             var pos_data = [];
             var value = ["一", "二", "三", "四", "五"];
-            for (i = 0; i < x_pos.length; i++) {
-                grade_data.push([x_pos[i], y_pos[i]]);
+            for (i = 0; i < grade_info.x_pos.length; i++) {
+                grade_data.push([grade_info.x_pos[i], grade_info.y_pos[i]]);
                 var d1 = {};
                 d1.value = value[i];
-                d1.xAxis = x_pos[i];
-                d1.yAxis = y_pos[i];
+                d1.xAxis = grade_info.x_pos[i];
+                d1.yAxis = grade_info.y_pos[i];
                 pos_data.push(d1);
             }
             var x_center = 0;
@@ -107,7 +98,12 @@
             circle_data_10.push([x_10_start, y_10_start]);
             circle_data_9.push([x_9_start, y_9_start]);
             circle_data_8.push([x_8_start, y_8_start]);
+
             var option_grade_pos = {
+                title: {
+                    text: '成绩稳定性:' + grade_info.grade_stability,
+                    left: 'center'
+                },
                 xAxis: {
                     type: 'value',
                     min: -130,
@@ -162,55 +158,9 @@
             };
 
 
-            var grade = "{{ grades }}";
-            var data_grade = grade.split(",");
-            var data_level = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-            var data_total = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-            data_grade.forEach(function (item, index) {
-                data_total[Math.floor(item) - 1]++;
-            });
-            var option_total_grade = {
-                color: ['#3398DB'],
-                title: {
-                    left: 'center',
-                    text: '成绩统计图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                        type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                    }
-                },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis: [{
-                    type: 'category',
-                    name: '环数',
-                    data: data_level,
-                    axisTick: {
-                        alignWithLabel: true
-                    }
-                }],
-                yAxis: [{
-                    type: 'value',
-                    name: '次数'
-                }],
-                series: [{
-                    name: '次数',
-                    type: 'bar',
-                    barWidth: '50%',
-                    data: data_total
-                }]
-            };
-
-
             var data_index = [1, 2, 3, 4, 5];
             var data_grade_pre = [];
-            for (var j = 0; j < data_grade.length; j++) {
+            for (var j = 0; j < grade_info.grades.length; j++) {
                 var m = Math.random();
                 if (m < 0.3) {
                     m = -1;
@@ -221,7 +171,7 @@
                 if (m > 0.6) {
                     m = 1;
                 }
-                var pre = parseInt(data_grade[j]) + m;
+                var pre = parseInt(grade_info.grades[j]) + m;
                 if (pre > 10) {
                     pre = 10;
                 }
@@ -298,7 +248,7 @@
                             color: '#f94427'
                         }
                     },
-                    data: data_grade
+                    data: grade_info.grades
                 },
                     {
                         name: '预测成绩',
@@ -309,8 +259,6 @@
             };
 
 
-            var hearts = "{{ hearts }}";
-            var values = hearts.split(",");
             var heart_index = [1, 2, 3, 4, 5, 6];
             var option_heart = {
                 title: {
@@ -347,7 +295,7 @@
                 },
                 series: [{
                     type: 'line',
-                    data: values,
+                    data: grade_info.hearts,
                     color: ['#2F42FF'],
                     symbolSize: 10,
                     label: {
@@ -364,11 +312,9 @@
                 }]
             };
 
-
-            var x_data = "{{ x_data }}";
-            var y_data = "{{ y_data }}";
-            var xData = x_data.split(",");
-            var yData = y_data.split(",");
+            var shake_info = {{ shake_info|safe }};
+            var xData = shake_info.x_data_plus;
+            var yData = shake_info.y_data_plus;
             var len = xData.length;
             var xAxisData = [];
             var x_y_plus = [];
@@ -565,11 +511,8 @@
             };
 
 
-            var x_data_ori = "{{ x_data_ori }}";
-            var y_data_ori = "{{ y_data_ori }}";
-            var xDataOri = x_data_ori.split(",");
-            var yDataOri = y_data_ori.split(",");
-
+            var xDataOri = shake_info.x_data_ori;
+            var yDataOri = shake_info.y_data_ori;
             var option_beside_shake_ori = {
                 color: [
                     '#66CCFF',
@@ -790,10 +733,8 @@
             };
 
 
-            var x_data_real = "{{ x_data_pos }}";
-            var y_data_real = "{{ y_data_pos }}";
-            var xDataReal = x_data_real.split(",");
-            var yDataReal = y_data_real.split(",");
+            var xDataReal = shake_info.x_data_pos;
+            var yDataReal = shake_info.y_data_pos;
             var beside_data_real = [];
             for (i = 0; i < xDataReal.length; i++) {
                 beside_data_real.push([xDataReal[i], 600 - yDataReal[i]])
@@ -839,10 +780,8 @@
             };
 
 
-            var x_up_data_ori = "{{ x_up_data_ori }}";
-            var y_up_data_ori = "{{ y_up_data_ori }}";
-            var xUpDataOri = x_up_data_ori.split(",");
-            var yUpDataOri = y_up_data_ori.split(",");
+            var xUpDataOri = shake_info.x_up_data_ori;
+            var yUpDataOri = shake_info.y_up_data_ori;
             var up_len = xData.length;
             var xUpAxisData = [];
             for (i = 0; i < up_len; i++) {
@@ -1037,10 +976,8 @@
             };
 
 
-            var x_up_data = "{{ x_up_data }}";
-            var y_up_data = "{{ y_up_data }}";
-            var xUpData = x_up_data.split(",");
-            var yUpData = y_up_data.split(",");
+            var xUpData = shake_info.x_up_data_plus;
+            var yUpData = shake_info.y_up_data_plus;
             var option_up_shake_line = {
                 color: [
                     '#66CCFF',
@@ -1228,10 +1165,8 @@
                 ]
             };
 
-            var x_up_shoot_pos = "{{ x_up_shoot_pos }}";
-            var y_up_shoot_pos = "{{ y_up_shoot_pos }}";
-            x_up_shoot_pos = x_up_shoot_pos.split(",");
-            y_up_shoot_pos = y_up_shoot_pos.split(",");
+            var x_up_shoot_pos = shake_info.x_up_shoot_pos;
+            var y_up_shoot_pos = shake_info.y_up_shoot_pos;
             var up_x_y_data = [];
 
             for (i = 0; i < x_up_shoot_pos.length; i++) {
@@ -1245,8 +1180,7 @@
             for (i = 0; i < up_len; i++) {
                 up_data_x_y_plus.push([xUpData[i], yUpData[i]]);
             }
-            var up_x_10_pos = "{{ up_x_10_pos }}";
-            up_x_10_pos = up_x_10_pos.split(",");
+            var up_x_10_pos = shake_info.up_x_10_pos;
             var up_line_data = [];
             for (i = 0; i < up_x_10_pos.length; i++) {
                 var d3 = {};
@@ -1294,10 +1228,8 @@
             };
 
 
-            var x_up_data_real = "{{ x_up_data_pos }}";
-            var y_up_data_real = "{{ y_up_data_pos }}";
-            var xUpDataReal = x_up_data_real.split(",");
-            var yUpDataReal = y_up_data_real.split(",");
+            var xUpDataReal = shake_info.x_up_data_pos;
+            var yUpDataReal = shake_info.y_up_data_pos;
             var up_data_real = [];
             for (i = 0; i < xUpDataReal.length; i++) {
                 up_data_real.push([xUpDataReal[i], 600 - yUpDataReal[i]])
@@ -1326,10 +1258,8 @@
                 }]
             };
 
-            var x_shoot_pos = "{{ x_shoot_pos }}";
-            var y_shoot_pos = "{{ y_shoot_pos }}";
-            x_shoot_pos = x_shoot_pos.split(",");
-            y_shoot_pos = y_shoot_pos.split(",");
+            var x_shoot_pos = shake_info.x_shoot_pos;
+            var y_shoot_pos = shake_info.y_shoot_pos;
             var data = [];
             var test_data = [];
 
@@ -1377,17 +1307,27 @@
             };
 
 
-            var x_data_process = "{{ x_pos_str }}";
-            var y_data_process = "{{ y_pos_str }}";
-            var xDataAll = x_data_process.split("#");
-            var yDataAll = y_data_process.split("#");
-            console.log(xDataAll[0]);
-            console.log(yDataAll[0]);
+            var five_pos_info = {{ five_pos_info|safe }};
+            var xDataAll = five_pos_info.x_pos_str;
+            var yDataAll = five_pos_info.y_pos_str;
+            var y_pos_average_str = five_pos_info.y_pos_average_str;
+            var x_shoot_point = five_pos_info.x_shoot_point;
+            var y_shoot_point = five_pos_info.y_shoot_point;
             var len1 = xDataAll.length;
             var allInfo = [];
+            var circle_8 = [];
+            var circle_9 = [];
+            var circle_10 = [];
+            var rate = parseFloat(five_pos_info.up_shake_rate);
+            for (i = 0; i < circle_data_10.length; i++) {
+                circle_8.push([circle_data_8[i][0] / rate, circle_data_8[i][1] / rate]);
+                circle_9.push([circle_data_9[i][0] / rate, circle_data_9[i][1] / rate]);
+                circle_10.push([circle_data_10[i][0] / rate, circle_data_10[i][1] / rate]);
+            }
+
             for (var k = 0; k < len1; k++) {
-                var xDataPro = xDataAll[k].split(",");
-                var yDataPro = yDataAll[k].split(",");
+                var xDataPro = xDataAll[k];
+                var yDataPro = yDataAll[k];
                 var data_four = [];
                 var l = xDataPro.length;
                 for (var t = 0; t < l; t++) {
@@ -1396,6 +1336,10 @@
                 allInfo.push(data_four)
             }
             var option_line_shake_one = {
+                title: {
+                    text: '瞄准稳定性:' + y_pos_average_str[0],
+                    top: 5
+                },
                 xAxis: {
                     type: 'value'
                 },
@@ -1414,11 +1358,45 @@
                 series: [{
                     data: allInfo[0],
                     type: 'line',
-                    smooth: true
-
+                    smooth: true,
+                    markPoint: {
+                        itemStyle: {
+                            color: 'rgba(0,0,255,0.3)'
+                        },
+                        data: [{
+                            value: '射击点',
+                            xAxis: x_shoot_point[0],
+                            yAxis: y_shoot_point[0]
+                        }]
+                    }
+                }, {
+                    data: circle_10,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
+                }, {
+                    data: circle_9,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
+                }, {
+                    data: circle_8,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
                 }]
             };
             var option_line_shake_two = {
+                title: {
+                    text: '瞄准稳定性:' + y_pos_average_str[1],
+                    top: 5
+                },
                 xAxis: {
                     type: 'value'
                 },
@@ -1437,11 +1415,46 @@
                 series: [{
                     data: allInfo[1],
                     type: 'line',
-                    smooth: true
+                    smooth: true,
+                    markPoint: {
+                        itemStyle: {
+                            color: 'rgba(0,0,255,0.3)'
+                        },
+                        data: [{
+                            value: '射击点',
+                            xAxis: x_shoot_point[1],
+                            yAxis: y_shoot_point[1]
+                        }]
+                    }
 
+                }, {
+                    data: circle_10,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
+                }, {
+                    data: circle_9,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
+                }, {
+                    data: circle_8,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
                 }]
             };
             var option_line_shake_three = {
+                title: {
+                    text: '瞄准稳定性:' + y_pos_average_str[2],
+                    top: 5
+                },
                 xAxis: {
                     type: 'value'
                 },
@@ -1460,11 +1473,46 @@
                 series: [{
                     data: allInfo[2],
                     type: 'line',
-                    smooth: true
+                    smooth: true,
+                    markPoint: {
+                        itemStyle: {
+                            color: 'rgba(0,0,255,0.3)'
+                        },
+                        data: [{
+                            value: '射击点',
+                            xAxis: x_shoot_point[2],
+                            yAxis: y_shoot_point[2]
+                        }]
+                    }
 
+                }, {
+                    data: circle_10,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
+                }, {
+                    data: circle_9,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
+                }, {
+                    data: circle_8,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
                 }]
             };
             var option_line_shake_four = {
+                title: {
+                    text: '瞄准稳定性:' + y_pos_average_str[3],
+                    top: 5
+                },
                 xAxis: {
                     type: 'value'
                 },
@@ -1483,11 +1531,46 @@
                 series: [{
                     data: allInfo[3],
                     type: 'line',
-                    smooth: true
+                    smooth: true,
+                    markPoint: {
+                        itemStyle: {
+                            color: 'rgba(0,0,255,0.3)'
+                        },
+                        data: [{
+                            value: '射击点',
+                            xAxis: x_shoot_point[3],
+                            yAxis: y_shoot_point[3]
+                        }]
+                    }
 
+                }, {
+                    data: circle_10,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
+                }, {
+                    data: circle_9,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
+                }, {
+                    data: circle_8,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
                 }]
             };
             var option_line_shake_five = {
+                title: {
+                    text: '瞄准稳定性:' + y_pos_average_str[4],
+                    top: 5
+                },
                 xAxis: {
                     type: 'value'
                 },
@@ -1506,8 +1589,39 @@
                 series: [{
                     data: allInfo[4],
                     type: 'line',
-                    smooth: true
+                    smooth: true,
+                    markPoint: {
+                        itemStyle: {
+                            color: 'rgba(0,0,255,0.3)'
+                        },
+                        data: [{
+                            value: '射击点',
+                            xAxis: x_shoot_point[4],
+                            yAxis: y_shoot_point[4]
+                        }]
+                    }
 
+                }, {
+                    data: circle_10,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
+                }, {
+                    data: circle_9,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
+                }, {
+                    data: circle_8,
+                    type: 'line',
+                    smooth: true,
+                    tooltip: {
+                        show: false
+                    }
                 }]
             };
 
@@ -1542,8 +1656,8 @@
                 }
             }
             var scatter_data = [];
-            for (i = 0; i < x_pos.length; i++) {
-                scatter_data.push([parseFloat(x_pos[4 - i]) + x_centers[i], y_pos[4 - i]]);
+            for (i = 0; i < grade_info.x_pos.length; i++) {
+                scatter_data.push([parseFloat(grade_info.x_pos[4 - i]) + x_centers[i], grade_info.y_pos[4 - i]]);
 
             }
             var scatter_series = {
