@@ -1258,6 +1258,10 @@
                 }]
             };
 
+            var five_pos_info = {{ five_pos_info|safe }};
+            var rate = parseFloat(five_pos_info.up_shake_rate);
+
+
             var x_shoot_pos = shake_info.x_shoot_pos;
             var y_shoot_pos = shake_info.y_shoot_pos;
             var data = [];
@@ -1276,6 +1280,58 @@
             for (i = 0; i < yData.length; i++) {
                 merge_data.push([xUpData[i], yData[i]]);
             }
+
+            var shoot_pos_series = [];
+            var merge_info = {
+                    data: merge_data,
+
+                    type: 'line',
+                    smooth: true,
+                    markPoint: {
+                        itemStyle: {
+                            color: 'rgba(0,0,255,0.3)'
+                        },
+                        data: data
+                    }
+                };
+            shoot_pos_series.push(merge_info);
+            var x_pos_center = [];
+            var y_pos_center = [];
+            for(i = 0;i < x_shoot_pos.length;i ++){
+               var x = parseFloat(grade_info.x_pos[i] / rate);
+               var y = parseFloat(grade_info.y_pos[i] / rate);
+                x_pos_center.push(x_shoot_pos[i] - x);
+                y_pos_center.push(y_shoot_pos[i] - y);
+            }
+            var radius = [50, 90, 130];
+            for(i = 0;i < radius.length;i ++){
+                radius[i] /= rate;
+            }
+            for (i = 0; i < 5; i++) {
+
+                for (j = 0; j < 3; j++) {
+                    var circle_grade_data = [];
+                    x_center = x_pos_center[i];
+                    y_center = y_pos_center[i];
+                    var x_pos_start = x_center + radius[j] * Math.cos(0);
+                    var y_pos_start = y_center + radius[j] * Math.sin(0);
+
+                    for (angle = 0; angle < 360; angle += 10) {
+                        x1 = x_center + radius[j] * Math.cos(angle * Math.PI / 180);
+                        y1 = y_center + radius[j] * Math.sin(angle * Math.PI / 180);
+                        circle_grade_data.push([x1, y1]);
+                    }
+                    circle_grade_data.push([x_pos_start, y_pos_start]);
+                    var pos_temp = {
+
+                        data: circle_grade_data,
+                        type: 'line',
+                        smooth: true
+                    };
+                    shoot_pos_series.push(pos_temp);
+                }
+            }
+
             var option_shake_merge_info = {
                 xAxis: {
                     type: 'value'
@@ -1292,22 +1348,11 @@
                     start: 0,
                     end: 100
                 },
-                series: [{
-                    data: merge_data,
-
-                    type: 'line',
-                    smooth: true,
-                    markPoint: {
-                        itemStyle: {
-                            color: 'rgba(0,0,255,0.3)'
-                        },
-                        data: data
-                    }
-                }]
+                series: shoot_pos_series
             };
 
 
-            var five_pos_info = {{ five_pos_info|safe }};
+
             var xDataAll = five_pos_info.x_pos_str;
             var yDataAll = five_pos_info.y_pos_str;
             var y_pos_average_str = five_pos_info.y_pos_average_str;
@@ -1318,7 +1363,7 @@
             var circle_8 = [];
             var circle_9 = [];
             var circle_10 = [];
-            var rate = parseFloat(five_pos_info.up_shake_rate);
+
             for (i = 0; i < circle_data_10.length; i++) {
                 circle_8.push([circle_data_8[i][0] / rate, circle_data_8[i][1] / rate]);
                 circle_9.push([circle_data_9[i][0] / rate, circle_data_9[i][1] / rate]);

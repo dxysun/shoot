@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url, include
 from shootweb import views
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     url('^$', views.sport_home, name='all_index'),
     url('admin/', admin.site.urls),
     url('shoot/', include('shootweb.urls')),
+    url('^favicon.ico$', RedirectView.as_view(url='static/favicon.ico')),
 ]
