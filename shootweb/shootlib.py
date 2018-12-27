@@ -352,7 +352,7 @@ def get_up_shoot_limit(x_up_shoot_pos, x_pos, grades):
         pos_cha = 3100 - (left + right)
         up_x_cha = (x_up_shoot_pos[4] - x_up_shoot_pos[0]) * -1
         up_shake_rate = pos_cha / up_x_cha
-        print(up_shake_rate)
+        # print(up_shake_rate)
         for i in range(0, 5):
             if grades[i] == 10:
                 if x_pos[i] > 0:

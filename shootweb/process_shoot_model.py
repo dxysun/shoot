@@ -201,13 +201,31 @@ def update_shoot_report():
     shoot_reports = shoot_report.objects.all()
     for report in shoot_reports:
         print(report.start_time)
-        if report.is_process == 0:
-            report.is_process = 2
-            report.save()
+        # if report.is_process == 0:
+        #     report.is_process = 2
+        #     report.save()
 
-        # grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
-        # rapid_time = grades[0].rapid_time
-        # print(rapid_time)
+        grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
+        rapid_time = grades[4].rapid_time
+        stage = 8
+        if float(rapid_time) < 1:
+            print(grades[3].rapid_time)
+            if float(grades[3].rapid_time) < 4:
+                stage = 4
+            elif float(grades[3].rapid_time) < 6:
+                stage = 6
+            elif float(grades[3].rapid_time) < 8:
+                stage = 8
+        elif float(rapid_time) < 4.2:
+            stage = 4
+        elif float(rapid_time) < 6.2:
+            stage = 6
+        elif float(rapid_time) < 8:
+            stage = 8
+        print(rapid_time)
+        print()
+        report.remark = str(stage)
+        report.save()
         # report_time = time_to_string_mill(
         #     string_to_time_mill(report.start_time) - datetime.timedelta(seconds=float(rapid_time)))
         # print(report_time[:-4])
@@ -216,7 +234,7 @@ def update_shoot_report():
         # report.save()
 
         # for grade in grades:
-        #     print(grade.grade_time)
+        #     print(grade.rapid_time)
         #     print(grade.grade_detail_time)
             # grade.grade_time = grade.grade_detail_time[:-3]
             # print(grade.grade_detail_time[:-3])
@@ -671,7 +689,7 @@ if __name__ == "__main__":
     # for x, y in zip(xd, yd):
     #     print(str(x) + " " + str(y))
 
-    # update_shoot_report()
+    update_shoot_report()
     # update_shoot_grade()
 
     # update_shake_time()

@@ -149,6 +149,7 @@ def sport_game_analyse(request):
             heart_temp = []
             heart_total = 0
             for grade in shoot_grades:
+                # print(grade.id)
                 x = float(grade.x_pos)
                 y = float(grade.y_pos)
                 r, p = shootlib.cart_to_polar(x, y)
@@ -292,7 +293,6 @@ def sport_game_analyse_id(request):
         up_x_10_pos, up_shake_rate = shootlib.get_up_shoot_limit(x_up_shoot_pos, x_pos, grades)
         # print(x_up_shoot_pos)
         # print(up_x_10_pos)
-
         x_pos_str, x_shoot_point = shootlib.process_pos_array(x_pos_array, x_pos, up_shake_rate)
         y_pos_str, y_shoot_point, y_pos_average_str = shootlib.process_pos_array(y_pos_array, y_pos, up_shake_rate,
                                                                                  is_average=True)
@@ -362,7 +362,6 @@ def sport_game_history(request):
     else:
         date1 = request.POST['date1']
         date2 = request.POST['date2']
-        print(date1)
         # shoot_reports = shoot_report.objects.filter(user_name=user_name).filter(shoot_date__gte=date1).filter(
         #     shoot_date__lte=date2).order_by('shoot_time').order_by('shoot_date')
         shoot_reports = shoot_report.objects.filter(user_name=user_name).filter(shoot_date=date1).order_by('shoot_time')

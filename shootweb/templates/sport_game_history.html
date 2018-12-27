@@ -135,141 +135,140 @@
 
 {% block content %}
     <div class="row">
-    <div class="col-md-12">
-        <!-- Advanced Tables -->
-
-
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-md-4">
-                        射击数据
+        <div class="col-md-12">
+            <!-- Advanced Tables -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-4">
+                            射击数据
+                        </div>
+                        <div class="col-md-5">
+                        </div>
+                        <div class="col-md-3">
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                    </div>
-                    <div class="col-md-3">
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-4">
-                        <a href="#" id="shoot_select" class="btn btn-success">全选</a>
-                        <a href="#" id="shoot_analyse" class="btn btn-info">数据分析与统计</a>
-                        <form id="shoot_info" action="{% url 'sport_game_analyse' %}" method="post">
-                            <input id="report_id" name="report_id" value="" type="text" hidden="hidden">
-                        </form>
-                    </div>
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-4">
-                        <form id="date_info" action="{% url 'sport_game_history' %}" method="post">
-                            <input id="date1" name="date1" value="" type="text" hidden="hidden">
-                            <input id="date2" name="date2" value="" type="text" hidden="hidden">
-                        </form>
-                        {% comment %} <div class="form-group input-group">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href="#" id="shoot_select" class="btn btn-success">全选</a>
+                            <a href="#" id="shoot_analyse" class="btn btn-info">数据分析与统计</a>
+                            <form id="shoot_info" action="{% url 'sport_game_analyse' %}" method="post">
+                                <input id="report_id" name="report_id" value="" type="text" hidden="hidden">
+                            </form>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-4">
+                            <form id="date_info" action="{% url 'sport_game_history' %}" method="post">
+                                <input id="date1" name="date1" value="" type="text" hidden="hidden">
+                                <input id="date2" name="date2" value="" type="text" hidden="hidden">
+                            </form>
+                            {% comment %} <div class="form-group input-group">
                             <span class="input-group-addon">日期选择：</span>
                             <input class="form-control" id="date_select" type="text" placeholder="yyyy-MM-dd">
                         </div>{% endcomment %}
-                        <form id="date_info" action="{% url 'sport_game_history' %}" method="post">
-                            <input id="date1" name="date1" value="" type="text" hidden="hidden">
-                        </form>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon">日期选择：</span>
-                            <select id="shoot_date" class="form-control">
-                                {% for date in shoot_dates %}
-                                    {% if date == date1 %}
-                                        <option value="{{ date }}" selected>{{ date }}</option>
-                                    {% else %}
-                                        <option value="{{ date }}">{{ date }}</option>
-                                    {% endif %}
+                            <form id="date_info" action="{% url 'sport_game_history' %}" method="post">
+                                <input id="date1" name="date1" value="" type="text" hidden="hidden">
+                            </form>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">日期选择：</span>
+                                <select id="shoot_date" class="form-control">
+                                    {% for date in shoot_dates %}
+                                        {% if date == date1 %}
+                                            <option value="{{ date }}" selected>{{ date }}</option>
+                                        {% else %}
+                                            <option value="{{ date }}">{{ date }}</option>
+                                        {% endif %}
 
-                                {% endfor %}
-                            </select>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-1">
-                        <button id="select_date" class="btn btn-primary">筛选</button>
+                        <div class="col-md-1">
+                            <button id="select_date" class="btn btn-primary">筛选</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel-body">
-                <div class="panel-group" id="accordion">
-                    {% for shoot_reports in all_report %}
-                        <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}"
-                                   class="collapsed">
-                                    {% with start=shoot_reports|first %}
-                                        {{ start.shoot_date }}&nbsp;{{ start.start_time }}
-                                    {% endwith %}
-                                    -
-                                    {% with end=shoot_reports|last %}
-                                        {{ end.shoot_date }}&nbsp;{{ end.start_time }}
-                                    {% endwith %}
-                                </a>
-                                &nbsp;&nbsp;&nbsp;
-                                <button id="shoot_select_item{{ forloop.counter }}"
-                                        onclick="item_click({{ forloop.counter }})" class="btn btn-success">
-                                    选中以下
-                                </button>
-                                <button id="shoot_analyse_item{{ forloop.counter }}"
-                                        onclick="analyse_click({{ forloop.counter }})" class="btn btn-info">
-                                    数据分析与统计
-                                </button>
-                            </h4>
-                        </div>
-                        {% if forloop.first %}
-                            <div id="collapse{{ forloop.counter }}" class="panel-collapse in">
-                        {% else %}
-                            <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse">
-                        {% endif %}
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <th>选择</th>
-                                    <th>时间</th>
-                                    <th>地点</th>
-                                    <th>具体射击时间</th>
-                                    <th>开始时间</th>
-                                    <th>结束时间</th>
-                                    <th>备注</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for report in shoot_reports %}
-                                    <tr class="gradeA">
-                                        <td>
-                                            <input id="shoot_report_item{{ forloop.parentloop.counter }}"
-                                                   name="shoot_report" type="checkbox"
-                                                   value="{{ report.id }}">
-                                        </td>
-                                        <td>
-                                            <a href="{% url 'sport_game_analyse_id' %}?id={{ report.id }}">{{ report.shoot_date }}</a>
-                                        </td>
-                                        <td>北京射击馆</td>
-                                        <td>{{ report.shoot_time }}</td>
-                                        <td>{{ report.start_time }}</td>
-                                        <td>{{ report.end_time }}</td>
-                                        <td>5次射击一共{{ report.total_grade }}环</td>
+                <div class="panel-body">
+                    <div class="panel-group" id="accordion">
+                        {% for shoot_reports in all_report %}
+                            <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapse{{ forloop.counter }}"
+                                       class="collapsed">
+                                        {% with start=shoot_reports|first %}
+                                            {{ start.shoot_date }}&nbsp;{{ start.start_time }}
+                                        {% endwith %}
+                                        -
+                                        {% with end=shoot_reports|last %}
+                                            {{ end.shoot_date }}&nbsp;{{ end.start_time }}
+                                        {% endwith %}
+                                    </a>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button id="shoot_select_item{{ forloop.counter }}"
+                                            onclick="item_click({{ forloop.counter }})" class="btn btn-success">
+                                        选中以下
+                                    </button>
+                                    <button id="shoot_analyse_item{{ forloop.counter }}"
+                                            onclick="analyse_click({{ forloop.counter }})" class="btn btn-info">
+                                        数据分析与统计
+                                    </button>
+                                </h4>
+                            </div>
+                            {% if forloop.first %}
+                                <div id="collapse{{ forloop.counter }}" class="panel-collapse in">
+                            {% else %}
+                                <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse">
+                            {% endif %}
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>选择</th>
+                                        <th>时间</th>
+                                        <th>地点</th>
+                                        <th>具体射击时间</th>
+                                        <th>开始时间</th>
+                                        <th>结束时间</th>
+                                        <th>备注</th>
                                     </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    {% for report in shoot_reports %}
+                                        <tr class="gradeA">
+                                            <td>
+                                                <input id="shoot_report_item{{ forloop.parentloop.counter }}"
+                                                       name="shoot_report" type="checkbox"
+                                                       value="{{ report.id }}">
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'sport_game_analyse_id' %}?id={{ report.id }}">{{ report.shoot_date }}</a>
+                                            </td>
+                                            <td>北京射击馆</td>
+                                            <td>{{ report.shoot_time }}</td>
+                                            <td>{{ report.start_time }}</td>
+                                            <td>{{ report.end_time }}</td>
+                                            <td>{{ report.remark }}秒阶段，5次射击一共{{ report.total_grade }}环</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        {% endfor %}
+
                         </div>
                     </div>
-                    </div>
-                    </div>
-                    {% endfor %}
 
-                    </div>
                 </div>
-
+                <!--End Advanced Tables -->
             </div>
-            <!--End Advanced Tables -->
         </div>
     </div>
 {% endblock %}
-

@@ -1283,28 +1283,28 @@
 
             var shoot_pos_series = [];
             var merge_info = {
-                    data: merge_data,
+                data: merge_data,
 
-                    type: 'line',
-                    smooth: true,
-                    markPoint: {
-                        itemStyle: {
-                            color: 'rgba(0,0,255,0.3)'
-                        },
-                        data: data
-                    }
-                };
+                type: 'line',
+                smooth: true,
+                markPoint: {
+                    itemStyle: {
+                        color: 'rgba(0,0,255,0.3)'
+                    },
+                    data: data
+                }
+            };
             shoot_pos_series.push(merge_info);
             var x_pos_center = [];
             var y_pos_center = [];
-            for(i = 0;i < x_shoot_pos.length;i ++){
-               var x = parseFloat(grade_info.x_pos[i] / rate);
-               var y = parseFloat(grade_info.y_pos[i] / rate);
+            for (i = 0; i < x_shoot_pos.length; i++) {
+                var x = parseFloat(grade_info.x_pos[i] / rate);
+                var y = parseFloat(grade_info.y_pos[i] / rate);
                 x_pos_center.push(x_shoot_pos[i] - x);
                 y_pos_center.push(y_shoot_pos[i] - y);
             }
             var radius = [50, 90, 130];
-            for(i = 0;i < radius.length;i ++){
+            for (i = 0; i < radius.length; i++) {
                 radius[i] /= rate;
             }
             for (i = 0; i < 5; i++) {
@@ -1350,7 +1350,6 @@
                 },
                 series: shoot_pos_series
             };
-
 
 
             var xDataAll = five_pos_info.x_pos_str;
@@ -1933,9 +1932,9 @@
             var heart = echarts.init(document.getElementById('heart'));
 
             var line_shake_ori = echarts.init(document.getElementById('line_shake_ori'));
-            var line_shake = echarts.init(document.getElementById('line_shake'));
+            {#var line_shake = echarts.init(document.getElementById('line_shake'));#}
             {#var line_shake_x_y_plus = echarts.init(document.getElementById('line_shake_x_y_plus'));#}
-            var line_shake_pos = echarts.init(document.getElementById('line_shake_pos'));
+            {#var line_shake_pos = echarts.init(document.getElementById('line_shake_pos'));#}
 
             var line_up_shake_ori = echarts.init(document.getElementById('line_up_shake_ori'));
             {#var line_up_shake = echarts.init(document.getElementById('line_up_shake'));#}
@@ -1960,9 +1959,9 @@
             heart.setOption(option_heart);
 
             line_shake_ori.setOption(option_beside_shake_ori);
-            line_shake.setOption(option_beside_shake_line);
+            {#line_shake.setOption(option_beside_shake_line);#}
             {#line_shake_x_y_plus.setOption(option_beside_shake_x_y_plus);#}
-            line_shake_pos.setOption(option_beside_shake_pos);
+            {#line_shake_pos.setOption(option_beside_shake_pos);#}
 
             line_up_shake_ori.setOption(option_up_shake_ori);
             {#line_up_shake.setOption(option_up_shake_line);#}
@@ -2085,7 +2084,18 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    比赛靶图
+                </div>
+                <div class="panel-body">
+                    <div id="line_pos_five" style="width: 100%;height:200%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
 
         <div class="col-md-12">
@@ -2113,18 +2123,7 @@
         </div>
     </div>{% endcomment %}
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    比赛靶图
-                </div>
-                <div class="panel-body">
-                    <div id="line_pos_five" style="width: 100%;height:200%;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="row">
         <div class="col-md-6">
@@ -2196,7 +2195,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+  {% comment %}  <div class="row">
 
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -2208,7 +2207,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>{% endcomment %}
 
     {% comment %}  <div class="row">
         <div class="col-md-12">
@@ -2223,7 +2222,7 @@
         </div>
     </div>{% endcomment %}
 
-    <div class="row">
+    {% comment %}<div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -2234,7 +2233,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>{% endcomment %}
 
     <div class="row">
 
