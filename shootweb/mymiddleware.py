@@ -7,10 +7,6 @@ from django.shortcuts import render
 class SimpleMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
-        # if request.session.get('user', None):
-        #     pass
-        # else:
-        #     return redirect("login")
         if request.path != '/shoot/login' and request.path != '/shoot/login_admin':
             user = request.session.get('user', None)
             if user:

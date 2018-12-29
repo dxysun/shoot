@@ -8,6 +8,8 @@ import math
 from scipy.interpolate import interp1d
 from scipy import optimize
 import numpy as np
+import random
+import matplotlib.pyplot as plt
 
 dirname, filename = os.path.split(os.path.abspath(__file__))
 pre_path = os.path.abspath(os.path.dirname(dirname))
@@ -92,6 +94,17 @@ def cart_to_polar(x, y):
     # print(r)
     # print(11 - r)
     # print(angle)
+    return r, angle
+
+
+def cart_to_polar_1(x, y):
+    z = pow(x, 2) + pow(y, 2)
+    r = math.sqrt(z)
+    angle = math.atan2(y, x) * 180 / math.pi
+    if angle < 0:
+        angle = 360 + angle
+    r = round(r, 2)
+    angle = round(angle, 2)
     return r, angle
 
 
@@ -209,15 +222,17 @@ def shake_get_plus_shoot_point(data_plus_array, nums, is_insert=False):
     pos = []
     j = 0
     n = 10
+    m = 0
     if is_insert:
         n *= 5
+        m = 5
     for i in range(0, len(data_plus_array)):
         plus_num = data_plus_array[i]
         if j < len(nums) and i == nums[j]:
             if i - n > 0:
-                pos_array.append(data_plus_array[i - n:i])
+                pos_array.append(data_plus_array[i - n:i + m])
             else:
-                pos_array.append(data_plus_array[0:i])
+                pos_array.append(data_plus_array[0:i + m])
             pos.append(plus_num)
             j += 1
     return pos, pos_array
@@ -416,10 +431,10 @@ def get_grade_stability(x_pos, y_pos):
     res = 0
     for x, y in zip(x_pos, y_pos):
         res += math.sqrt(x * x + y * y)
-    return round(res / 5, 2)
+    return round(res / len(x_pos), 2)
 
 
-def process_pos_array(pos_array, shoot_pos, up_shake_rate, is_average=False):
+def process_pos_array(pos_array, shoot_pos, up_shake_rate, is_average=False, is_insert=False):
     y_pos_average_str = []
     y_pos_str = []
     last_num = None
@@ -427,6 +442,8 @@ def process_pos_array(pos_array, shoot_pos, up_shake_rate, is_average=False):
     i = 5 - len(pos_array)
     shoot_point = []
     j = 1
+    if is_insert:
+        j = 6
     for pos_a in pos_array:
         temp = []
         for y_d in pos_a:
@@ -456,6 +473,90 @@ def get_shoot_date(user_name):
     return shoot_dates
 
 
+def g_1(r, r_e=130):
+    if r == 0:
+        res = 0
+    elif r == r_e:
+        res = 1
+    else:
+        res = (r * r) / (r_e * r_e)
+    return res
+
+
+def g_2(a, a_e=360):
+    if a == 0:
+        res = 0
+    elif a == a_e:
+        res = 1
+    else:
+        res = a / a_e
+    return res
+
+
+def j_radius(radius):
+    b = g_1(radius[0])
+    n = len(radius)
+    for k in range(1, len(radius) - 1):
+        g_k = g_1(radius[k])
+        g_k_1 = g_1(radius[k + 1])
+        temp = g_k_1 - g_k - (k / n) * (k / n) * (1 / g_k_1 - 1 / g_k) - (2 * k / n) * math.log(g_k_1 / g_k)
+        b += temp
+    return 1 - math.sqrt(b)
+
+
+def j_angle(angle):
+    b = g_2(angle[0])
+    n = len(angle)
+    for k in range(1, len(angle) - 1):
+        g_k = g_2(angle[k])
+        g_k_1 = g_2(angle[k + 1])
+        temp = g_k_1 - g_k - (k / n) * (k / n) * (1 / g_k_1 - 1 / g_k) - (2 * k / n) * math.log(g_k_1 / g_k)
+        b += temp
+    return 1 - math.sqrt(b)
+
+
+def get_average_in_circle(x_pos, y_pos):
+    r_pos = []
+    a_pos = []
+    for x, y in zip(x_pos, y_pos):
+        r, angle = cart_to_polar_1(x, y)
+        r_pos.append(r)
+        a_pos.append(angle)
+    j_r = j_radius(r_pos)
+    j_a = j_angle(a_pos)
+    return j_r * j_a
+
+
+def get_random_circle(r, samples_num):
+    r_pos = []
+    a_pos = []
+    t = np.random.random(size=samples_num) * 2 * np.pi
+    x = np.cos(t) * r
+    y = np.sin(t) * r
+    i_set = np.arange(0, samples_num, 1)
+    for i in i_set:
+        len = np.sqrt(np.random.random())
+        x[i] = x[i] * len
+        y[i] = y[i] * len
+        radius1, angle = cart_to_polar_1(x[i], y[i])
+        r_pos.append(radius1)
+        a_pos.append(angle)
+    plt.figure(figsize=(10, 10.1), dpi=125)
+    plt.plot(x, y, 'ro')
+    _t = np.arange(0, 7, 0.1)
+    _x = np.cos(_t) * r
+    _y = np.sin(_t) * r
+    plt.plot(_x, _y, 'g-')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.title('Random Scatter')
+    plt.grid(True)
+    # plt.show()
+    return r_pos, a_pos
+
+
 if __name__ == "__main__":
     print("shoot")
-    # update_data("A")
+    # r_pos_1, a_pos_1 = get_random_circle(130, 800)
+    # print(get_average_in_circle(r_pos_1, a_pos_1))
+    # plt.show()

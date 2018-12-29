@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7d03cb4f-baf8-47fc-b3ac-218109122674" name="Default" comment="在正面轨迹图上为每个射击点添加靶图">
+    <list default="true" id="7d03cb4f-baf8-47fc-b3ac-218109122674" name="Default" comment="对数据分析页面修改之前存档">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shootweb/mymiddleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/mymiddleware.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shootweb/process_shoot_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/process_shoot_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shootweb/shootlib.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/shootlib.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/sport_game_history.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/sport_game_history.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shootweb/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shootweb/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,9 +23,9 @@
     <SUITE FILE_PATH="coverage/shoot$views.coverage" NAME="views Coverage Results" MODIFIED="1543924324774" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$SplineInterpolation.coverage" NAME="SplineInterpolation Coverage Results" MODIFIED="1544448860945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$readAndWriteData.coverage" NAME="readAndWriteData Coverage Results" MODIFIED="1544244740865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
-    <SUITE FILE_PATH="coverage/shoot$shootlib.coverage" NAME="shootlib Coverage Results" MODIFIED="1544887884290" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
+    <SUITE FILE_PATH="coverage/shoot$shootlib.coverage" NAME="shootlib Coverage Results" MODIFIED="1545980300961" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$watch_grade_file.coverage" NAME="watch_grade_file Coverage Results" MODIFIED="1543494526006" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
-    <SUITE FILE_PATH="coverage/shoot$process_shoot_model.coverage" NAME="process_shoot_model Coverage Results" MODIFIED="1545837736488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
+    <SUITE FILE_PATH="coverage/shoot$process_shoot_model.coverage" NAME="process_shoot_model Coverage Results" MODIFIED="1545920640027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$readData.coverage" NAME="readData Coverage Results" MODIFIED="1531315166449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$ReadData.coverage" NAME="ReadData Coverage Results" MODIFIED="1530531350577" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$process_readAndWriteData.coverage" NAME="process_readAndWriteData Coverage Results" MODIFIED="1545208927829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
@@ -55,95 +57,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shootweb/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="160" column="33" lean-forward="true" selection-start-line="160" selection-start-column="33" selection-end-line="160" selection-end-column="33" />
+            <state relative-caret-position="298">
+              <caret line="285" column="24" selection-start-line="285" selection-start-column="24" selection-end-line="285" selection-end-column="24" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_history.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-703">
-              <caret line="5" column="61" lean-forward="true" selection-start-line="5" selection-start-column="61" selection-end-line="5" selection-end-column="61" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/shootlib.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6593">
-              <caret line="355" column="21" selection-start-line="355" selection-start-column="21" selection-end-line="355" selection-end-column="21" />
-              <folding>
-                <element signature="e#24#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/process_shoot_model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4009">
-              <caret line="218" column="37" selection-start-line="218" selection-start-column="37" selection-end-line="218" selection-end-column="37" />
-              <folding>
-                <element signature="e#24#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2261">
-              <caret line="120" column="29" selection-start-line="120" selection-start-column="29" selection-end-line="120" selection-end-column="29" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/templates/test.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16321">
-              <caret line="859" column="13" selection-start-line="832" selection-start-column="12" selection-end-line="859" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="1935" column="55" lean-forward="true" selection-start-line="1935" selection-start-column="55" selection-end-line="1935" selection-end-column="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shoot/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
-              <folding>
-                <element signature="e#629#661#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/mymiddleware.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -162,18 +80,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>OT</find>
-      <find>rapid_time</find>
-      <find>same</find>
-      <find>report_data</find>
-      <find>shoot</find>
-      <find>x_data_pos</find>
-      <find>data_grade_pre</find>
-      <find>line_pos_five</find>
-      <find>makrLine</find>
-      <find>markLine</find>
       <find>y_data</find>
-      <find>y_shoot_pos</find>
       <find>line_shake_x_y_plus</find>
       <find>line_up_shake</find>
       <find>line_test_five</find>
@@ -188,10 +95,21 @@
       <find>option_line_shake_one</find>
       <find>up_x_10_pos</find>
       <find>line_up_shake_x_y_plus</find>
-      <find>line_shake_merge_info</find>
       <find>option_beside_shake_pos</find>
       <find>line_shake_pos</find>
       <find>line_shake</find>
+      <find>coach</find>
+      <find>hearts</find>
+      <find>best_grade</find>
+      <find>quadrant</find>
+      <find>average_grade</find>
+      <find>accordion</find>
+      <find>line_shake_merge_info</find>
+      <find>y_shoot_pos</find>
+      <find>merge_data</find>
+      <find>射击成绩</find>
+      <find>test_data</find>
+      <find>report_shake_info</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -241,19 +159,19 @@
         <option value="$PROJECT_DIR$/shootweb/SplineInterpolation.py" />
         <option value="$PROJECT_DIR$/shootweb/readAndWriteData.py" />
         <option value="$PROJECT_DIR$/shootweb/static/assets/js/pages/sport_home.js" />
-        <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse.html" />
         <option value="$PROJECT_DIR$/shootweb/templates/sport_home.html" />
         <option value="$PROJECT_DIR$/shootweb/models.py" />
         <option value="$PROJECT_DIR$/shootweb/watch_grade_file.py" />
         <option value="$PROJECT_DIR$/shootweb/process_readAndWriteData.py" />
         <option value="$PROJECT_DIR$/shootweb/config.ini" />
-        <option value="$PROJECT_DIR$/shootweb/templates/test.html" />
         <option value="$PROJECT_DIR$/shoot/urls.py" />
-        <option value="$PROJECT_DIR$/shootweb/mymiddleware.py" />
-        <option value="$PROJECT_DIR$/shootweb/shootlib.py" />
-        <option value="$PROJECT_DIR$/shootweb/process_shoot_model.py" />
         <option value="$PROJECT_DIR$/shootweb/templates/sport_game_history.html" />
+        <option value="$PROJECT_DIR$/shootweb/process_shoot_model.py" />
+        <option value="$PROJECT_DIR$/shootweb/templates/test.html" />
+        <option value="$PROJECT_DIR$/shootweb/mymiddleware.py" />
+        <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse.html" />
         <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" />
+        <option value="$PROJECT_DIR$/shootweb/shootlib.py" />
         <option value="$PROJECT_DIR$/shootweb/views.py" />
       </list>
     </option>
@@ -272,6 +190,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -284,11 +203,16 @@
               <item name="shoot" type="462c0819:PsiDirectoryNode" />
               <item name="shootweb" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="shoot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shoot" type="462c0819:PsiDirectoryNode" />
+              <item name="shootweb" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -496,9 +420,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.shootlib" />
         <item itemvalue="Python.process_shoot_model" />
         <item itemvalue="Python.process_readAndWriteData" />
-        <item itemvalue="Python.shootlib" />
         <item itemvalue="Python.SplineInterpolation" />
         <item itemvalue="Python.readAndWriteData" />
       </list>
@@ -575,7 +499,12 @@
       <workItem from="1545835992841" duration="146000" />
       <workItem from="1545836394187" duration="1787000" />
       <workItem from="1545883606100" duration="1957000" />
-      <workItem from="1545892069560" duration="4146000" />
+      <workItem from="1545892069560" duration="8588000" />
+      <workItem from="1545919753143" duration="6030000" />
+      <workItem from="1545965109733" duration="6120000" />
+      <workItem from="1546004567459" duration="5647000" />
+      <workItem from="1546011330203" duration="607000" />
+      <workItem from="1546057588727" duration="1569000" />
     </task>
     <task id="LOCAL-00001" summary="添加对某一组射击的可视化展示">
       <created>1540262311101</created>
@@ -752,11 +681,18 @@
       <option name="project" value="LOCAL" />
       <updated>1545836577045</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="对数据分析页面修改之前存档">
+      <created>1545898174774</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1545898174774</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="365143000" />
+    <option name="totallyTimeSpent" value="389558000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -769,13 +705,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1552" height="840" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4952381" visible="true" weight="0.24497992" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4952381" visible="true" weight="0.26171353" />
       <window_info id="Structure" order="1" sideWeight="0.50476193" side_tool="true" weight="0.22356091" />
       <window_info id="Favorites" order="2" sideWeight="0.501845" side_tool="true" weight="0.23159304" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32952926" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4966533" visible="true" weight="0.20480226" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4966533" visible="true" weight="0.25706214" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.33333334" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -798,7 +735,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="添加对某一组射击的可视化展示" />
     <MESSAGE value="修改某一组射击可视化展示的后台逻辑，添加全部信息并以表格展示" />
     <MESSAGE value="添加对于多组数据的统计" />
     <MESSAGE value="射击数据页面添加选择时间范围选项" />
@@ -823,7 +759,8 @@
     <MESSAGE value="修改查找射击点的阈值和平稳点范围，以防漏掉射击点，修复其他bug" />
     <MESSAGE value="为每个射击点添加靶图并分别显示" />
     <MESSAGE value="在正面轨迹图上为每个射击点添加靶图" />
-    <option name="LAST_COMMIT_MESSAGE" value="在正面轨迹图上为每个射击点添加靶图" />
+    <MESSAGE value="对数据分析页面修改之前存档" />
+    <option name="LAST_COMMIT_MESSAGE" value="对数据分析页面修改之前存档" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/shootweb/templates/admin_modify_coach.html">
@@ -1024,13 +961,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="35" column="29" lean-forward="true" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/config.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -1090,43 +1020,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/shootlib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6593">
-          <caret line="355" column="21" selection-start-line="355" selection-start-column="21" selection-end-line="355" selection-end-column="21" />
-          <folding>
-            <element signature="e#24#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/process_shoot_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4009">
-          <caret line="218" column="37" selection-start-line="218" selection-start-column="37" selection-end-line="218" selection-end-column="37" />
-          <folding>
-            <element signature="e#24#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2261">
-          <caret line="120" column="29" selection-start-line="120" selection-start-column="29" selection-end-line="120" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/templates/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16321">
-          <caret line="859" column="13" selection-start-line="832" selection-start-column="12" selection-end-line="859" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shoot/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -1137,13 +1030,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/mymiddleware.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_history.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-703">
@@ -1151,17 +1037,101 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2356">
+          <caret line="125" column="14" selection-start-line="125" selection-start-column="4" selection-end-line="125" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/mymiddleware.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/templates/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19703">
+          <caret line="1037" selection-start-line="1037" selection-end-line="1037" />
+          <folding>
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6802">
+          <caret line="358" column="57" selection-start-line="358" selection-start-column="57" selection-end-line="358" selection-end-column="57" />
+          <folding>
+            <element signature="e#16163#16169#0#HTML" expanded="true" />
+            <element signature="e#16169#16175#0#HTML" expanded="true" />
+            <element signature="e#16175#16181#0#HTML" expanded="true" />
+            <element signature="e#16181#16187#0#HTML" expanded="true" />
+            <element signature="e#16166#16172#0#HTML" expanded="true" />
+            <element signature="e#16172#16178#0#HTML" expanded="true" />
+            <element signature="e#16202#16208#0#HTML" expanded="true" />
+            <element signature="e#16208#16214#0#HTML" expanded="true" />
+            <element signature="e#16214#16220#0#HTML" expanded="true" />
+            <element signature="e#16220#16226#0#HTML" expanded="true" />
+            <element signature="e#16226#16232#0#HTML" expanded="true" />
+            <element signature="e#16232#16238#0#HTML" expanded="true" />
+            <element signature="e#16238#16244#0#HTML" expanded="true" />
+            <element signature="e#16244#16250#0#HTML" expanded="true" />
+            <element signature="e#16250#16256#0#HTML" expanded="true" />
+            <element signature="e#16256#16262#0#HTML" expanded="true" />
+            <element signature="e#16222#16228#0#HTML" expanded="true" />
+            <element signature="e#16228#16234#0#HTML" expanded="true" />
+            <element signature="e#16234#16240#0#HTML" expanded="true" />
+            <element signature="e#16240#16246#0#HTML" expanded="true" />
+            <element signature="e#16253#16259#0#HTML" expanded="true" />
+            <element signature="e#16259#16265#0#HTML" expanded="true" />
+            <element signature="e#16265#16271#0#HTML" expanded="true" />
+            <element signature="e#16271#16277#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#5;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/process_shoot_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12882">
+          <caret line="685" column="33" selection-start-line="685" selection-start-column="33" selection-end-line="685" selection-end-column="33" />
+          <folding>
+            <element signature="e#24#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="1935" column="55" lean-forward="true" selection-start-line="1935" selection-start-column="55" selection-end-line="1935" selection-end-column="55" />
+        <state relative-caret-position="335">
+          <caret line="2093" column="83" lean-forward="true" selection-start-line="2093" selection-start-column="83" selection-end-line="2093" selection-end-column="83" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/shootlib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="226" column="14" lean-forward="true" selection-start-line="226" selection-start-column="14" selection-end-line="226" selection-end-column="14" />
+          <folding>
+            <element signature="e#24#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="160" column="33" lean-forward="true" selection-start-line="160" selection-start-column="33" selection-end-line="160" selection-end-column="33" />
+        <state relative-caret-position="298">
+          <caret line="285" column="24" selection-start-line="285" selection-start-column="24" selection-end-line="285" selection-end-column="24" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>

@@ -18,7 +18,7 @@ def login_admin(request):
     if request.method == 'GET':
         return render(request, 'login_admin.html')
     result = {}
-    if request.method == "POST":  # 请求方法为POST时，进行处理
+    if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = user_info.objects.filter(user_name=username)
@@ -38,10 +38,10 @@ def login_admin(request):
 def get_user_info(request):
     if request.method == 'POST':
         users = user_info.objects.filter(role="athlete")
-        result = {}
+        result = dict()
         result['data'] = []
         for user in users:
-            u = {}
+            u = dict()
             u['id'] = user.id
             u['user_name'] = user.user_name
             result['data'].append(u)
@@ -61,7 +61,6 @@ def login(request):
     if request.method == 'POST':
         user_id = request.POST['user_id']
         user = user_info.objects.get(id=int(user_id))
-
         request.session['user'] = user.user_name
         request.session['user_id'] = user.id
         request.session['role'] = user.role
@@ -72,7 +71,6 @@ def login(request):
             observer.stop()
             del observer
         observer = watch_grade_file.start_watch(user.user_name)
-        # request.session['observer'] = observer
         return redirect("sport_home")
 
 
@@ -113,7 +111,6 @@ def coach_sport_info_detail(request):
 
 def sport_game_analyse(request):
     user_name = request.session.get('user', "")
-
     shoot_reports = []
     best_grade = 0
     bad_grade = 100
@@ -125,37 +122,49 @@ def sport_game_analyse(request):
     left_up = 0
     left_blow = 0
     right_blow = 0
-    grades = ""
-    r_pos = ""
-    p_pos = ""
-    hearts = ""
+    grades = []
+    r_pos = []
+    p_pos = []
+    x_pos = []
+    y_pos = []
+    hearts = []
+    report_shake_info = []
     if request.method == 'POST':
         report_id = request.POST['report_id']
-        # print(report_id)
         ids = report_id.split(",")
         for id in ids:
             # print(id)
             num += 1
             report = shoot_report.objects.get(id=id)
             grade = float(report.total_grade)
-            grades += str(report.total_grade) + ","
+            grades.append(grade)
             total_grade += grade
             if grade > best_grade:
                 best_grade = grade
             if grade < bad_grade:
                 bad_grade = grade
             shoot_reports.append(report)
+
+            shake_info = {}
             shoot_grades = shoot_grade.objects.filter(report_id=id)
             heart_temp = []
             heart_total = 0
+            shake_info['x_pos'] = []
+            shake_info['y_pos'] = []
+            shake_info['grades'] = []
             for grade in shoot_grades:
                 # print(grade.id)
+                shake_info['grades'].append(grade.grade)
                 x = float(grade.x_pos)
                 y = float(grade.y_pos)
+                x_pos.append(x)
+                shake_info['x_pos'].append(x)
+                shake_info['y_pos'].append(y)
+                y_pos.append(y)
                 r, p = shootlib.cart_to_polar(x, y)
                 r = 11 - r
-                r_pos += str(r) + ","
-                p_pos += str(p) + ","
+                r_pos.append(r)
+                p_pos.append(p)
                 if x > 0 and y > 0:
                     quadrant[0] += 1
                     right_up += 1
@@ -175,26 +184,61 @@ def sport_game_analyse(request):
                 heart = heart_total / len(heart_temp)
             else:
                 heart = 0
-            hearts += str(heart) + ","
+            hearts.append(heart)
+            if report.x_shake_pos is not None and report.x_up_shake_pos is not None:
+                x_shake_data, y_shake_data, x_up_shake_data, y_up_shake_data = shootlib.process_shake_pos_info(
+                    report.x_shake_pos,
+                    report.y_shake_pos,
+                    report.x_up_shake_pos,
+                    report.y_up_shake_pos)
+                is_insert = False
+                y_data = y_shake_data.split(",")
+                x_up_data = x_up_shake_data.split(",")
+                y_up_data = y_up_shake_data.split(",")
+
+                y_data = shootlib.get_int_data(y_data, is_negative=True)
+                x_up_data = shootlib.get_int_data(x_up_data)
+                y_up_data = shootlib.get_int_data(y_up_data)
+
+                y_data, num = shootlib.cut_shake_data(y_data)
+                x_up_data = x_up_data[num:]
+                y_up_data = y_up_data[num:]
+
+                y_data_plus = shootlib.shake_data_process(y_data)
+                x_up_data_plus = shootlib.shake_data_process(x_up_data)
+
+                nums = shootlib.get_shoot_point(y_data, is_insert=is_insert)
+                up_nums = shootlib.get_shoot_point(y_up_data, is_insert=is_insert, limit=5)
+
+                y_shoot_pos, y_pos_array = shootlib.shake_get_plus_shoot_point(y_data_plus, nums, is_insert=is_insert)
+                x_shoot_pos, x_pos_array = shootlib.shake_get_plus_shoot_point(x_up_data_plus, nums,
+                                                                               is_insert=is_insert)
+                x_up_shoot_pos, _ = shootlib.shake_get_plus_shoot_point(x_up_data_plus, up_nums, is_insert=is_insert)
+                up_x_10_pos, up_shake_rate = shootlib.get_up_shoot_limit(x_up_shoot_pos, shake_info['x_pos'],
+                                                                         shake_info['grades'])
+
+                shake_info['y_data_plus'] = y_data_plus
+                shake_info['x_up_data_plus'] = x_up_data_plus
+                shake_info['x_shoot_pos'] = x_shoot_pos
+                shake_info['y_shoot_pos'] = y_shoot_pos
+                shake_info['up_shake_rate'] = up_shake_rate
+            report_shake_info.append(shake_info)
         average_grade = round(total_grade / num, 2)
-    grades = grades[:-1]
-    r_pos = r_pos[:-1]
-    p_pos = p_pos[:-1]
-    hearts = hearts[:-1]
+    # average_in_circle = shootlib.get_average_in_circle(x_pos, y_pos)
+    # print(average_in_circle)
+    grade_stability = shootlib.get_grade_stability(x_pos, y_pos)
+    grade_info = dict(grades=grades, r_pos=r_pos, p_pos=p_pos, hearts=hearts, grade_stability=grade_stability)
     return render(request, 'sport_game_analyse.html', {
         'shoot_reports': shoot_reports,
+        'grade_info': json.dumps(grade_info),
+        'report_shake_info': json.dumps(report_shake_info),
         'best_grade': best_grade,
         'bad_grade': bad_grade,
         'average_grade': average_grade,
-        'quadrant': quadrant,
         'right_up': right_up,
         'left_up': left_up,
         'left_blow': left_blow,
         'right_blow': right_blow,
-        'grades': grades,
-        'r_pos': r_pos,
-        'p_pos': p_pos,
-        'hearts': hearts
     })
 
 
@@ -239,7 +283,7 @@ def sport_game_analyse_id(request):
             report.y_shake_pos,
             report.x_up_shake_pos,
             report.y_up_shake_pos)
-        is_insert = False
+        is_insert = True
         x_data = x_shake_data.split(",")
         y_data = y_shake_data.split(",")
         x_up_data = x_up_shake_data.split(",")
@@ -293,9 +337,9 @@ def sport_game_analyse_id(request):
         up_x_10_pos, up_shake_rate = shootlib.get_up_shoot_limit(x_up_shoot_pos, x_pos, grades)
         # print(x_up_shoot_pos)
         # print(up_x_10_pos)
-        x_pos_str, x_shoot_point = shootlib.process_pos_array(x_pos_array, x_pos, up_shake_rate)
+        x_pos_str, x_shoot_point = shootlib.process_pos_array(x_pos_array, x_pos, up_shake_rate, is_insert=is_insert)
         y_pos_str, y_shoot_point, y_pos_average_str = shootlib.process_pos_array(y_pos_array, y_pos, up_shake_rate,
-                                                                                 is_average=True)
+                                                                                 is_average=True, is_insert=is_insert)
 
         five_pos_info['x_pos_str'] = x_pos_str
         five_pos_info['y_pos_str'] = y_pos_str
