@@ -222,7 +222,7 @@ def shake_get_plus_shoot_point(data_plus_array, nums, is_insert=False):
     pos = []
     j = 0
     n = 10
-    m = 0
+    m = 2
     if is_insert:
         n *= 5
         m = 5
@@ -434,16 +434,13 @@ def get_grade_stability(x_pos, y_pos):
     return round(res / len(x_pos), 2)
 
 
-def process_pos_array(pos_array, shoot_pos, up_shake_rate, is_average=False, is_insert=False):
+def process_pos_array(pos_array, shoot_pos, grade_pos, up_shake_rate, is_average=False):
     y_pos_average_str = []
     y_pos_str = []
     last_num = None
     temp_sum = 0
     i = 5 - len(pos_array)
     shoot_point = []
-    j = 1
-    if is_insert:
-        j = 6
     for pos_a in pos_array:
         temp = []
         for y_d in pos_a:
@@ -452,9 +449,9 @@ def process_pos_array(pos_array, shoot_pos, up_shake_rate, is_average=False, is_
                     cha = y_d - last_num
                     temp_sum += cha
                 last_num = y_d
-            d1 = round(y_d - pos_a[len(pos_a) - j], 2) + int(shoot_pos[i] / up_shake_rate)
+            d1 = round(y_d - shoot_pos[i], 2) + int(grade_pos[i] / up_shake_rate)
             temp.append(d1)
-        shoot_point.append(temp[len(pos_a) - j])
+        shoot_point.append(int(grade_pos[i] / up_shake_rate))
         i += 1
         if is_average:
             y_pos_average_str.append(round(temp_sum / (len(pos_a) - 1), 2))

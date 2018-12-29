@@ -115,7 +115,7 @@ def sport_game_analyse(request):
     best_grade = 0
     bad_grade = 100
     total_grade = 0
-    num = 0
+    report_num = 0
     average_grade = 0
     quadrant = [0, 0, 0, 0]
     right_up = 0
@@ -134,7 +134,7 @@ def sport_game_analyse(request):
         ids = report_id.split(",")
         for id in ids:
             # print(id)
-            num += 1
+            report_num += 1
             report = shoot_report.objects.get(id=id)
             grade = float(report.total_grade)
             grades.append(grade)
@@ -223,7 +223,7 @@ def sport_game_analyse(request):
                 shake_info['y_shoot_pos'] = y_shoot_pos
                 shake_info['up_shake_rate'] = up_shake_rate
             report_shake_info.append(shake_info)
-        average_grade = round(total_grade / num, 2)
+        average_grade = round(total_grade / report_num, 2)
     # average_in_circle = shootlib.get_average_in_circle(x_pos, y_pos)
     # print(average_in_circle)
     grade_stability = shootlib.get_grade_stability(x_pos, y_pos)
@@ -337,17 +337,16 @@ def sport_game_analyse_id(request):
         up_x_10_pos, up_shake_rate = shootlib.get_up_shoot_limit(x_up_shoot_pos, x_pos, grades)
         # print(x_up_shoot_pos)
         # print(up_x_10_pos)
-        x_pos_str, x_shoot_point = shootlib.process_pos_array(x_pos_array, x_pos, up_shake_rate, is_insert=is_insert)
-        y_pos_str, y_shoot_point, y_pos_average_str = shootlib.process_pos_array(y_pos_array, y_pos, up_shake_rate,
-                                                                                 is_average=True, is_insert=is_insert)
-
-        five_pos_info['x_pos_str'] = x_pos_str
-        five_pos_info['y_pos_str'] = y_pos_str
-        five_pos_info['y_pos_average_str'] = y_pos_average_str
-        five_pos_info['up_shake_rate'] = up_shake_rate
-
-        five_pos_info['x_shoot_point'] = x_shoot_point
-        five_pos_info['y_shoot_point'] = y_shoot_point
+        if up_shake_rate is not None:
+            x_pos_str, x_shoot_point = shootlib.process_pos_array(x_pos_array, x_shoot_pos, x_pos, up_shake_rate)
+            y_pos_str, y_shoot_point, y_pos_average_str = shootlib.process_pos_array(y_pos_array, y_shoot_pos, y_pos,
+                                                                            up_shake_rate, is_average=True)
+            five_pos_info['up_shake_rate'] = up_shake_rate
+            five_pos_info['x_pos_str'] = x_pos_str
+            five_pos_info['y_pos_str'] = y_pos_str
+            five_pos_info['y_pos_average_str'] = y_pos_average_str
+            five_pos_info['x_shoot_point'] = x_shoot_point
+            five_pos_info['y_shoot_point'] = y_shoot_point
 
         shake_info['x_data_plus'] = x_data_plus
         shake_info['y_data_plus'] = y_data_plus
