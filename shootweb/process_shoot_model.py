@@ -618,60 +618,6 @@ def process_shake_time_data():
         up_data.save()
 
 
-def update_data(user_name):
-    # shake_datas = shake_all_info.objects.filter(is_process=0).filter(user_name=user_name)
-    # for data in shake_datas:
-    #     record_time = data.record_time
-    #     report_times = shoot_report.objects.filter(shoot_date=data.record_date).filter(
-    #         start_time__lte=record_time).filter(end_time__gte=record_time)
-    #     if len(report_times) > 0:
-    #         print(len(report_times))
-    #         print(data.record_time + " shake  find report data " + report_times[0].start_time)
-    #         if string_to_time(data.end_time) - string_to_time(data.start_time) <= datetime.timedelta(seconds=2):
-    #             print("delete " + data.record_time)
-    #             data.delete()
-    #     else:
-    #         print(data.record_time + " shake  not find report data")
-    #         data.delete()
-
-    shoot_reports = shoot_report.objects.filter(is_process=0).filter(user_name=user_name)
-    shoot_reports = shoot_report.objects.filter(user_name=user_name)
-    if len(shoot_reports) > 0:
-        for report in shoot_reports:
-            report_time = time_to_string_mill(string_to_time_mill(report.shoot_time) + datetime.timedelta(seconds=2))
-            shake_times = shake_all_info.objects.filter(start_time__lte=report_time).filter(
-                end_time__gte=report_time)
-            if len(shake_times) == 1:
-                print('find shake:' + report.shoot_time)
-                shake = shake_times[0]
-                # report.x_shake_data = shake.beside_x_data
-                # report.y_shake_data = shake.beside_y_data
-                # report.x_shake_pos = shake.beside_x_pos
-                # report.y_shake_pos = shake.beside_y_pos
-                # report.x_up_shake_data = shake.up_x_data
-                # report.y_up_shake_data = shake.up_y_data
-                # report.x_up_shake_pos = shake.up_x_pos
-                # report.y_up_shake_pos = shake.up_y_pos
-                report.remark = shake.remark
-                # report.is_process = 1
-                # shake.is_process = 1
-                # shake.save()
-                report.save()
-            else:
-                print('not find shake ' + report.shoot_time)
-            # grades = shoot_grade.objects.filter(report_id=report.id)
-            # for grade in grades:
-            #     heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
-            #     if len(heart_times) >= 1:
-            #         print('find heart data')
-            #         heart_time = heart_times[0]
-            #         grade.heart_rate = heart_time.average_rate
-            #     else:
-            #         print('no heart data')
-            #         grade.heart_rate = 0
-            #     grade.save()
-
-
 if __name__ == "__main__":
     print("shoot")
     # test()
