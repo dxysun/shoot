@@ -60,11 +60,7 @@ def save_report_info():
     g_i = 0
     for report in shoot_reports:
         print(report.shoot_date + " " + report.start_time)
-        report_df.loc[r_i] = [report.id, report.shoot_date, report.shoot_time, report.start_time, report.end_time,
-                              float(report.total_grade), int(report.remark), report.x_shake_data, report.y_shake_data,
-                              report.x_shake_pos, report.y_shake_pos, report.x_up_shake_data, report.y_up_shake_data,
-                              report.x_up_shake_pos, report.y_up_shake_pos]
-        r_i += 1
+
         shoot_grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
         rapid_time = shoot_grades[4].rapid_time
         stage = 8
@@ -78,7 +74,11 @@ def save_report_info():
                 stage = 8
             shoot_grades[4].rapid_time = stage + float(rapid_time)
         last_rapid = 0
+        is_grade_not_zero = True
         for grade in shoot_grades:
+            if int(grade.grade) == 0:
+                is_grade_not_zero = False
+                break
             print(grade.grade_detail_time)
             rapid_time = float(grade.rapid_time)
             if rapid_time < 1:
@@ -89,9 +89,188 @@ def save_report_info():
                                  float(grade.y_pos), int(grade.heart_rate)]
             last_rapid = rapid_time
             g_i += 1
+        if is_grade_not_zero:
+            report_df.loc[r_i] = [report.id, report.shoot_date, report.shoot_time, report.start_time, report.end_time,
+                                  float(report.total_grade), int(report.remark), report.x_shake_data,
+                                  report.y_shake_data,
+                                  report.x_shake_pos, report.y_shake_pos, report.x_up_shake_data,
+                                  report.y_up_shake_data,
+                                  report.x_up_shake_pos, report.y_up_shake_pos]
+            r_i += 1
+        else:
+            print("grade zero")
         print()
     report_df.to_excel("D:/workSpace/PythonWorkspace/shoot/shootweb/data/report_info.xlsx")
     grade_df.to_excel("D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_info.xlsx")
+
+
+def save_first_shoot_info():
+    shoot_reports = shoot_report.objects.all()
+    print(len(shoot_reports))
+    grade_first_shoot_df = pd.DataFrame(columns=['report_id', 'grade_date', 'grade_time', 'grade_detail_time', 'grade',
+                                                 'rapid_time', 'x_pos', 'y_pos', 'heart_rate'])
+    g_i = 0
+    for report in shoot_reports:
+        print(report.shoot_date + " " + report.start_time)
+        shoot_grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
+        grade = shoot_grades[0]
+        grade_first_shoot_df.loc[g_i] = [grade.report_id, grade.grade_date, grade.grade_time,
+                                         grade.grade_detail_time,
+                                         float(grade.grade), float(grade.rapid_time),
+                                         float(grade.x_pos),
+                                         float(grade.y_pos), int(grade.heart_rate)]
+        g_i += 1
+
+    grade_first_shoot_df.to_excel("D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_first_shoot_info.xlsx")
+
+
+def save_first_shoot_info_by_stage():
+    shoot_reports = shoot_report.objects.all()
+    print(len(shoot_reports))
+    grade_first_shoot_df_4 = pd.DataFrame(
+        columns=['report_id', 'grade_date', 'grade_time', 'grade_detail_time', 'grade',
+                 'rapid_time', 'x_pos', 'y_pos', 'heart_rate'])
+    grade_first_shoot_df_6 = pd.DataFrame(
+        columns=['report_id', 'grade_date', 'grade_time', 'grade_detail_time', 'grade',
+                 'rapid_time', 'x_pos', 'y_pos', 'heart_rate'])
+    grade_first_shoot_df_8 = pd.DataFrame(
+        columns=['report_id', 'grade_date', 'grade_time', 'grade_detail_time', 'grade',
+                 'rapid_time', 'x_pos', 'y_pos', 'heart_rate'])
+    g_i_4 = 0
+    g_i_6 = 0
+    g_i_8 = 0
+    for report in shoot_reports:
+        print(report.shoot_date + " " + report.start_time)
+        shoot_grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
+        grade = shoot_grades[0]
+        stage = int(report.remark)
+        if stage == 4:
+            grade_first_shoot_df_4.loc[g_i_4] = [grade.report_id, grade.grade_date, grade.grade_time,
+                                                 grade.grade_detail_time,
+                                                 float(grade.grade), float(grade.rapid_time),
+                                                 float(grade.x_pos),
+                                                 float(grade.y_pos), int(grade.heart_rate)]
+            g_i_4 += 1
+        if stage == 6:
+            grade_first_shoot_df_6.loc[g_i_6] = [grade.report_id, grade.grade_date, grade.grade_time,
+                                                 grade.grade_detail_time,
+                                                 float(grade.grade), float(grade.rapid_time),
+                                                 float(grade.x_pos),
+                                                 float(grade.y_pos), int(grade.heart_rate)]
+            g_i_6 += 1
+        if stage == 8:
+            grade_first_shoot_df_8.loc[g_i_8] = [grade.report_id, grade.grade_date, grade.grade_time,
+                                                 grade.grade_detail_time,
+                                                 float(grade.grade), float(grade.rapid_time),
+                                                 float(grade.x_pos),
+                                                 float(grade.y_pos), int(grade.heart_rate)]
+            g_i_8 += 1
+
+    grade_first_shoot_df_4.to_excel("D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_first_shoot_info_4.xlsx")
+    grade_first_shoot_df_6.to_excel("D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_first_shoot_info_6.xlsx")
+    grade_first_shoot_df_8.to_excel("D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_first_shoot_info_8.xlsx")
+
+
+def save_report_by_stage():
+    shoot_reports = shoot_report.objects.all()
+    print(len(shoot_reports))
+    report_df_4 = pd.DataFrame(columns=['id', 'shoot_date', 'shoot_time', 'start_time', 'end_time', 'total_grade',
+                                        'stage', 'x_shake_data', 'y_shake_data', 'x_shake_pos', 'y_shake_pos',
+                                        'x_up_shake_data', 'y_up_shake_data', 'x_up_shake_pos', 'y_up_shake_pos'])
+    report_df_6 = pd.DataFrame(columns=['id', 'shoot_date', 'shoot_time', 'start_time', 'end_time', 'total_grade',
+                                        'stage', 'x_shake_data', 'y_shake_data', 'x_shake_pos', 'y_shake_pos',
+                                        'x_up_shake_data', 'y_up_shake_data', 'x_up_shake_pos', 'y_up_shake_pos'])
+    report_df_8 = pd.DataFrame(columns=['id', 'shoot_date', 'shoot_time', 'start_time', 'end_time', 'total_grade',
+                                        'stage', 'x_shake_data', 'y_shake_data', 'x_shake_pos', 'y_shake_pos',
+                                        'x_up_shake_data', 'y_up_shake_data', 'x_up_shake_pos', 'y_up_shake_pos'])
+    grade_df_4 = pd.DataFrame(columns=['report_id', 'grade_date', 'grade_time', 'grade_detail_time', 'grade',
+                                       'rapid_time', 'grade_rapid_time', 'x_pos', 'y_pos', 'heart_rate'])
+    grade_df_6 = pd.DataFrame(columns=['report_id', 'grade_date', 'grade_time', 'grade_detail_time', 'grade',
+                                       'rapid_time', 'grade_rapid_time', 'x_pos', 'y_pos', 'heart_rate'])
+    grade_df_8 = pd.DataFrame(columns=['report_id', 'grade_date', 'grade_time', 'grade_detail_time', 'grade',
+                                       'rapid_time', 'grade_rapid_time', 'x_pos', 'y_pos', 'heart_rate'])
+    r_i_4 = 0
+    g_i_6 = 0
+    r_i_8 = 0
+    g_i_4 = 0
+    r_i_6 = 0
+    g_i_8 = 0
+    for report in shoot_reports:
+        print(report.shoot_date + " " + report.start_time)
+
+        shoot_grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
+        rapid_time = shoot_grades[4].rapid_time
+        stage = int(report.remark)
+        if float(rapid_time) < 1:
+            shoot_grades[4].rapid_time = stage + float(rapid_time)
+        last_rapid = 0
+        is_grade_not_zero = True
+        for grade in shoot_grades:
+            if int(grade.grade) == 0:
+                is_grade_not_zero = False
+                break
+            print(grade.grade_detail_time)
+            rapid_time = float(grade.rapid_time)
+            if rapid_time < 1:
+                rapid_time = int(report.remark) + rapid_time
+            grade_rapid_time = rapid_time - last_rapid
+            if stage == 4:
+                grade_df_4.loc[g_i_4] = [grade.report_id, grade.grade_date, grade.grade_time, grade.grade_detail_time,
+                                         float(grade.grade), float(grade.rapid_time), grade_rapid_time,
+                                         float(grade.x_pos),
+                                         float(grade.y_pos), int(grade.heart_rate)]
+                g_i_4 += 1
+            elif stage == 6:
+                grade_df_6.loc[g_i_6] = [grade.report_id, grade.grade_date, grade.grade_time, grade.grade_detail_time,
+                                         float(grade.grade), float(grade.rapid_time), grade_rapid_time,
+                                         float(grade.x_pos),
+                                         float(grade.y_pos), int(grade.heart_rate)]
+                g_i_6 += 1
+            else:
+                grade_df_6.loc[g_i_8] = [grade.report_id, grade.grade_date, grade.grade_time, grade.grade_detail_time,
+                                         float(grade.grade), float(grade.rapid_time), grade_rapid_time,
+                                         float(grade.x_pos),
+                                         float(grade.y_pos), int(grade.heart_rate)]
+                g_i_8 += 1
+
+            last_rapid = rapid_time
+        if is_grade_not_zero:
+            if stage == 4:
+                report_df_4.loc[r_i_4] = [report.id, report.shoot_date, report.shoot_time, report.start_time,
+                                          report.end_time,
+                                          float(report.total_grade), int(report.remark), report.x_shake_data,
+                                          report.y_shake_data,
+                                          report.x_shake_pos, report.y_shake_pos, report.x_up_shake_data,
+                                          report.y_up_shake_data,
+                                          report.x_up_shake_pos, report.y_up_shake_pos]
+                r_i_4 += 1
+            elif stage == 6:
+                report_df_6.loc[r_i_6] = [report.id, report.shoot_date, report.shoot_time, report.start_time,
+                                          report.end_time,
+                                          float(report.total_grade), int(report.remark), report.x_shake_data,
+                                          report.y_shake_data,
+                                          report.x_shake_pos, report.y_shake_pos, report.x_up_shake_data,
+                                          report.y_up_shake_data,
+                                          report.x_up_shake_pos, report.y_up_shake_pos]
+                r_i_6 += 1
+            else:
+                report_df_8.loc[r_i_8] = [report.id, report.shoot_date, report.shoot_time, report.start_time,
+                                          report.end_time,
+                                          float(report.total_grade), int(report.remark), report.x_shake_data,
+                                          report.y_shake_data,
+                                          report.x_shake_pos, report.y_shake_pos, report.x_up_shake_data,
+                                          report.y_up_shake_data,
+                                          report.x_up_shake_pos, report.y_up_shake_pos]
+                r_i_8 += 1
+        else:
+            print("grade zero")
+        print()
+    report_df_4.to_excel("D:/workSpace/PythonWorkspace/shoot/shootweb/data/report_info_4.xlsx")
+    grade_df_4.to_excel("D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_info_4.xlsx")
+    report_df_6.to_excel("D:/workSpace/PythonWorkspace/shoot/shootweb/data/report_info_6.xlsx")
+    grade_df_6.to_excel("D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_info_6.xlsx")
+    report_df_8.to_excel("D:/workSpace/PythonWorkspace/shoot/shootweb/data/report_info_8.xlsx")
+    grade_df_8.to_excel("D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_info_8.xlsx")
 
 
 def save_grade_info():
@@ -108,3 +287,6 @@ if __name__ == "__main__":
     print()
     # save_report_info()
     # save_grade_info()
+    # save_first_shoot_info()
+    # save_report_by_stage()
+    save_first_shoot_info_by_stage()

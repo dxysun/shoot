@@ -1,1032 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7d03cb4f-baf8-47fc-b3ac-218109122674" name="Default" comment="修改bug，数据分析界面平均成绩显示不正确的bug，根据上面摄像头换算比例可能为空的bug">
-      <change afterPath="$PROJECT_DIR$/shootweb/shoot_data_mining.py" afterDir="false" />
+    <list default="true" id="7d03cb4f-baf8-47fc-b3ac-218109122674" name="Default" comment="添加数据分析挖掘部分">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/data.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-19-22.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-20-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-20-30.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-20-39.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-22-18.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-22-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-22-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-23-21.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-23-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-24-09.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-24-19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-24-57.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-25-07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-25-42.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-25-52.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-26-31.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-26-42.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-27-18.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-27-27.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-28-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-28-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-29-07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-29-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-31-37.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-31-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-32-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-32-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-33-09.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-33-20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-33-53.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-34-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-34-37.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-34-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-35-19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-35-29.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-36-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-36-13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-36-49.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-37-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-37-35.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-37-44.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-38-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-38-24.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-40-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-40-24.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-41-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-41-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-42-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-42-25.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-42-53.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-43-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-43-41.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-43-48.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-45-51.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-46-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-46-16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-47-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-47-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-47-26.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-48-04.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-48-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/10-48-44.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/beside/11-05-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-19-22.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-20-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-20-30.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-20-39.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-22-18.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-22-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-22-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-23-21.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-23-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-24-09.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-24-19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-24-57.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-25-07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-25-42.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-25-52.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-26-31.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-26-42.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-27-18.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-27-27.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-28-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-28-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-29-07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-29-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-31-37.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-31-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-32-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-32-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-33-09.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-33-20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-33-53.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-34-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-34-37.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-34-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-35-19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-35-29.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-36-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-36-13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-36-49.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-37-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-37-35.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-37-44.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-38-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-38-24.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-40-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-40-24.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-41-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-41-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-42-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-42-25.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-42-53.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-43-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-43-41.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-43-48.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-45-51.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-46-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-46-16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-47-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-47-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-47-26.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-48-04.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-48-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/10-48-44.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/horizontal/11-05-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-20-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-20-30.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-20-39.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-20-53.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-20-57.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-21-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-22-18.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-22-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-22-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-23-21.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-23-32.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-24-09.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-24-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-24-56.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-25-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-25-42.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-25-52.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-26-31.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-26-41.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-27-18.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-27-26.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-28-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-29-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-31-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-31-46.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-32-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-32-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-33-09.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-33-20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-33-52.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-34-02.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-34-37.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-34-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-35-19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-35-29.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-36-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-36-13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-36-49.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-36-59.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-37-35.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-37-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-38-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-38-24.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-40-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-40-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-41-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-41-13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-42-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-42-24.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-42-53.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-43-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-43-41.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-43-46.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-45-49.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-46-05.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-46-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-47-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-47-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-47-25.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-48-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-48-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-48-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/10-52-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/up/11-05-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-19-22.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-20-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-20-30.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-20-39.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-22-18.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-22-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-22-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-23-21.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-23-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-24-09.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-24-19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-24-57.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-25-07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-25-42.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-25-52.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-26-31.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-26-42.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-27-18.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-27-27.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-28-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-28-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-29-07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-29-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-31-37.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-31-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-32-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-32-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-33-09.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-33-20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-33-53.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-34-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-34-37.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-34-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-35-19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-35-29.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-36-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-36-13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-36-49.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-37-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-37-35.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-37-44.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-38-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-38-24.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-40-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-40-24.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-41-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-41-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-42-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-42-25.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-42-53.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-43-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-43-41.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-43-48.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-45-51.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-46-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-46-16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-47-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-47-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-47-26.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-48-04.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-48-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/10-48-44.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/camera/vertical/11-05-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-19-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-23-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-24-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-25-48.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-28-26.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-31-45.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-32-28.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-33-16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-33-58.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-34-44.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-36-10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-37-41.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-38-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-43-58.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-45-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-47-22.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/10-48-51.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/11-05-01.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/11-08-39.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/11-09-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/11-10-04.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/11-10-45.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/11-11-27.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/11-12-07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/11-12-50.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/heart/11-13-29.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/after_process/shoot_20180707_after_process.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/FILE_NET_PRT_PARA_2018_0413.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/FILE_NET_PRT_PARA_2018_0413_1.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/FILE_NET_PRT_PARA_2018_0413_2.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-20-17 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-20-30 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-20-39 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-20-53 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-20-57 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-21-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-22-18 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-22-33 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-22-43 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-23-21 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-23-32 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-24-09 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-24-15 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-24-56 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-25-06 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-25-42 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-25-52 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-26-31 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-26-41 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-27-18 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-27-26 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-28-23 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-29-06 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-31-36 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-31-46 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-32-23 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-32-33 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-33-09 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-33-20 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-33-52 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-34-02 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-34-37 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-34-47 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-35-19 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-35-29 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-36-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-36-13 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-36-49 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-36-59 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-37-35 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-37-43 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-38-14 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-38-24 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-40-14 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-40-23 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-41-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-41-13 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-42-15 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-42-24 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-42-53 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-43-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-43-41 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-43-46 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-45-49 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-46-05 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-46-15 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-47-00 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-47-14 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-47-25 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-48-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-48-14 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-48-43 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 10-52-34 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/up/Up2018-07-06 11-05-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-19-22 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-20-17 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-20-30 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-20-39 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-22-18 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-22-33 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-22-43 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-23-21 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-23-33 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-24-09 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-24-19 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-24-57 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-25-07 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-25-42 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-25-52 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-26-31 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-26-42 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-27-18 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-27-27 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-28-23 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-28-34 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-29-07 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-29-17 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-31-37 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-31-47 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-32-23 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-32-34 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-33-09 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-33-20 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-33-53 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-34-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-34-37 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-34-47 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-35-19 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-35-29 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-36-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-36-13 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-36-49 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-37-00 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-37-35 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-37-44 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-38-14 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-38-24 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-40-14 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-40-24 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-41-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-41-14 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-42-15 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-42-25 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-42-53 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-43-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-43-41 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-43-48 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-45-51 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-46-06 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-46-16 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-47-00 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-47-15 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-47-26 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-48-04 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-48-15 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 10-48-44 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/x/BesideX2018-07-06 11-05-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-19-22 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-20-17 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-20-30 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-20-39 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-22-18 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-22-33 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-22-43 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-23-21 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-23-33 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-24-09 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-24-19 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-24-57 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-25-07 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-25-42 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-25-52 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-26-31 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-26-42 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-27-18 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-27-27 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-28-23 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-28-34 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-29-07 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-29-17 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-31-37 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-31-47 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-32-23 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-32-34 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-33-09 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-33-20 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-33-53 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-34-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-34-37 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-34-47 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-35-19 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-35-29 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-36-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-36-13 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-36-49 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-37-00 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-37-35 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-37-44 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-38-14 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-38-24 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-40-14 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-40-24 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-41-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-41-14 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-42-15 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-42-25 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-42-53 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-43-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-43-41 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-43-48 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-45-51 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-46-06 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-46-16 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-47-00 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-47-15 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-47-26 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-48-04 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-48-15 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 10-48-44 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/camera/y/BesideY2018-07-06 11-05-03 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-19-33 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-23-34 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-24-14 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-25-48 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-28-26 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-31-45 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-32-28 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-33-16 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-33-58 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-34-44 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-36-10 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-37-41 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-38-14 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-43-58 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-45-14 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-47-22 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 10-48-51 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 11-05-01 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 11-08-39 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 11-09-23 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 11-10-04 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 11-10-45 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 11-11-27 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 11-12-07 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 11-12-50 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/heart/Heart2018-07-06 11-13-29 Friday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/origin/shoot_2018_0706.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-18-50.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-19-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-19-12.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-19-26.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-19-30.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-19-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-20-51.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-21-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-21-16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-21-54.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-22-05.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-22-42.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-22-48.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-23-29.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-23-39.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-24-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-24-25.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-25-04.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-25-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-25-51.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-25-59.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-26-56.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-27-39.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-30-09.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-30-19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-30-56.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-31-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-31-42.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-31-53.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-32-25.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-32-35.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-33-10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-33-20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-33-52.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-34-02.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-34-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-34-46.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-35-22.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-35-32.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-36-08.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-36-16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-36-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-36-57.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-38-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-38-56.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-39-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-39-46.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-40-48.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-40-57.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-41-26.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-41-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-42-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-42-19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-44-22.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-44-38.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-44-48.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-45-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-45-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-45-58.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-46-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-46-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-47-16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/10-51-07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/up/11-03-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-17-55.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-18-50.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-19-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-19-12.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-20-51.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-21-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-21-16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-21-54.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-22-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-22-42.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-22-52.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-23-30.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-23-40.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-24-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-24-25.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-25-04.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-25-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-25-51.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-26-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-26-56.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-27-07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-27-40.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-27-50.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-30-10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-30-20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-30-56.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-31-07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-31-42.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-31-53.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-32-26.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-32-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-33-10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-33-20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-33-52.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-34-02.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-34-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-34-46.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-35-22.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-35-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-36-08.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-36-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-36-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-36-57.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-38-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-38-57.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-39-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-39-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-40-48.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-40-58.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-41-26.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-41-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-42-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-42-21.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-44-24.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-44-39.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-44-49.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-45-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-45-48.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-45-59.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-46-37.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-46-48.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/10-47-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/x/11-03-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-17-55.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-18-50.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-19-03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-19-12.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-20-51.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-21-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-21-16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-21-54.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-22-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-22-42.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-22-52.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-23-30.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-23-40.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-24-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-24-25.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-25-04.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-25-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-25-51.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-26-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-26-56.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-27-07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-27-40.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-27-50.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-30-10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-30-20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-30-56.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-31-07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-31-42.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-31-53.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-32-26.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-32-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-33-10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-33-20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-33-52.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-34-02.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-34-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-34-46.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-35-22.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-35-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-36-08.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-36-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-36-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-36-57.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-38-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-38-57.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-39-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-39-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-40-48.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-40-58.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-41-26.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-41-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-42-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-42-21.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-44-24.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-44-39.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-44-49.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-45-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-45-48.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-45-59.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-46-37.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-46-48.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/10-47-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/camera/y/11-03-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-18-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-22-07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-22-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-24-21.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-26-59.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-30-18.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-31-01.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-31-49.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-32-31.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-33-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-34-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-36-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-36-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-42-31.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-43-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-45-55.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/10-47-24.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/11-03-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/11-07-12.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/11-07-56.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/11-08-37.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/11-09-18.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/11-10-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/11-10-40.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/11-11-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/second_process/heart/11-12-02.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/third_process/camera/x/10-17-55.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/third_process/camera/x/10-19-12.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/first/third_process/camera/x/10-21-16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-15-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-15-11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-16-28.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-16-39.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-18-13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-18-21.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-19-45.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-19-55.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-21-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-21-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-23-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-23-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-25-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-25-46.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-27-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-27-44.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-29-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-29-16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-30-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-30-57.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-31-11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-31-13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-31-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-31-27.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-32-37.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-32-40.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-32-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-33-12.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-33-25.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-33-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-34-51.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-35-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-36-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-36-27.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-37-45.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-37-54.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-39-09.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/merge/10-39-19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-14-59.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-15-11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-16-27.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-16-39.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-18-11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-18-21.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-19-44.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-19-54.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-21-13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-21-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-23-31.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-23-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-25-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-25-46.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-27-32.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-27-44.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-29-05.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-29-16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-30-45.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-30-56.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-33-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-33-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-34-49.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-35-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-36-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-36-26.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-37-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-37-54.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-39-07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/up/10-39-19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-15-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-15-11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-16-28.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-16-39.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-18-13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-18-21.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-19-45.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-19-55.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-21-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-21-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-23-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-23-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-25-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-25-46.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-27-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-27-44.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-29-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-29-16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-30-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-30-57.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-31-11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-31-13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-31-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-31-27.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-32-37.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-32-40.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-32-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-33-12.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-33-25.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-33-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-34-51.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-35-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-36-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-36-27.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-37-45.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-37-54.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-39-09.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/x/10-39-19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-15-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-15-11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-16-28.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-16-39.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-18-13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-18-21.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-19-45.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-19-55.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-21-15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-21-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-23-33.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-23-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-25-36.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-25-46.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-27-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-27-44.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-29-06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-29-16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-30-47.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-30-57.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-31-11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-31-13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-31-23.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-31-27.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-32-37.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-32-40.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-32-43.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-33-12.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-33-25.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-33-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-34-51.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-35-00.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-36-17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-36-27.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-37-45.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-37-54.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-39-09.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/camera/y/10-39-19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-10-34.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-15-01.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-16-21.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-18-18.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-19-48.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-21-21.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-23-38.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-25-41.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-27-45.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-29-13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-30-53.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-33-31.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-34-57.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-36-27.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-37-55.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/10-39-14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/11-07-38.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/11-09-08.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/11-11-32.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/11-13-09.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/11-14-50.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/11-16-30.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/11-18-04.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/11-21-01.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/heart/11-23-19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/after_process/shoot_2_2018_0714_after_process.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/FILE_shoot_2_2018_0714.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-16-26 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-16-38 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-17-54 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-18-06 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-19-38 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-19-48 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-21-11 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-21-21 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-22-40 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-22-50 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-24-58 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-25-10 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-27-01 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-27-13 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-28-59 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-29-11 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-30-32 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-30-43 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-32-12 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-32-23 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-34-50 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-35-00 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-36-16 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-36-27 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-37-42 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-37-53 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-39-10 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-39-21 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-40-34 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/up/Up2018-07-14 10-40-46 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-16-27 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-16-38 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-17-55 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-18-06 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-19-40 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-19-48 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-21-12 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-21-22 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-22-42 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-22-50 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-25-00 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-25-10 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-27-03 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-27-13 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-29-01 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-29-11 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-30-33 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-30-43 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-32-14 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-32-24 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-32-38 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-32-40 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-32-50 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-32-54 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-34-04 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-34-07 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-34-10 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-34-39 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-34-52 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-35-01 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-36-18 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-36-27 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-37-44 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-37-54 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-39-12 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-39-21 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-40-36 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/x/BesideX2018-07-14 10-40-46 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-16-27 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-16-38 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-17-55 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-18-06 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-19-40 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-19-48 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-21-12 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-21-22 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-22-42 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-22-50 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-25-00 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-25-10 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-27-03 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-27-13 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-29-01 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-29-11 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-30-33 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-30-43 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-32-14 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-32-24 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-32-38 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-32-40 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-32-50 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-32-54 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-34-04 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-34-07 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-34-10 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-34-39 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-34-52 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-35-01 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-36-18 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-36-27 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-37-44 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-37-54 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-39-12 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-39-21 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-40-36 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/camera/y/BesideY2018-07-14 10-40-46 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-12-01 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-16-28 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-17-48 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-19-45 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-21-15 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-22-48 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-25-05 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-27-08 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-29-12 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-30-40 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-32-20 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-34-58 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-36-24 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-37-54 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-39-22 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 10-40-41 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 11-09-05 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 11-10-35 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 11-12-59 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 11-14-36 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 11-16-17 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 11-17-57 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 11-19-31 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 11-22-28 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/data/second/origin/heart/Heart2018-07-14 11-24-46 Saturday.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/process_shoot_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/process_shoot_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shootweb/shoot_data_mining.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/shoot_data_mining.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shootweb/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shootweb/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -1048,7 +27,7 @@
     <SUITE FILE_PATH="coverage/shoot$process_readAndWriteData.coverage" NAME="process_readAndWriteData Coverage Results" MODIFIED="1545208927829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$mysql_option.coverage" NAME="mysql_option Coverage Results" MODIFIED="1540969708730" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$watch_file.coverage" NAME="watch_file Coverage Results" MODIFIED="1541163522853" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
-    <SUITE FILE_PATH="coverage/shoot$shoot_data_mining.coverage" NAME="shoot_data_mining Coverage Results" MODIFIED="1546097679991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
+    <SUITE FILE_PATH="coverage/shoot$shoot_data_mining.coverage" NAME="shoot_data_mining Coverage Results" MODIFIED="1546348960813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -1072,13 +51,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shootweb/shoot_data_mining.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="487">
-              <caret line="107" column="11" lean-forward="true" selection-start-line="107" selection-start-column="11" selection-end-line="107" selection-end-column="11" />
+            <state relative-caret-position="249">
+              <caret line="288" column="23" lean-forward="true" selection-start-line="288" selection-start-column="23" selection-end-line="288" selection-end-column="23" />
               <folding>
                 <element signature="e#43#53#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/shootweb/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="285" column="25" selection-start-line="285" selection-start-column="25" selection-end-line="285" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/Program/Anaconda2/envs/python36/Lib/site-packages/pandas/core/indexing.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="444" selection-start-line="444" selection-end-line="444" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shootweb/templates/test.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="379" column="18" lean-forward="true" selection-start-line="379" selection-start-column="18" selection-end-line="379" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="28405">
+              <caret line="1495" column="14" selection-start-line="1438" selection-start-column="11" selection-end-line="1495" selection-end-column="14" />
+              <folding>
+                <element signature="e#49807#51541#0#HTML" />
               </folding>
             </state>
           </provider>
@@ -1087,8 +108,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shootweb/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-166">
-              <caret line="113" column="9" lean-forward="true" selection-start-line="113" selection-start-column="9" selection-end-line="113" selection-end-column="9" />
+            <state relative-caret-position="2109">
+              <caret line="112" column="7" selection-start-line="112" selection-start-column="7" selection-end-line="112" selection-end-column="7" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -1099,8 +120,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shootweb/process_shoot_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="67">
-              <caret line="208" column="8" lean-forward="true" selection-start-line="208" selection-start-column="8" selection-end-line="224" selection-end-column="27" />
+            <state relative-caret-position="3819">
+              <caret line="208" column="8" selection-start-line="208" selection-start-column="8" selection-end-line="224" selection-end-column="27" />
               <folding>
                 <element signature="e#24#34#0" expanded="true" />
               </folding>
@@ -1111,8 +132,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shootweb/shootlib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-463">
-              <caret line="504" column="21" lean-forward="true" selection-start-line="504" selection-start-column="21" selection-end-line="504" selection-end-column="21" />
+            <state relative-caret-position="9386">
+              <caret line="504" column="21" selection-start-line="504" selection-start-column="21" selection-end-line="504" selection-end-column="21" />
               <folding>
                 <element signature="e#24#34#0" expanded="true" />
               </folding>
@@ -1218,15 +239,15 @@
         <option value="$PROJECT_DIR$/shootweb/process_readAndWriteData.py" />
         <option value="$PROJECT_DIR$/shootweb/config.ini" />
         <option value="$PROJECT_DIR$/shoot/urls.py" />
-        <option value="$PROJECT_DIR$/shootweb/templates/test.html" />
         <option value="$PROJECT_DIR$/shootweb/mymiddleware.py" />
         <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" />
         <option value="$PROJECT_DIR$/shootweb/shootlib.py" />
         <option value="$PROJECT_DIR$/shootweb/templates/sport_game_history.html" />
         <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse.html" />
-        <option value="$PROJECT_DIR$/shootweb/views.py" />
         <option value="$PROJECT_DIR$/shootweb/process_shoot_model.py" />
+        <option value="$PROJECT_DIR$/shootweb/templates/test.html" />
         <option value="$PROJECT_DIR$/shootweb/shoot_data_mining.py" />
+        <option value="$PROJECT_DIR$/shootweb/views.py" />
       </list>
     </option>
   </component>
@@ -1244,7 +265,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -1261,6 +281,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1300,26 +321,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.shoot_data_mining">
-    <configuration name="SplineInterpolation" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="shoot" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/shootweb" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="D:\workSpace\PythonWorkspace\shootDataMining\SplineInterpolation.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+    <configuration name="test" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:8000/shoot/api/test">
       <method v="2" />
     </configuration>
     <configuration name="process_readAndWriteData" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -1460,8 +462,8 @@
     </configuration>
     <list>
       <item itemvalue="Django server.shoot" />
+      <item itemvalue="JavaScript Debug.test" />
       <item itemvalue="Python.shootlib" />
-      <item itemvalue="Python.SplineInterpolation" />
       <item itemvalue="Python.process_shoot_model" />
       <item itemvalue="Python.process_readAndWriteData" />
       <item itemvalue="Python.shoot_data_mining" />
@@ -1469,10 +471,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.shoot_data_mining" />
+        <item itemvalue="JavaScript Debug.test" />
         <item itemvalue="Python.shootlib" />
         <item itemvalue="Python.process_shoot_model" />
         <item itemvalue="Python.process_readAndWriteData" />
-        <item itemvalue="Python.SplineInterpolation" />
       </list>
     </recent_temporary>
   </component>
@@ -1553,6 +555,9 @@
       <workItem from="1546004567459" duration="5647000" />
       <workItem from="1546011330203" duration="607000" />
       <workItem from="1546057588727" duration="20068000" />
+      <workItem from="1546151771466" duration="2807000" />
+      <workItem from="1546222979386" duration="7564000" />
+      <workItem from="1546324487254" duration="5784000" />
     </task>
     <task id="LOCAL-00001" summary="添加对某一组射击的可视化展示">
       <created>1540262311101</created>
@@ -1750,11 +755,18 @@
       <option name="project" value="LOCAL" />
       <updated>1546084753155</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="添加数据分析挖掘部分">
+      <created>1546151942314</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1546151942315</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="408057000" />
+    <option name="totallyTimeSpent" value="424212000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1767,14 +779,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1552" height="840" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4952381" visible="true" weight="0.26171353" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4952381" visible="true" weight="0.27175367" />
       <window_info id="Structure" order="1" sideWeight="0.50476193" side_tool="true" weight="0.22356091" />
       <window_info id="Favorites" order="2" sideWeight="0.501845" side_tool="true" weight="0.23159304" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32952926" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4966533" weight="0.38135594" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4966533" visible="true" weight="0.30932203" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.33333334" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1797,7 +808,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="射击数据页面添加选择时间范围选项" />
     <MESSAGE value="添加生成模拟数据的函数" />
     <MESSAGE value="创建射击模拟数据，并可监控数据处理后存到数据库中" />
     <MESSAGE value="对模型数据进行一些修改，添加是否处理过的字段" />
@@ -1822,23 +832,11 @@
     <MESSAGE value="对数据分析页面修改之前存档" />
     <MESSAGE value="修改数据分析页面，添加要分析的每条数据的枪的正面移动图，对插值后的数据进行适配，对射击点分别画靶图时显示射击点之后的5个点" />
     <MESSAGE value="修改bug，数据分析界面平均成绩显示不正确的bug，根据上面摄像头换算比例可能为空的bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改bug，数据分析界面平均成绩显示不正确的bug，根据上面摄像头换算比例可能为空的bug" />
+    <MESSAGE value="添加数据分析挖掘部分" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加数据分析挖掘部分" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/shootweb/templates/login_admin.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="36" column="76" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/data/second/after_process/shoot_2_2018_0714_after_process.dat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1406">
-          <caret line="74" column="12" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/data/second/after_process/shoot_2_2018_0714_after_process.dat" />
     <entry file="file://$PROJECT_DIR$/shootweb/templates/admin_coach.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -2068,16 +1066,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/templates/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19703">
-          <caret line="1037" selection-start-line="1037" selection-end-line="1037" />
-          <folding>
-            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/mymiddleware.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
@@ -2095,13 +1083,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="2093" column="83" lean-forward="true" selection-start-line="2093" selection-start-column="83" selection-end-line="2093" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_history.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -2116,56 +1097,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/views.py">
+    <entry file="file://$PROJECT_DIR$/shootweb/data/data.txt" />
+    <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4256">
-          <caret line="224" column="48" lean-forward="true" selection-start-line="224" selection-start-column="48" selection-end-line="224" selection-end-column="48" />
+        <state relative-caret-position="28405">
+          <caret line="1495" column="14" selection-start-line="1438" selection-start-column="11" selection-end-line="1495" selection-end-column="14" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <element signature="e#14208#15799#0" />
+            <element signature="e#49807#51541#0#HTML" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/data/data.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-166">
-          <caret line="113" column="9" lean-forward="true" selection-start-line="113" selection-start-column="9" selection-end-line="113" selection-end-column="9" />
+        <state relative-caret-position="2109">
+          <caret line="112" column="7" selection-start-line="112" selection-start-column="7" selection-end-line="112" selection-end-column="7" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/shootlib.py">
+    <entry file="file://$PROJECT_DIR$/shootweb/process_shoot_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-463">
-          <caret line="504" column="21" lean-forward="true" selection-start-line="504" selection-start-column="21" selection-end-line="504" selection-end-column="21" />
+        <state relative-caret-position="3819">
+          <caret line="208" column="8" selection-start-line="208" selection-start-column="8" selection-end-line="224" selection-end-column="27" />
           <folding>
             <element signature="e#24#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/process_shoot_model.py">
+    <entry file="file://$PROJECT_DIR$/shootweb/shootlib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="208" column="8" lean-forward="true" selection-start-line="208" selection-start-column="8" selection-end-line="224" selection-end-column="27" />
+        <state relative-caret-position="9386">
+          <caret line="504" column="21" selection-start-line="504" selection-start-column="21" selection-end-line="504" selection-end-column="21" />
           <folding>
             <element signature="e#24#34#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/templates/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="379" column="18" lean-forward="true" selection-start-line="379" selection-start-column="18" selection-end-line="379" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Program/Anaconda2/envs/python36/Lib/site-packages/pandas/core/indexing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="444" selection-start-line="444" selection-end-line="444" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/shoot_data_mining.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="107" column="11" lean-forward="true" selection-start-line="107" selection-start-column="11" selection-end-line="107" selection-end-column="11" />
+        <state relative-caret-position="249">
+          <caret line="288" column="23" lean-forward="true" selection-start-line="288" selection-start-column="23" selection-end-line="288" selection-end-column="23" />
           <folding>
             <element signature="e#43#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="285" column="25" selection-start-line="285" selection-start-column="25" selection-end-line="285" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>

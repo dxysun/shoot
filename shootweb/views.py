@@ -283,7 +283,7 @@ def sport_game_analyse_id(request):
             report.y_shake_pos,
             report.x_up_shake_pos,
             report.y_up_shake_pos)
-        is_insert = True
+        is_insert = False
         x_data = x_shake_data.split(",")
         y_data = y_shake_data.split(",")
         x_up_data = x_up_shake_data.split(",")
