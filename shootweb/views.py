@@ -90,7 +90,56 @@ def main(request):
 
 
 def sport_home(request):
-    return render(request, 'sport_home.html')
+    user_name = request.session.get('user')
+    shoot_reports = shoot_report.objects.filter(user_name=user_name)
+    stage_four = {}
+    stage_six = {}
+    stage_eight = {}
+    for report in shoot_reports:
+        shoot_grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
+        stage = shootlib.get_shoot_stage(report)
+        if stage == 4:
+            stage_four = shootlib.set_report_stage_info(stage_four, report)
+        if stage == 6:
+            stage_six = shootlib.set_report_stage_info(stage_six, report)
+        if stage == 8:
+            stage_eight = shootlib.set_report_stage_info(stage_eight, report)
+        heart_four = 0
+        heart_six = 0
+        heart_eight = 0
+        i = 0
+        for grade in shoot_grades:
+            if stage == 4:
+                heart_four += grade.heart_rate
+                stage_four = shootlib.set_report_shoot_rapid_info(stage_four, grade.grade, grade.rapid_time, i, stage)
+            if stage == 6:
+                heart_six += grade.heart_rate
+                stage_six = shootlib.set_report_shoot_rapid_info(stage_six, grade.grade, grade.rapid_time, i, stage)
+            if stage == 8:
+                heart_eight += grade.heart_rate
+                stage_eight = shootlib.set_report_shoot_rapid_info(stage_eight, grade.grade, grade.rapid_time, i, stage)
+            i += 1
+
+        heart_four /= 5
+        heart_six /= 5
+        heart_eight /= 5
+        if stage == 4:
+            stage_four = shootlib.set_report_heart_info(stage_four, heart_four)
+        if stage == 6:
+            stage_six = shootlib.set_report_heart_info(stage_six, heart_six)
+        if stage == 8:
+            stage_eight = shootlib.set_report_heart_info(stage_eight, heart_eight)
+    if len(stage_four) > 0:
+        stage_four = shootlib.process_report_stage_info(stage_four)
+    if len(stage_six) > 0:
+        stage_six = shootlib.process_report_stage_info(stage_six)
+    if len(stage_eight) > 0:
+        stage_eight = shootlib.process_report_stage_info(stage_eight)
+    return render(request, 'sport_home.html', {
+        'stage_four': stage_four,
+        'stage_six': stage_six,
+        'stage_eight': stage_eight
+    })
 
 
 def coach_home(request):
@@ -146,7 +195,7 @@ def sport_game_analyse(request):
             shoot_reports.append(report)
 
             shake_info = {}
-            shoot_grades = shoot_grade.objects.filter(report_id=id)
+            shoot_grades = shoot_grade.objects.filter(report_id=id).order_by('grade_detail_time')
             heart_temp = []
             heart_total = 0
             shake_info['x_pos'] = []
@@ -340,7 +389,7 @@ def sport_game_analyse_id(request):
         if up_shake_rate is not None:
             x_pos_str, x_shoot_point = shootlib.process_pos_array(x_pos_array, x_shoot_pos, x_pos, up_shake_rate)
             y_pos_str, y_shoot_point, y_pos_average_str = shootlib.process_pos_array(y_pos_array, y_shoot_pos, y_pos,
-                                                                            up_shake_rate, is_average=True)
+                                                                                     up_shake_rate, is_average=True)
             five_pos_info['up_shake_rate'] = up_shake_rate
             five_pos_info['x_pos_str'] = x_pos_str
             five_pos_info['y_pos_str'] = y_pos_str

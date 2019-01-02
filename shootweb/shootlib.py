@@ -552,6 +552,99 @@ def get_random_circle(r, samples_num):
     return r_pos, a_pos
 
 
+def get_shoot_stage(report):
+    return int(report.remark)
+
+
+def set_report_stage_info(stage_four, report):
+    if stage_four.get('report_len') is None:
+        stage_four['report_len'] = 1
+    else:
+        stage_four['report_len'] += 1
+    if stage_four.get('all_grade') is None:
+        stage_four["all_grade"] = report.total_grade
+    else:
+        stage_four["all_grade"] += report.total_grade
+    if stage_four.get('best_grade') is None:
+        stage_four["best_grade"] = report.total_grade
+    else:
+        if report.total_grade > stage_four["best_grade"]:
+            stage_four["best_grade"] = report.total_grade
+    if stage_four.get('bad_grade') is None:
+        stage_four["bad_grade"] = report.total_grade
+    else:
+        if report.total_grade < stage_four["bad_grade"]:
+            stage_four["bad_grade"] = report.total_grade
+    return stage_four
+
+
+def set_report_heart_info(stage_four, heart):
+    if stage_four.get('all_heart') is None:
+        stage_four["all_heart"] = heart
+    else:
+        stage_four["all_heart"] += heart
+    return stage_four
+
+
+def set_report_shoot_rapid_info(stage_four, grade, rapid_time, i, stage):
+    if stage_four.get("grades") is None:
+        stage_four["grades"] = []
+    stage_four["grades"].append(int(grade))
+    if i == 0 and int(grade) == 10:
+        if stage_four.get("one") is None:
+            stage_four["one"] = []
+        stage_four["one"].append(float(rapid_time))
+    if i == 1 and int(grade) == 10:
+        if stage_four.get("two") is None:
+            stage_four["two"] = []
+        stage_four["two"].append(float(rapid_time))
+    if i == 2 and int(grade) == 10:
+        if stage_four.get("three") is None:
+            stage_four["three"] = []
+        stage_four["three"].append(float(rapid_time))
+    if i == 3 and int(grade) == 10:
+        if stage_four.get("four") is None:
+            stage_four["four"] = []
+        stage_four["four"].append(float(rapid_time))
+    if i == 4 and int(grade) == 10:
+        if stage_four.get("five") is None:
+            stage_four["five"] = []
+        if float(rapid_time) < 1:
+            rapid_time = float(stage) + float(rapid_time)
+        stage_four["five"].append(float(rapid_time))
+    return stage_four
+
+
+def get_array_average(arr):
+    return round(sum(arr) / len(arr), 2)
+
+
+def get_ring_rate(grades):
+    num_10 = 0
+    num_9 = 0
+    num_8 = 0
+    for g in grades:
+        if g == 10:
+            num_10 += 1
+        if g == 9:
+            num_9 += 1
+        if g == 8:
+            num_8 += 1
+    return round(num_10 / len(grades), 2), round(num_9 / len(grades), 2), round(num_8 / len(grades), 2)
+
+
+def process_report_stage_info(stage):
+    stage["average_grade"] = round(stage["all_grade"] / stage['report_len'], 2)
+    stage["average_heart"] = int(stage["all_heart"] / stage['report_len'])
+    stage["one_average"] = get_array_average(stage["one"])
+    stage["two_average"] = get_array_average(stage["two"])
+    stage["three_average"] = get_array_average(stage["three"])
+    stage["four_average"] = get_array_average(stage["four"])
+    stage["five_average"] = get_array_average(stage["five"])
+    stage["ten_ring"], stage["nine_ring"], stage["eight_ring"] = get_ring_rate(stage["grades"])
+    return stage
+
+
 if __name__ == "__main__":
     print("shoot")
     # r_pos_1, a_pos_1 = get_random_circle(130, 800)
