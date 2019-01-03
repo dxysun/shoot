@@ -316,7 +316,7 @@ def sport_game_analyse_id(request):
         hearts.append(grade.heart_rate)
     grade_stability = shootlib.get_grade_stability(x_pos, y_pos)
     grade_info = dict(r_pos=r_pos, p_pos=p_pos, x_pos=x_pos, y_pos=y_pos, grades=grades, hearts=hearts,
-                      grade_stability=grade_stability)
+                      rapid_data=rapid_data, grade_stability=grade_stability)
 
     shake_info = {}
     five_pos_info = {}
