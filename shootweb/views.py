@@ -324,24 +324,27 @@ def sport_game_analyse_id(request):
     y_data_pos = report.y_shake_pos
     x_up_data_pos = report.x_up_shake_pos
     y_up_data_pos = report.y_up_shake_pos
+    x_shake_data = report.x_shake_data
+    y_shake_data = report.y_shake_data
+    x_up_shake_data = report.x_up_shake_data
+    y_up_shake_data = report.y_up_shake_data
 
     nums = []
     if report.x_shake_pos is not None and report.x_up_shake_pos is not None:
+        x_data_pos = x_data_pos.split(",")
+        y_data_pos = y_data_pos.split(",")
+        x_up_data_pos = x_up_data_pos.split(",")
+        y_up_data_pos = y_up_data_pos.split(",")
         x_shake_data, y_shake_data, x_up_shake_data, y_up_shake_data = shootlib.process_shake_pos_info(
-            report.x_shake_pos,
-            report.y_shake_pos,
-            report.x_up_shake_pos,
-            report.y_up_shake_pos)
+            x_data_pos,
+            y_data_pos,
+            x_up_data_pos,
+            y_up_data_pos)
         is_insert = False
         x_data = x_shake_data.split(",")
         y_data = y_shake_data.split(",")
         x_up_data = x_up_shake_data.split(",")
         y_up_data = y_up_shake_data.split(",")
-
-        x_data_pos = x_data_pos.split(",")
-        y_data_pos = y_data_pos.split(",")
-        x_up_data_pos = x_up_data_pos.split(",")
-        y_up_data_pos = y_up_data_pos.split(",")
 
         x_data = shootlib.get_int_data(x_data)
         y_data = shootlib.get_int_data(y_data, is_negative=True)
@@ -383,6 +386,8 @@ def sport_game_analyse_id(request):
         x_up_shoot_pos, _ = shootlib.shake_get_plus_shoot_point(x_up_data_plus, up_nums, is_insert=is_insert)
         y_up_shoot_pos, _ = shootlib.shake_get_plus_shoot_point(y_up_data_plus, up_nums, is_insert=is_insert)
 
+        y_stability_array = shootlib.shake_get_diff_shoot_array(y_data_plus, nums)
+
         up_x_10_pos, up_shake_rate = shootlib.get_up_shoot_limit(x_up_shoot_pos, x_pos, grades)
         # print(x_up_shoot_pos)
         # print(up_x_10_pos)
@@ -390,10 +395,11 @@ def sport_game_analyse_id(request):
             x_pos_str, x_shoot_point = shootlib.process_pos_array(x_pos_array, x_shoot_pos, x_pos, up_shake_rate)
             y_pos_str, y_shoot_point, y_pos_average_str = shootlib.process_pos_array(y_pos_array, y_shoot_pos, y_pos,
                                                                                      up_shake_rate, is_average=True)
+
             five_pos_info['up_shake_rate'] = up_shake_rate
             five_pos_info['x_pos_str'] = x_pos_str
             five_pos_info['y_pos_str'] = y_pos_str
-            five_pos_info['y_pos_average_str'] = y_pos_average_str
+            five_pos_info['y_pos_average_str'] = y_stability_array
             five_pos_info['x_shoot_point'] = x_shoot_point
             five_pos_info['y_shoot_point'] = y_shoot_point
 

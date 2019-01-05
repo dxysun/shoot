@@ -1272,26 +1272,21 @@
             var last_x_pos = 0;
             for (i = 0; i < x_shoot_pos.length; i++) {
                 var d = {};
-                point_values[i] += "\n" +
-                    grade_info.grades[i] + "环" + "\n" +
-                    "坐标:" + grade_info.x_pos[i] + "," + grade_info.y_pos[i] + "\n" +
-                    "速射时间:" + grade_info.rapid_data[i] + "s\n" +
-                    "心率:" + grade_info.hearts[i];
+
                 d.value = point_values[i];
                 d.xAxis = x_shoot_pos[i];
                 d.yAxis = y_shoot_pos[i];
                 data.push(d);
-                test_data.push([x_shoot_pos[i], y_shoot_pos[i]]);
+                test_data.push([x_shoot_pos[i], y_shoot_pos[i], point_values[i], grade_info.grades[i], grade_info.x_pos[i],
+                    grade_info.y_pos[i], grade_info.rapid_data[i], grade_info.hearts[i]]);
 
                 if (last_rapid_time != 0) {
-                    var diff = {};
                     var diff_rapid = grade_info.rapid_data[i] - last_rapid_time;
                     var diff_pos = (last_x_pos - grade_info.x_pos[i] + i * 750) / 10;
-                    diff.value = "时间间隔:" + diff_rapid.toFixed(2) + "s\n" +
-                        "x坐标间隔:" + diff_pos.toFixed(2) + "cm\n";
-                    diff.xAxis = (x_shoot_pos[i] - x_shoot_pos[i - 1]) / 2 + x_shoot_pos[i - 1];
-                    diff.yAxis = 0;
-                    diff_data.push(diff);
+
+                    var xAxis = (x_shoot_pos[i] - x_shoot_pos[i - 1]) / 2 + x_shoot_pos[i - 1];
+                    var yAxis = 0;
+                    diff_data.push([xAxis, yAxis, diff_rapid.toFixed(2), diff_pos.toFixed(2)]);
                 }
                 last_rapid_time = grade_info.rapid_data[i];
                 last_x_pos = grade_info.x_pos[i] - i * 750;
@@ -1306,18 +1301,7 @@
             var merge_info = {
                 data: merge_data,
                 type: 'line',
-
                 smooth: true,
-                markPoint: {
-                    itemStyle: {
-                        color: 'rgba(0,100,0,0.5)'
-                    },
-                    symbol: 'path://m 0,0 h 300 v 40 h -300 z',
-                    symbolSize: 70,
-                    symbolKeepAspect: true,
-                    symbolOffset: [0, '-250%'],
-                    data: data
-                }
             };
             var shoot_point_info = {
                 symbolSize: 5,
@@ -1326,19 +1310,111 @@
                     color: 'rgba(0,0,0)'
                 },
                 type: 'scatter',
-                markPoint: {
-                    itemStyle: {
-                        color: 'rgba(0,0,0,0.5)'
+                label: {
+                    show: true,
+                    position: 'top',
+                    distance: 80,
+                    formatter: '{line1|{@[2]}}\n{hr|}\n{line2|环数:{@[3]}}\n{line3|坐标:\n{@[4]}mm,{@[5]}mm}\n{line4|速射时间:{@[6]}s}\n{line5|心率:{@[7]}}',
+                    rich: {
+                        line1: {
+                            color: '#000',
+                            lineHeight: 22,
+                          //  fontWeight: 'bold',
+                            align: 'center'
+                            //   padding: [10, 10]
+                        },
+                        hr: {
+                            borderColor: '#aaa',
+                            width: '100%',
+                            borderWidth: 0.5,
+                            height: 0
+                        },
+                        line2: {
+                            //   color: '#eee',
+                            fontSize: 15,
+                            lineHeight: 22,
+                            fontWeight: 'bold',
+                            align: 'left'
+                            //   padding: [10, 10]
+                        },
+                        line3: {
+                            //   color: '#eee',
+                            lineHeight: 15,
+                        //    fontWeight: 'bold',
+                            align: 'left'
+                            //   padding: [10, 10]
+                        },
+                        line4: {
+                            //   color: '#eee',
+                            lineHeight: 20,
+                            fontSize: 15,
+                            fontWeight: 'bold',
+                            align: 'left'
+                            //   padding: [10, 10]
+                        },
+                        line5: {
+                            //   color: '#eee',
+                            lineHeight: 15,
+                        //    fontWeight: 'bold',
+                            align: 'left'
+                            //   padding: [10, 10]
+                        }
                     },
-                    symbol: 'path://m 0,0 h 300 v 2 h -300 z',
-                    symbolSize: 50,
-                    {#symbolKeepAspect: true,#}
-                    symbolOffset: [0, '-50%'],
-                    data: diff_data
+                    {#backgroundColor: '#eee',#}
+                    backgroundColor: 'rgba(190,190,190,0.4)',
+                    borderColor: '#aaa',
+                    borderWidth: 1,
+                    borderRadius: 4,
+
+
+                }
+            };
+
+            var shoot_point_diff_info = {
+                symbolSize: 1,
+                data: diff_data,
+                itemStyle: {
+                    color: 'rgba(0,0,0)'
+                },
+                type: 'scatter',
+                label: {
+                    show: true,
+                    position: 'top',
+                    distance: -10,
+                    formatter: '{pre1|时间间隔:{@[2]}s}\n{hr|}\n{per2|x坐标差值:{@[3]}cm}',
+                    rich: {
+                        pre1: {
+                            //   color: '#eee',
+                            align: 'left',
+                            lineHeight: 25,
+                            fontWeight: 'bold',
+                            //   borderWidth: 10,
+                            //  height: 50
+                            padding: [0, 0, 0, 10]
+                        },
+                        hr: {
+                            borderColor: '#aaa',
+                            width: '100%',
+                            borderWidth: 0.5,
+                            height: 0
+                        },
+                        per2: {
+                            //   color: '#eee',
+                            align: 'left',
+                            fontWeight: 'bold',
+                            lineHeight: 25
+                            //   padding: [10, 10]
+                        }
+                    },
+                    backgroundColor: '#eee',
+                    borderColor: '#aaa',
+                    borderWidth: 1,
+                    borderRadius: 4
                 }
             };
             shoot_pos_series.push(merge_info);
             shoot_pos_series.push(shoot_point_info);
+            shoot_pos_series.push(shoot_point_diff_info);
             var x_pos_center = [];
             var y_pos_center = [];
             for (i = 0; i < x_shoot_pos.length; i++) {
@@ -2120,7 +2196,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    比赛稳定性图(枪的正面移动图)
+                    枪的正面移动图
                 </div>
                 <div class="panel-body">
                     <div id="line_shake_merge_info" style="width: 100%;height:400%;"></div>
@@ -2145,7 +2221,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    比赛稳定性图(上面摄像头xy坐标累加数据)
+                    上面摄像头xy坐标累加数据
                 </div>
                 <div class="panel-body">
                     <div id="line_up_shake_x_y_plus" style="width: 100%;height:500%;"></div>
@@ -2231,7 +2307,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    比赛稳定性图(侧面摄像头原始数据)
+                    侧面摄像头原始数据
                 </div>
                 <div class="panel-body">
                     <div id="line_shake_ori" style="width: 100%;height:500%;"></div>
@@ -2284,7 +2360,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    比赛稳定性图(上面摄像头原始数据)
+                    上面摄像头原始数据
                 </div>
                 <div class="panel-body">
                     <div id="line_up_shake_ori" style="width: 100%;height:500%;"></div>

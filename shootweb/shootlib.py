@@ -238,6 +238,38 @@ def shake_get_plus_shoot_point(data_plus_array, nums, is_insert=False):
     return pos, pos_array
 
 
+def shake_get_diff_shoot_array(data_diff_array, shoot_index, is_insert=False):
+    pos_array = []
+    var_array = []
+    j = 0
+    n = 10
+    m = 1
+    if is_insert:
+        n *= 5
+    for i in range(0, len(data_diff_array)):
+        plus_num = data_diff_array[i]
+        if j < len(shoot_index) and i == shoot_index[j]:
+            if i - n > 0:
+                pos_array.append(data_diff_array[i - n:i + m])
+            else:
+                pos_array.append(data_diff_array[0:i + m])
+
+            j += 1
+    # print(pos_array)
+    for arr in pos_array:
+        var_array.append(get_variance_in_array(arr))
+    return var_array
+
+
+def get_variance_in_array(data):
+    data_sum = sum(data)
+    data_average = data_sum / len(data)
+    sum1 = 0
+    for d in data:
+        sum1 += (d - data_average) ** 2
+    return round(math.sqrt(sum1 / len(data)), 2)
+
+
 def cut_shake_data(y_shake_data):
     count_smooth = 0
     rank = -1
@@ -319,10 +351,6 @@ def get_shoot_info(y_sum_data):
 
 
 def process_shake_pos_info(beside_x_pos, beside_y_pos, up_x_pos, up_y_pos):
-    beside_x_pos = beside_x_pos.split(",")
-    beside_y_pos = beside_y_pos.split(",")
-    up_x_pos = up_x_pos.split(",")
-    up_y_pos = up_y_pos.split(",")
     beside_x_data = "0,"
     beside_y_data = "0,"
     up_x_data = "0,"
@@ -460,6 +488,17 @@ def process_pos_array(pos_array, shoot_pos, grade_pos, up_shake_rate, is_average
         return y_pos_str, shoot_point, y_pos_average_str
     else:
         return y_pos_str, shoot_point
+
+
+def get_beside_shoot_stability(pos_array):
+    last_num = None
+    temp_sum = 0
+    for pos_a in pos_array:
+        temp = []
+        for y_d in pos_a:
+            if last_num is not None:
+                cha = y_d - last_num
+                temp_sum += cha
 
 
 def get_shoot_date(user_name):
