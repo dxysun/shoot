@@ -1291,7 +1291,7 @@
                 last_rapid_time = grade_info.rapid_data[i];
                 last_x_pos = grade_info.x_pos[i] - i * 750;
             }
-
+            var y_max_value = parseInt(y_shoot_pos[0] + 80);
             var merge_data = [];
             for (i = 0; i < yData.length; i++) {
                 merge_data.push([xUpData[i], yData[i]]);
@@ -1313,7 +1313,7 @@
                 label: {
                     show: true,
                     position: 'top',
-                    distance: 80,
+                    distance: 70,
                     formatter: '{line1|{@[2]}}\n{hr|}\n{line2|环数:{@[3]}}\n{line3|坐标:\n{@[4]}mm,{@[5]}mm}\n{line4|速射时间:{@[6]}s}\n{line5|心率:{@[7]}}',
                     rich: {
                         line1: {
@@ -1460,7 +1460,8 @@
                     trigger: 'axis'
                 },
                 yAxis: {
-                    type: 'value'
+                    type: 'value',
+                    max: y_max_value
                 },
                 dataZoom: {
                     show: true,
@@ -1474,7 +1475,7 @@
 
             var xDataAll = five_pos_info.x_pos_str;
             var yDataAll = five_pos_info.y_pos_str;
-            var y_pos_average_str = five_pos_info.y_pos_average_str;
+            var y_stability_array = five_pos_info.y_stability_array;
             var x_shoot_point = five_pos_info.x_shoot_point;
             var y_shoot_point = five_pos_info.y_shoot_point;
             var len1 = xDataAll.length;
@@ -1501,7 +1502,7 @@
             }
             var option_line_shake_one = {
                 title: {
-                    text: '瞄准稳定性:' + y_pos_average_str[0],
+                    text: '瞄准稳定性:' + y_stability_array[0],
                     top: 5
                 },
                 xAxis: {
@@ -1558,7 +1559,7 @@
             };
             var option_line_shake_two = {
                 title: {
-                    text: '瞄准稳定性:' + y_pos_average_str[1],
+                    text: '瞄准稳定性:' + y_stability_array[1],
                     top: 5
                 },
                 xAxis: {
@@ -1616,7 +1617,7 @@
             };
             var option_line_shake_three = {
                 title: {
-                    text: '瞄准稳定性:' + y_pos_average_str[2],
+                    text: '瞄准稳定性:' + y_stability_array[2],
                     top: 5
                 },
                 xAxis: {
@@ -1674,7 +1675,7 @@
             };
             var option_line_shake_four = {
                 title: {
-                    text: '瞄准稳定性:' + y_pos_average_str[3],
+                    text: '瞄准稳定性:' + y_stability_array[3],
                     top: 5
                 },
                 xAxis: {
@@ -1732,7 +1733,7 @@
             };
             var option_line_shake_five = {
                 title: {
-                    text: '瞄准稳定性:' + y_pos_average_str[4],
+                    text: '瞄准稳定性:' + y_stability_array[4],
                     top: 5
                 },
                 xAxis: {

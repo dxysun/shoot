@@ -317,7 +317,7 @@ def sport_game_analyse_id(request):
     grade_stability = shootlib.get_grade_stability(x_pos, y_pos)
     grade_info = dict(r_pos=r_pos, p_pos=p_pos, x_pos=x_pos, y_pos=y_pos, grades=grades, hearts=hearts,
                       rapid_data=rapid_data, grade_stability=grade_stability)
-
+    stage = int(report.remark)
     shake_info = {}
     five_pos_info = {}
     x_data_pos = report.x_shake_pos
@@ -380,19 +380,19 @@ def sport_game_analyse_id(request):
         x_up_data_plus = shootlib.shake_data_process(x_up_data)
         y_up_data_plus = shootlib.shake_data_process(y_up_data, is_negative=True)
 
-        y_shoot_pos, y_pos_array = shootlib.shake_get_plus_shoot_point(y_data_plus, nums, is_insert=is_insert)
-        x_shoot_pos, x_pos_array = shootlib.shake_get_plus_shoot_point(x_up_data_plus, nums, is_insert=is_insert)
+        y_shoot_pos, y_pos_array = shootlib.shake_get_plus_shoot_point(y_data_plus, nums, is_insert, stage)
+        x_shoot_pos, x_pos_array = shootlib.shake_get_plus_shoot_point(x_up_data_plus, nums, is_insert, stage)
 
         x_up_shoot_pos, _ = shootlib.shake_get_plus_shoot_point(x_up_data_plus, up_nums, is_insert=is_insert)
         y_up_shoot_pos, _ = shootlib.shake_get_plus_shoot_point(y_up_data_plus, up_nums, is_insert=is_insert)
 
-        y_stability_array = shootlib.shake_get_diff_shoot_array(y_data_plus, nums)
+        y_stability_array = shootlib.shake_get_stability_shoot_array(y_data_plus, nums, is_insert=is_insert)
 
         up_x_10_pos, up_shake_rate = shootlib.get_up_shoot_limit(x_up_shoot_pos, x_pos, grades)
         # print(x_up_shoot_pos)
         # print(up_x_10_pos)
         y_shoot_pos_new = y_shoot_pos.copy()
-        if up_shake_rate is not None:
+        if up_shake_rate is not None and len(y_shoot_pos_new) == 5:
             y_data_plus, y_shoot_pos_new = shootlib.process_shoot_y_pos_to_one_line(y_data_plus, y_shoot_array,
                                                                                     up_shake_rate, y_shoot_pos_new,
                                                                                     y_pos)
@@ -403,7 +403,7 @@ def sport_game_analyse_id(request):
             five_pos_info['up_shake_rate'] = up_shake_rate
             five_pos_info['x_pos_str'] = x_pos_str
             five_pos_info['y_pos_str'] = y_pos_str
-            five_pos_info['y_pos_average_str'] = y_stability_array
+            five_pos_info['y_stability_array'] = y_stability_array
             five_pos_info['x_shoot_point'] = x_shoot_point
             five_pos_info['y_shoot_point'] = y_shoot_point
 

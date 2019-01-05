@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7d03cb4f-baf8-47fc-b3ac-218109122674" name="Default" comment="修改射击轨迹页面的信息样式，使其现实的更清楚，改用label现实">
+    <list default="true" id="7d03cb4f-baf8-47fc-b3ac-218109122674" name="Default" comment="修改轨迹页面，使5个靶位于同一水平线上">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shootweb/shootlib.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/shootlib.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shootweb/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,11 +51,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shootweb/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="424" column="50" selection-start-line="424" selection-start-column="50" selection-end-line="424" selection-end-column="50" />
+            <state relative-caret-position="150">
+              <caret line="382" column="61" lean-forward="true" selection-start-line="382" selection-start-column="61" selection-end-line="382" selection-end-column="61" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -65,17 +66,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shootweb/shootlib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1027">
-              <caret line="718" column="16" lean-forward="true" selection-start-line="718" selection-start-column="16" selection-end-line="718" selection-end-column="16" />
+            <state relative-caret-position="207">
+              <caret line="226" column="14" lean-forward="true" selection-start-line="226" selection-start-column="14" selection-end-line="226" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="1357" column="26" selection-start-line="1357" selection-start-column="26" selection-end-line="1357" selection-end-column="26" />
+            <state relative-caret-position="224">
+              <caret line="1312" column="24" lean-forward="true" selection-start-line="1312" selection-start-column="24" selection-end-line="1312" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -117,13 +118,13 @@
       <find>null</find>
       <find>stage</find>
       <find>set_report_heart_info</find>
-      <find>y_pos_average_str</find>
       <find>grades</find>
       <find>x_pos</find>
       <find>rgba</find>
       <find>yData</find>
       <find>y_shoot_pos</find>
       <find>five_pos_info</find>
+      <find>y_pos_average_str</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -184,9 +185,9 @@
         <option value="$PROJECT_DIR$/shootweb/templates/test.html" />
         <option value="$PROJECT_DIR$/shootweb/shoot_data_mining.py" />
         <option value="$PROJECT_DIR$/shootweb/templates/sport_home.html" />
-        <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" />
         <option value="$PROJECT_DIR$/shootweb/views.py" />
         <option value="$PROJECT_DIR$/shootweb/shootlib.py" />
+        <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" />
       </list>
     </option>
   </component>
@@ -510,7 +511,7 @@
       <workItem from="1546564869564" duration="6748000" />
       <workItem from="1546575423537" duration="10134000" />
       <workItem from="1546605334694" duration="7868000" />
-      <workItem from="1546663798408" duration="13794000" />
+      <workItem from="1546663798408" duration="20295000" />
     </task>
     <task id="LOCAL-00001" summary="添加对某一组射击的可视化展示">
       <created>1540262311101</created>
@@ -743,11 +744,18 @@
       <option name="project" value="LOCAL" />
       <updated>1546669357007</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="修改轨迹页面，使5个靶位于同一水平线上">
+      <created>1546696599920</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1546696599920</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="490734000" />
+    <option name="totallyTimeSpent" value="497235000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -766,7 +774,7 @@
       <window_info id="Favorites" order="2" sideWeight="0.501845" side_tool="true" weight="0.23159304" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32952926" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4966533" visible="true" weight="0.3375706" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4966533" visible="true" weight="0.37429377" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.33333334" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -789,7 +797,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="添加管理员对射击项目，教练和运动员的增删改查" />
     <MESSAGE value="添加切换用户和登录拦截功能" />
     <MESSAGE value="设置特定用户只能登陆特定界面" />
     <MESSAGE value="将监控射击文件的函数整合到登录中" />
@@ -814,7 +821,8 @@
     <MESSAGE value="为运动员首页界面添加逻辑代码" />
     <MESSAGE value="在射击轨迹图中添加更多信息" />
     <MESSAGE value="修改射击轨迹页面的信息样式，使其现实的更清楚，改用label现实" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改射击轨迹页面的信息样式，使其现实的更清楚，改用label现实" />
+    <MESSAGE value="修改轨迹页面，使5个靶位于同一水平线上" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改轨迹页面，使5个靶位于同一水平线上" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/shootweb/data/second/after_process/shoot_2_2018_0714_after_process.dat" />
@@ -1123,27 +1131,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
+    <entry file="file://$PROJECT_DIR$/shootweb/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="1357" column="26" selection-start-line="1357" selection-start-column="26" selection-end-line="1357" selection-end-column="26" />
+        <state relative-caret-position="150">
+          <caret line="382" column="61" lean-forward="true" selection-start-line="382" selection-start-column="61" selection-end-line="382" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/shootlib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1027">
-          <caret line="718" column="16" lean-forward="true" selection-start-line="718" selection-start-column="16" selection-end-line="718" selection-end-column="16" />
+        <state relative-caret-position="207">
+          <caret line="226" column="14" lean-forward="true" selection-start-line="226" selection-start-column="14" selection-end-line="226" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/views.py">
+    <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="424" column="50" selection-start-line="424" selection-start-column="50" selection-end-line="424" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="224">
+          <caret line="1312" column="24" lean-forward="true" selection-start-line="1312" selection-start-column="24" selection-end-line="1312" selection-end-column="24" />
         </state>
       </provider>
     </entry>

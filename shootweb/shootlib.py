@@ -217,11 +217,16 @@ def shake_data_process(data_shake, is_negative=False):
     return data_plus_array
 
 
-def shake_get_plus_shoot_point(data_plus_array, nums, is_insert=False):
+def shake_get_plus_shoot_point(data_plus_array, nums, is_insert=False,stage=6):
     pos_array = []
     pos = []
     j = 0
-    n = 10
+    if stage == 4:
+        n = 8
+    elif stage == 6:
+        n = 10
+    else:
+        n = 15
     m = 2
     if is_insert:
         n *= 5
@@ -238,7 +243,7 @@ def shake_get_plus_shoot_point(data_plus_array, nums, is_insert=False):
     return pos, pos_array
 
 
-def shake_get_diff_shoot_array(data_diff_array, shoot_index, is_insert=False):
+def shake_get_stability_shoot_array(data_diff_array, shoot_index, is_insert=False):
     pos_array = []
     var_array = []
     j = 0
@@ -253,9 +258,7 @@ def shake_get_diff_shoot_array(data_diff_array, shoot_index, is_insert=False):
                 pos_array.append(data_diff_array[i - n:i + m])
             else:
                 pos_array.append(data_diff_array[0:i + m])
-
             j += 1
-    # print(pos_array)
     for arr in pos_array:
         var_array.append(get_variance_in_array(arr))
     return var_array
@@ -266,7 +269,7 @@ def get_variance_in_array(data):
     data_average = data_sum / len(data)
     sum1 = 0
     for d in data:
-        sum1 += (d - data_average) ** 2
+        sum1 += (d - data_average) * (d - data_average)
     return round(math.sqrt(sum1 / len(data)), 2)
 
 
@@ -333,7 +336,7 @@ def get_shoot_point(beside_y_data, is_insert=False, limit=10):
             count_smooth = 0
         else:
             count_smooth += 1
-            if count_smooth >= 5:
+            if count_smooth >= 6:
                 is_smooth = True
     # print(nums)
     # print(shoot_array)
@@ -717,3 +720,4 @@ if __name__ == "__main__":
     # r_pos_1, a_pos_1 = get_random_circle(130, 800)
     # print(get_average_in_circle(r_pos_1, a_pos_1))
     # plt.show()
+
