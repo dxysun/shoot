@@ -366,8 +366,8 @@ def sport_game_analyse_id(request):
         x_up_data_pos = x_up_data_pos[num:]
         y_up_data_pos = y_up_data_pos[num:]
 
-        nums = shootlib.get_shoot_point(y_data, is_insert=is_insert)
-        up_nums = shootlib.get_shoot_point(y_up_data, is_insert=is_insert, limit=5)
+        nums, y_shoot_array = shootlib.get_shoot_point(y_data, is_insert=is_insert)
+        up_nums, x_shoot_array = shootlib.get_shoot_point(y_up_data, is_insert=is_insert, limit=5)
         # print(nums)
         # print(up_nums)
 
@@ -391,10 +391,14 @@ def sport_game_analyse_id(request):
         up_x_10_pos, up_shake_rate = shootlib.get_up_shoot_limit(x_up_shoot_pos, x_pos, grades)
         # print(x_up_shoot_pos)
         # print(up_x_10_pos)
+        y_shoot_pos_new = y_shoot_pos.copy()
         if up_shake_rate is not None:
+            y_data_plus, y_shoot_pos_new = shootlib.process_shoot_y_pos_to_one_line(y_data_plus, y_shoot_array,
+                                                                                    up_shake_rate, y_shoot_pos_new,
+                                                                                    y_pos)
+
             x_pos_str, x_shoot_point = shootlib.process_pos_array(x_pos_array, x_shoot_pos, x_pos, up_shake_rate)
-            y_pos_str, y_shoot_point, y_pos_average_str = shootlib.process_pos_array(y_pos_array, y_shoot_pos, y_pos,
-                                                                                     up_shake_rate, is_average=True)
+            y_pos_str, y_shoot_point = shootlib.process_pos_array(y_pos_array, y_shoot_pos, y_pos, up_shake_rate)
 
             five_pos_info['up_shake_rate'] = up_shake_rate
             five_pos_info['x_pos_str'] = x_pos_str
@@ -418,7 +422,7 @@ def sport_game_analyse_id(request):
         shake_info['x_up_data_pos'] = x_up_data_pos
         shake_info['y_up_data_pos'] = y_up_data_pos
 
-        shake_info['y_shoot_pos'] = y_shoot_pos
+        shake_info['y_shoot_pos'] = y_shoot_pos_new
         shake_info['x_shoot_pos'] = x_shoot_pos
         shake_info['x_up_shoot_pos'] = x_up_shoot_pos
         shake_info['y_up_shoot_pos'] = y_up_shoot_pos

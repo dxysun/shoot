@@ -298,6 +298,8 @@ def process_grade_rapid_time(rapid_data):
 
 
 def get_shoot_point(beside_y_data, is_insert=False, limit=10):
+    shoot_array = []
+    last_index = 0
     nums = []
     is_smooth = False
     count_smooth = 0
@@ -307,13 +309,21 @@ def get_shoot_point(beside_y_data, is_insert=False, limit=10):
             if beside_y_data[i - 1] > 5:
                 if is_insert:
                     nums.append((i - 2) * 5)
+                    shoot_array.append([last_index, (i - 2) * 5])
+                    last_index = (i - 2) * 5 + 1
                 else:
                     nums.append(i - 2)
+                    shoot_array.append([last_index, i - 2])
+                    last_index = i - 1
             else:
                 if is_insert:
                     nums.append((i - 1) * 5)
+                    shoot_array.append([last_index, (i - 1) * 5])
+                    last_index = (i - 1) * 5 + 1
                 else:
                     nums.append(i - 1)
+                    shoot_array.append([last_index, i - 1])
+                    last_index = i
             count_smooth = 0
             is_smooth = False
             continue
@@ -325,7 +335,9 @@ def get_shoot_point(beside_y_data, is_insert=False, limit=10):
             count_smooth += 1
             if count_smooth >= 5:
                 is_smooth = True
-    return nums
+    # print(nums)
+    # print(shoot_array)
+    return nums, shoot_array
 
 
 def fun(x, a, b, c):
@@ -462,32 +474,19 @@ def get_grade_stability(x_pos, y_pos):
     return round(res / len(x_pos), 2)
 
 
-def process_pos_array(pos_array, shoot_pos, grade_pos, up_shake_rate, is_average=False):
-    y_pos_average_str = []
+def process_pos_array(pos_array, shoot_pos, grade_pos, up_shake_rate):
     y_pos_str = []
-    last_num = None
-    temp_sum = 0
     i = 5 - len(pos_array)
     shoot_point = []
     for pos_a in pos_array:
         temp = []
         for y_d in pos_a:
-            if is_average:
-                if last_num is not None:
-                    cha = y_d - last_num
-                    temp_sum += cha
-                last_num = y_d
             d1 = round(y_d - shoot_pos[i], 2) + int(grade_pos[i] / up_shake_rate)
             temp.append(d1)
         shoot_point.append(int(grade_pos[i] / up_shake_rate))
         i += 1
-        if is_average:
-            y_pos_average_str.append(round(temp_sum / (len(pos_a) - 1), 2))
         y_pos_str.append(temp)
-    if is_average:
-        return y_pos_str, shoot_point, y_pos_average_str
-    else:
-        return y_pos_str, shoot_point
+    return y_pos_str, shoot_point
 
 
 def get_beside_shoot_stability(pos_array):
@@ -682,6 +681,35 @@ def process_report_stage_info(stage):
     stage["five_average"] = get_array_average(stage["five"])
     stage["ten_ring"], stage["nine_ring"], stage["eight_ring"] = get_ring_rate(stage["grades"])
     return stage
+
+
+def process_shoot_y_pos_to_one_line(y_data_plus, y_shoot_array, up_shake_rate, y_shoot_pos, y_pos):
+    data_plus_array = []
+    a_i = 0
+    for shoot_array in y_shoot_array:
+        if a_i == 4:
+            data_plus_array.append(y_data_plus[shoot_array[0]:])
+        else:
+            data_plus_array.append(y_data_plus[shoot_array[0]:shoot_array[1] + 1])
+        a_i += 1
+    diff_pos = [0, 0, 0, 0, 0]
+    first_center_y_pos = y_shoot_pos[0] - int((y_pos[0] / up_shake_rate))
+    if first_center_y_pos < 30:
+        diff_pos[0] = 30 - first_center_y_pos
+        y_shoot_pos[0] += diff_pos[0]
+        first_center_y_pos = 30
+    for index in range(1, len(y_pos)):
+        center_y_pos = y_shoot_pos[index] - int((y_pos[index] / up_shake_rate))
+        diff_pos[index] = first_center_y_pos - center_y_pos
+        y_shoot_pos[index] += diff_pos[index]
+    j = 0
+    y_data_plus_new = []
+    for plus_array in data_plus_array:
+        for i in range(len(plus_array)):
+            plus_array[i] += diff_pos[j]
+        y_data_plus_new.extend(plus_array)
+        j += 1
+    return y_data_plus_new, y_shoot_pos
 
 
 if __name__ == "__main__":
