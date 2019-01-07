@@ -3,12 +3,13 @@ __author__ = 'dxy'
 import sys
 import os
 import django
+import pandas as pd
+import shootlib
 import time
 import datetime
 import math
 from scipy.interpolate import interp1d
 import numpy as np
-import pandas as pd
 
 dirname, filename = os.path.split(os.path.abspath(__file__))
 pre_path = os.path.abspath(os.path.dirname(dirname))
@@ -171,6 +172,162 @@ def save_first_shoot_info_by_stage():
     grade_first_shoot_df_8.to_excel("D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_first_shoot_info_8.xlsx")
 
 
+def save_first_shoot_info_by_stage_with_stability():
+    shoot_reports = shoot_report.objects.all()
+    print(len(shoot_reports))
+    grade_first_shoot_df_4 = pd.DataFrame(
+        columns=['report_id', 'grade_date', 'grade_time', 'grade_detail_time', 'grade',
+                 'rapid_time', 'x_pos', 'y_pos', 'heart_rate', 'x_average', 'y_stability'])
+    grade_first_shoot_df_6 = pd.DataFrame(
+        columns=['report_id', 'grade_date', 'grade_time', 'grade_detail_time', 'grade',
+                 'rapid_time', 'x_pos', 'y_pos', 'heart_rate', 'x_average', 'y_stability'])
+    grade_first_shoot_df_8 = pd.DataFrame(
+        columns=['report_id', 'grade_date', 'grade_time', 'grade_detail_time', 'grade',
+                 'rapid_time', 'x_pos', 'y_pos', 'heart_rate', 'x_average', 'y_stability'])
+
+    grade_four_shoot_df_4 = pd.DataFrame(
+        columns=['report_id', 'grade_date', 'grade_time', 'grade_detail_time', 'grade',
+                 'rapid_time', 'x_pos', 'y_pos', 'heart_rate', 'rapid_diff', 'x_average', 'y_stability', 'move_speed'])
+    grade_four_shoot_df_6 = pd.DataFrame(
+        columns=['report_id', 'grade_date', 'grade_time', 'grade_detail_time', 'grade',
+                 'rapid_time', 'x_pos', 'y_pos', 'heart_rate', 'rapid_diff', 'x_average', 'y_stability', 'move_speed'])
+    grade_four_shoot_df_8 = pd.DataFrame(
+        columns=['report_id', 'grade_date', 'grade_time', 'grade_detail_time', 'grade',
+                 'rapid_time', 'x_pos', 'y_pos', 'heart_rate', 'rapid_diff', 'x_average', 'y_stability', 'move_speed'])
+    g_i_4 = 0
+    g_i_6 = 0
+    g_i_8 = 0
+
+    g_i_f_4 = 0
+    g_i_f_6 = 0
+    g_i_f_8 = 0
+    for report in shoot_reports:
+        print(report.shoot_date + " " + report.start_time)
+        stage = int(report.remark)
+        # print(report.y_shake_pos)
+        # print(report.x_up_shake_data)
+        y_data_pos = report.y_shake_pos.split(",")
+        x_up_data_pos = report.x_up_shake_pos.split(",")
+        y_up_data_pos = report.y_up_shake_pos.split(",")
+
+        y_up_shake_data = shootlib.process_shake_pos_info(y_up_data_pos)
+        y_shake_data = shootlib.process_shake_pos_info(y_data_pos)
+        x_up_shake_data = shootlib.process_shake_pos_info(x_up_data_pos)
+
+        y_up_data = y_up_shake_data.split(",")
+        y_data = y_shake_data.split(",")
+        x_up_data = x_up_shake_data.split(",")
+        y_data = shootlib.get_int_data(y_data, is_negative=True)
+        x_up_data = shootlib.get_int_data(x_up_data)
+        y_up_data = shootlib.get_int_data(y_up_data)
+
+        y_data, num = shootlib.cut_shake_data(y_data)
+        x_up_data = x_up_data[num:]
+        y_up_data = y_up_data[num:]
+
+        if stage == 4:
+            pos_num = 8
+        elif stage == 6:
+            pos_num = 10
+        else:
+            pos_num = 15
+        after_shoot = 1
+
+        nums, y_shoot_array = shootlib.get_shoot_point(y_data)
+        # up_nums, x_shoot_array = shootlib.get_shoot_point(y_up_data, limit=5)
+        y_data_plus = shootlib.shake_data_process(y_data)
+        x_up_data_plus = shootlib.shake_data_process(x_up_data)
+        y_shoot_pos, y_pos_array = shootlib.shake_get_plus_shoot_point(y_data_plus, nums, pos_num=pos_num,
+                                                                       after_shoot=after_shoot)
+        x_shoot_pos, x_pos_array = shootlib.shake_get_plus_shoot_point(x_up_data_plus, nums, pos_num=pos_num,
+                                                                       after_shoot=after_shoot)
+        if len(nums) == 5:
+            # print(x_pos_array)
+            x_average_array = shootlib.shake_get_average_x_shoot_array(x_pos_array, after_shoot)
+            y_stability_array = shootlib.shake_get_stability_shoot_array(y_pos_array, after_shoot)
+            print(x_average_array)
+            print(y_stability_array)
+            shoot_grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
+            first_grade = shoot_grades[0]
+            if stage == 4:
+                grade_first_shoot_df_4.loc[g_i_4] = [first_grade.report_id, first_grade.grade_date,
+                                                     first_grade.grade_time,
+                                                     first_grade.grade_detail_time,
+                                                     float(first_grade.grade), float(first_grade.rapid_time),
+                                                     float(first_grade.x_pos),
+                                                     float(first_grade.y_pos), int(first_grade.heart_rate),
+                                                     x_average_array[0], y_stability_array[0]]
+                g_i_4 += 1
+            if stage == 6:
+                grade_first_shoot_df_6.loc[g_i_6] = [first_grade.report_id, first_grade.grade_date,
+                                                     first_grade.grade_time,
+                                                     first_grade.grade_detail_time,
+                                                     float(first_grade.grade), float(first_grade.rapid_time),
+                                                     float(first_grade.x_pos),
+                                                     float(first_grade.y_pos), int(first_grade.heart_rate),
+                                                     x_average_array[0], y_stability_array[0]]
+                g_i_6 += 1
+            if stage == 8:
+                grade_first_shoot_df_8.loc[g_i_8] = [first_grade.report_id, first_grade.grade_date,
+                                                     first_grade.grade_time,
+                                                     first_grade.grade_detail_time,
+                                                     float(first_grade.grade), float(first_grade.rapid_time),
+                                                     float(first_grade.x_pos),
+                                                     float(first_grade.y_pos), int(first_grade.heart_rate),
+                                                     x_average_array[0], y_stability_array[0]]
+                g_i_8 += 1
+            last_x_pos = float(first_grade.x_pos)
+            last_rapid_time = float(first_grade.rapid_time)
+            for i in range(1, len(shoot_grades)):
+                grade = shoot_grades[i]
+                diff_pos = (last_x_pos - float(grade.x_pos) + i * 750)
+                diff_rapid = float(grade.rapid_time) - last_rapid_time
+                move_speed = round(diff_pos / diff_rapid, 2)
+                last_x_pos = float(grade.x_pos)
+                last_rapid_time = float(grade.rapid_time)
+                if stage == 4:
+                    grade_four_shoot_df_4.loc[g_i_f_4] = [grade.report_id, grade.grade_date, grade.grade_time,
+                                                          grade.grade_detail_time,
+                                                          float(grade.grade), float(grade.rapid_time),
+                                                          float(grade.x_pos),
+                                                          float(grade.y_pos), int(grade.heart_rate), diff_rapid,
+                                                          x_average_array[i], y_stability_array[i], move_speed]
+                    g_i_f_4 += 1
+                if stage == 6:
+                    grade_four_shoot_df_6.loc[g_i_f_6] = [grade.report_id, grade.grade_date, grade.grade_time,
+                                                          grade.grade_detail_time,
+                                                          float(grade.grade), float(grade.rapid_time),
+                                                          float(grade.x_pos),
+                                                          float(grade.y_pos), int(grade.heart_rate), diff_rapid,
+                                                          x_average_array[i], y_stability_array[i], move_speed]
+                    g_i_f_6 += 1
+                if stage == 8:
+                    grade_four_shoot_df_8.loc[g_i_f_8] = [grade.report_id, grade.grade_date, grade.grade_time,
+                                                          grade.grade_detail_time,
+                                                          float(grade.grade), float(grade.rapid_time),
+                                                          float(grade.x_pos),
+                                                          float(grade.y_pos), int(grade.heart_rate), diff_rapid,
+                                                          x_average_array[i], y_stability_array[i], move_speed]
+                    g_i_f_8 += 1
+
+        else:
+            print("data not find five shoot")
+
+    grade_first_shoot_df_4.to_excel(
+        "D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_first_shoot_info_4_with_feature.xlsx")
+    grade_first_shoot_df_6.to_excel(
+        "D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_first_shoot_info_6_with_feature.xlsx")
+    grade_first_shoot_df_8.to_excel(
+        "D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_first_shoot_info_8_with_feature.xlsx")
+
+    grade_four_shoot_df_4.to_excel(
+        "D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_four_shoot_info_4_with_feature.xlsx")
+    grade_four_shoot_df_6.to_excel(
+        "D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_four_shoot_info_6_with_feature.xlsx")
+    grade_four_shoot_df_8.to_excel(
+        "D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_four_shoot_info_8_with_feature.xlsx")
+
+
 def save_report_by_stage():
     shoot_reports = shoot_report.objects.all()
     print(len(shoot_reports))
@@ -289,4 +446,5 @@ if __name__ == "__main__":
     # save_grade_info()
     # save_first_shoot_info()
     # save_report_by_stage()
-    save_first_shoot_info_by_stage()
+    # save_first_shoot_info_by_stage()
+    save_first_shoot_info_by_stage_with_stability()

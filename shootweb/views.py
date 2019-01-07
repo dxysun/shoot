@@ -235,11 +235,9 @@ def sport_game_analyse(request):
                 heart = 0
             hearts.append(heart)
             if report.x_shake_pos is not None and report.x_up_shake_pos is not None:
-                x_shake_data, y_shake_data, x_up_shake_data, y_up_shake_data = shootlib.process_shake_pos_info(
-                    report.x_shake_pos,
-                    report.y_shake_pos,
-                    report.x_up_shake_pos,
-                    report.y_up_shake_pos)
+                y_shake_data = shootlib.process_shake_pos_info(report.y_shake_pos)
+                x_up_shake_data = shootlib.process_shake_pos_info(report.x_up_shake_pos)
+                y_up_shake_data = shootlib.process_shake_pos_info(report.y_up_shake_pos)
                 is_insert = False
                 y_data = y_shake_data.split(",")
                 x_up_data = x_up_shake_data.split(",")
@@ -335,12 +333,21 @@ def sport_game_analyse_id(request):
         y_data_pos = y_data_pos.split(",")
         x_up_data_pos = x_up_data_pos.split(",")
         y_up_data_pos = y_up_data_pos.split(",")
-        x_shake_data, y_shake_data, x_up_shake_data, y_up_shake_data = shootlib.process_shake_pos_info(
-            x_data_pos,
-            y_data_pos,
-            x_up_data_pos,
-            y_up_data_pos)
+
+        x_shake_data = shootlib.process_shake_pos_info(x_data_pos)
+        y_shake_data = shootlib.process_shake_pos_info(y_data_pos)
+        x_up_shake_data = shootlib.process_shake_pos_info(x_up_data_pos)
+        y_up_shake_data = shootlib.process_shake_pos_info(y_up_data_pos)
+
         is_insert = False
+        if stage == 4:
+            pos_num = 8
+        elif stage == 6:
+            pos_num = 10
+        else:
+            pos_num = 15
+        after_shoot = 1
+
         x_data = x_shake_data.split(",")
         y_data = y_shake_data.split(",")
         x_up_data = x_up_shake_data.split(",")
@@ -380,13 +387,19 @@ def sport_game_analyse_id(request):
         x_up_data_plus = shootlib.shake_data_process(x_up_data)
         y_up_data_plus = shootlib.shake_data_process(y_up_data, is_negative=True)
 
-        y_shoot_pos, y_pos_array = shootlib.shake_get_plus_shoot_point(y_data_plus, nums, is_insert, stage)
-        x_shoot_pos, x_pos_array = shootlib.shake_get_plus_shoot_point(x_up_data_plus, nums, is_insert, stage)
+        y_shoot_pos, y_pos_array = shootlib.shake_get_plus_shoot_point(y_data_plus, nums, is_insert, pos_num,
+                                                                       after_shoot)
+        x_shoot_pos, x_pos_array = shootlib.shake_get_plus_shoot_point(x_up_data_plus, nums, is_insert, pos_num,
+                                                                       after_shoot)
+        # print(x_pos_array)
+        # print(y_pos_array)
 
-        x_up_shoot_pos, _ = shootlib.shake_get_plus_shoot_point(x_up_data_plus, up_nums, is_insert=is_insert)
-        y_up_shoot_pos, _ = shootlib.shake_get_plus_shoot_point(y_up_data_plus, up_nums, is_insert=is_insert)
+        x_up_shoot_pos, _ = shootlib.shake_get_plus_shoot_point(x_up_data_plus, up_nums, is_insert, pos_num,
+                                                                after_shoot)
+        y_up_shoot_pos, _ = shootlib.shake_get_plus_shoot_point(y_up_data_plus, up_nums, is_insert, pos_num,
+                                                                after_shoot)
 
-        y_stability_array = shootlib.shake_get_stability_shoot_array(y_data_plus, nums, is_insert=is_insert)
+        y_stability_array = shootlib.shake_get_stability_shoot_array(y_pos_array, after_shoot, is_insert=is_insert)
 
         up_x_10_pos, up_shake_rate = shootlib.get_up_shoot_limit(x_up_shoot_pos, x_pos, grades)
         # print(x_up_shoot_pos)

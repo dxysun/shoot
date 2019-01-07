@@ -217,51 +217,50 @@ def shake_data_process(data_shake, is_negative=False):
     return data_plus_array
 
 
-def shake_get_plus_shoot_point(data_plus_array, nums, is_insert=False,stage=6):
+def shake_get_plus_shoot_point(data_plus_array, nums, is_insert=False, pos_num=8, after_shoot=1):
     pos_array = []
     pos = []
     j = 0
-    if stage == 4:
-        n = 8
-    elif stage == 6:
-        n = 10
-    else:
-        n = 15
-    m = 2
+    # if stage == 4:
+    #     n = 8
+    # elif stage == 6:
+    #     n = 10
+    # else:
+    #     n = 15
     if is_insert:
-        n *= 5
-        m = 5
+        pos_num *= 5
+        after_shoot *= 5
+    after_shoot += 1
     for i in range(0, len(data_plus_array)):
         plus_num = data_plus_array[i]
         if j < len(nums) and i == nums[j]:
-            if i - n > 0:
-                pos_array.append(data_plus_array[i - n:i + m])
+            if i - pos_num > 0:
+                pos_array.append(data_plus_array[i - pos_num:i + after_shoot])
             else:
-                pos_array.append(data_plus_array[0:i + m])
+                pos_array.append(data_plus_array[0:i + after_shoot])
             pos.append(plus_num)
             j += 1
     return pos, pos_array
 
 
-def shake_get_stability_shoot_array(data_diff_array, shoot_index, is_insert=False):
-    pos_array = []
-    var_array = []
-    j = 0
-    n = 10
-    m = 1
+def shake_get_stability_shoot_array(y_pos_array, after_shoot, is_insert=False):
+    new_var_array = []
     if is_insert:
-        n *= 5
-    for i in range(0, len(data_diff_array)):
-        plus_num = data_diff_array[i]
-        if j < len(shoot_index) and i == shoot_index[j]:
-            if i - n > 0:
-                pos_array.append(data_diff_array[i - n:i + m])
-            else:
-                pos_array.append(data_diff_array[0:i + m])
-            j += 1
-    for arr in pos_array:
-        var_array.append(get_variance_in_array(arr))
-    return var_array
+        after_shoot *= 5
+    for arr in y_pos_array:
+        new_arr = arr[:-after_shoot]
+        new_var_array.append(get_variance_in_array(new_arr))
+    return new_var_array
+
+
+def shake_get_average_x_shoot_array(y_pos_array, after_shoot, is_insert=False):
+    new_var_array = []
+    if is_insert:
+        after_shoot *= 5
+    for arr in y_pos_array:
+        new_arr = arr[:-after_shoot]
+        new_var_array.append(get_average_x_in_array(new_arr))
+    return new_var_array
 
 
 def get_variance_in_array(data):
@@ -271,6 +270,14 @@ def get_variance_in_array(data):
     for d in data:
         sum1 += (d - data_average) * (d - data_average)
     return round(math.sqrt(sum1 / len(data)), 2)
+
+
+def get_average_x_in_array(data):
+    diff_array = []
+    data = data[-6:]
+    for i in range(len(data) - 1, 0, -1):
+        diff_array.append(abs(data[i] - data[i - 1]))
+    return round(sum(diff_array) / len(diff_array), 2)
 
 
 def cut_shake_data(y_shake_data):
@@ -365,27 +372,13 @@ def get_shoot_info(y_sum_data):
         start += 1
 
 
-def process_shake_pos_info(beside_x_pos, beside_y_pos, up_x_pos, up_y_pos):
+def process_shake_pos_info(beside_x_pos):
     beside_x_data = "0,"
-    beside_y_data = "0,"
-    up_x_data = "0,"
-    up_y_data = "0,"
     for i in range(1, len(beside_x_pos)):
         d_x = int(beside_x_pos[i]) - int(beside_x_pos[i - 1])
-        d_y = int(beside_y_pos[i]) - int(beside_y_pos[i - 1])
         beside_x_data += str(d_x) + ","
-        beside_y_data += str(d_y) + ","
     beside_x_data = beside_x_data[:-1]
-    beside_y_data = beside_y_data[:-1]
-
-    for i in range(1, len(up_x_pos)):
-        d_x = int(up_x_pos[i]) - int(up_x_pos[i - 1])
-        d_y = int(up_y_pos[i]) - int(up_y_pos[i - 1])
-        up_x_data += str(d_x) + ","
-        up_y_data += str(d_y) + ","
-    up_x_data = up_x_data[:-1]
-    up_y_data = up_y_data[:-1]
-    return beside_x_data, beside_y_data, up_x_data, up_y_data
+    return beside_x_data
 
 
 def array_to_str(data):
@@ -720,4 +713,5 @@ if __name__ == "__main__":
     # r_pos_1, a_pos_1 = get_random_circle(130, 800)
     # print(get_average_in_circle(r_pos_1, a_pos_1))
     # plt.show()
-
+    # for i in range(4, 0, -1):
+    #     print(i)
