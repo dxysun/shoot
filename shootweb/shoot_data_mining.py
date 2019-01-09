@@ -11,11 +11,14 @@ import numpy as np
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 import model_evaluation_utils as meu
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 import matplotlib.pyplot as plt
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import FeatureUnion
+from sklearn.tree import DecisionTreeRegressor
 
 plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
@@ -113,10 +116,70 @@ def train_first_shoot_8_data(grade_first_shoot_info_8_with_feature):
     display_importance(shoot_rf, feature_col)
 
 
+class DataFrameSelector(BaseEstimator, TransformerMixin):
+    def __init__(self, attribute_names):
+        self.attribute_names = attribute_names
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        return X[self.attribute_names].values
+
+
+def use_pipeline(num_attribs, cat_attribs=None):
+    # num_attribs = ['rapid_time', 'heart_rate', 'x_average', 'y_stability']
+    # cat_attribs = ["shoot_area"]
+    num_pipeline = Pipeline([
+        ('selector', DataFrameSelector(num_attribs)),
+        ('std_scaler', StandardScaler())
+    ])
+    if cat_attribs is not None:
+        cat_pipeline = Pipeline([
+            ('selector', DataFrameSelector(cat_attribs)),
+            ('label_binarizer', OneHotEncoder())
+        ])
+
+        full_pipeline = FeatureUnion(transformer_list=[
+            ("num_pipeline", num_pipeline),
+            ("cat_pipeline", cat_pipeline)
+        ])
+        return full_pipeline
+    else:
+        return num_pipeline
+
+
+def train_data_and_predict(all_data_df, feature_names, label_name):
+    feature = all_data_df[feature_names].copy()
+    shoot_labels = all_data_df[label_name].copy()
+    train_x, test_x, train_y, test_y = train_test_split(feature, shoot_labels, test_size=0.3, random_state=42)
+    #
+    # full_pipeline = use_pipeline(feature_names)
+    #
+    # train_x_prepared = full_pipeline.fit_transform(train_x)
+    # test_x_prepared = full_pipeline.transform(test_x)
+
+    # shoot_reg = DecisionTreeRegressor()
+    shoot_reg = RandomForestClassifier()
+    shoot_reg.fit(train_x, train_y)
+
+    shoot_dt_predictions = shoot_reg.predict(test_x)
+    label_class = list(set(shoot_labels.values))
+    meu.display_model_performance_metrics(true_labels=test_y, predicted_labels=shoot_dt_predictions,
+                                          classes=label_class)
+
+    # shoot_feature_names = ['rapid_time', 'heart_rate', 'x_average', 'y_stability', 'shoot_area1', 'shoot_area2',
+    #                        'shoot_area3', 'shoot_area4']
+    display_importance(shoot_reg, feature_names)
+
+
 if __name__ == "__main__":
     print()
     # add_shoot_area()
     grade_first_shoot_info_8_with_feature = pd.read_excel('data/grade_first_shoot_info_8_with_feature.xlsx')
     grade_first_shoot_info_4_with_feature = pd.read_excel('data/grade_first_shoot_info_4_with_feature.xlsx')
     grade_first_shoot_info_6_with_feature = pd.read_excel('data/grade_first_shoot_info_6_with_feature.xlsx')
-    train_first_shoot_8_data(grade_first_shoot_info_4_with_feature)
+    # train_first_shoot_8_data(grade_first_shoot_info_4_with_feature)
+    shoot_feature_names = ['rapid_time', 'heart_rate', 'y_stability']
+    shoot_label_names = 'grade'
+    train_data_and_predict(grade_first_shoot_info_4_with_feature, shoot_feature_names, shoot_label_names)

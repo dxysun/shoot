@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7d03cb4f-baf8-47fc-b3ac-218109122674" name="Default" comment="修改shootlib的一些函数，使其更通用">
-      <change afterPath="$PROJECT_DIR$/shootweb/model_evaluation_utils.py" afterDir="false" />
+    <list default="true" id="7d03cb4f-baf8-47fc-b3ac-218109122674" name="Default" comment="修改shoot_data_mining，使其只涉及数据分析相关操作，数据库相关操作都放在process_shoot_model下">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/process_readAndWriteData.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/process_readAndWriteData.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shootweb/process_shoot_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/process_shoot_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shootweb/shoot_data_mining.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/shoot_data_mining.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,13 +21,13 @@
     <SUITE FILE_PATH="coverage/shoot$readAndWriteData.coverage" NAME="readAndWriteData Coverage Results" MODIFIED="1544244740865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$shootlib.coverage" NAME="shootlib Coverage Results" MODIFIED="1546763087775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$watch_grade_file.coverage" NAME="watch_grade_file Coverage Results" MODIFIED="1543494526006" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
-    <SUITE FILE_PATH="coverage/shoot$process_shoot_model.coverage" NAME="process_shoot_model Coverage Results" MODIFIED="1545920640027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
+    <SUITE FILE_PATH="coverage/shoot$process_shoot_model.coverage" NAME="process_shoot_model Coverage Results" MODIFIED="1547032779077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$readData.coverage" NAME="readData Coverage Results" MODIFIED="1531315166449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$ReadData.coverage" NAME="ReadData Coverage Results" MODIFIED="1530531350577" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$process_readAndWriteData.coverage" NAME="process_readAndWriteData Coverage Results" MODIFIED="1545208927829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$mysql_option.coverage" NAME="mysql_option Coverage Results" MODIFIED="1540969708730" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
     <SUITE FILE_PATH="coverage/shoot$watch_file.coverage" NAME="watch_file Coverage Results" MODIFIED="1541163522853" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
-    <SUITE FILE_PATH="coverage/shoot$shoot_data_mining.coverage" NAME="shoot_data_mining Coverage Results" MODIFIED="1546863246858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
+    <SUITE FILE_PATH="coverage/shoot$shoot_data_mining.coverage" NAME="shoot_data_mining Coverage Results" MODIFIED="1546958046251" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/shootweb" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -55,8 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shootweb/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7277">
-              <caret line="389" column="14" selection-start-line="389" selection-start-column="14" selection-end-line="389" selection-end-column="14" />
+            <state relative-caret-position="5586">
+              <caret line="300" column="94" selection-start-line="300" selection-start-column="77" selection-end-line="300" selection-end-column="94" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -65,28 +64,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/shootlib.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5016">
-              <caret line="274" column="33" selection-start-line="274" selection-start-column="33" selection-end-line="274" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27816">
-              <caret line="1464" column="18" selection-start-line="1464" selection-start-column="18" selection-end-line="1464" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shootweb/shoot_data_mining.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="104" column="61" lean-forward="true" selection-start-line="104" selection-start-column="61" selection-end-line="104" selection-end-column="61" />
+            <state relative-caret-position="2356">
+              <caret line="142" column="55" selection-start-line="142" selection-start-column="55" selection-end-line="142" selection-end-column="55" />
               <folding>
                 <element signature="e#43#53#0" expanded="true" />
               </folding>
@@ -95,19 +76,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shootweb/process_readAndWriteData.py">
+        <entry file="file://$PROJECT_DIR$/shootweb/shootlib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15390">
-              <caret line="813" selection-start-line="813" selection-end-line="813" />
+            <state relative-caret-position="4674">
+              <caret line="256" column="22" selection-start-line="256" selection-start-column="22" selection-end-line="256" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shootweb/process_shoot_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19361">
-              <caret line="1028" column="95" selection-start-line="1028" selection-start-column="4" selection-end-line="1028" selection-end-column="95" />
+            <state relative-caret-position="484">
+              <caret line="999" column="29" lean-forward="true" selection-start-line="999" selection-start-column="29" selection-end-line="999" selection-end-column="29" />
               <folding>
                 <element signature="e#24#34#0" expanded="true" />
               </folding>
@@ -129,9 +110,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>option_beside_shake_pos</find>
-      <find>line_shake_pos</find>
-      <find>line_shake</find>
       <find>coach</find>
       <find>hearts</find>
       <find>best_grade</find>
@@ -159,6 +137,9 @@
       <find>shake_get_stability_shoot_array</find>
       <find>x_up_shoot_pos</find>
       <find>get_average_x_in_array</find>
+      <find>line_pos_five</find>
+      <find>grade</find>
+      <find>diff_rapid</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -167,6 +148,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/shootweb/models.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/shootweb/views.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/shootweb/shoot_data_mining.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -217,11 +199,11 @@
         <option value="$PROJECT_DIR$/shootweb/templates/test.html" />
         <option value="$PROJECT_DIR$/shootweb/templates/sport_home.html" />
         <option value="$PROJECT_DIR$/shootweb/shootlib.py" />
-        <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" />
         <option value="$PROJECT_DIR$/shootweb/views.py" />
         <option value="$PROJECT_DIR$/shootweb/process_readAndWriteData.py" />
-        <option value="$PROJECT_DIR$/shootweb/process_shoot_model.py" />
         <option value="$PROJECT_DIR$/shootweb/shoot_data_mining.py" />
+        <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" />
+        <option value="$PROJECT_DIR$/shootweb/process_shoot_model.py" />
       </list>
     </option>
   </component>
@@ -239,6 +221,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -255,7 +238,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -294,7 +276,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.shoot_data_mining">
+  <component name="RunManager" selected="Python.process_shoot_model">
     <configuration name="test" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:8000/shoot/api/test">
       <method v="2" />
     </configuration>
@@ -444,10 +426,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.process_shoot_model" />
         <item itemvalue="Python.shoot_data_mining" />
         <item itemvalue="Python.shootlib" />
         <item itemvalue="JavaScript Debug.test" />
-        <item itemvalue="Python.process_shoot_model" />
         <item itemvalue="Python.process_readAndWriteData" />
       </list>
     </recent_temporary>
@@ -542,7 +524,10 @@
       <workItem from="1546663798408" duration="20411000" />
       <workItem from="1546753257859" duration="15199000" />
       <workItem from="1546821828466" duration="7547000" />
-      <workItem from="1546923372102" duration="1203000" />
+      <workItem from="1546923372102" duration="2001000" />
+      <workItem from="1546947148630" duration="6439000" />
+      <workItem from="1547009381180" duration="8313000" />
+      <workItem from="1547039598931" duration="772000" />
     </task>
     <task id="LOCAL-00001" summary="添加对某一组射击的可视化展示">
       <created>1540262311101</created>
@@ -796,11 +781,18 @@
       <option name="project" value="LOCAL" />
       <updated>1546846558049</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="修改shoot_data_mining，使其只涉及数据分析相关操作，数据库相关操作都放在process_shoot_model下">
+      <created>1546929279231</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1546929279231</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="521300000" />
+    <option name="totallyTimeSpent" value="537622000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -814,12 +806,12 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1552" height="840" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4952381" visible="true" weight="0.31526104" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4952381" visible="true" weight="0.3286479" />
       <window_info id="Structure" order="1" sideWeight="0.50476193" side_tool="true" weight="0.22356091" />
       <window_info id="Favorites" order="2" sideWeight="0.501845" side_tool="true" weight="0.23159304" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32952926" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4966533" weight="0.29943502" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4966533" weight="0.34887007" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.33333334" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -842,7 +834,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="将监控射击文件的函数整合到登录中" />
     <MESSAGE value="添加日期筛选的功能" />
     <MESSAGE value="处理今天在射击馆获取的数据" />
     <MESSAGE value="解决重启服务器不能继续读文件最新内容的问题" />
@@ -867,24 +858,10 @@
     <MESSAGE value="修改轨迹页面，使5个靶位于同一水平线上" />
     <MESSAGE value="解决四个射击点会出错的bug，限制只有5个射击点才回正常显示，设置轨迹图中的y的最大值，以便信息显示完全" />
     <MESSAGE value="修改shootlib的一些函数，使其更通用" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改shootlib的一些函数，使其更通用" />
+    <MESSAGE value="修改shoot_data_mining，使其只涉及数据分析相关操作，数据库相关操作都放在process_shoot_model下" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改shoot_data_mining，使其只涉及数据分析相关操作，数据库相关操作都放在process_shoot_model下" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/shootweb/data/second/after_process/shoot_2_2018_0714_after_process.dat" />
-    <entry file="file://$PROJECT_DIR$/shootweb/templates/admin_coach.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/templates/admin_home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="27" column="42" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/templates/admin_sport.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
@@ -1149,27 +1126,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/views.py">
+    <entry file="file://D:/Program/Anaconda2/envs/python36/Lib/site-packages/sklearn/metrics/classification.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7277">
-          <caret line="389" column="14" selection-start-line="389" selection-start-column="14" selection-end-line="389" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="156">
+          <caret line="1090" selection-start-line="1090" selection-end-line="1090" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/shootlib.py">
+    <entry file="file://D:/Program/Anaconda2/envs/python36/Lib/site-packages/sklearn/preprocessing/label.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5016">
-          <caret line="274" column="33" selection-start-line="274" selection-start-column="33" selection-end-line="274" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27816">
-          <caret line="1464" column="18" selection-start-line="1464" selection-start-column="18" selection-end-line="1464" selection-end-column="18" />
+        <state relative-caret-position="156">
+          <caret line="132" selection-start-line="132" selection-end-line="132" />
         </state>
       </provider>
     </entry>
@@ -1180,22 +1147,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/process_shoot_model.py">
+    <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19361">
-          <caret line="1028" column="95" selection-start-line="1028" selection-start-column="4" selection-end-line="1028" selection-end-column="95" />
+        <state relative-caret-position="19">
+          <caret line="1448" column="38" selection-start-line="1448" selection-start-column="38" selection-end-line="1448" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Program/Anaconda2/envs/python36/Lib/site-packages/sklearn/ensemble/forest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="973" column="8" selection-start-line="973" selection-start-column="8" selection-end-line="973" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5586">
+          <caret line="300" column="94" selection-start-line="300" selection-start-column="77" selection-end-line="300" selection-end-column="94" />
           <folding>
-            <element signature="e#24#34#0" expanded="true" />
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/shoot_data_mining.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="104" column="61" lean-forward="true" selection-start-line="104" selection-start-column="61" selection-end-line="104" selection-end-column="61" />
+        <state relative-caret-position="2356">
+          <caret line="142" column="55" selection-start-line="142" selection-start-column="55" selection-end-line="142" selection-end-column="55" />
           <folding>
             <element signature="e#43#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/shootlib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4674">
+          <caret line="256" column="22" selection-start-line="256" selection-start-column="22" selection-end-line="256" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/process_shoot_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="999" column="29" lean-forward="true" selection-start-line="999" selection-start-column="29" selection-end-line="999" selection-end-column="29" />
+          <folding>
+            <element signature="e#24#34#0" expanded="true" />
           </folding>
         </state>
       </provider>

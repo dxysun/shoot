@@ -845,8 +845,8 @@ def save_first_shoot_info_by_stage_with_stability():
             # print(x_pos_array)
             x_average_array = shootlib.shake_get_average_x_shoot_array(x_pos_array, after_shoot)
             y_stability_array = shootlib.shake_get_stability_shoot_array(y_pos_array, after_shoot)
-            print(x_average_array)
-            print(y_stability_array)
+            # print(x_average_array)
+            # print(y_stability_array)
             shoot_grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
             first_grade = shoot_grades[0]
             if stage == 4:
@@ -882,6 +882,12 @@ def save_first_shoot_info_by_stage_with_stability():
                 grade = shoot_grades[i]
                 diff_pos = (last_x_pos - float(grade.x_pos) + i * 750)
                 diff_rapid = float(grade.rapid_time) - last_rapid_time
+                if i == 4 and float(grade.rapid_time) < 1:
+                    diff_rapid = float(grade.rapid_time) + stage - last_rapid_time
+                if diff_rapid < 0:
+                    print(i)
+                    print("diff_rapid:" + str(diff_rapid))
+
                 move_speed = round(diff_pos / diff_rapid, 2)
                 last_x_pos = float(grade.x_pos)
                 last_rapid_time = float(grade.rapid_time)
@@ -1074,3 +1080,4 @@ if __name__ == "__main__":
     # process_shake_time_data()
 
     # update_data("A")
+    save_first_shoot_info_by_stage_with_stability()
