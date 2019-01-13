@@ -235,9 +235,12 @@ def sport_game_analyse(request):
                 heart = 0
             hearts.append(heart)
             if report.x_shake_pos is not None and report.x_up_shake_pos is not None:
-                y_shake_data = shootlib.process_shake_pos_info(report.y_shake_pos)
-                x_up_shake_data = shootlib.process_shake_pos_info(report.x_up_shake_pos)
-                y_up_shake_data = shootlib.process_shake_pos_info(report.y_up_shake_pos)
+                y_shake_pos = report.y_shake_pos.split(",")
+                x_up_shake_pos = report.x_up_shake_pos.split(",")
+                y_up_shake_pos = report.y_up_shake_pos.split(",")
+                y_shake_data = shootlib.process_shake_pos_info(y_shake_pos)
+                x_up_shake_data = shootlib.process_shake_pos_info(x_up_shake_pos)
+                y_up_shake_data = shootlib.process_shake_pos_info(y_up_shake_pos)
                 is_insert = False
                 y_data = y_shake_data.split(",")
                 x_up_data = x_up_shake_data.split(",")
