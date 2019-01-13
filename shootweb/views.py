@@ -373,8 +373,8 @@ def sport_game_analyse_id(request):
         x_up_data_pos = x_up_data_pos[num:]
         y_up_data_pos = y_up_data_pos[num:]
 
-        nums, y_shoot_array = shootlib.get_shoot_point(y_data, is_insert=is_insert)
-        up_nums, x_shoot_array = shootlib.get_shoot_point(y_up_data, is_insert=is_insert, limit=5)
+        nums, y_shoot_array = shootlib.get_shoot_point(y_data, is_insert=is_insert, stage=stage)
+        up_nums, x_shoot_array = shootlib.get_shoot_point(y_up_data, is_insert=is_insert, limit=5, stage = stage)
         # print(nums)
         # print(up_nums)
 

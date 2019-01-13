@@ -127,6 +127,7 @@
                     data: grade_data,
                     type: 'line',
                     smooth: true,
+
                     markPoint: {
                         itemStyle: {
                             color: 'rgba(0,0,255,0.3)'
@@ -136,6 +137,7 @@
                 }, {
                     data: circle_data_10,
                     type: 'line',
+                    symbol:'none',
                     smooth: true,
                     tooltip: {
                         show: false
@@ -143,6 +145,7 @@
                 }, {
                     data: circle_data_9,
                     type: 'line',
+                    symbol:'none',
                     smooth: true,
                     tooltip: {
                         show: false
@@ -150,6 +153,7 @@
                 }, {
                     data: circle_data_8,
                     type: 'line',
+                    symbol:'none',
                     smooth: true,
                     tooltip: {
                         show: false
@@ -1291,12 +1295,16 @@
                 last_rapid_time = grade_info.rapid_data[i];
                 last_x_pos = grade_info.x_pos[i] - i * 750;
             }
-            var y_max_value = parseInt(y_shoot_pos[0] + 80);
+
+            var y_max_value = 0;
             var merge_data = [];
             for (i = 0; i < yData.length; i++) {
+                if(parseFloat(yData[i]) > y_max_value){
+                    y_max_value = parseFloat(yData[i]);
+                }
                 merge_data.push([xUpData[i], yData[i]]);
             }
-
+            y_max_value += 50;
             var shoot_pos_series = [];
             var merge_info = {
                 data: merge_data,
@@ -1313,7 +1321,7 @@
                 label: {
                     show: true,
                     position: 'top',
-                    distance: 70,
+                    distance: 50,
                     formatter: '{line1|{@[2]}}\n{hr|}\n{line2|环数:{@[3]}}\n{line3|坐标:\n{@[4]}mm,{@[5]}mm}\n{line4|速射时间:{@[6]}s}\n{line5|心率:{@[7]}}',
                     rich: {
                         line1: {
@@ -1462,7 +1470,7 @@
                 },
                 yAxis: {
                     type: 'value',
-                //    max: y_max_value
+                    max: y_max_value
                 },
                 dataZoom: {
                     show: true,

@@ -253,14 +253,22 @@ def shake_get_stability_shoot_array(y_pos_array, after_shoot, is_insert=False):
     return new_var_array
 
 
-def shake_get_average_x_shoot_array(y_pos_array, after_shoot, is_insert=False):
+def shake_get_average_x_shoot_array(y_pos_array, after_shoot, is_insert=False, get_distance=False):
     new_var_array = []
     if is_insert:
         after_shoot *= 5
+    shoot_point = []
     for arr in y_pos_array:
         new_arr = arr[:-after_shoot]
+        shoot_point.append(arr[-(after_shoot + 1)])
         new_var_array.append(get_average_x_in_array(new_arr))
-    return new_var_array
+    if get_distance:
+        move_distance = []
+        for i in range(1, len(shoot_point)):
+            move_distance.append(abs(shoot_point[i] - shoot_point[i - 1]))
+        return new_var_array, move_distance
+    else:
+        return new_var_array
 
 
 def get_variance_in_array(data):
@@ -307,10 +315,15 @@ def process_grade_rapid_time(rapid_data):
     return data
 
 
-def get_shoot_point(beside_y_data, is_insert=False, limit=10):
+def get_shoot_point(beside_y_data, is_insert=False, limit=10, stage=8):
     shoot_array = []
     last_index = 0
     nums = []
+    len_smooth = 11
+    if stage == 6:
+        len_smooth = 7
+    if stage == 4:
+        len_smooth = 5
     is_smooth = False
     count_smooth = 0
     for i in range(0, len(beside_y_data)):
@@ -343,7 +356,7 @@ def get_shoot_point(beside_y_data, is_insert=False, limit=10):
             count_smooth = 0
         else:
             count_smooth += 1
-            if count_smooth >= 6:
+            if count_smooth >= len_smooth:
                 is_smooth = True
     # print(nums)
     # print(shoot_array)
