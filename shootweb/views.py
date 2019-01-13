@@ -342,7 +342,7 @@ def sport_game_analyse_id(request):
         x_up_shake_data = shootlib.process_shake_pos_info(x_up_data_pos)
         y_up_shake_data = shootlib.process_shake_pos_info(y_up_data_pos)
 
-        is_insert = False
+        is_insert = True
         if stage == 4:
             pos_num = 8
         elif stage == 6:
@@ -422,6 +422,11 @@ def sport_game_analyse_id(request):
             five_pos_info['y_stability_array'] = y_stability_array
             five_pos_info['x_shoot_point'] = x_shoot_point
             five_pos_info['y_shoot_point'] = y_shoot_point
+        else:
+            return render(request, 'sport_game_analyse_id_backup.html', {
+                'shoot_reports': report,
+                'shoot_info': shoot_grades
+            })
 
         shake_info['x_data_plus'] = x_data_plus
         shake_info['y_data_plus'] = y_data_plus
@@ -447,10 +452,10 @@ def sport_game_analyse_id(request):
     nums = shootlib.array_to_str(nums)
     return render(request, 'sport_game_analyse_id.html', {
         'shoot_reports': report,
+        'shoot_info': shoot_grades,
         'grade_info': json.dumps(grade_info),
         'shake_info': json.dumps(shake_info),
         'five_pos_info': json.dumps(five_pos_info),
-        'shoot_info': shoot_grades,
         'beside_y_nums': nums,
     })
 

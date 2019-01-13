@@ -1,28 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7d03cb4f-baf8-47fc-b3ac-218109122674" name="Default" comment="射击数据分析添加射击距离项">
-      <change afterPath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id_backup.html" afterDir="false" />
+    <list default="true" id="7d03cb4f-baf8-47fc-b3ac-218109122674" name="Default" comment="修改模板文件名即base.html改为base_shoot.html，并修复一个bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/admin_add_coach.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/admin_add_coach.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/admin_add_item.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/admin_add_item.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/admin_add_sport.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/admin_add_sport.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/admin_analyse.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/admin_analyse.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/admin_coach.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/admin_coach.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/admin_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/admin_home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/admin_modify_coach.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/admin_modify_coach.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/admin_modify_item.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/admin_modify_item.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/admin_modify_sport.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/admin_modify_sport.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/admin_sport.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/admin_sport.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/base_shoot.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/coach_game_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/coach_game_info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/coach_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/coach_home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/coach_sport_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/coach_sport_info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/coach_sport_info_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/coach_sport_info_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/sport_game_history.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/sport_game_history.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shootweb/templates/sport_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/sport_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id_backup.html" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id_backup.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shootweb/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/shootweb/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -69,11 +51,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shootweb/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="242" column="81" lean-forward="true" selection-start-line="242" selection-start-column="81" selection-end-line="242" selection-end-column="81" />
+            <state relative-caret-position="164">
+              <caret line="343" lean-forward="true" selection-start-line="343" selection-end-line="343" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -89,6 +71,15 @@
               <folding>
                 <element signature="e#24#34#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="27455">
+              <caret line="1445" lean-forward="true" selection-start-line="1445" selection-end-line="1445" />
             </state>
           </provider>
         </entry>
@@ -196,11 +187,11 @@
         <option value="$PROJECT_DIR$/shootweb/templates/coach_sport_info.html" />
         <option value="$PROJECT_DIR$/shootweb/templates/coach_sport_info_detail.html" />
         <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse.html" />
-        <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" />
-        <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id_backup.html" />
         <option value="$PROJECT_DIR$/shootweb/templates/sport_game_history.html" />
         <option value="$PROJECT_DIR$/shootweb/templates/sport_home.html" />
+        <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id_backup.html" />
         <option value="$PROJECT_DIR$/shootweb/views.py" />
+        <option value="$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html" />
       </list>
     </option>
   </component>
@@ -534,7 +525,7 @@
       <workItem from="1547096560606" duration="5663000" />
       <workItem from="1547180121742" duration="3842000" />
       <workItem from="1547278533119" duration="1372000" />
-      <workItem from="1547387045570" duration="884000" />
+      <workItem from="1547387045570" duration="5230000" />
     </task>
     <task id="LOCAL-00001" summary="添加对某一组射击的可视化展示">
       <created>1540262311101</created>
@@ -809,11 +800,18 @@
       <option name="project" value="LOCAL" />
       <updated>1547387186401</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="修改模板文件名即base.html改为base_shoot.html，并修复一个bug">
+      <created>1547388182065</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1547388182065</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="550018000" />
+    <option name="totallyTimeSpent" value="554364000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -826,14 +824,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1552" height="840" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4952381" visible="true" weight="0.34069613" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4952381" visible="true" weight="0.34069613" />
       <window_info id="Structure" order="1" sideWeight="0.50476193" side_tool="true" weight="0.22356091" />
       <window_info id="Favorites" order="2" sideWeight="0.501845" side_tool="true" weight="0.23159304" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32952926" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4966533" visible="true" weight="0.34887007" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4966533" visible="true" weight="0.26553673" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.33333334" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -856,7 +853,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="解决重启服务器不能继续读文件最新内容的问题" />
     <MESSAGE value="修改绝对路径的问题" />
     <MESSAGE value="修改数据分析界面枪的抖动图" />
     <MESSAGE value="每个射击点前重新正向累加" />
@@ -881,7 +877,8 @@
     <MESSAGE value="修改shoot_data_mining，使其只涉及数据分析相关操作，数据库相关操作都放在process_shoot_model下" />
     <MESSAGE value="修复速射时间间隔会有负数的bug" />
     <MESSAGE value="射击数据分析添加射击距离项" />
-    <option name="LAST_COMMIT_MESSAGE" value="射击数据分析添加射击距离项" />
+    <MESSAGE value="修改模板文件名即base.html改为base_shoot.html，并修复一个bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改模板文件名即base.html改为base_shoot.html，并修复一个bug" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../shootDataMining/SplineInterpolation.py">
@@ -1162,20 +1159,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="22" selection-start-column="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id_backup.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="22" selection-start-column="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_history.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1214,13 +1197,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id_backup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="54" column="37" lean-forward="true" selection-start-line="54" selection-start-column="37" selection-end-line="54" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/shootweb/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="242" column="81" lean-forward="true" selection-start-line="242" selection-start-column="81" selection-end-line="242" selection-end-column="81" />
+        <state relative-caret-position="164">
+          <caret line="343" lean-forward="true" selection-start-line="343" selection-end-line="343" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shootweb/templates/sport_game_analyse_id.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27455">
+          <caret line="1445" lean-forward="true" selection-start-line="1445" selection-end-line="1445" />
         </state>
       </provider>
     </entry>

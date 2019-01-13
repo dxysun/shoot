@@ -1434,6 +1434,7 @@
             for (i = 0; i < radius.length; i++) {
                 radius[i] /= rate;
             }
+            var colors = ["rgb(255,0,0)","rgb(0,104,139)","rgb(0,178,238)"];
             for (i = 0; i < 5; i++) {
 
                 for (j = 0; j < 3; j++) {
@@ -1453,6 +1454,9 @@
 
                         data: circle_grade_data,
                         type: 'line',
+                        lineStyle: {
+                        color: colors[j]
+                        },
                         symbol:'none',
                         smooth: true
                     };
@@ -1487,7 +1491,6 @@
             var x_shoot_point = five_pos_info.x_shoot_point;
             var y_shoot_point = five_pos_info.y_shoot_point;
             var len1 = xDataAll.length;
-            var allInfo = [];
             var circle_8 = [];
             var circle_9 = [];
             var circle_10 = [];
@@ -1497,16 +1500,31 @@
                 circle_9.push([circle_data_9[i][0] / rate, circle_data_9[i][1] / rate]);
                 circle_10.push([circle_data_10[i][0] / rate, circle_data_10[i][1] / rate]);
             }
+            var shoot_line = [];
 
             for (var k = 0; k < len1; k++) {
                 var xDataPro = xDataAll[k];
                 var yDataPro = yDataAll[k];
-                var data_four = [];
                 var l = xDataPro.length;
-                for (var t = 0; t < l; t++) {
-                    data_four.push([xDataPro[t], yDataPro[t]])
+                var shoot_index = l;
+                for(i = l - 1;i >=0 ;i --){
+                    if(xDataPro[i] == x_shoot_point[k] && yDataPro[i] == y_shoot_point[k]){
+                        shoot_index = i;
+                        break;
+                    }
                 }
-                allInfo.push(data_four)
+                var before_shoot = [];
+                var after_shoot = [];
+                for (i = 0; i < l; i++) {
+                    if (i <= shoot_index ){
+                        before_shoot.push([xDataPro[i], yDataPro[i]])
+                    }
+                    if (i >= shoot_index ){
+                        after_shoot.push([xDataPro[i], yDataPro[i]])
+                    }
+                }
+                shoot_line.push(before_shoot);
+                shoot_line.push(after_shoot);
             }
             var option_line_shake_one = {
                 title: {
@@ -1529,10 +1547,15 @@
                     end: 100
                 },
                 series: [{
-                    data: allInfo[0],
+                    data: shoot_line[0],
                     type: 'line',
                     smooth: true,
-
+                    lineStyle: {
+                        color: "rgb(255,215,0)"
+                    },
+                    itemStyle:{
+                        color: "rgb(255,215,0)"
+                    },
                     markPoint: {
                         itemStyle: {
                             color: 'rgba(0,0,255,0.3)'
@@ -1543,7 +1566,19 @@
                             yAxis: y_shoot_point[0]
                         }]
                     }
-                }, {
+                },
+                    {
+                    data: shoot_line[1],
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: {
+                        color: "rgb(255,0,0)"
+                    },
+                    itemStyle:{
+                        color: "rgb(255,0,0)"
+                    }
+                },
+                    {
                     data: circle_10,
                     type: 'line',
                     smooth: true,
@@ -1590,9 +1625,15 @@
                     end: 100
                 },
                 series: [{
-                    data: allInfo[1],
+                    data: shoot_line[2],
                     type: 'line',
                     smooth: true,
+                    lineStyle: {
+                        color: "rgb(255,215,0)"
+                    },
+                    itemStyle:{
+                        color: "rgb(255,215,0)"
+                    },
                     markPoint: {
                         itemStyle: {
                             color: 'rgba(0,0,255,0.3)'
@@ -1604,6 +1645,16 @@
                         }]
                     }
 
+                },{
+                    data: shoot_line[3],
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: {
+                        color: "rgb(255,0,0)"
+                    },
+                    itemStyle:{
+                        color: "rgb(255,0,0)"
+                    }
                 }, {
                     data: circle_10,
                     type: 'line',
@@ -1651,9 +1702,15 @@
                     end: 100
                 },
                 series: [{
-                    data: allInfo[2],
+                    data: shoot_line[4],
                     type: 'line',
                     smooth: true,
+                    lineStyle: {
+                        color: "rgb(255,215,0)"
+                    },
+                    itemStyle:{
+                        color: "rgb(255,215,0)"
+                    },
                     markPoint: {
                         itemStyle: {
                             color: 'rgba(0,0,255,0.3)'
@@ -1665,6 +1722,16 @@
                         }]
                     }
 
+                },{
+                    data: shoot_line[5],
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: {
+                        color: "rgb(255,0,0)"
+                    },
+                    itemStyle:{
+                        color: "rgb(255,0,0)"
+                    }
                 }, {
                     data: circle_10,
                     type: 'line',
@@ -1712,9 +1779,15 @@
                     end: 100
                 },
                 series: [{
-                    data: allInfo[3],
+                    data: shoot_line[6],
                     type: 'line',
                     smooth: true,
+                    lineStyle: {
+                        color: "rgb(255,215,0)"
+                    },
+                    itemStyle:{
+                        color: "rgb(255,215,0)"
+                    },
                     markPoint: {
                         itemStyle: {
                             color: 'rgba(0,0,255,0.3)'
@@ -1726,7 +1799,17 @@
                         }]
                     }
 
-                }, {
+                },{
+                    data: shoot_line[7],
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: {
+                        color: "rgb(255,0,0)"
+                    },
+                    itemStyle:{
+                        color: "rgb(255,0,0)"
+                    }
+                },  {
                     data: circle_10,
                     type: 'line',
                     symbol:'none',
@@ -1773,10 +1856,15 @@
                     end: 100
                 },
                 series: [{
-                    data: allInfo[4],
+                    data: shoot_line[8],
                     type: 'line',
                     smooth: true,
-
+                    lineStyle: {
+                        color: "rgb(255,215,0)"
+                    },
+                    itemStyle:{
+                        color: "rgb(255,215,0)"
+                    },
                     markPoint: {
                         itemStyle: {
                             color: 'rgba(0,0,255,0.3)'
@@ -1789,6 +1877,16 @@
                     }
 
                 }, {
+                    data: shoot_line[9],
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: {
+                        color: "rgb(255,0,0)"
+                    },
+                    itemStyle:{
+                        color: "rgb(255,0,0)"
+                    }
+                },{
                     data: circle_10,
                     type: 'line',
                     symbol:'none',
