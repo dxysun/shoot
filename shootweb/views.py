@@ -119,7 +119,6 @@ def sport_home(request):
                 heart_eight += grade.heart_rate
                 stage_eight = shootlib.set_report_shoot_rapid_info(stage_eight, grade.grade, grade.rapid_time, i, stage)
             i += 1
-
         heart_four /= 5
         heart_six /= 5
         heart_eight /= 5
@@ -342,7 +341,7 @@ def sport_game_analyse_id(request):
         x_up_shake_data = shootlib.process_shake_pos_info(x_up_data_pos)
         y_up_shake_data = shootlib.process_shake_pos_info(y_up_data_pos)
 
-        is_insert = True
+        is_insert = False
         if stage == 4:
             pos_num = 8
         elif stage == 6:
@@ -377,7 +376,7 @@ def sport_game_analyse_id(request):
         y_up_data_pos = y_up_data_pos[num:]
 
         nums, y_shoot_array = shootlib.get_shoot_point(y_data, is_insert=is_insert, stage=stage)
-        up_nums, x_shoot_array = shootlib.get_shoot_point(y_up_data, is_insert=is_insert, limit=5, stage = stage)
+        up_nums, x_shoot_array = shootlib.get_shoot_point(y_up_data, is_insert=is_insert, limit=5, stage=stage)
         # print(nums)
         # print(up_nums)
 
@@ -423,9 +422,20 @@ def sport_game_analyse_id(request):
             five_pos_info['x_shoot_point'] = x_shoot_point
             five_pos_info['y_shoot_point'] = y_shoot_point
         else:
+            shake_info['x_data_plus'] = x_data_plus
+            shake_info['y_data_plus'] = y_data_plus
+            shake_info['x_data_ori'] = x_data
+            shake_info['y_data_ori'] = y_data
+
+            shake_info['x_up_data_plus'] = x_up_data_plus
+            shake_info['x_up_data_ori'] = x_up_data
+            shake_info['y_up_data_plus'] = y_up_data_plus
+            shake_info['y_up_data_ori'] = y_up_data
             return render(request, 'sport_game_analyse_id_backup.html', {
                 'shoot_reports': report,
-                'shoot_info': shoot_grades
+                'shoot_info': shoot_grades,
+                'grade_info': json.dumps(grade_info),
+                'shake_info': shake_info
             })
 
         shake_info['x_data_plus'] = x_data_plus

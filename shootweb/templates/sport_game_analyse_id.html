@@ -458,7 +458,6 @@
                         nameGap: 30,
                         nameRotate: -90
                     },
-
                     {
                         name: 'y方向',
                         type: 'value',
@@ -763,22 +762,6 @@
 
                     type: 'line',
                     smooth: true,
-                    {% comment %} markPoint: {
-                         data: [{
-
-                             value: '第一发',
-                             xAxis: 20,
-                             yAxis: 20
-                         }, {
-                             value: '第二发',
-                             xAxis: 60,
-                             yAxis: 50
-                         }, {
-                             value: '第三发',
-                             xAxis: 70,
-                             yAxis: 40
-                         }]
-                     }{% endcomment %}
                 }]
             };
 
@@ -2026,154 +2009,10 @@
                 }
             };
 
-
-            {% comment %}    var option_line_shake_five = {
-
-                    tooltip: {
-                        trigger: 'axis'
-                    },
-                    grid: [{
-                        show: false,
-                        left: '0%',
-                        top: '5%',
-                        containLabel: true,
-                        width: '20%',
-                        height: '80%'
-                    }, {
-                        show: false,
-                        left: '20%',
-                        top: '5%',
-                        containLabel: true,
-                        width: '20%',
-                        height: '80%'
-                    }, {
-                        show: false,
-                        left: '40%',
-                        top: '5%',
-                        containLabel: true,
-                        width: '20%',
-                        height: '80%'
-                    }, {
-                        show: false,
-                        left: '60%',
-                        top: '5%',
-                        containLabel: true,
-                        width: '20%',
-                        height: '80%'
-                    }, {
-                        show: false,
-                        left: '80%',
-                        top: '5%',
-                        containLabel: true,
-                        width: '18%',
-                        height: '80%'
-                    }],
-                    xAxis: [{
-                        gridIndex: 0,
-                        type: 'value'
-                    }, {
-                        gridIndex: 1,
-                        type: 'value'
-                    }, {
-                        gridIndex: 2,
-                        type: 'value'
-                    }, {
-                        gridIndex: 3,
-                        type: 'value'
-                    }, {
-                        gridIndex: 4,
-                        type: 'value'
-                    }],
-                    yAxis: [{
-                        gridIndex: 0,
-                        type: 'value'
-                    }, {
-                        gridIndex: 1,
-                        type: 'value'
-                    }, {
-                        gridIndex: 2,
-                        type: 'value'
-                    }, {
-                        gridIndex: 3,
-                        type: 'value'
-                    }, {
-                        gridIndex: 4,
-                        type: 'value'
-                    }],
-                    dataZoom: [{
-                        show: true,
-                        realtime: true,
-                        xAxisIndex: 0,
-                        yAxisIndex: 0,
-                        start: 0,
-                        end: 100
-                    }, {
-                        show: true,
-                        realtime: true,
-                        xAxisIndex: 1,
-                        yAxisIndex: 1,
-                        start: 0,
-                        end: 100
-                    }, {
-                        show: true,
-                        realtime: true,
-                        xAxisIndex: 2,
-                        yAxisIndex: 2,
-                        start: 0,
-                        end: 100
-                    }, {
-                        show: true,
-                        realtime: true,
-                        xAxisIndex: 3,
-                        yAxisIndex: 3,
-                        start: 0,
-                        end: 100
-                    }, {
-                        show: true,
-                        realtime: true,
-                        xAxisIndex: 4,
-                        yAxisIndex: 4,
-                        start: 0,
-                        end: 100
-                    }],
-                    series: [{
-                        data: allInfo[0],
-                        xAxisIndex: 0,
-                        yAxisIndex: 0,
-                        type: 'line',
-                        smooth: true
-                    }, {
-                        data: allInfo[1],
-                        xAxisIndex: 1,
-                        yAxisIndex: 1,
-                        type: 'line',
-                        smooth: true
-                    }, {
-                        data: allInfo[2],
-                        xAxisIndex: 2,
-                        yAxisIndex: 2,
-                        type: 'line',
-                        smooth: true
-                    }, {
-                        data: allInfo[3],
-                        xAxisIndex: 3,
-                        yAxisIndex: 3,
-                        type: 'line',
-                        smooth: true
-                    }, {
-                        data: allInfo[4],
-                        xAxisIndex: 4,
-                        yAxisIndex: 4,
-                        type: 'line',
-                        smooth: true
-                    }]
-                };{% endcomment %}
-
-
             var grade_line = echarts.init(document.getElementById('grade_line'));
             var grade_circle = echarts.init(document.getElementById('grade_circle'));
             var grade_position = echarts.init(document.getElementById('grade_position'));
-            //    var total_grade = echarts.init(document.getElementById('total_grade'));
+            {#var total_grade = echarts.init(document.getElementById('total_grade'));#}
             var heart = echarts.init(document.getElementById('heart'));
 
             var line_shake_ori = echarts.init(document.getElementById('line_shake_ori'));
