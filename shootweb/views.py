@@ -5,6 +5,8 @@ from . import shootlib
 from . import watch_grade_file
 from django.shortcuts import redirect
 import json
+import numpy as np
+from sklearn import preprocessing
 
 observer = None
 
@@ -95,6 +97,11 @@ def sport_home(request):
     stage_four = {}
     stage_six = {}
     stage_eight = {}
+    skills = {}
+    all_grade = 0
+    all_num = 0
+    heart_variance_array = []
+    grades_array = []
     for report in shoot_reports:
         shoot_grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
         stage = shootlib.get_shoot_stage(report)
@@ -108,6 +115,7 @@ def sport_home(request):
         heart_six = 0
         heart_eight = 0
         i = 0
+        heart_array = []
         for grade in shoot_grades:
             if stage == 4:
                 heart_four += grade.heart_rate
@@ -119,6 +127,12 @@ def sport_home(request):
                 heart_eight += grade.heart_rate
                 stage_eight = shootlib.set_report_shoot_rapid_info(stage_eight, grade.grade, grade.rapid_time, i, stage)
             i += 1
+            all_grade += int(grade.grade)
+            all_num += 1
+            heart_array.append(grade.heart_rate)
+        heart_variance = shootlib.get_variance_in_array(heart_array)
+        heart_variance_array.append(heart_variance)
+        grades_array.append(report.total_grade)
         heart_four /= 5
         heart_six /= 5
         heart_eight /= 5
@@ -134,10 +148,23 @@ def sport_home(request):
         stage_six = shootlib.process_report_stage_info(stage_six)
     if len(stage_eight) > 0:
         stage_eight = shootlib.process_report_stage_info(stage_eight)
+
+    user_model = user_model_info.objects.filter(user_name="A")[0]
+    skills['grade_level'] = round((all_grade / all_num), 2)
+    heart_variance_array_np = np.array(heart_variance_array).reshape(-1, 1)
+    grades_array_np = np.array(grades_array).reshape(-1, 1)
+    min_max_scaler = preprocessing.MinMaxScaler()
+    heart_min_max = min_max_scaler.fit_transform(heart_variance_array_np)
+    grades_min_max = min_max_scaler.fit_transform(grades_array_np)
+    skills['heart_level'] = round(float(1 - np.mean(heart_min_max)) * 10, 2)
+    # skills['heart_level'] = round((1 - np.sqrt(np.var(heart_min_max))) * 10, 2)
+    skills['stability_level'] = round(float(1 - np.sqrt(np.var(grades_min_max))) * 10, 2)
     return render(request, 'sport_home.html', {
         'stage_four': stage_four,
         'stage_six': stage_six,
-        'stage_eight': stage_eight
+        'stage_eight': stage_eight,
+        'model_info': user_model.model_info,
+        'skills': json.dumps(skills),
     })
 
 
@@ -302,6 +329,7 @@ def sport_game_analyse_id(request):
     y_pos = []
     shoot_grades = shoot_grade.objects.filter(report_id=report_id).order_by('grade_detail_time')
     rapid_data = []
+    predict_grade = []
     for grade in shoot_grades:
         rapid_data.append(grade.rapid_time)
         grades.append(float(grade.grade))
@@ -314,9 +342,13 @@ def sport_game_analyse_id(request):
         r_pos.append(r)
         p_pos.append(p)
         hearts.append(grade.heart_rate)
+        if grade.remark is not None:
+            predict_grade.append(grade.remark)
+        else:
+            predict_grade.append(grade.grade)
     grade_stability = shootlib.get_grade_stability(x_pos, y_pos)
     grade_info = dict(r_pos=r_pos, p_pos=p_pos, x_pos=x_pos, y_pos=y_pos, grades=grades, hearts=hearts,
-                      rapid_data=rapid_data, grade_stability=grade_stability)
+                      rapid_data=rapid_data, grade_stability=grade_stability, predict_grade=predict_grade)
     stage = int(report.remark)
     shake_info = {}
     five_pos_info = {}

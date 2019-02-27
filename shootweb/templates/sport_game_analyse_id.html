@@ -163,8 +163,9 @@
 
 
             var data_index = [1, 2, 3, 4, 5];
-            var data_grade_pre = [];
-            for (var j = 0; j < grade_info.grades.length; j++) {
+            var data_grade_pre = grade_info.predict_grade;
+
+      /*      for (var j = 0; j < grade_info.grades.length; j++) {
                 var m = Math.random();
                 if (m < 0.3) {
                     m = -1;
@@ -181,6 +182,7 @@
                 }
                 data_grade_pre.push(pre);
             }
+            */
             var option_grade_line = {
                 title: {
                     left: 'center',
@@ -2073,7 +2075,7 @@
 
     <ul class="nav" id="main-menu">
         <li>
-            <a href="{% url 'sport_home' %}"><i class="fa fa-dashboard"></i> 主界面</a>
+            <a href="{% url 'sport_home' %}"><i class="fa fa-dashboard"></i> 主页</a>
         </li>
         <li>
             <a class="active-menu" href="{% url 'sport_game_history' %}"><i class="fa fa-qrcode"></i> 射击数据</a>

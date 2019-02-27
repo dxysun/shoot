@@ -1,185 +1,157 @@
-# -*- coding:utf-8 -*- 
-__author__ = 'dxy'
-import sys
 import os
+import sys
 import pandas as pd
-import time
-import datetime
-import math
-from scipy.interpolate import interp1d
 import numpy as np
-from sklearn.preprocessing import OneHotEncoder
+import matplotlib.pyplot as plt
+import django
+import datetime
+import json
+from sklearn.externals import joblib
 from sklearn.model_selection import train_test_split
 import model_evaluation_utils as meu
-from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
-import matplotlib.pyplot as plt
-from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import FeatureUnion
-from sklearn.tree import DecisionTreeRegressor
+from sklearn import preprocessing
+import shootlib
+
+dirname, filename = os.path.split(os.path.abspath(__file__))
+pre_path = os.path.abspath(os.path.dirname(dirname))
+sys.path.append(pre_path + '/shoot')
+os.chdir(pre_path + '/shoot')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shoot.settings")
+django.setup()
+from shootweb.models import *
 
 plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 
 
-def get_shoot_area(x, y):
-    x = float(x)
-    y = float(y)
-    if x > 0 and y > 0:
-        return 1
-    elif x < 0 and y > 0:
-        return 2
-    elif x < 0 and y < 0:
-        return 3
-    else:
-        return 4
+def train_save_model():
+    grade_four_shoot_info_4_with_feature = pd.read_excel('../shootweb/data/grade_four_shoot_info_4_with_feature.xlsx')
+    grade_four_shoot_info_6_with_feature = pd.read_excel('../shootweb/data/grade_four_shoot_info_6_with_feature.xlsx')
+    grade_four_shoot_info_8_with_feature = pd.read_excel('../shootweb/data/grade_four_shoot_info_8_with_feature.xlsx')
+    all_shoot_info = grade_four_shoot_info_8_with_feature.append(grade_four_shoot_info_6_with_feature)
+    all_shoot_info = all_shoot_info.append(grade_four_shoot_info_4_with_feature)
+    all_shoot_info['label'] = all_shoot_info['grade'].apply(lambda value: 1 if value == 10 else 0)
+
+    all_shoot_info = all_shoot_info[all_shoot_info['move_distance'] > 60]
+    all_feature_names = ['x_pos', 'y_pos', 'heart_rate', 'y_stability', 'x_average']
+    all_label_name = 'label'
+
+    all_shoot_features = all_shoot_info[all_feature_names].copy()
+    all_shoot_labels = all_shoot_info[all_label_name].copy()
+    train_x_all, test_x_all, train_y_all, test_y_all = train_test_split(all_shoot_features, all_shoot_labels,
+                                                                        test_size=0.3, random_state=42)
+    shoot_reg_all = RandomForestClassifier()
+    shoot_reg_all.fit(train_x_all, train_y_all)
+
+    shoot_dt_predictions_all = shoot_reg_all.predict(test_x_all)
+    label_class_all = list(set(all_shoot_labels.values))
+    meu.display_model_performance_metrics(true_labels=test_y_all, predicted_labels=shoot_dt_predictions_all,
+                                          classes=label_class_all)
+    joblib.dump(shoot_reg_all, '../shootweb/data/shoot_reg_all.pkl')
+    return show_importance(shoot_reg_all, all_feature_names)
+    # clf = joblib.load('data/shoot_reg_all.pkl')
+    # test_data = test_x_all.iloc[3].values.reshape(1, -1)
+    # print(clf.predict(test_data))
 
 
-def add_shoot_area():
-    grade_first_shoot_info_4_with_feature = pd.read_excel('data/grade_first_shoot_info_4_with_feature.xlsx')
-    grade_first_shoot_info_6_with_feature = pd.read_excel('data/grade_first_shoot_info_6_with_feature.xlsx')
-    grade_first_shoot_info_8_with_feature = pd.read_excel('data/grade_first_shoot_info_8_with_feature.xlsx')
-    grade_first_shoot_info_8_with_feature['shoot_area'] = grade_first_shoot_info_8_with_feature.apply(
-        lambda x: get_shoot_area(x.x_pos, x.y_pos), axis=1)
-    grade_first_shoot_info_4_with_feature['shoot_area'] = grade_first_shoot_info_4_with_feature.apply(
-        lambda x: get_shoot_area(x.x_pos, x.y_pos), axis=1)
-    grade_first_shoot_info_6_with_feature['shoot_area'] = grade_first_shoot_info_6_with_feature.apply(
-        lambda x: get_shoot_area(x.x_pos, x.y_pos), axis=1)
-    grade_first_shoot_info_8_with_feature.to_excel(
-        "D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_first_shoot_info_8_with_feature.xlsx")
-    grade_first_shoot_info_6_with_feature.to_excel(
-        "D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_first_shoot_info_6_with_feature.xlsx")
-    grade_first_shoot_info_4_with_feature.to_excel(
-        "D:/workSpace/PythonWorkspace/shoot/shootweb/data/grade_first_shoot_info_4_with_feature.xlsx")
+def show_importance(shoot_dt, shoot_feature_names):
+    shoot_dt_feature_importances = shoot_dt.feature_importances_
+    res = {}
+    for shoot_dt_feature_names, shoot_dt_feature_scores in zip(shoot_feature_names, shoot_dt_feature_importances):
+        res[shoot_dt_feature_names] = shoot_dt_feature_scores
+    return res
 
 
-def one_hot_test(train_set):
-    shoot_area_encoded = train_set['shoot_area'].values
-    encoder = OneHotEncoder()
-    shoot_area_1hot = encoder.fit_transform(shoot_area_encoded.reshape(-1, 1))
-    shoot_area_1hot.toarray()
+def save_model_to_sql():
+    r = train_save_model()
+    print(r)
+    d = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    user_model = user_model_info(user_name="A", model_path="data/shoot_reg_all.pkl", build_time=d, model_type=0,
+                                 model_info=json.dumps(r))
+    user_model.save()
 
 
-def get_feature_label(train_df, feature_col, label_name):
-    shoot_features = train_df[feature_col]  # 最后一列是目标变量
-    shoot_class_labels = np.array(train_df[label_name])
-    return shoot_features, shoot_class_labels
+def predict_grade():
+    user_model = user_model_info.objects.filter(user_name="A")
+    clf = joblib.load('../shootweb/' + user_model[0].model_path)
 
+    shoot_reports = shoot_report.objects.all()
 
-def normalize(train_X):
-    shoot_ss = StandardScaler().fit(train_X)
-    return shoot_ss
+    for report in shoot_reports:
+        print(report.shoot_date + " " + report.start_time)
+        stage = int(report.remark)
+        # print(report.y_shake_pos)
+        # print(report.x_up_shake_data)
+        y_data_pos = report.y_shake_pos.split(",")
+        x_up_data_pos = report.x_up_shake_pos.split(",")
+        y_up_data_pos = report.y_up_shake_pos.split(",")
 
+        y_up_shake_data = shootlib.process_shake_pos_info(y_up_data_pos)
+        y_shake_data = shootlib.process_shake_pos_info(y_data_pos)
+        x_up_shake_data = shootlib.process_shake_pos_info(x_up_data_pos)
 
-def train_model_predict(shoot_train_SX, shoot_train_y, shoot_test_SX, shoot_test_y, shoot_label_names):
-    shoot_rf = RandomForestClassifier()
-    shoot_rf.fit(shoot_train_SX, shoot_train_y)
+        y_up_data = y_up_shake_data.split(",")
+        y_data = y_shake_data.split(",")
+        x_up_data = x_up_shake_data.split(",")
+        y_data = shootlib.get_int_data(y_data, is_negative=True)
+        x_up_data = shootlib.get_int_data(x_up_data)
+        y_up_data = shootlib.get_int_data(y_up_data)
 
-    shoot_rf_predictions = shoot_rf.predict(shoot_test_SX)
-    meu.display_model_performance_metrics(true_labels=shoot_test_y, predicted_labels=shoot_rf_predictions,
-                                          classes=shoot_label_names)
-    return shoot_rf
+        y_data, num = shootlib.cut_shake_data(y_data)
+        x_up_data = x_up_data[num:]
+        y_up_data = y_up_data[num:]
 
+        if stage == 4:
+            pos_num = 8
+        elif stage == 6:
+            pos_num = 10
+        else:
+            pos_num = 15
+        after_shoot = 1
+        nums, y_shoot_array = shootlib.get_shoot_point(y_data, stage=stage)
+        # up_nums, x_shoot_array = shootlib.get_shoot_point(y_up_data, limit=5)
+        y_data_plus = shootlib.shake_data_process(y_data)
+        x_up_data_plus = shootlib.shake_data_process(x_up_data)
+        y_shoot_pos, y_pos_array = shootlib.shake_get_plus_shoot_point(y_data_plus, nums, pos_num=pos_num,
+                                                                       after_shoot=after_shoot)
+        x_shoot_pos, x_pos_array = shootlib.shake_get_plus_shoot_point(x_up_data_plus, nums, pos_num=pos_num,
+                                                                       after_shoot=after_shoot)
 
-def display_importance(shoot_rf, shoot_feature_names):
-    shoot_rf_feature_importances = shoot_rf.feature_importances_
-    shoot_rf_feature_names, shoot_rf_feature_scores = zip(
-        *sorted(zip(shoot_feature_names, shoot_rf_feature_importances),
-                key=lambda x: x[1]))
-    y_position = list(range(len(shoot_rf_feature_names)))
-    plt.barh(y_position, shoot_rf_feature_scores, height=0.6, align='center')
-    plt.yticks(y_position, shoot_rf_feature_names)
-    plt.xlabel(u'重要性得分')
-    plt.ylabel(u'特征')
-    t = plt.title(u'随机森林特征重要性')
-    plt.show()
+        x_average_array, move_distance = shootlib.shake_get_average_x_shoot_array(x_pos_array, after_shoot,
+                                                                                  is_insert=False,
+                                                                                  get_distance=True)
+        y_stability_array = shootlib.shake_get_stability_shoot_array(y_pos_array, after_shoot)
 
+        shoot_grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
+        first_grade = shoot_grades[0]
+        last_x_pos = float(first_grade.x_pos)
+        last_rapid_time = float(first_grade.rapid_time)
+        for i in range(1, len(shoot_grades)):
+            grade = shoot_grades[i]
+            diff_pos = (last_x_pos - float(grade.x_pos) + i * 750)
+            diff_rapid = float(grade.rapid_time) - last_rapid_time
+            if i == 4 and float(grade.rapid_time) < 1:
+                diff_rapid = float(grade.rapid_time) + stage - last_rapid_time
+            if diff_rapid < 0:
+                print(i)
+                print("diff_rapid:" + str(diff_rapid))
 
-def train_first_shoot_8_data(grade_first_shoot_info_8_with_feature):
-    # grade_first_shoot_info_8_with_feature = pd.read_excel('data/grade_first_shoot_info_8_with_feature.xlsx')
-    train_8_first_df = grade_first_shoot_info_8_with_feature[
-        ['rapid_time', 'shoot_area', 'heart_rate', 'x_average', 'y_stability', 'grade']]
-    feature_col = ['rapid_time', 'shoot_area', 'heart_rate', 'x_average', 'y_stability']
-    label_col = ['grade']
-    shoot_features, shoot_class_labels = get_feature_label(train_8_first_df, feature_col, label_col)
-    shoot_train_X, shoot_test_X, shoot_train_y, shoot_test_y = train_test_split(shoot_features, shoot_class_labels,
-                                                                                test_size=0.3, random_state=42)
-    shoot_ss = normalize(shoot_train_X)
-    shoot_train_SX = shoot_ss.transform(shoot_train_X)
-
-    shoot_test_SX = shoot_ss.transform(shoot_test_X)
-
-    shoot_label_names = [10, 9]
-    shoot_rf = train_model_predict(shoot_train_SX, shoot_train_y, shoot_test_SX, shoot_test_y, shoot_label_names)
-    display_importance(shoot_rf, feature_col)
-
-
-class DataFrameSelector(BaseEstimator, TransformerMixin):
-    def __init__(self, attribute_names):
-        self.attribute_names = attribute_names
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X):
-        return X[self.attribute_names].values
-
-
-def use_pipeline(num_attribs, cat_attribs=None):
-    # num_attribs = ['rapid_time', 'heart_rate', 'x_average', 'y_stability']
-    # cat_attribs = ["shoot_area"]
-    num_pipeline = Pipeline([
-        ('selector', DataFrameSelector(num_attribs)),
-        ('std_scaler', StandardScaler())
-    ])
-    if cat_attribs is not None:
-        cat_pipeline = Pipeline([
-            ('selector', DataFrameSelector(cat_attribs)),
-            ('label_binarizer', OneHotEncoder())
-        ])
-
-        full_pipeline = FeatureUnion(transformer_list=[
-            ("num_pipeline", num_pipeline),
-            ("cat_pipeline", cat_pipeline)
-        ])
-        return full_pipeline
-    else:
-        return num_pipeline
-
-
-def train_data_and_predict(all_data_df, feature_names, label_name):
-    feature = all_data_df[feature_names].copy()
-    shoot_labels = all_data_df[label_name].copy()
-    train_x, test_x, train_y, test_y = train_test_split(feature, shoot_labels, test_size=0.3, random_state=42)
-    #
-    # full_pipeline = use_pipeline(feature_names)
-    #
-    # train_x_prepared = full_pipeline.fit_transform(train_x)
-    # test_x_prepared = full_pipeline.transform(test_x)
-
-    # shoot_reg = DecisionTreeRegressor()
-    shoot_reg = RandomForestClassifier()
-    shoot_reg.fit(train_x, train_y)
-
-    shoot_dt_predictions = shoot_reg.predict(test_x)
-    label_class = list(set(shoot_labels.values))
-    meu.display_model_performance_metrics(true_labels=test_y, predicted_labels=shoot_dt_predictions,
-                                          classes=label_class)
-
-    # shoot_feature_names = ['rapid_time', 'heart_rate', 'x_average', 'y_stability', 'shoot_area1', 'shoot_area2',
-    #                        'shoot_area3', 'shoot_area4']
-    display_importance(shoot_reg, feature_names)
+            last_x_pos = float(grade.x_pos)
+            last_rapid_time = float(grade.rapid_time)
+            # all_feature_names = ['x_pos', 'y_pos', 'heart_rate', 'y_stability', 'x_average']
+            if len(y_stability_array) == 5 and len(x_average_array) == 5:
+                a = np.array([float(first_grade.x_pos), float(first_grade.y_pos), int(first_grade.heart_rate),
+                              y_stability_array[i], x_average_array[i]]).reshape(1, -1)
+                print(clf.predict(a))
+                if clf.predict(a) == 1:
+                    grade.remark = 10
+                else:
+                    grade.remark = 9
+                grade.save()
 
 
 if __name__ == "__main__":
     print()
-    # add_shoot_area()
-    grade_first_shoot_info_8_with_feature = pd.read_excel('data/grade_first_shoot_info_8_with_feature.xlsx')
-    grade_first_shoot_info_4_with_feature = pd.read_excel('data/grade_first_shoot_info_4_with_feature.xlsx')
-    grade_first_shoot_info_6_with_feature = pd.read_excel('data/grade_first_shoot_info_6_with_feature.xlsx')
-    # train_first_shoot_8_data(grade_first_shoot_info_4_with_feature)
-    shoot_feature_names = ['rapid_time', 'heart_rate', 'y_stability']
-    shoot_label_names = 'grade'
-    train_data_and_predict(grade_first_shoot_info_4_with_feature, shoot_feature_names, shoot_label_names)
+    # predict_grade()
+
