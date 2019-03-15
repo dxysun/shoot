@@ -148,17 +148,18 @@ def sport_home(request):
         stage_six = shootlib.process_report_stage_info(stage_six)
     if len(stage_eight) > 0:
         stage_eight = shootlib.process_report_stage_info(stage_eight)
-
     user_model = user_model_info.objects.filter(user_name="A")[0]
-    skills['grade_level'] = round((all_grade / all_num), 2)
-    heart_variance_array_np = np.array(heart_variance_array).reshape(-1, 1)
-    grades_array_np = np.array(grades_array).reshape(-1, 1)
-    min_max_scaler = preprocessing.MinMaxScaler()
-    heart_min_max = min_max_scaler.fit_transform(heart_variance_array_np)
-    grades_min_max = min_max_scaler.fit_transform(grades_array_np)
-    skills['heart_level'] = round(float(1 - np.mean(heart_min_max)) * 10, 2)
-    # skills['heart_level'] = round((1 - np.sqrt(np.var(heart_min_max))) * 10, 2)
-    skills['stability_level'] = round(float(1 - np.sqrt(np.var(grades_min_max))) * 10, 2)
+    if all_num != 0:
+        skills['grade_level'] = round((all_grade / all_num), 2)
+        heart_variance_array_np = np.array(heart_variance_array).reshape(-1, 1)
+        grades_array_np = np.array(grades_array).reshape(-1, 1)
+        min_max_scaler = preprocessing.MinMaxScaler()
+        heart_min_max = min_max_scaler.fit_transform(heart_variance_array_np)
+        grades_min_max = min_max_scaler.fit_transform(grades_array_np)
+        skills['heart_level'] = round(float(1 - np.mean(heart_min_max)) * 10, 2)
+        # skills['heart_level'] = round((1 - np.sqrt(np.var(heart_min_max))) * 10, 2)
+        skills['stability_level'] = round(float(1 - np.sqrt(np.var(grades_min_max))) * 10, 2)
+
     return render(request, 'sport_home.html', {
         'stage_four': stage_four,
         'stage_six': stage_six,
