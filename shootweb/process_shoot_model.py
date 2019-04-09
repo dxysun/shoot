@@ -1053,8 +1053,52 @@ def save_grade_info():
             print()
 
 
+def process_0406_shake_data():
+    shake_all_infos = shake_all_info.objects.filter(user_name="A").filter(record_date="2019-04-06").filter(is_process=0)
+    count = 0
+    for info in shake_all_infos:
+        # if string_to_time(info.end_time) - string_to_time(info.start_time) <= datetime.timedelta(seconds=2):
+        #     print("delete " + info.record_time)
+        #     info.is_process = 1
+        #     info.save()
+        # else:
+        #     count += 1
+        #     print(info.record_time)
+        info.end_time = time_to_string(string_to_time(info.end_time) + datetime.timedelta(seconds=110))
+        info.start_time = time_to_string(string_to_time(info.start_time) + datetime.timedelta(seconds=110))
+        info.record_time = time_to_string(string_to_time(info.record_time) + datetime.timedelta(seconds=110))
+        print(info.record_time)
+        info.save()
+
+
+def process_0406_shoot_data():
+    print()
+    shoot_reports = shoot_report.objects.filter(shoot_date="2019-04-06")
+    for report in shoot_reports:
+        grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
+        rapid_time = grades[4].rapid_time
+        stage = 8
+        if float(rapid_time) < 1:
+            print(grades[3].rapid_time)
+            if float(grades[3].rapid_time) < 4:
+                stage = 4
+            elif float(grades[3].rapid_time) < 6:
+                stage = 6
+            elif float(grades[3].rapid_time) < 8:
+                stage = 8
+        elif float(rapid_time) < 4.2:
+            stage = 4
+        elif float(rapid_time) < 6.2:
+            stage = 6
+        elif float(rapid_time) < 8:
+            stage = 8
+        report.remark = str(stage)
+        report.save()
+
+
 if __name__ == "__main__":
     print("shoot")
+    process_0406_shoot_data()
     # test()
     # get_shoot_info()
     # x1, y1 = 31.33, 12.82
@@ -1087,4 +1131,4 @@ if __name__ == "__main__":
     # process_shake_time_data()
 
     # update_data("A")
-    save_shoot_info_by_stage_with_stability()
+    # save_shoot_info_by_stage_with_stability()

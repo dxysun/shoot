@@ -135,19 +135,20 @@ def update_data(user_name):
             print(data.record_time + " shake  find report data " + report_times[0].start_time)
             if string_to_time(data.end_time) - string_to_time(data.start_time) <= datetime.timedelta(seconds=2):
                 print("delete " + data.record_time)
-                data.delete()
+                # data.delete()
+                data.is_process = 1
         else:
             print(data.record_time + " shake  not find report data")
             data.is_process = 1
-            data.delete()
+            # data.delete()
 
     shoot_reports = shoot_report.objects.filter(is_process=0).filter(user_name=user_name)
     if len(shoot_reports) > 0:
         for report in shoot_reports:
             # report_time = time_to_string_mill(string_to_time_mill(report.shoot_time) + datetime.timedelta(seconds=10))
             # print(report_time)
-            report_time = time_to_string_mill(string_to_time_mill(report.shoot_time) + datetime.timedelta(seconds=2))
-            shake_times = shake_all_info.objects.filter(record_date=report.shoot_date).filter(
+            report_time = time_to_string_mill(string_to_time_mill(report.shoot_time) + datetime.timedelta(seconds=1))
+            shake_times = shake_all_info.objects.filter(record_date=report.shoot_date).filter(is_process=0).filter(
                 start_time__lte=report_time).filter(end_time__gte=report_time)
             if len(shake_times) == 1:
                 print('find shake:' + report.shoot_time)
@@ -163,10 +164,27 @@ def update_data(user_name):
                 report.is_process = 1
                 shake.is_process = 1
                 shake.save()
-                report.save()
             else:
                 print('not find shake ' + report.shoot_time)
-            grades = shoot_grade.objects.filter(report_id=report.id)
+            grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
+            rapid_time = grades[4].rapid_time
+            stage = 8
+            if float(rapid_time) < 1:
+                print(grades[3].rapid_time)
+                if float(grades[3].rapid_time) < 4:
+                    stage = 4
+                elif float(grades[3].rapid_time) < 6:
+                    stage = 6
+                elif float(grades[3].rapid_time) < 8:
+                    stage = 8
+            elif float(rapid_time) < 4.2:
+                stage = 4
+            elif float(rapid_time) < 6.2:
+                stage = 6
+            elif float(rapid_time) < 8:
+                stage = 8
+            report.remark = str(stage)
+            report.save()
             for grade in grades:
                 heart_times = heart_data.objects.filter(heart_date=grade.grade_date).filter(heart_time=grade.grade_time)
                 if len(heart_times) >= 1:

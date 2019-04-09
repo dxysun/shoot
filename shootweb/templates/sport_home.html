@@ -23,6 +23,7 @@
     var heart_rate = model_info.heart_rate.toFixed(3) * 10;
     var y_stability = model_info.y_stability.toFixed(3) * 10;
     var x_average = model_info.x_average.toFixed(3) * 10;
+    var rapid_diff = model_info.rapid_diff.toFixed(3) * 10;
     var option_relationship = {
         title: {
             textStyle: {
@@ -65,7 +66,7 @@
             axisLabel: {
                 interval: 0
             },
-            data: ['瞄准稳定性', '射击移动稳定性', '心率']
+            data: ['瞄准稳定性', '射击移动稳定性', '速射时间','心率']
 
         }],
         yAxis: [{
@@ -75,7 +76,7 @@
         series: [{
             name: '相关系数',
             type: 'bar',
-            data: [y_stability.toFixed(2),x_average.toFixed(2), heart_rate.toFixed(2)],
+            data: [y_stability.toFixed(2),x_average.toFixed(2),rapid_diff.toFixed(2), heart_rate.toFixed(2)],
             markPoint: {
                 data: [{
                     type: 'max',
@@ -250,6 +251,7 @@
                 <div class="panel-body">
                     <div id="relationship" style="width: 100%;height:500%;"></div>
                     射击移动稳定性：射击运动员在射击点附近的水平方向移动变化，射击移动稳定性越低，则说明运动员在射击点附近水平移动的越稳，反之，则运动员水平移动的不稳。
+                    <br>
                     <br>
                     瞄准稳定性：射击运动员在射击点附近的垂直方向移动变化，瞄准稳定性越低，则说明运动员在射击点附近持枪的越稳，反之，则运动员持枪不稳。
                 </div>
