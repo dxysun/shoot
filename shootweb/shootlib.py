@@ -618,6 +618,8 @@ def get_random_circle(r, samples_num):
 
 
 def get_shoot_stage(report):
+    if report.remark is None:
+        return 8
     return int(report.remark)
 
 

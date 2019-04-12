@@ -412,11 +412,11 @@ class GradeEventTimerHandler(FileSystemEventHandler):
                         if 'Miss' in line:
                             self.num += 1
                             continue
-                        if '%' in line:
+                        if '/' in line:
                             data = line.split("/")
+                            # print(data)
                             y_pos = data[1].strip()
                             data = data[0].split()
-                            # print(data)
                             x_pos = data[-1]
                             shoot_time = data[-2]
                             grade = None
@@ -454,9 +454,11 @@ class GradeEventTimerHandler(FileSystemEventHandler):
                         if self.num == 10:
                             self.report_data.total_grade = self.total_grade
                             t = datetime.datetime.now().strftime("%H:")
+                            # print("start_time:" + str(self.start_time))
                             self.start_time = t + self.start_time
                             self.end_time = t + self.end_time
                             self.report_data.shoot_time = self.start_time
+                            print(self.start_time)
                             report_time = time_to_string_mill(
                                 string_to_time_mill(self.start_time) - datetime.timedelta(
                                     seconds=float(self.rapid_time)))
@@ -485,7 +487,7 @@ class GradeEventTimerHandler(FileSystemEventHandler):
 def start_watch(username):
     observer1 = Observer()
     event_handler = GradeEventTimerHandler(username)
-    observer1.schedule(event_handler, "D:/code/shoot/grade", True)
+    observer1.schedule(event_handler, "D:/grade", True)
     # observer1.schedule(event_handler, "D:\code\shoot\simulation_data\grade", True)
     observer1.start()
     return observer1

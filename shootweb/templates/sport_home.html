@@ -5,8 +5,6 @@
 {% block script %}
    <script>
    $(function () {
-
-
     var data1 = [];
 
     var data_grade = [];
@@ -104,7 +102,7 @@
         },
         radar: {
             indicator: [{
-                text: '稳定性',
+                text: '成绩稳定性',
                 max: 10
             },
                 {
@@ -138,8 +136,6 @@
             }]
         }
     };
-
-
 
     var myRelationship = echarts.init(document.getElementById('relationship'));
     var myAttention = echarts.init(document.getElementById('attention'));
