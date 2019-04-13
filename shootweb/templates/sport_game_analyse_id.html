@@ -1359,9 +1359,7 @@
                     backgroundColor: 'rgba(190,190,190,0.4)',
                     borderColor: '#aaa',
                     borderWidth: 1,
-                    borderRadius: 4,
-
-
+                    borderRadius: 4
                 }
             };
 
@@ -1514,9 +1512,29 @@
                 shoot_line.push(before_shoot);
                 shoot_line.push(after_shoot);
             }
+            var aims = [];
+            for(i = 0;i < 5;i ++){
+                var t_x = grade_info.x_pos[i];
+                var t_y  = grade_info.y_pos[i];
+                var distance = Math.sqrt(t_x * t_x + t_y * t_y);
+                var aim = 0;
+                if(grade_info.grades[i] == 10){
+                    aim = distance/50.2;
+                }
+                else if(grade_info.grades[i] == 9){
+                    aim = parseFloat(1 + (distance - 50)/40.3);
+                }
+                else if(grade_info.grades[i] == 8){
+                    aim = parseFloat(2 + (distance - 90)/41);
+                }
+                else{
+                    aim = 3;
+                }
+                aims.push(aim.toFixed(2));
+            }
             var option_line_shake_one = {
                 title: {
-                    text: '瞄准稳定性:' + y_stability_array[0],
+                    text: '瞄准性:'+aims[0]+' 稳定性:' + y_stability_array[0],
                     top: 5
                 },
                 xAxis: {
@@ -1594,7 +1612,7 @@
             };
             var option_line_shake_two = {
                 title: {
-                    text: '瞄准稳定性:' + y_stability_array[1],
+                    text:  '瞄准性:'+aims[1]+' 稳定性:' + y_stability_array[1],
                     top: 5
                 },
                 xAxis: {
@@ -1671,7 +1689,7 @@
             };
             var option_line_shake_three = {
                 title: {
-                    text: '瞄准稳定性:' + y_stability_array[2],
+                    text: '瞄准性:'+aims[2]+' 稳定性:' + y_stability_array[2],
                     top: 5
                 },
                 xAxis: {
@@ -1748,7 +1766,7 @@
             };
             var option_line_shake_four = {
                 title: {
-                    text: '瞄准稳定性:' + y_stability_array[3],
+                    text: '瞄准性:'+aims[3]+' 稳定性:' + y_stability_array[3],
                     top: 5
                 },
                 xAxis: {
@@ -1825,7 +1843,7 @@
             };
             var option_line_shake_five = {
                 title: {
-                    text: '瞄准稳定性:' + y_stability_array[4],
+                    text: '瞄准性:'+aims[4]+' 稳定性:' + y_stability_array[4],
                     top: 5
                 },
                 xAxis: {
