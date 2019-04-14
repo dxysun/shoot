@@ -304,6 +304,9 @@ def sport_game_analyse(request):
                 shake_info['x_shoot_pos'] = x_shoot_pos
                 shake_info['y_shoot_pos'] = y_shoot_pos
                 shake_info['up_shake_rate'] = up_shake_rate
+            else:
+                ex = Exception("多次射击的射击点个数不够")
+                raise ex
             report_shake_info.append(shake_info)
         average_grade = round(total_grade / report_num, 2)
     # average_in_circle = shootlib.get_average_in_circle(x_pos, y_pos)

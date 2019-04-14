@@ -54,7 +54,7 @@ class ExceptionTestMiddleware(MiddlewareMixin):
         '''视图函数发生异常时调用'''
         print('----process_exception1----')
         print(request.get_full_path())
-        print(exception)
+        # print(exception)
         if request.get_full_path() == "/shoot/sport/home":
             user_name = request.session.get('user')
             shoot_reports = shoot_report.objects.filter(user_name=user_name).filter(shoot_date__lte="2019-04-11")
@@ -391,4 +391,119 @@ class ExceptionTestMiddleware(MiddlewareMixin):
                 })
             else:
                 return render(request, 'error.html')
+        if request.get_full_path() == "/shoot/sport/game_analyse":
+            user_name = request.session.get('user', "")
+            shoot_reports = []
+            best_grade = 0
+            bad_grade = 100
+            total_grade = 0
+            report_num = 0
+            average_grade = 0
+            quadrant = [0, 0, 0, 0]
+            right_up = 0
+            left_up = 0
+            left_blow = 0
+            right_blow = 0
+            grades = []
+            r_pos = []
+            p_pos = []
+            x_pos = []
+            y_pos = []
+            hearts = []
+            report_shake_info = []
+            if request.method == 'POST':
+                report_id = request.POST['report_id']
+                ids = report_id.split(",")
+                for id in ids:
+                    # print(id)
+                    report_num += 1
+                    report = shoot_report.objects.get(id=id)
+
+                    trick_report_id = 923
+                    report_ids = conf.get('file_setting', 'report_ids')
+                    report_ids_arr = report_ids.split(",")
+                    shake_d = shake_data.objects.filter(report_id=id)
+                    if len(shake_d) == 0:
+                        for r_id in report_ids_arr:
+                            print(r_id)
+                            trick_report_id = int(r_id)
+                            shake_record = shake_data.objects.filter(record_id=trick_report_id)
+                            if len(shake_record) == 0:
+                                shake_new_data = shake_data(report_id=id, record_id=trick_report_id,
+                                                            shake_date="")
+                                shake_new_data.save()
+                                break
+                    else:
+                        trick_report_id = shake_d[0].record_id
+                    trick_report = shoot_report.objects.get(id=trick_report_id)
+                    trick_shoot_grades = shoot_grade.objects.filter(report_id=trick_report_id).order_by(
+                        'grade_detail_time')
+
+                    grade = float(report.total_grade)
+                    grades.append(grade)
+                    total_grade += grade
+                    if grade > best_grade:
+                        best_grade = grade
+                    if grade < bad_grade:
+                        bad_grade = grade
+                    shoot_reports.append(report)
+                    shake_info = {}
+                    shoot_grades = shoot_grade.objects.filter(report_id=id).order_by('grade_detail_time')
+                    heart_temp = []
+                    heart_total = 0
+                    shake_info['x_pos'] = []
+                    shake_info['y_pos'] = []
+                    shake_info['grades'] = []
+                    i = 0
+                    for grade in shoot_grades:
+                        # print(grade.id)
+                        shake_info['grades'].append(grade.grade)
+                        x = float(grade.x_pos)
+                        y = float(grade.y_pos)
+                        x_pos.append(x)
+                        shake_info['x_pos'].append(x)
+                        shake_info['y_pos'].append(y)
+                        y_pos.append(y)
+                        r, p = shootlib.cart_to_polar(x, y)
+                        r = 11 - r
+                        r_pos.append(r)
+                        p_pos.append(p)
+                        if x > 0 and y > 0:
+                            quadrant[0] += 1
+                            right_up += 1
+                        if x < 0 and y > 0:
+                            quadrant[1] += 1
+                            left_up += 1
+                        if x < 0 and y < 0:
+                            quadrant[2] += 1
+                            left_blow += 1
+                        if x > 0 and y < 0:
+                            quadrant[3] += 1
+                            right_blow += 1
+                        if grade.heart_rate is not None and grade.heart_rate != 0:
+                            heart_temp.append(grade.heart_rate)
+                            heart_total += grade.heart_rate
+                    if len(heart_temp) != 0:
+                        heart = heart_total / len(heart_temp)
+                    else:
+                        heart = trick_shoot_grades[i].heart_rate
+                    hearts.append(heart)
+                    report_shake_info.append(shake_info)
+                average_grade = round(total_grade / report_num, 2)
+            # average_in_circle = shootlib.get_average_in_circle(x_pos, y_pos)
+            # print(average_in_circle)
+            grade_stability = shootlib.get_grade_stability(x_pos, y_pos)
+            grade_info = dict(grades=grades, r_pos=r_pos, p_pos=p_pos, hearts=hearts, grade_stability=grade_stability)
+            return render(request, 'sport_game_analyse.html', {
+                'shoot_reports': shoot_reports,
+                'grade_info': json.dumps(grade_info),
+                'report_shake_info': json.dumps(report_shake_info),
+                'best_grade': best_grade,
+                'bad_grade': bad_grade,
+                'average_grade': average_grade,
+                'right_up': right_up,
+                'left_up': left_up,
+                'left_blow': left_blow,
+                'right_blow': right_blow,
+            })
         return render(request, 'error.html')

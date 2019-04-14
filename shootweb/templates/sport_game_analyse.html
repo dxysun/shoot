@@ -338,18 +338,18 @@
                     },
 
                     data: data_grade
-                }, {
+                }{% comment %}, {
                     name: '预测环数',
                     type: 'line',
                     smooth: true,
 
                     data: data_grade_pre
-                }]
+                }{% endcomment %}]
             };
 
 
             var report_shake_info = {{ report_shake_info|safe }};
-            console.log(report_shake_info.length);
+         {% comment %}   console.log(report_shake_info.length);
             for (k = 0; k < report_shake_info.length; k++) {
                 var xUpData = report_shake_info[k].x_up_data_plus;
                 var yData = report_shake_info[k].y_data_plus;
@@ -449,7 +449,7 @@
                 console.log(name);
                 var line_shake_merge_info = echarts.init(document.getElementById(name));
                 line_shake_merge_info.setOption(option_shake_merge_info);
-            }
+            }{% endcomment %}
 
 
             var myGrade = echarts.init(document.getElementById('grade'));
@@ -636,10 +636,10 @@
                                 <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <a href="{% url 'sport_game_analyse_id' %}?id={{ report.id }}" target="_blank">详细信息</a><br>
-                                        <div id="line_shake_merge_info{{ forloop.counter0 }}"
+                                        {% comment %}<div id="line_shake_merge_info{{ forloop.counter0 }}"
                                              style="width: 1200%;height:300%;">
 
-                                        </div>
+                                        </div>{% endcomment %}
                                     </div>
                                 </div>
                             </div>
