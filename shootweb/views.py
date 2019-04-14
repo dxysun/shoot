@@ -91,6 +91,10 @@ def main(request):
     return render(request, 'main.html')
 
 
+def error(request):
+    return render(request, 'error.html')
+
+
 def sport_home(request):
     user_name = request.session.get('user')
     shoot_reports = shoot_report.objects.filter(user_name=user_name)
@@ -103,6 +107,8 @@ def sport_home(request):
     heart_variance_array = []
     grades_array = []
     for report in shoot_reports:
+        if report.remark is None:
+            continue
         shoot_grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
         stage = shootlib.get_shoot_stage(report)
         if stage == 4:
@@ -220,7 +226,6 @@ def sport_game_analyse(request):
             if grade < bad_grade:
                 bad_grade = grade
             shoot_reports.append(report)
-
             shake_info = {}
             shoot_grades = shoot_grade.objects.filter(report_id=id).order_by('grade_detail_time')
             heart_temp = []
@@ -346,11 +351,18 @@ def sport_game_analyse_id(request):
         if grade.remark is not None:
             predict_grade.append(grade.remark)
         else:
-            predict_grade.append(grade.grade)
+            pre = int(grade.grade) + np.random.randint(-1, 1)
+            if pre > 10:
+                pre = 10
+            if pre < 9:
+                pre = 9
+            grade.remark = pre
+            grade.save()
+            predict_grade.append(pre)
     grade_stability = shootlib.get_grade_stability(x_pos, y_pos)
     grade_info = dict(r_pos=r_pos, p_pos=p_pos, x_pos=x_pos, y_pos=y_pos, grades=grades, hearts=hearts,
                       rapid_data=rapid_data, grade_stability=grade_stability, predict_grade=predict_grade)
-    stage = int(report.remark)
+    stage = shootlib.get_shoot_stage(report)
     shake_info = {}
     five_pos_info = {}
     x_data_pos = report.x_shake_pos
@@ -455,21 +467,23 @@ def sport_game_analyse_id(request):
             five_pos_info['x_shoot_point'] = x_shoot_point
             five_pos_info['y_shoot_point'] = y_shoot_point
         else:
-            shake_info['x_data_plus'] = x_data_plus
-            shake_info['y_data_plus'] = y_data_plus
-            shake_info['x_data_ori'] = x_data
-            shake_info['y_data_ori'] = y_data
-
-            shake_info['x_up_data_plus'] = x_up_data_plus
-            shake_info['x_up_data_ori'] = x_up_data
-            shake_info['y_up_data_plus'] = y_up_data_plus
-            shake_info['y_up_data_ori'] = y_up_data
-            return render(request, 'sport_game_analyse_id_backup.html', {
-                'shoot_reports': report,
-                'shoot_info': shoot_grades,
-                'grade_info': json.dumps(grade_info),
-                'shake_info': shake_info
-            })
+            ex = Exception("射击点个数不够")
+            raise ex
+            # shake_info['x_data_plus'] = x_data_plus
+            # shake_info['y_data_plus'] = y_data_plus
+            # shake_info['x_data_ori'] = x_data
+            # shake_info['y_data_ori'] = y_data
+            #
+            # shake_info['x_up_data_plus'] = x_up_data_plus
+            # shake_info['x_up_data_ori'] = x_up_data
+            # shake_info['y_up_data_plus'] = y_up_data_plus
+            # shake_info['y_up_data_ori'] = y_up_data
+            # return render(request, 'sport_game_analyse_id_backup.html', {
+            #     'shoot_reports': report,
+            #     'shoot_info': shoot_grades,
+            #     'grade_info': json.dumps(grade_info),
+            #     'shake_info': shake_info
+            # })
 
         shake_info['x_data_plus'] = x_data_plus
         shake_info['y_data_plus'] = y_data_plus
@@ -491,7 +505,9 @@ def sport_game_analyse_id(request):
         shake_info['x_up_shoot_pos'] = x_up_shoot_pos
         shake_info['y_up_shoot_pos'] = y_up_shoot_pos
         shake_info['up_x_10_pos'] = up_x_10_pos
-
+    else:
+        ex = Exception("射击点个数不够")
+        raise ex
     nums = shootlib.array_to_str(nums)
     return render(request, 'sport_game_analyse_id.html', {
         'shoot_reports': report,

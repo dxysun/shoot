@@ -408,27 +408,28 @@ class GradeEventTimerHandler(FileSystemEventHandler):
                 d = datetime.datetime.now().strftime("%Y-%m-%d")
                 if self.is_report:
                     if self.report_data is not None and self.num < 10:
-                        self.num += 1
                         if 'Miss' in line:
                             self.num += 1
                             continue
                         if '/' in line:
+                            self.num += 1
                             data = line.split("/")
-                            # print(data)
                             y_pos = data[1].strip()
-                            data = data[0].split()
+                            pos = data[0].find(":")
+                            shoot_time = data[0][pos - 2:pos + 6]
+                            data = data[0].replace(shoot_time, " ")
+                            data = data.split()
                             x_pos = data[-1]
-                            shoot_time = data[-2]
                             grade = None
-                            if data[-3].isdigit():
-                                grade = data[-3]
+                            if data[-2].isdigit():
+                                grade = data[-2]
                             else:
-                                if data[-3] == "P":
-                                    grade = data[-4]
-                                elif "*P" in data[-3]:
-                                    grade = data[-3][:-2]
-                                elif "*" in data[-3]:
-                                    grade = data[-3][:-1]
+                                if data[-2] == "P":
+                                    grade = data[-3]
+                                elif "*P" in data[-2]:
+                                    grade = data[-2][:-2]
+                                elif "*" in data[-2]:
+                                    grade = data[-2][:-1]
                             t1 = datetime.datetime.now().strftime("%H:")
                             t = t1 + shoot_time[0:5]
                             if self.num == 1:
@@ -444,6 +445,7 @@ class GradeEventTimerHandler(FileSystemEventHandler):
                             self.shoot_data.save()
                         else:
                             if self.shoot_data is not None:
+                                self.num += 1
                                 rapid_time = line[1:-1]
                                 s = rapid_time.find("s")
                                 self.rapid_time = rapid_time[:s]

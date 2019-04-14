@@ -1,0 +1,38 @@
+{% extends 'base_shoot.html' %}
+
+{% block title %}运动员数据分析-运动员主页{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+{% block menu %}
+
+    <ul class="nav" id="main-menu">
+        <li>
+            <a class="active-menu" href="{% url 'sport_home' %}"><i class="fa fa-dashboard"></i> 主页</a>
+        </li>
+        {% comment %}       <li>
+            <a href="{% url 'sport_game_analyse' %}"><i class="fa fa-desktop"></i> 射击数据分析</a>
+        </li>{% endcomment %}
+        <li>
+            <a href="{% url 'sport_game_history' %}"><i class="fa fa-qrcode"></i> 射击数据</a>
+        </li>
+    </ul>
+
+{% endblock %}
+
+
+{% block header %}
+
+    <h1 class="page-header">
+        主页
+    </h1>
+    <ol class="breadcrumb">
+        <li class="active">数据整体分析结果</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    数据出错
+{% endblock %}
+

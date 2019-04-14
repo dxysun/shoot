@@ -49,7 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'shootweb.mymiddleware.SimpleMiddleware'
+    'shootweb.mymiddleware.SimpleMiddleware',
+    'shootweb.mymiddleware.ExceptionTestMiddleware'
 ]
 
 ROOT_URLCONF = 'shoot.urls'

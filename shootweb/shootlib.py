@@ -141,6 +141,7 @@ def update_data(user_name):
             print(data.record_time + " shake  not find report data")
             data.is_process = 1
             # data.delete()
+        data.save()
 
     shoot_reports = shoot_report.objects.filter(is_process=0).filter(user_name=user_name)
     if len(shoot_reports) > 0:
@@ -528,7 +529,7 @@ def get_beside_shoot_stability(pos_array):
 
 
 def get_shoot_date(user_name):
-    shoot_reports = shoot_report.objects.filter(user_name=user_name).values('shoot_date').distinct()
+    shoot_reports = shoot_report.objects.filter(user_name=user_name).order_by('shoot_date').values('shoot_date').distinct()
     shoot_dates = []
     for r in shoot_reports:
         shoot_dates.append(r['shoot_date'])
