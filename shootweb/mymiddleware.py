@@ -324,6 +324,8 @@ class ExceptionTestMiddleware(MiddlewareMixin):
                     # print(x_up_shoot_pos)
                     # print(up_x_10_pos)
                     y_shoot_pos_new = y_shoot_pos.copy()
+                    print(up_shake_rate)
+                    print(len(y_shoot_pos_new))
                     if up_shake_rate is not None and len(y_shoot_pos_new) == 5:
                         y_data_plus, y_shoot_pos_new = shootlib.process_shoot_y_pos_to_one_line(y_data_plus,
                                                                                                 y_shoot_array,
