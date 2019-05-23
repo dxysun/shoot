@@ -3,12 +3,12 @@ import sys
 import os
 import datetime
 import django
-import time
 import math
 from scipy.interpolate import interp1d
 from scipy import optimize
 import numpy as np
-import random
+import threading
+import json
 import matplotlib.pyplot as plt
 
 dirname, filename = os.path.split(os.path.abspath(__file__))
@@ -529,7 +529,8 @@ def get_beside_shoot_stability(pos_array):
 
 
 def get_shoot_date(user_name):
-    shoot_reports = shoot_report.objects.filter(user_name=user_name).order_by('shoot_date').values('shoot_date').distinct()
+    shoot_reports = shoot_report.objects.filter(user_name=user_name).order_by('shoot_date').values(
+        'shoot_date').distinct()
     shoot_dates = []
     for r in shoot_reports:
         shoot_dates.append(r['shoot_date'])
@@ -740,6 +741,149 @@ def process_shoot_y_pos_to_one_line(y_data_plus, y_shoot_array, up_shake_rate, y
         y_data_plus_new.extend(plus_array)
         j += 1
     return y_data_plus_new, y_shoot_pos
+
+
+def process_model_to_latest(user_name):
+    import pandas as pd
+    shoot_reports = shoot_report.objects.filter(is_process=1)
+    grade_four_shoot_df_8 = pd.DataFrame(
+        columns=['report_id', 'grade_date', 'grade_time', 'grade_detail_time', 'grade', 'move_distance',
+                 'rapid_time', 'x_pos', 'y_pos', 'heart_rate', 'rapid_diff', 'x_average', 'y_stability', 'move_speed'])
+    g_i_f_8 = 0
+    for report in shoot_reports:
+        # print(report.shoot_date + " " + report.start_time)
+        stage = int(report.remark)
+        y_data_pos = report.y_shake_pos.split(",")
+        x_up_data_pos = report.x_up_shake_pos.split(",")
+        y_up_data_pos = report.y_up_shake_pos.split(",")
+
+        y_up_shake_data = process_shake_pos_info(y_up_data_pos)
+        y_shake_data = process_shake_pos_info(y_data_pos)
+        x_up_shake_data = process_shake_pos_info(x_up_data_pos)
+
+        y_up_data = y_up_shake_data.split(",")
+        y_data = y_shake_data.split(",")
+        x_up_data = x_up_shake_data.split(",")
+
+        y_data = get_int_data(y_data, is_negative=True)
+        x_up_data = get_int_data(x_up_data)
+        y_up_data = get_int_data(y_up_data)
+
+        y_data, num = cut_shake_data(y_data)
+        x_up_data = x_up_data[num:]
+
+        if stage == 4:
+            pos_num = 8
+        elif stage == 6:
+            pos_num = 10
+        else:
+            pos_num = 15
+        after_shoot = 1
+
+        nums, y_shoot_array = get_shoot_point(y_data, stage=stage)
+        y_data_plus = shake_data_process(y_data)
+        x_up_data_plus = shake_data_process(x_up_data)
+        y_shoot_pos, y_pos_array = shake_get_plus_shoot_point(y_data_plus, nums, pos_num=pos_num,
+                                                                       after_shoot=after_shoot)
+        x_shoot_pos, x_pos_array = shake_get_plus_shoot_point(x_up_data_plus, nums, pos_num=pos_num,
+                                                                       after_shoot=after_shoot)
+        if len(nums) == 5:
+            x_average_array, move_distance = shake_get_average_x_shoot_array(x_pos_array, after_shoot,
+                                                                                      is_insert=False,
+                                                                                      get_distance=True)
+            y_stability_array = shake_get_stability_shoot_array(y_pos_array, after_shoot)
+            shoot_grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
+            first_grade = shoot_grades[0]
+            last_x_pos = float(first_grade.x_pos)
+            last_rapid_time = float(first_grade.rapid_time)
+            for i in range(1, len(shoot_grades)):
+                grade = shoot_grades[i]
+                diff_pos = (last_x_pos - float(grade.x_pos) + i * 750)
+                diff_rapid = float(grade.rapid_time) - last_rapid_time
+                if i == 4 and float(grade.rapid_time) < 1:
+                    diff_rapid = float(grade.rapid_time) + stage - last_rapid_time
+                if diff_rapid < 0:
+                    print(i)
+                    print("diff_rapid:" + str(diff_rapid))
+                move_speed = round(diff_pos / diff_rapid, 2)
+                last_x_pos = float(grade.x_pos)
+                last_rapid_time = float(grade.rapid_time)
+                if stage == 8:
+                    grade_four_shoot_df_8.loc[g_i_f_8] = [grade.report_id, grade.grade_date, grade.grade_time,
+                                                          grade.grade_detail_time,
+                                                          float(grade.grade), move_distance[i - 1],
+                                                          float(grade.rapid_time), float(grade.x_pos),
+                                                          float(grade.y_pos), int(grade.heart_rate), diff_rapid,
+                                                          x_average_array[i], y_stability_array[i], move_speed]
+                    g_i_f_8 += 1
+
+        else:
+            print("data not find five shoot " + str(report.id))
+
+    data_cols = ['x_pos', 'y_pos', 'heart_rate', 'rapid_diff', 'x_average', 'y_stability', 'move_distance',
+                 'move_speed', 'grade']
+    data = grade_four_shoot_df_8[data_cols].copy()
+    data['Class'] = data['grade'].apply(lambda value: 1 if value == 10 else 0)
+    feature_cols = ['x_pos', 'y_pos', 'heart_rate', 'rapid_diff', 'x_average', 'y_stability', 'move_distance',
+                    'move_speed']
+    from sklearn.preprocessing import StandardScaler
+    data[feature_cols] = StandardScaler().fit_transform(data[feature_cols])
+    new_data_cols = ['x_pos', 'y_pos', 'heart_rate', 'rapid_diff', 'x_average', 'y_stability', 'move_distance',
+                     'move_speed', 'Class']
+    all_data = data[new_data_cols].copy()
+
+    label_name = 'Class'
+    shoot_features = all_data[feature_cols].copy()
+    shoot_labels = all_data[label_name].copy()
+
+    train_x_stacking = shoot_features.values
+    train_y_stacking = shoot_labels.values
+    from xgboost import XGBClassifier
+    from sklearn.ensemble import AdaBoostClassifier
+    from sklearn.ensemble import GradientBoostingClassifier
+    from sklearn.ensemble import RandomForestClassifier
+    from sklearn.tree import DecisionTreeClassifier
+    from . import stacking
+    rf_model_stack = RandomForestClassifier()
+    adb_model_stack = AdaBoostClassifier()
+    gdbc_model_stack = GradientBoostingClassifier()
+    dt_model_stack = DecisionTreeClassifier()
+    xgb_model_stack = XGBClassifier()
+    base_models = [rf_model_stack, adb_model_stack, gdbc_model_stack, dt_model_stack, xgb_model_stack]
+    meta_model = stacking.NetDnnClassifier(input_shape=5)
+    stacking = stacking.StackingAveragedModels(base_models, meta_model)
+    stacking.fit(train_x_stacking, train_y_stacking)
+    stacking.save_model(user_name)
+    print("train done")
+
+    importance_features = stacking.get_importance_feature()
+    all_feature_names = ['x_pos', 'y_pos', 'heart_rate', 'y_stability', 'x_average']
+    feature_dict = {}
+    model_info = {}
+    for label_name, label_score in zip(feature_cols, importance_features):
+        feature_dict[label_name] = label_score
+        if label_name in all_feature_names:
+            model_info[label_name] = label_score
+    model_obj = user_model_info.objects.filter(user_name=user_name).first()
+    report_last = shoot_reports.last()
+    latest_time = report_last.shoot_date + " " + report_last.shoot_time
+    if model_obj is None:
+        user_model = user_model_info(user_name=user_name, model_path="data/", build_time=latest_time,
+                                     model_type=0,  model_info=json.dumps(model_info), remark=json.dumps(feature_dict))
+        user_model.save()
+    else:
+        model_obj.model_info = json.dumps(model_info)
+        model_obj.remark = json.dumps(feature_dict)
+        model_obj.build_time = latest_time
+        model_obj.model_path = "data/"
+        model_obj.save()
+    print("update success")
+
+
+def update_model_info(user_name):
+    print("update_model_info")
+    thread = threading.Thread(target=process_model_to_latest, args=(user_name,))
+    thread.start()
 
 
 if __name__ == "__main__":

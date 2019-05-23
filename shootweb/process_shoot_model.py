@@ -1098,7 +1098,7 @@ def process_0406_shoot_data():
 
 if __name__ == "__main__":
     print("shoot")
-    process_0406_shoot_data()
+    # process_0406_shoot_data()
     # test()
     # get_shoot_info()
     # x1, y1 = 31.33, 12.82

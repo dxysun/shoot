@@ -193,6 +193,22 @@ def coach_sport_info_detail(request):
 
 def sport_game_analyse(request):
     user_name = request.session.get('user', "")
+    report_info = shoot_report.objects.filter(is_process=1).last()
+    print(report_info.shoot_date)
+    model_info = user_model_info.objects.filter(user_name=user_name).first()
+    if model_info is not None and report_info is not None:
+        print(model_info.build_time)
+        latest_time = report_info.shoot_date + " " + report_info.shoot_time
+        print(latest_time)
+        if latest_time == model_info.build_time:
+            print("model is latest")
+        else:
+            print("model is not latest")
+            shootlib.update_model_info(user_name)
+
+    if model_info is None:
+        shootlib.update_model_info(user_name)
+
     shoot_reports = []
     best_grade = 0
     bad_grade = 100

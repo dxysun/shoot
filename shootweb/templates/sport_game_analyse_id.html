@@ -2045,7 +2045,7 @@
 
             var line_up_shake_ori = echarts.init(document.getElementById('line_up_shake_ori'));
             {#var line_up_shake = echarts.init(document.getElementById('line_up_shake'));#}
-            var line_up_shake_x_y_plus = echarts.init(document.getElementById('line_up_shake_x_y_plus'));
+            {#var line_up_shake_x_y_plus = echarts.init(document.getElementById('line_up_shake_x_y_plus'));#}
             {#var line_up_shake_pos = echarts.init(document.getElementById('line_up_shake_pos'));#}
 
             var line_shake_merge_info = echarts.init(document.getElementById('line_shake_merge_info'));
@@ -2072,7 +2072,7 @@
 
             line_up_shake_ori.setOption(option_up_shake_ori);
             {#line_up_shake.setOption(option_up_shake_line);#}
-            line_up_shake_x_y_plus.setOption(option_up_shake_x_y_plus);
+            {#line_up_shake_x_y_plus.setOption(option_up_shake_x_y_plus);#}
             {#line_up_shake_pos.setOption(option_up_shake_pos);#}
 
 
@@ -2203,7 +2203,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+      {% comment %}   <div class="row">
 
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -2217,7 +2217,7 @@
         </div>
     </div>
 
-    {% comment %}   <div class="row">
+  <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
