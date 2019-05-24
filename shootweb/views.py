@@ -66,10 +66,9 @@ def login(request):
         request.session['user'] = user.user_name
         request.session['user_id'] = user.id
         request.session['role'] = user.role
-        print("observer get")
         global observer
         if observer is not None:
-            print("observer not none")
+            # print("observer not none")
             observer.stop()
             del observer
         observer = watch_grade_file.start_watch(user.user_name)

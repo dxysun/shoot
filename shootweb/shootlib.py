@@ -784,13 +784,13 @@ def process_model_to_latest(user_name):
         y_data_plus = shake_data_process(y_data)
         x_up_data_plus = shake_data_process(x_up_data)
         y_shoot_pos, y_pos_array = shake_get_plus_shoot_point(y_data_plus, nums, pos_num=pos_num,
-                                                                       after_shoot=after_shoot)
+                                                              after_shoot=after_shoot)
         x_shoot_pos, x_pos_array = shake_get_plus_shoot_point(x_up_data_plus, nums, pos_num=pos_num,
-                                                                       after_shoot=after_shoot)
+                                                              after_shoot=after_shoot)
         if len(nums) == 5:
             x_average_array, move_distance = shake_get_average_x_shoot_array(x_pos_array, after_shoot,
-                                                                                      is_insert=False,
-                                                                                      get_distance=True)
+                                                                             is_insert=False,
+                                                                             get_distance=True)
             y_stability_array = shake_get_stability_shoot_array(y_pos_array, after_shoot)
             shoot_grades = shoot_grade.objects.filter(report_id=report.id).order_by('grade_detail_time')
             first_grade = shoot_grades[0]
@@ -857,7 +857,7 @@ def process_model_to_latest(user_name):
     print("train done")
 
     importance_features = stacking.get_importance_feature()
-    all_feature_names = ['x_pos', 'y_pos', 'heart_rate', 'y_stability', 'x_average']
+    all_feature_names = ['x_pos', 'y_pos', 'heart_rate', 'y_stability', 'x_average', 'rapid_diff']
     feature_dict = {}
     model_info = {}
     for label_name, label_score in zip(feature_cols, importance_features):
@@ -869,7 +869,7 @@ def process_model_to_latest(user_name):
     latest_time = report_last.shoot_date + " " + report_last.shoot_time
     if model_obj is None:
         user_model = user_model_info(user_name=user_name, model_path="data/", build_time=latest_time,
-                                     model_type=0,  model_info=json.dumps(model_info), remark=json.dumps(feature_dict))
+                                     model_type=0, model_info=json.dumps(model_info), remark=json.dumps(feature_dict))
         user_model.save()
     else:
         model_obj.model_info = json.dumps(model_info)
