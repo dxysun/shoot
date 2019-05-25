@@ -38,7 +38,7 @@ if python_path == "" or shoot_path == "":
                               message='请设置客户端程序同一目录下shoot_config.ini中的python路径python_path和射击大数据系统的服务器路径shoot_path')
     sys.exit()
 manage_path = shoot_path + '/manage.py'
-
+python_path = python_path + '/python.exe'
 PORT = 8000
 
 p1 = None
@@ -139,7 +139,6 @@ start.pack()
 
 # tk.Label(window, text='', width=30, height=1).pack()
 # 设置下载进度条
-# tk.Label(window, text='下载进度:', ).place(x=50, y=60)
 canvas = tk.Canvas(window, width=465, height=22, bg="white")
 canvas.pack_forget()
 
