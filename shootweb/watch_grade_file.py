@@ -489,7 +489,7 @@ class GradeEventTimerHandler(FileSystemEventHandler):
 def start_watch(username):
     observer1 = Observer()
     event_handler = GradeEventTimerHandler(username)
-    observer1.schedule(event_handler, "D:/grade", True)
+    observer1.schedule(event_handler, "D:\grade", True)
     # observer1.schedule(event_handler, "D:\code\shoot\simulation_data\grade", True)
     observer1.start()
     return observer1
