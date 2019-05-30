@@ -64,8 +64,8 @@
             axisLabel: {
                 interval: 0
             },
-      //      data: ['射击稳定性', '射击移动稳定性', '速射时间','心率']
-            data: ['射击垂直稳定性', '速射时间', '射击水平稳定性','心率','移动速度','移动距离']
+            data: ['射击稳定性', '射击移动稳定性', '速射时间','心率']
+            {#data: ['射击垂直稳定性', '速射时间', '射击水平稳定性','心率','移动速度','移动距离']#}
 
         }],
         yAxis: [{
@@ -75,8 +75,8 @@
         series: [{
             name: '贡献度',
             type: 'bar',
-         //   data: [y_stability.toFixed(2),x_average.toFixed(2),rapid_diff.toFixed(2), heart_rate.toFixed(2)],
-            data: [20.37,17.31,15.96, 10.83, 8.71, 6.61],
+            data: [y_stability.toFixed(2),x_average.toFixed(2),rapid_diff.toFixed(2), heart_rate.toFixed(2)],
+            {#data: [20.37,17.31,15.96, 10.83, 8.71, 6.61],#}
             markPoint: {
                 data: [{
                     type: 'max',
